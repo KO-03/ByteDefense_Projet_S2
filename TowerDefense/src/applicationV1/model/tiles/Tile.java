@@ -1,6 +1,7 @@
 package applicationV1.model.tiles;
 
 public class Tile {
+	
 	private int x;
 	private int y;
 	String fileSource;

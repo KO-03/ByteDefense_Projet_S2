@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 public class TileMap {
 	
 	public static final int TILES_SIZE = 13;
-	
 	private static final int CORNER = 1;
 	private static final int HORIZONTAL_PATH = 2;
 	private static final int VERTICAL_PATH = 3;
