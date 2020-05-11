@@ -1,4 +1,4 @@
-package applicationV1.model.tiles;
+package byteDefense.model.tiles;
 
 public class Tile {
 	

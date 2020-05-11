@@ -1,4 +1,4 @@
-package applicationV1.model.ennemies;
+package byteDefense.model.ennemies;
 
 public class Spyware extends Ennemy {
 

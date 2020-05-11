@@ -1,9 +1,4 @@
-package applicationV1.model.tiles;
-
-import applicationV1.model.ennemies.Ennemy;
-import applicationV1.model.ennemies.Rookit;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+package byteDefense.model.tiles;
 
 public class TileMap {
 	
@@ -17,18 +12,15 @@ public class TileMap {
 	private static final int TOWER_ZONE = 7;
 
 	private int[] tiles = {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 6, 6, 6, 6, 6, 6, 5, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 4, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 4, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 4, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 4, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 5, 6, 6, 6, 6, 6, 6, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1};
-	private ObservableList<Ennemy> ennemiesProperty;
-	
 	
 	public TileMap() {
-		this.ennemiesProperty = FXCollections.observableArrayList(); 
 	}
 	
 	public int getCase(int x, int y) {
 		return tiles[x + TILES_SIZE * y];
 	}
 	
-	public String getCaseUrl(int mapCase) {
+	public String getCaseNamePng(int mapCase) {
 		String nameUrlTile = "";
 		
 		switch (mapCase) {
@@ -55,23 +47,6 @@ public class TileMap {
 				break;
 		}
 		return nameUrlTile;
-	}
-	
-	public ObservableList<Ennemy> getEnnemiesProperty() {
-		return this.ennemiesProperty;
-	}
-	
-	public Ennemy getEnnemy(int id) {
-		for(Ennemy e : this.ennemiesProperty){
-			if(e.getId() == id){
-				return e;
-			}
-		}
-		return null;
-	}
-	
-	public void addEnnemy() {
-		this.ennemiesProperty.add(new Rookit());
 	}
 	
 }

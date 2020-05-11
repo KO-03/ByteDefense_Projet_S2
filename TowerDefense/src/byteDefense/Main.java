@@ -1,4 +1,4 @@
-package applicationV1;
+package byteDefense;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		
 		try {
-			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getClassLoader().getResource("applicationV1/view/GameView.fxml"));
+			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getClassLoader().getResource("byteDefense/view/GameView.fxml"));
 			Scene scene = new Scene(root,900,900);
 			primaryStage.setScene(scene);
 			primaryStage.show();
