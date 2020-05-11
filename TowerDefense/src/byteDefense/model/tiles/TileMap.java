@@ -1,5 +1,8 @@
 package byteDefense.model.tiles;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class TileMap {
 	
 	public static final int TILES_SIZE = 13;
@@ -11,9 +14,28 @@ public class TileMap {
 	private static final int HORIZONTAL_WALL = 6;
 	private static final int TOWER_ZONE = 7;
 
-	private int[] tiles = {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 6, 6, 6, 6, 6, 6, 5, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 4, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 4, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 4, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 4, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 5, 6, 6, 6, 6, 6, 6, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 3, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1};
+	private int[] tiles;
 	
 	public TileMap() {
+		this.tiles = new int[169];
+		this.setTiles();
+	}
+	
+	public void setTiles() {
+		try {
+			FileReader input = new FileReader("./resources/tiles.txt");
+			BufferedReader br = new BufferedReader(input);
+		    String line = null;
+		    while ((line = br.readLine()) != null) {
+		    	String[] values = line.split(", ");
+		    	for (int i = 0; i < values.length; i++) {
+		    		this.tiles[i] = Integer.parseInt(values[i]);
+		    	}
+		    }
+		    br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public int getCase(int x, int y) {
