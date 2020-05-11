@@ -1,4 +1,4 @@
-package applicationV1.modele.ennemies;
+package applicationV1.model.ennemies;
 
 public class Ransomware extends Ennemy {
 
