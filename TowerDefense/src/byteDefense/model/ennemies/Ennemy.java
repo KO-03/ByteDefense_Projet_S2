@@ -1,30 +1,18 @@
 package byteDefense.model.ennemies;
 
-public class Ennemy {
+public abstract class Ennemy {
 
 	private int id;
 	private int x;
 	private int y;
-	private int hp;
-	private int attack;
-	private int defense;
-	private int attackSpeed;
-	private int attackRange;
-	private int cost;
-	private String urlImg;
+	private StatisticsEnnemy stats;
 	
 	private static int counterId = 0;
 	
-	public Ennemy(int x, int y, int hp, int attack, int defense, int attackSpeed, int attackRange, int cost, String urlImg) {
+	public Ennemy(int x, int y, StatisticsEnnemy stats) {
 		this.x = x;
 		this.y = y;
-		this.hp = hp;
-		this.attack = attack;
-		this.defense = defense;
-		this.attackRange = attackRange;
-		this.attackSpeed = attackSpeed;
-		this.cost = cost;
-		this.urlImg = urlImg;
+		this.stats = stats;
 		this.id = counterId;
 		counterId++;
 	}
@@ -50,38 +38,35 @@ public class Ennemy {
 	}	
 	
 	public int getHp() {
-		return this.hp;
+		return this.stats.getHp();
 	}
 	
 	public void decrementHp(int lostHp) {
-		this.hp -= lostHp;
+		this.stats.setHp(this.stats.getHp() - lostHp);
 	}
 
 	public boolean isAlive() {
-		return this.hp > 0;
+		return this.stats.getHp() > 0;
 	}
 	
 	public int getAttack() {
-		return attack;
+		return this.stats.getAttack();
 	}
 
 	public int getDefense() {
-		return defense;
+		return this.stats.getDefense();
 	}
 
 	public int getAttackSpeed() {
-		return attackSpeed;
+		return this.stats.getAttackSpeed();
 	}
 
 	public int getAttackRange() {
-		return attackRange;
+		return this.stats.getAttackRange();
 	}
 
 	public int getCost() {
-		return cost;
+		return this.stats.getLoot();
 	}
-	
-	public String getUrlImg() {
-		return this.urlImg;
-	}
+
 }
