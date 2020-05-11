@@ -1,6 +1,5 @@
 package applicationV1.model.tiles;
 
-<<<<<<< HEAD
 public class Tile {
 	
 	private int x;
@@ -24,9 +23,5 @@ public class Tile {
 	public int getY() {
 		return this.y;
 	}
-=======
 
-public class Tile {
-
->>>>>>> refs/remotes/origin/devBranch
 }
