@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import byteDefense.model.TileMap;
+import byteDefense.model.ennemies.Bot;
+import byteDefense.view.EnnemyView;
 import byteDefense.view.TileMapView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -23,6 +25,8 @@ public class Controller implements Initializable {
 	
 	@FXML
     private TilePane gameBoard;
+	@FXML
+    private TilePane gridEnnemies;
 	
 	private TileMap map;
     private Timeline gameLoop;
@@ -32,6 +36,7 @@ public class Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.map = new TileMap();
 		new TileMapView(this.map, this.gameBoard);
+		new EnnemyView(new Bot(), gridEnnemies);
 		
 		initAnimation();
 		this.gameLoop.play();

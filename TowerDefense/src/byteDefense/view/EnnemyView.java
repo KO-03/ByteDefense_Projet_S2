@@ -25,12 +25,12 @@ public class EnnemyView {
 	}
 	
 	private void addEnnemy() {
-		File f = new File("./resources/character.png");
+		File sourceFile = new File("./resources/character.png");
 		
-		if (f != null) {
+		if (sourceFile != null) {
 			ImageView imgView = new ImageView();
 			try {
-				Image img = new Image(f.toURI().toURL().toString());
+				Image img = new Image(sourceFile.toURI().toURL().toString());
 				
 				imgView.setImage(img);
 				imgView.setTranslateX(this.ennemy.getX());
