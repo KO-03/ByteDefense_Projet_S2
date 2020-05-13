@@ -9,7 +9,7 @@ package byteDefense.view;
 import java.io.File;
 import java.net.MalformedURLException;
 
-import byteDefense.model.tiles.TileMap;
+import byteDefense.model.TileMap;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
