@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import byteDefense.model.TileMap;
 import byteDefense.model.ennemies.Bot;
+import byteDefense.model.ennemies.Ennemy;
 import byteDefense.view.EnnemyView;
 import byteDefense.view.TileMapView;
 import javafx.animation.KeyFrame;
@@ -23,11 +24,14 @@ import javafx.util.Duration;
 
 public class Controller implements Initializable {
 	
+	private static final int TILE_WIDTH = 48;
+	
 	@FXML
     private TilePane gameBoard;
 	@FXML
     private TilePane gridEnnemies;
 	
+	private Ennemy ennemy;
 	private TileMap map;
     private Timeline gameLoop;
     private int time;
@@ -36,7 +40,8 @@ public class Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.map = new TileMap();
 		new TileMapView(this.map, this.gameBoard);
-		new EnnemyView(new Bot(), gridEnnemies);
+		ennemy = new Bot();
+		new EnnemyView(ennemy, gridEnnemies);
 		
 		initAnimation();
 		this.gameLoop.play();
@@ -55,6 +60,8 @@ public class Controller implements Initializable {
 						gameLoop.stop();
 					} else if (this.time % 5 == 0) {
 						System.out.println("un tour");
+						ennemy.setX(ennemy.getX() + TILE_WIDTH * ((int)(Math.random() * 3) - 1));
+						ennemy.setY(ennemy.getY() + TILE_WIDTH * ((int)(Math.random() * 3) - 1));
 					}
 					time++;
 				})
