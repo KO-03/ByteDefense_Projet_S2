@@ -17,7 +17,7 @@ public class TileMap {
 	private int[] tiles;
 	
 	public TileMap() {
-		this.tiles = new int[169];
+		this.tiles = new int[196];
 		this.setTiles();
 	}
 	
