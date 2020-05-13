@@ -11,7 +11,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		
 		try {
-			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getClassLoader().getResource("byteDefense/view/GameView.fxml"));
+			BorderPane root = FXMLLoader.load(getClass().getResource("view/GameView.fxml"));
 			Scene scene = new Scene(root,900,900);
 			primaryStage.setScene(scene);
 			primaryStage.show();
