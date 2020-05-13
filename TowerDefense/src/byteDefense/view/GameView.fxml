@@ -9,14 +9,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1201.0" style="-fx-background-color: black;" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="byteDefense.controller.Controller">
-   <center>
-      <TilePane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="832.0" style="-fx-background-color: #1e838c;" BorderPane.alignment="CENTER" />
-   </center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="byteDefense.controller.Controller">
    <top>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" scaleZ="0.0" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" scaleZ="0.0" BorderPane.alignment="TOP_LEFT">
          <children>
-            <ImageView disable="true" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/top_background.png" />
                </image>
@@ -25,9 +22,9 @@
       </Pane>
    </top>
    <left>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="TOP_LEFT">
          <children>
-            <ImageView pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="672.0" fitWidth="14.0" pickOnBounds="true">
                <image>
                   <Image url="@../../../resources/left_background.png" />
                </image>
@@ -36,56 +33,59 @@
       </Pane>
    </left>
    <right>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="TOP_LEFT">
          <children>
-            <ImageView pickOnBounds="true" preserveRatio="true" scaleZ="0.0">
+            <ImageView fitHeight="672.0" fitWidth="214.0" pickOnBounds="true" scaleZ="0.0">
                <image>
                   <Image url="@../../../resources/right_background.png" />
                </image>
             </ImageView>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="213.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-header" text="Menu :">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Menu :">
                      <font>
                         <Font size="17.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="25.0" left="30.0" />
+                        <Insets bottom="12.0" left="12.0" />
                      </VBox.margin>
                   </Text>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Retour">
+                  <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Retour">
                      <VBox.margin>
-                        <Insets bottom="6.0" left="40.0" right="40.0" top="6.0" />
+                        <Insets bottom="6.0" left="10.0" top="6.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Sauvegarder">
+                  <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Sauvegarder">
                      <VBox.margin>
-                        <Insets bottom="6.0" left="40.0" right="40.0" top="6.0" />
+                        <Insets bottom="6.0" left="10.0" top="6.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Régles">
+                  <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Régles">
                      <VBox.margin>
-                        <Insets bottom="6.0" left="40.0" right="40.0" top="6.0" />
+                        <Insets bottom="6.0" left="10.0" top="6.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="220.0" text="Quitter">
+                  <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Quitter">
                      <VBox.margin>
-                        <Insets bottom="6.0" left="40.0" right="40.0" top="6.0" />
+                        <Insets bottom="6.0" left="10.0" top="6.0" />
                      </VBox.margin>
                   </Button>
                </children>
             </VBox>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </Pane>
    </right>
    <bottom>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER_LEFT">
          <children>
             <VBox>
                <children>
                   <Pane scaleZ="0.0">
                      <children>
-                        <ImageView pickOnBounds="true" preserveRatio="true" scaleZ="0.0">
+                        <ImageView fitWidth="900.0" pickOnBounds="true" preserveRatio="true" scaleZ="0.0">
                            <image>
                               <Image url="@../../../resources/stats_background.png" />
                            </image>
@@ -102,7 +102,7 @@
                                     <Label styleClass="label-subHeader" text="0" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="120.0" top="10.0" />
+                                    <Insets left="50.0" top="3.0" />
                                  </HBox.margin>
                               </HBox>
                               <HBox styleClass="label-subHeader">
@@ -115,7 +115,7 @@
                                     <Label styleClass="label-subHeader" text="0" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets left="50.0" top="3.0" />
                                  </HBox.margin>
                               </HBox>
                               <HBox styleClass="label-subHeader">
@@ -128,7 +128,7 @@
                                     <Label styleClass="label-subHeader" text="0" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets top="10.0" />
+                                    <Insets left="50.0" top="3.0" />
                                  </HBox.margin>
                               </HBox>
                            </children>
@@ -137,7 +137,7 @@
                   </Pane>
                   <Pane>
                      <children>
-                        <ImageView pickOnBounds="true" preserveRatio="true" scaleZ="0.0">
+                        <ImageView fitWidth="900.0" pickOnBounds="true" preserveRatio="true" scaleZ="0.0">
                            <image>
                               <Image url="@../../../resources/towers_menu_background.png" />
                            </image>
@@ -149,10 +149,10 @@
                                     <Font size="17.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets left="53.0" top="15.0" />
+                                    <Insets bottom="5.0" left="20.0" top="4.0" />
                                  </VBox.margin>
                               </Text>
-                              <GridPane hgap="15.0" prefHeight="100.0" prefWidth="900.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 1;" vgap="25.0">
+                              <GridPane hgap="15.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 1;" vgap="25.0">
                                 <columnConstraints>
                                   <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
@@ -165,7 +165,7 @@
                                   <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" />
                                 </rowConstraints>
                                  <VBox.margin>
-                                    <Insets left="150.0" />
+                                    <Insets left="75.0" />
                                  </VBox.margin>
                               </GridPane>
                            </children>
@@ -177,4 +177,11 @@
          </children>
       </Pane>
    </bottom>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TilePane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="672.0" style="-fx-background-color: #1e838c;" tileAlignment="CENTER_RIGHT" />
+         </children>
+      </Pane>
+   </center>
 </BorderPane>

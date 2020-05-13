@@ -1,5 +1,7 @@
+/*
+ * Méthode principale du programme charge la vue
+ */
 package byteDefense;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,8 +13,8 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		
 		try {
-			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getClassLoader().getResource("byteDefense/view/GameView.fxml"));
-			Scene scene = new Scene(root,900,900);
+			BorderPane root = FXMLLoader.load(getClass().getResource("view/GameView.fxml"));
+			Scene scene = new Scene(root,900,936);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
@@ -24,4 +26,3 @@ public class Main extends Application{
 		launch(args);
 	}
 }
-
