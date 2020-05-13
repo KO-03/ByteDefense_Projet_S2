@@ -1,3 +1,8 @@
+/*
+ * Adware.java
+ * Cette classe représente un objet Adware
+ */
+
 package byteDefense.model.ennemies;
 
 public class Adware extends Ennemy {

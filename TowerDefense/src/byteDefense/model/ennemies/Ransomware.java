@@ -1,3 +1,8 @@
+/*
+ * Ransomware.java
+ * Cette classe représente un objet Ransomware.
+ */
+
 package byteDefense.model.ennemies;
 
 public class Ransomware extends Ennemy {

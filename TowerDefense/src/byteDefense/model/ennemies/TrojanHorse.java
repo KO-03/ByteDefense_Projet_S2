@@ -1,3 +1,8 @@
+/*
+ * TrojanHorse.java
+ * Cette classe représente un objet TrojanHorse.
+ */
+
 package byteDefense.model.ennemies;
 
 public class TrojanHorse extends Ennemy {

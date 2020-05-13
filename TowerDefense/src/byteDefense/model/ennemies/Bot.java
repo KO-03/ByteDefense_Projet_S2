@@ -1,3 +1,8 @@
+/*
+ * Bot.java
+ * Cette classe représente un objet Bot.
+ */
+
 package byteDefense.model.ennemies;
 
 public class Bot extends Ennemy {

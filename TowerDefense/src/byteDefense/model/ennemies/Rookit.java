@@ -1,3 +1,8 @@
+/*
+ * Rookit.java
+ * Cette classe représente un objet Rookit.
+ */
+
 package byteDefense.model.ennemies;
 
 public class Rookit extends Ennemy {

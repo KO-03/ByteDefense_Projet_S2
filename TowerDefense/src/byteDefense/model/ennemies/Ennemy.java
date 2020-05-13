@@ -1,3 +1,14 @@
+/*
+ * Ennemy.java
+ * Cette classe représente un objet Ennemy, ses responsabilités sont de:
+ * - permet de récupérer et de décrémenter les points de vie de ennemi
+ * - identifier l'ennemi par un identifiant récupérable
+ * - permet de récupérer et de fixer les coordonnées xy de ennemi
+ * - vérifier que l'ennemi est mort ou non
+ * - récupérer les caractéristiques de l'ennemi (points d'attaque, point 
+ *   de défense, vitesse d'attaque, portée d'attaque et le butin)
+ */
+
 package byteDefense.model.ennemies;
 
 import javafx.beans.property.IntegerProperty;
@@ -5,12 +16,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Ennemy {
 
+	private static int counterId = 0;
+	
 	private int id;
 	private IntegerProperty xProperty;
 	private IntegerProperty yProperty;
 	private int hp;
-	
-	private static int counterId = 0;
 	
 	public Ennemy(int x, int y) {
 		this.xProperty = new SimpleIntegerProperty(x);
