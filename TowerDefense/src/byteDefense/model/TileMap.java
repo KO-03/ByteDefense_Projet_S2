@@ -5,7 +5,7 @@
  * - récupérer une case avec ses coordonnées
  */
 
-package byteDefense.model.tiles;
+package byteDefense.model;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

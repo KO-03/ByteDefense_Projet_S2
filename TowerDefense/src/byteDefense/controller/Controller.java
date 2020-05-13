@@ -10,7 +10,7 @@ package byteDefense.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import byteDefense.model.tiles.TileMap;
+import byteDefense.model.TileMap;
 import byteDefense.view.TileMapView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
