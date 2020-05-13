@@ -1,5 +1,6 @@
 /*
- * Méthode principale du programme charge la vue
+ * Main.java
+ * Cette classe charge la vue et lance le programme.
  */
 package byteDefense;
 import javafx.application.Application;
