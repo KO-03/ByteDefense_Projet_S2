@@ -40,12 +40,13 @@ public class TileMapView {
 	public TileMapView(TileMap map, TilePane gameBoard) {
 		this.map = map;
 		this.gameBoard = gameBoard;
-		this.generateMap();
+		this.generateMapView();
 	}
 
-	public File getFile(int mapCase) {
+
+	private File getFile(int mapCase) {
 		File tileFile = null;
-		
+
 		switch (mapCase) {
 		case CORNER:
 			tileFile = CORNER_SRC_IMG;
@@ -72,7 +73,7 @@ public class TileMapView {
 		return tileFile;
 	}
 
-	private void generateMap() {
+	private void generateMapView() {
 		File sourceFile;
 		int tilesSize = TileMap.TILES_SIZE;
 
