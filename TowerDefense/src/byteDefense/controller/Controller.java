@@ -19,7 +19,7 @@ public class Controller implements Initializable {
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.map = new TileMap();
-		TileMapView tmv = new TileMapView(map, gameBoard);
+		new TileMapView(map, gameBoard);
 	}
 	
     
