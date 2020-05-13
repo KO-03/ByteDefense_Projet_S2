@@ -1,3 +1,10 @@
+/*
+ * Controller.java
+ * Cette classe fait le lien entre le modèle et la vue, ses responsabilités sont :
+ * - initialiser la TileMap
+ * - gérer la gameLoop
+ */
+
 package byteDefense.controller;
 
 import java.net.URL;
@@ -14,13 +21,11 @@ import javafx.util.Duration;
 
 public class Controller implements Initializable {
 	
-	private TileMap map;
-	
-    @FXML
+	@FXML
     private TilePane gameBoard;
-    
+	
+	private TileMap map;
     private Timeline gameLoop;
-    
     private int time;
     
     @Override
@@ -51,5 +56,4 @@ public class Controller implements Initializable {
 				);
 		this.gameLoop.getKeyFrames().add(kf);
 	}
-    
 }
