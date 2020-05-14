@@ -41,7 +41,6 @@ public class EnnemyView {
 				
 				this.gridEnnemies.getChildren().add(imgView);
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 		}

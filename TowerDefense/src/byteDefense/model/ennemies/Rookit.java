@@ -5,9 +5,12 @@
 
 package byteDefense.model.ennemies;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Rookit extends Ennemy {
 	
-	private static final int ATTACK = 0;
+	private static IntegerProperty attack = new SimpleIntegerProperty(0);
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
@@ -18,7 +21,15 @@ public class Rookit extends Ennemy {
 	}
 	
 	public int getAttack() {
-		return ATTACK;
+		return this.attack.getValue();
+	}
+	
+	public IntegerProperty getAttackProperty() {
+		return this.attack;
+	}
+	
+	public void incrementAttack() {
+		this.attack.setValue(this.getAttack() + 1);
 	}
 
 	public int getDefense() {
