@@ -1,6 +1,6 @@
 /*
  * TileMap.java
- * Cette classe représente un objet TileMap, ses responsabilites sont :
+ * Cette classe represente un objet TileMap, ses responsabilites sont :
  * - creer la liste de tiles
  * - recuperer la taille de la map en tiles 
  * - recuperer une case avec ses coordonnees

@@ -1,6 +1,6 @@
 /*
  * TileMapReader.java
- * Cette classe représente un objet TileMapReader, sa responsabilite est de :
+ * Cette classe represente un objet TileMapReader, sa responsabilite est de :
  * - lire un fichier contenant une map de tile
  */
 
