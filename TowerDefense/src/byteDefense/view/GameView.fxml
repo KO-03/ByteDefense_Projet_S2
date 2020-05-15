@@ -181,7 +181,7 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <TilePane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="672.0" style="-fx-background-color: #1e838c;" tileAlignment="CENTER_RIGHT" />
-            <TilePane fx:id="gridEnnemies" prefHeight="672.0" prefWidth="672.0" />
+            <Pane fx:id="gridEnnemies" prefHeight="672.0" prefWidth="672.0" />
          </children>
       </Pane>
    </center>
