@@ -1,6 +1,6 @@
 /*
  * Spyware.java
- * Cette classe représente un objet Spyware.
+ * Cette classe represente un objet Spyware.
  */
 
 package byteDefense.model.ennemies;

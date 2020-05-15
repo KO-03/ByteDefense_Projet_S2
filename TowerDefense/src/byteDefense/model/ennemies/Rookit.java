@@ -1,6 +1,6 @@
 /*
  * Rookit.java
- * Cette classe représente un objet Rookit.
+ * Cette classe represente un objet Rookit.
  */
 
 package byteDefense.model.ennemies;
@@ -21,15 +21,15 @@ public class Rookit extends Ennemy {
 	}
 	
 	public int getAttack() {
-		return this.attack.getValue();
+		return attack.getValue();
 	}
 	
 	public IntegerProperty getAttackProperty() {
-		return this.attack;
+		return attack;
 	}
 	
 	public void incrementAttack() {
-		this.attack.setValue(this.getAttack() + 1);
+		attack.setValue(this.getAttack() + 1);
 	}
 
 	public int getDefense() {

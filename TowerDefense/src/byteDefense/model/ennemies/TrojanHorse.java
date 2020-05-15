@@ -1,6 +1,6 @@
 /*
  * TrojanHorse.java
- * Cette classe représente un objet TrojanHorse.
+ * Cette classe represente un objet TrojanHorse.
  */
 
 package byteDefense.model.ennemies;

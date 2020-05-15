@@ -1,12 +1,12 @@
 /*
  * Ennemy.java
- * Cette classe représente un objet Ennemy, ses responsabilités sont de:
- * - permet de récupérer et de décrémenter les points de vie de ennemi
- * - identifier l'ennemi par un identifiant récupérable
- * - permet de récupérer et de fixer les coordonnées xy de ennemi
- * - vérifier que l'ennemi est mort ou non
- * - récupérer les caractéristiques de l'ennemi (points d'attaque, point 
- *   de défense, vitesse d'attaque, portée d'attaque et le butin)
+ * Cette classe represente un objet Ennemy, ses responsabilites sont de:
+ * - permet de recuperer et de decrementer les points de vie de ennemi
+ * - identifier l'ennemi par un identifiant recuperable
+ * - permet de recuperer et de fixer les coordonnees xy de ennemi
+ * - verifier que l'ennemi est mort ou non
+ * - recuperer les caracteristiques de l'ennemi (points d'attaque, point 
+ *   de defense, vitesse d'attaque, portee d'attaque et le butin)
  */
 
 package byteDefense.model.ennemies;
@@ -70,6 +70,11 @@ public abstract class Ennemy {
 	public boolean isAlive() {
 		return this.hp > 0;
 	}
+	
+	public void moveRandomlyEnnemy() {
+    	this.setX(this.getX() + ((int)(Math.random() * 3) - 1));
+		this.setY(this.getY() + ((int)(Math.random() * 3) - 1));
+    }
 	
 	public abstract int getAttack();
 
