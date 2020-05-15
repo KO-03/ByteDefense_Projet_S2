@@ -1,10 +1,12 @@
 /*
  * Ennemy.java
  * Cette classe represente un objet Ennemy, ses responsabilites sont de:
- * - permet de recuperer et de decrementer les points de vie de ennemi
+ * - recuperer et de decrementer les points de vie de ennemi
  * - identifier l'ennemi par un identifiant recuperable
- * - permet de recuperer et de fixer les coordonnees xy de ennemi
+ * - recuperer et de fixer les coordonnees xy de ennemi
  * - verifier que l'ennemi est mort ou non
+ * - recuperer le type d'ennemi de l'objet
+ * - faire se deplacer aleatoirement un ennemi
  * - recuperer les caracteristiques de l'ennemi (points d'attaque, point 
  *   de defense, vitesse d'attaque, portee d'attaque et le butin)
  */
@@ -22,11 +24,13 @@ public abstract class Ennemy {
 	private IntegerProperty xProperty;
 	private IntegerProperty yProperty;
 	private int hp;
+	private int ennemyType;
 	
-	public Ennemy(int x, int y) {
+	public Ennemy(int x, int y, int ennemyType) {
 		this.xProperty = new SimpleIntegerProperty(x);
 		this.yProperty = new SimpleIntegerProperty(y);
 		this.hp = 0;
+		this.ennemyType = ennemyType;
 		this.id = counterId;
 		counterId++;
 	}
@@ -71,9 +75,13 @@ public abstract class Ennemy {
 		return this.hp > 0;
 	}
 	
+	public int getEnnemyType() {
+		return this.ennemyType;
+	}
+	
 	public void moveRandomlyEnnemy() {
-    	this.setX(this.getX() + ((int)(Math.random() * 3) - 1));
-		this.setY(this.getY() + ((int)(Math.random() * 3) - 1));
+    	this.setX(this.getX() + 48 * ((int)(Math.random() * 3) - 1));
+		this.setY(this.getY() + 48 * ((int)(Math.random() * 3) - 1));
     }
 	
 	public abstract int getAttack();

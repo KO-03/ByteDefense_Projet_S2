@@ -14,7 +14,7 @@ public class Adware extends Ennemy {
 	private static final int LOOT = 0;
 	
 	public Adware() {
-		super(0, 0);
+		super(0, 0, 1);
 	}
 
 	public int getAttack() {

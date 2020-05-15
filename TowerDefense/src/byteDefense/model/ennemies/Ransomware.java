@@ -14,7 +14,7 @@ public class Ransomware extends Ennemy {
 	private static final int LOOT = 0;
 	
 	public Ransomware() {
-		super(0, 0);
+		super(0, 0, 3);
 	}
 	
 	public int getAttack() {

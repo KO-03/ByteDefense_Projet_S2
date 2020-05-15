@@ -14,7 +14,7 @@ public class TrojanHorse extends Ennemy {
 	private static final int LOOT = 0;
 	
 	public TrojanHorse() {
-		super(0, 0);
+		super(0, 0, 6);
 	}
 	
 	public int getAttack() {
