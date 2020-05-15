@@ -1,7 +1,7 @@
 /*
  * TileMapView.java
  * Cette classe gere la partie visuelle de la Tile Map, ses responsabilites sont de :
- * - recuperer et afficher l'image corrspondant à la tuile.
+ * - recuperer et afficher l'image correspondant à la tuile.
  * 
  */
 package byteDefense.view;

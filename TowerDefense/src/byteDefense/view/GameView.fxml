@@ -40,7 +40,7 @@
                   <Image url="@../../../resources/right_background.png" />
                </image>
             </ImageView>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="213.0">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="232.0" prefWidth="214.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Menu :">
                      <font>
