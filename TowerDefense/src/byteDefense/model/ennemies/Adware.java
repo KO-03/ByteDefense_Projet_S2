@@ -1,6 +1,6 @@
 /*
  * Adware.java
- * Cette classe représente un objet Adware
+ * Cette classe represente un objet Adware
  */
 
 package byteDefense.model.ennemies;

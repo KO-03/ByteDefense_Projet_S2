@@ -1,6 +1,6 @@
 /*
  * Ransomware.java
- * Cette classe représente un objet Ransomware.
+ * Cette classe represente un objet Ransomware.
  */
 
 package byteDefense.model.ennemies;

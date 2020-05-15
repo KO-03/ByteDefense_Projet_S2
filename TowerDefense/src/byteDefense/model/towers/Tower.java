@@ -1,6 +1,6 @@
 /*
  * Tower.java
- * Cette classe représente un objet Tower.
+ * Cette classe represente un objet Tower.
  */
 
 package byteDefense.model.towers;

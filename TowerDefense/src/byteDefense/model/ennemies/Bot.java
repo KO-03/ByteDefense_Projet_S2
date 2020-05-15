@@ -1,6 +1,6 @@
 /*
  * Bot.java
- * Cette classe représente un objet Bot.
+ * Cette classe represente un objet Bot.
  */
 
 package byteDefense.model.ennemies;
