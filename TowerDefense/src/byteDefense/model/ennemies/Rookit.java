@@ -17,7 +17,7 @@ public class Rookit extends Ennemy {
 	private static final int LOOT = 0;
 	
 	public Rookit() {
-		super(0, 0);
+		super(0, 0, 4);
 	}
 	
 	public int getAttack() {

@@ -14,7 +14,7 @@ public class Bot extends Ennemy {
 	private static final int LOOT = 0;
 	
 	public Bot() {
-		super(0, 0);
+		super(0, 0, 2);
 	}
 	
 	public int getAttack() {

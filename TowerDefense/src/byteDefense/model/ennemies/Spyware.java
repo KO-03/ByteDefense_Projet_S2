@@ -14,7 +14,7 @@ public class Spyware extends Ennemy {
 	private static final int LOOT = 0;
 	
 	public Spyware() {
-		super(0, 0);
+		super(0, 0, 5);
 	}
 	
 	public int getAttack() {

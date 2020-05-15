@@ -1,4 +1,5 @@
 /*
+ * Controller.java
  * Cette classe fait le lien entre le modele et la vue, ses responsabilitees sont :
  * - initialiser la TileMap
  * - gerer la gameLoop
