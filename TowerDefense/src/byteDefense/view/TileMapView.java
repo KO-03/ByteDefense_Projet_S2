@@ -1,8 +1,10 @@
 /*
  * TileMapView.java
  * Cette classe gere la partie visuelle de la Tile Map, ses responsabilites sont de :
- * - recuperer et afficher l'image correspondant Ã  la tuile.
- * 
+ * - charger et stocker les ressources d'images des tiles
+ * - stocker les types de tiles
+ * - faire la correspondance entre les types de tiles et les donnees de la tilemap a ajouter 
+ * - ajouter la tilemap à la vue.
  */
 package byteDefense.view;
 
@@ -26,12 +28,12 @@ public class TileMapView {
 	public static final int TOWER_ZONE = 7;
 
 	private static Image CORNER_SRC_IMG; 
-	private static Image HORIZONTAL_PATH_SRC_IMG ;
+	private static Image HORIZONTAL_PATH_SRC_IMG;
 	private static Image VERTICAL_PATH_SRC_IMG;
-	private static Image VERTICAL_WALL_SRC_IMG ;
-	private static Image INTERSECTION_PATH_SRC_IMG ;
-	private static Image HORIZONTAL_WALL_SRC_IMG ;
-	private static Image TOWER_ZONE_SRC_IMG ;
+	private static Image VERTICAL_WALL_SRC_IMG;
+	private static Image INTERSECTION_PATH_SRC_IMG;
+	private static Image HORIZONTAL_WALL_SRC_IMG;
+	private static Image TOWER_ZONE_SRC_IMG;
 
 	private TileMap map;
 	private TilePane gameBoard;
@@ -58,48 +60,48 @@ public class TileMapView {
 	}
 
 	private Image tileImageGet(int mapCase) {
-		Image tileImage = null;
+		Image tileImg = null;
 
 		switch (mapCase) {
-		case CORNER:
-			tileImage = CORNER_SRC_IMG;
-			break;
-		case HORIZONTAL_PATH:
-			tileImage = HORIZONTAL_PATH_SRC_IMG;
-			break;
-		case VERTICAL_PATH:
-			tileImage = VERTICAL_PATH_SRC_IMG;
-			break;
-		case VERTICAL_WALL:
-			tileImage = VERTICAL_WALL_SRC_IMG;
-			break;
-		case INTERSECTION_PATH:
-			tileImage = INTERSECTION_PATH_SRC_IMG;
-			break;
-		case HORIZONTAL_WALL:
-			tileImage = HORIZONTAL_WALL_SRC_IMG;
-			break;
-		case TOWER_ZONE:
-			tileImage = TOWER_ZONE_SRC_IMG;
-			break;
+			case CORNER:
+				tileImg = CORNER_SRC_IMG;
+				break;
+			case HORIZONTAL_PATH:
+				tileImg = HORIZONTAL_PATH_SRC_IMG;
+				break;
+			case VERTICAL_PATH:
+				tileImg = VERTICAL_PATH_SRC_IMG;
+				break;
+			case VERTICAL_WALL:
+				tileImg = VERTICAL_WALL_SRC_IMG;
+				break;
+			case INTERSECTION_PATH:
+				tileImg = INTERSECTION_PATH_SRC_IMG;
+				break;
+			case HORIZONTAL_WALL:
+				tileImg = HORIZONTAL_WALL_SRC_IMG;
+				break;
+			case TOWER_ZONE:
+				tileImg = TOWER_ZONE_SRC_IMG;
+				break;
 		}
-		return tileImage;
+		return tileImg;
 	}
 
 	private void generateMapView() {
-		Image tileImage;
+		Image tileImg;
 		int tilesSize = TileMap.tilesSize;
 		
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {
-				tileImage = this.tileImageGet(this.map.getCase(x, y));
+				tileImg = this.tileImageGet(this.map.getCase(x, y));
 				
-				if(tileImage != null) {
+				if(tileImg != null) {
 					ImageView tile = new ImageView();
-						tile.setImage(tileImage);
-						tile.setX(x);
-						tile.setY(y);
-						this.gameBoard.getChildren().add(tile);
+					tile.setImage(tileImg);
+					tile.setX(x);
+					tile.setY(y);
+					this.gameBoard.getChildren().add(tile);
 				}		
 			}
 		}
