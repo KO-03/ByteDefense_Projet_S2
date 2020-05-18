@@ -1,11 +1,11 @@
 /*
  * Tower.java
  * Cette classe represente un objet Tower. ses responsabilites sont de :
- * - identifier l'ennemi par un identifiant recuperable
- * - recuperer et de fixer les coordonnees xy de ennemi
+ * - identifier la tourelle par un identifiant recuperable
+ * - recuperer les coordonnees xy d'une tourelle
  * - recuperer et de decrementer les points de vie d'une tourelle
- * - verifier que l'ennemi est mort ou non
- * - recuperer les caracteristiques de l'ennemi (points d'attaque, point 
+ * - verifier que la tourelle est mort ou non
+ * - recuperer les caracteristiques de la tourelle (points d'attaque, point 
  *   de defense, vitesse d'attaque, portee d'attaque et le cout)
  */
 
@@ -18,11 +18,13 @@ public abstract class Tower {
 	private int id;
 	private int x, y;
 	private int hp;
+	private int towerType;
 	
-	public Tower(int x, int y) {
+	public Tower(int x, int y, int towerType) {
 		this.x = x;
 		this.y = y;
 		this.hp = 0;
+		this.towerType = towerType;
 		this.id = counterId;
 		counterId++;
 	}
@@ -35,16 +37,8 @@ public abstract class Tower {
 		return this.x;
 	}
 	
-	public void setX(int x) {
-		this.x = x;
-	}
-	
 	public int getY() {
 		return this.y;
-	}
-	
-	public void setY(int y) {
-		this.y = y;
 	}
 	
 	public int getHp() {
@@ -59,6 +53,10 @@ public abstract class Tower {
 		return this.hp > 0;
 	}
 	
+	public int getTowerType() {
+		return this.towerType;
+	}
+	
 	public abstract int getAttack();
 
 	public abstract int getDefense();
@@ -68,4 +66,6 @@ public abstract class Tower {
 	public abstract int getAttackRange();
 	
 	public abstract int getCost();
+	
+	public abstract void act();
 }

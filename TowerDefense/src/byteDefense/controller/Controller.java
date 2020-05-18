@@ -13,8 +13,11 @@ import java.util.ResourceBundle;
 import byteDefense.model.TileMap;
 import byteDefense.model.ennemies.Ennemy;
 import byteDefense.model.ennemies.Rookit;
+import byteDefense.model.towers.AdCube;
+import byteDefense.model.towers.Tower;
 import byteDefense.view.EnnemyView;
 import byteDefense.view.TileMapView;
+import byteDefense.view.TowerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -29,8 +32,11 @@ public class Controller implements Initializable {
     private TilePane gameBoard;
 	@FXML
     private Pane gridEnnemies;
+	@FXML
+    private Pane gridTowers;
 	
 	private Ennemy ennemy;
+	private Tower tower;
 	private TileMap map;
     private Timeline gameLoop;
     private int time;
@@ -42,6 +48,9 @@ public class Controller implements Initializable {
 		
 		this.ennemy = new Rookit();
 		new EnnemyView(this.ennemy, this.gridEnnemies);
+		
+		this.tower = new AdCube(240, 288);
+		new TowerView(this.tower, this.gridTowers);
 		
 		this.initAnimation();
 		this.gameLoop.play();
