@@ -79,14 +79,12 @@ public abstract class Ennemy {
 		return this.ennemyType;
 	}
 	
-	public void moveRandomlyEnnemy(int moveSpeed) {
-    	this.setX(this.getX() + (int)(48 * ((int)(Math.random() * 3) - 1) * moveSpeed));
-		this.setY(this.getY() + (int)(48 * ((int)(Math.random() * 3) - 1) * moveSpeed));
+	public void moveRandomlyEnnemy() {
+    	this.setX(this.getX() + 48 * ((int)(Math.random() * 3) - 1));
+		this.setY(this.getY() + 48 * ((int)(Math.random() * 3) - 1));
     }
 	
-	public abstract void act();
-	
-	public abstract float getAttack();
+	public abstract int getAttack();
 
 	public abstract int getDefense();
 

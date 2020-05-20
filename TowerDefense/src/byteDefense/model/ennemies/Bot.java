@@ -7,17 +7,17 @@ package byteDefense.model.ennemies;
 
 public class Bot extends Ennemy {
 
-	private static final float ATTACK = 0;
+	private static final int ATTACK = 0;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
 	
 	public Bot() {
-		super(0, 0, 3);
+		super(0, 0, 2);
 	}
 	
-	public float getAttack() {
+	public int getAttack() {
 		return ATTACK;
 	}
 
@@ -35,9 +35,5 @@ public class Bot extends Ennemy {
 
 	public int getLoot() {
 		return LOOT;
-	}
-
-	public void act() {
-		this.moveRandomlyEnnemy(1);
 	}
 }

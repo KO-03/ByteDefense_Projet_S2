@@ -7,8 +7,7 @@ package byteDefense.model.ennemies;
 
 public class Spyware extends Ennemy {
 
-	private static final int MOVE_SPEED = 2;
-	private static final float ATTACK = 0;
+	private static final int ATTACK = 0;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
@@ -18,7 +17,7 @@ public class Spyware extends Ennemy {
 		super(0, 0, 5);
 	}
 	
-	public float getAttack() {
+	public int getAttack() {
 		return ATTACK;
 	}
 
@@ -36,13 +35,5 @@ public class Spyware extends Ennemy {
 
 	public int getLoot() {
 		return LOOT;
-	}
-
-	public float getMoveSpeed() {
-		return MOVE_SPEED;
-	}
-	
-	public void act() {
-		this.moveRandomlyEnnemy(MOVE_SPEED);
 	}
 }

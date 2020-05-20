@@ -5,19 +5,19 @@
 
 package byteDefense.model.ennemies;
 
-public class Ransomware extends OffensiveEnnemy {
+public class Ransomware extends Ennemy {
 
-	private static final float ATTACK = 0;
+	private static final int ATTACK = 0;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
 	
 	public Ransomware() {
-		super(0, 0, 4);
+		super(0, 0, 3);
 	}
 	
-	public float getAttack() {
+	public int getAttack() {
 		return ATTACK;
 	}
 
@@ -35,9 +35,5 @@ public class Ransomware extends OffensiveEnnemy {
 
 	public int getLoot() {
 		return LOOT;
-	}
-
-	public void act() {
-		this.moveRandomlyEnnemy(1);
 	}
 }
