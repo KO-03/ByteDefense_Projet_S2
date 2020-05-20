@@ -7,7 +7,7 @@ package byteDefense.model.ennemies;
 
 public class TrojanHorse extends Ennemy {
 	
-	private static final int ATTACK = 0;
+	private static final float ATTACK = 0;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
@@ -17,7 +17,7 @@ public class TrojanHorse extends Ennemy {
 		super(0, 0, 6);
 	}
 	
-	public int getAttack() {
+	public float getAttack() {
 		return ATTACK;
 	}
 
@@ -35,5 +35,9 @@ public class TrojanHorse extends Ennemy {
 
 	public int getLoot() {
 		return LOOT;
+	}
+
+	public void act() {
+		this.moveRandomlyEnnemy(1);
 	}
 }
