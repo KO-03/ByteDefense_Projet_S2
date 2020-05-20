@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import byteDefense.model.TileMap;
 import byteDefense.model.ennemies.Ennemy;
 import byteDefense.model.ennemies.Rookit;
+import byteDefense.utilities.BFS;
 import byteDefense.view.EnnemyView;
 import byteDefense.view.TileMapView;
 import javafx.animation.KeyFrame;
@@ -34,10 +35,20 @@ public class Controller implements Initializable {
     private Timeline gameLoop;
     private int time;
     
+    private int startTile =20;
+    
+    
+    BFS bfsMap = new BFS(43);//43
+    
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.map = new TileMap();
 		new TileMapView(this.map, this.gameBoard);
+		bfsMap.createPathList();// cree la liste des chemins parcourables
+		
+		bfsMap.fillGraph(); // liste avec les voisins
+		bfsMap.BFS_algo(14); // point d'arrivee et de lancement de l'algo
 		
 		this.ennemy = new Rookit();
 		new EnnemyView(this.ennemy, this.gridEnnemies);
@@ -45,7 +56,16 @@ public class Controller implements Initializable {
 		this.initAnimation();
 		this.gameLoop.play();
     }
-	
+
+    private void moveEnnemy(int startTile) {
+    	int i =startTile;
+		int xPos = (int) bfsMap.pathList.get(i).getX();//recupere le X et Y du Point2D selon l'indice
+		int yPos = (int) bfsMap.pathList.get(i).getY();
+		System.out.println(" x :" + xPos + " y :" + yPos);
+		this.ennemy.setX(xPos*48);
+		this.ennemy.setY(yPos*48);
+    }
+    
     private void initAnimation() {
 		this.gameLoop = new Timeline();
 		this.time = 0;
@@ -59,10 +79,14 @@ public class Controller implements Initializable {
 						gameLoop.stop();
 					} else if (this.time % 5 == 0) {
 						System.out.println("un tour");
-						this.ennemy.moveRandomlyEnnemy();
+						this.moveEnnemy(startTile);
+						if(startTile>0)//finish point pas la meileure façon // to review //
+							startTile--;
+						//this.ennemy.moveRandomlyEnnemy();
 					}
 					this.time++;
 				}));
+		
 		this.gameLoop.getKeyFrames().add(kf);
 	}
 }
