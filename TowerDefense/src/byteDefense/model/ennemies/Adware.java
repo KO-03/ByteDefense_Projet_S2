@@ -5,19 +5,22 @@
 
 package byteDefense.model.ennemies;
 
-public class Adware extends Ennemy {
+public class Adware extends OffensiveEnnemy {
 
-	private static final int ATTACK = 0;
+	private static final float REPRODUCTION_RATE = 0;
+	private static final float ATTACK = 0;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
 	
+	private int bornRound;
+	
 	public Adware() {
-		super(0, 0, 1);
+		super(0, 0, 2);
 	}
 
-	public int getAttack() {
+	public float getAttack() {
 		return ATTACK;
 	}
 
@@ -35,5 +38,9 @@ public class Adware extends Ennemy {
 
 	public int getLoot() {
 		return LOOT;
+	}
+
+	public void act() {
+		this.moveRandomlyEnnemy(1);
 	}
 }

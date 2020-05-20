@@ -5,31 +5,32 @@
 
 package byteDefense.model.ennemies;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.FloatProperty;
+import javafx.beans.property.SimpleFloatProperty;
 
-public class Rookit extends Ennemy {
+public class Rookit extends OffensiveEnnemy {
 	
-	private static IntegerProperty attack = new SimpleIntegerProperty(0);
+	public static final float INCREASE_ATTACK_RATE = 1.20F;
+	private static FloatProperty attack = new SimpleFloatProperty(1);
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
 	
 	public Rookit() {
-		super(0, 0, 4);
+		super(0, 0, 1);
 	}
 	
-	public int getAttack() {
+	public float getAttack() {
 		return attack.getValue();
 	}
 	
-	public IntegerProperty getAttackProperty() {
+	public FloatProperty getAttackProperty() {
 		return attack;
 	}
 	
-	public void incrementAttack() {
-		attack.setValue(this.getAttack() + 1);
+	private void increaseAttack() {
+		attack.setValue(this.getAttack() * INCREASE_ATTACK_RATE);
 	}
 
 	public int getDefense() {
@@ -46,5 +47,10 @@ public class Rookit extends Ennemy {
 
 	public int getLoot() {
 		return LOOT;
+	}
+
+	public void act() {
+		this.increaseAttack();
+		this.moveRandomlyEnnemy(1);
 	}
 }
