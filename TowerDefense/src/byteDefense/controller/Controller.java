@@ -59,7 +59,7 @@ public class Controller implements Initializable {
 						gameLoop.stop();
 					} else if (this.time % 5 == 0) {
 						System.out.println("un tour");
-						this.ennemy.moveRandomlyEnnemy();
+						this.ennemy.act();
 					}
 					this.time++;
 				}));
