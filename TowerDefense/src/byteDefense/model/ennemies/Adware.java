@@ -5,6 +5,8 @@
 
 package byteDefense.model.ennemies;
 
+import byteDefense.utilities.BFS;
+
 public class Adware extends OffensiveEnnemy {
 
 	private static final float REPRODUCTION_RATE = 0;
@@ -16,8 +18,8 @@ public class Adware extends OffensiveEnnemy {
 	
 	private int bornRound;
 	
-	public Adware() {
-		super(0, 0, 2);
+	public Adware(BFS bfsMap) {
+		super(624, 432, 2, bfsMap);
 	}
 
 	public float getAttack() {
@@ -41,6 +43,6 @@ public class Adware extends OffensiveEnnemy {
 	}
 
 	public void act() {
-		this.moveRandomlyEnnemy(1);
+		this.moveEnnemy();
 	}
 }

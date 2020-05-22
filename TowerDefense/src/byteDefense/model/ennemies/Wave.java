@@ -1,5 +1,6 @@
 package byteDefense.model.ennemies;
 
+import byteDefense.utilities.BFS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
@@ -9,12 +10,14 @@ public class Wave {
 	private ObservableList<Ennemy> ennemies;
 	private final int WAVE_NUMBER;
 	private final Point2D ARRIVAL_POINT; 
+	private BFS bfsMap;
 	
-	public Wave(int waveNumber) {
+	public Wave(int waveNumber, BFS bfsMap) {
 		this.ennemies = FXCollections.observableArrayList(); 
 		this.WAVE_NUMBER = waveNumber;
 		this.ARRIVAL_POINT = new Point2D(0, 0);
-
+		this.bfsMap = bfsMap;
+		
 		fillEnnemyList();
 	}
 	
@@ -26,21 +29,21 @@ public class Wave {
 		for (int i = 1; i <= ennemyQty; i++) {
 			switch (ennemyType) {
 				case 1:
-					this.addEnnemy(new Rookit());
+					this.addEnnemy(new Rookit(bfsMap));
 					break;
 				case 2:
-					this.addEnnemy(new Adware());
+					this.addEnnemy(new Adware(bfsMap));
 					break;
 				case 3:
-					this.addEnnemy(new Bot());
+					this.addEnnemy(new Bot(bfsMap));
 					break;
 				case 4:
-					this.addEnnemy(new Ransomware());
+					this.addEnnemy(new Ransomware(bfsMap));
 					break;
 				case 5:
-					this.addEnnemy(new Spyware());
+					this.addEnnemy(new Spyware(bfsMap));
 				case 6:
-					this.addEnnemy(new TrojanHorse());
+					this.addEnnemy(new TrojanHorse(bfsMap));
 					break;
 			}
 		}
@@ -97,9 +100,13 @@ public class Wave {
 		return this.ennemies.size() <= 0;
 	}
 	
+	public int sizeOfEnnemies() {
+		return this.ennemies.size();
+	}
+	
 	public void verifieEnnemi() {
 		if(! this.isEmpty())
-			for(int i = this.ennemies.size() - 1; i > 0; i--) {			
+			for(int i = this.sizeOfEnnemies() - 1; i > 0; i--) {			
 				Ennemy e = this.ennemies.get(i);
 				if(! e.isAlive() || e.getX() == ARRIVAL_POINT.getX() && e.getY() == ARRIVAL_POINT.getY()) 
 					this.ennemies.remove(i);

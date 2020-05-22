@@ -5,6 +5,8 @@
 
 package byteDefense.model.ennemies;
 
+import byteDefense.utilities.BFS;
+
 public class Spyware extends Ennemy {
 
 	private static final int MOVE_SPEED = 2;
@@ -14,8 +16,8 @@ public class Spyware extends Ennemy {
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
 	
-	public Spyware() {
-		super(0, 0, 5);
+	public Spyware(BFS bfsMap) {
+		super(624, 432, 5, bfsMap);
 	}
 	
 	public float getAttack() {
@@ -43,6 +45,6 @@ public class Spyware extends Ennemy {
 	}
 	
 	public void act() {
-		this.moveRandomlyEnnemy(MOVE_SPEED);
+		this.moveEnnemy();
 	}
 }

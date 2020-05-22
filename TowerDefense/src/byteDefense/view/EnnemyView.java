@@ -13,20 +13,21 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import byteDefense.model.ennemies.Ennemy;
+import byteDefense.model.ennemies.Wave;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class EnnemyView {
 
-	private Ennemy ennemy;
+	//private Ennemy ennemy;
 	private Pane gridEnnemies;
 	
 	// Donnees correspondant aux composantes visuelles des ennemis 
-	public static final int ADWARE = 1;
-	public static final int BOT = 2;
-	public static final int RANSOMWARE = 3;
-	public static final int ROOKIT = 4;
+	public static final int ROOKIT = 1;
+	public static final int ADWARE = 2;
+	public static final int BOT = 3;
+	public static final int RANSOMWARE = 4;
 	public static final int SPYWARE = 5;
 	public static final int TROJAN_HORSE = 6;
 	
@@ -37,11 +38,9 @@ public class EnnemyView {
 	private static Image SPYWARE_SRC_IMG;
 	private static Image TROJAN_HORSE_SRC_IMG;
 	
-	public EnnemyView(Ennemy ennemy, Pane gridEnnemies) {
-		this.ennemy = ennemy;
+	public EnnemyView(Pane gridEnnemies) {
 		this.gridEnnemies = gridEnnemies;
 		this.imageLoader();
-		this.addEnnemy();
 	}
 	
 	private void imageLoader() {
@@ -61,6 +60,9 @@ public class EnnemyView {
 		Image ennemyImg = null;
 
 		switch (ennemyType) {
+			case ROOKIT:
+				ennemyImg = ROOKIT_SRC_IMG;
+				break;
 			case ADWARE:
 				ennemyImg = ADWARE_SRC_IMG;
 				break;
@@ -69,9 +71,6 @@ public class EnnemyView {
 				break;
 			case RANSOMWARE:
 				ennemyImg = RANSOMWARE_SRC_IMG;
-				break;
-			case ROOKIT:
-				ennemyImg = ROOKIT_SRC_IMG;
 				break;
 			case SPYWARE:
 				ennemyImg = SPYWARE_SRC_IMG;
@@ -83,18 +82,18 @@ public class EnnemyView {
 		return ennemyImg;
 	}
 	
-	private void addEnnemy() {
-		Image ennemyImg = ennemyImageGet(this.ennemy.getEnnemyType());
+	public void addEnnemy(Ennemy ennemy) {
+		Image ennemyImg = ennemyImageGet(ennemy.getEnnemyType());
 		
 		if (ennemyImg != null) {
 			ImageView imgView = new ImageView();
 			imgView.setImage(ennemyImg);
-			imgView.setId(Integer.toString(this.ennemy.getId()));
-			imgView.setTranslateX(this.ennemy.getX());
-			imgView.setTranslateY(this.ennemy.getY());	
+			imgView.setId(Integer.toString(ennemy.getId()));
+			imgView.setTranslateX(ennemy.getX());
+			imgView.setTranslateY(ennemy.getY());	
 			
-			imgView.translateXProperty().bind(this.ennemy.getXProperty());
-			imgView.translateYProperty().bind(this.ennemy.getYProperty());
+			imgView.translateXProperty().bind(ennemy.getXProperty());
+			imgView.translateYProperty().bind(ennemy.getYProperty());
 			
 			this.gridEnnemies.getChildren().add(imgView);
 		}

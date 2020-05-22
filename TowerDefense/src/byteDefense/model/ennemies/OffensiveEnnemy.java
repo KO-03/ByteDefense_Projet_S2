@@ -1,9 +1,11 @@
 package byteDefense.model.ennemies;
 
+import byteDefense.utilities.BFS;
+
 public abstract class OffensiveEnnemy extends Ennemy {
 
-	public OffensiveEnnemy(int x, int y, int ennemyType) {
-		super(x, y, ennemyType);
+	public OffensiveEnnemy(int x, int y, int ennemyType, BFS bfsMap) {
+		super(x, y, ennemyType, bfsMap);
 	}
 
 	public void attackTower() {

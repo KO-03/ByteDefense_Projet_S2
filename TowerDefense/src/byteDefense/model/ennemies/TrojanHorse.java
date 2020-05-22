@@ -5,6 +5,8 @@
 
 package byteDefense.model.ennemies;
 
+import byteDefense.utilities.BFS;
+
 public class TrojanHorse extends Ennemy {
 	
 	private static final float ATTACK = 0;
@@ -13,8 +15,8 @@ public class TrojanHorse extends Ennemy {
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
 	
-	public TrojanHorse() {
-		super(0, 0, 6);
+	public TrojanHorse(BFS bfsMap) {
+		super(624, 432, 6, bfsMap);
 	}
 	
 	public float getAttack() {
@@ -38,6 +40,6 @@ public class TrojanHorse extends Ennemy {
 	}
 
 	public void act() {
-		this.moveRandomlyEnnemy(1);
+		this.moveEnnemy();
 	}
 }
