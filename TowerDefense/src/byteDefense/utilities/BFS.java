@@ -9,10 +9,11 @@ public class BFS {
 	private int V;
 	private LinkedList<Integer> adj[]; //liste des tiles voisines, remplie avec fill graph
 	public  ArrayList<Point2D> pathList =  new ArrayList<>();
-	private ArrayList<Integer> tilesList;//map on peut la rÃ©cup d'autre part
-	public ArrayList<Integer> bfsPath  =  new ArrayList<>();// ordre du bfs aprÃ¨s algo
-
-	// Create a graph
+	private ArrayList<Integer> tilesList;//map on peut la récup d'autre part
+	public ArrayList<Integer> bfsPath  =  new ArrayList<>();// ordre du bfs après algo
+	public int ARRIVAL_POINT = 0;
+	
+	
 	public BFS(int v) {
 		V = v;
 		adj = new LinkedList[v];
@@ -22,9 +23,12 @@ public class BFS {
 		for (int i = 0; i < v; ++i)
 			adj[i] = new LinkedList<Integer>();
 		
+		
+		this.createPathList(); // liste des chemins parcourables
+		this.fillGraph(); // liste des voisins
+		this.BFS_algo(ARRIVAL_POINT); // lancement de l'algo a partir de l'indice du point d'arrivee
 	}
 
-	// Add edges to the graph
 	void addEdge(int v, int w) {
 		adj[v].add(w);
 	}
@@ -86,7 +90,6 @@ public class BFS {
 		return pos/TileMap.tilesSize;
 	}
 	
-	// BFS_algo algorithm
 	public void BFS_algo(int s) {
 
 		boolean visited[] = new boolean[V];
@@ -98,7 +101,6 @@ public class BFS {
 
 		while (queue.size() != 0) {
 			s = queue.poll();
-			//System.out.print(s + " ");
 			bfsPath.add(s);
 
 			Iterator<Integer> i = adj[s].listIterator();

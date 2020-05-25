@@ -67,4 +67,8 @@ public class GameObject {
 		return this.hp > 0;
 	}
 	
+	public int indexTile(int x, int y) {
+		return x + TileMap.tilesSize * y;
+	}
+	
 }
