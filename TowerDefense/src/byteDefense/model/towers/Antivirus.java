@@ -14,7 +14,7 @@ public class Antivirus extends Tower {
 	private static final int COST = 0;
 
 	public Antivirus(int x, int y) {
-		super(x, y, 2);
+		super(x, y, 8);
 	}
 	
 	public int getAttack() {

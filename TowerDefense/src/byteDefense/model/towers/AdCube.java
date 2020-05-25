@@ -14,7 +14,7 @@ public class AdCube extends Tower {
 	private static final int COST = 0;
 
 	public AdCube(int x, int y) {
-		super(x, y, 1);
+		super(x, y, 7);
 	}
 	
 	public int getAttack() {

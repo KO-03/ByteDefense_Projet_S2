@@ -14,7 +14,7 @@ public class SudVPN extends Tower {
 	private static final int COST = 0;
 
 	public SudVPN(int x, int y) {
-		super(x, y, 5);
+		super(x, y, 11);
 	}
 	
 	public int getAttack() {
