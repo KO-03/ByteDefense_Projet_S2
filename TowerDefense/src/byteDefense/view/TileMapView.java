@@ -94,7 +94,7 @@ public class TileMapView {
 		
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {
-				tileImg = this.tileImageGet(this.map.getCase(x, y));
+				tileImg = this.tileImageGet(this.map.tileMapCase(x, y));
 				
 				if(tileImg != null) {
 					ImageView tile = new ImageView();

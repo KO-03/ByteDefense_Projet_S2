@@ -28,7 +28,11 @@ public class TileMap {
 		return (int) Math.sqrt(this.tilesList.size());
 	}
 	
-	public int getCase(int x, int y) {
-		return this.tilesList.get(x + tilesSize * y);
+	public int tileMapCase(int x, int y) {
+		return this.tilesList.get(tileIndex(x, y));
+	}
+	
+	public int tileIndex(int x, int y) {
+		return x + TileMap.tilesSize * y;
 	}
 }
