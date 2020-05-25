@@ -29,7 +29,7 @@ public abstract class Ennemy {
 	private int hp;
 	private int ennemyType;
 	private static BFS bfs;
-	private int startTile = 20;
+	private int currentIndTile;
 	
 	public Ennemy(int x, int y, int ennemyType, BFS bfsMap) {
 		this.xProperty = new SimpleIntegerProperty(x);
@@ -37,6 +37,7 @@ public abstract class Ennemy {
 		this.hp = 0;
 		this.ennemyType = ennemyType;
 		bfs = bfsMap;
+		this.currentIndTile = 20;
 		this.id = counterId;
 		counterId++;
 	}
@@ -85,15 +86,17 @@ public abstract class Ennemy {
 		return this.ennemyType;
 	}
 	
+	public int getcurrentIndTile() {
+		return this.currentIndTile;
+	}
+	
 	public void moveEnnemy() {
-		int xPos = (int) bfs.pathList.get(startTile).getX();//recupere le X et Y du Point2D selon l'indice
-		int yPos = (int) bfs.pathList.get(startTile).getY();
-		System.out.println(" x : " + xPos + " y : " + yPos);
-		this.setX(xPos * 48);
-		this.setY(yPos * 48);
+	//	int currentIndTile = TileMap.tileIndex(getX(), getY());
+		this.setX((int)bfs.pathList.get(this.currentIndTile).getX() * 48);
+		this.setY((int)bfs.pathList.get(this.currentIndTile).getY() * 48);
 		
-		if(startTile > 0)
-			startTile--;
+		if(this.currentIndTile > 0)
+			this.currentIndTile--;
     }
 	
 	public abstract void act();

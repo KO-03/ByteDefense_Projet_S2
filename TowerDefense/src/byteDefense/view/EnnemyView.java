@@ -1,10 +1,11 @@
 /*
  * EnnemyView.java
- * Cette classe gere la partie visuelle d'un ennemi, ses responsabilites sont de :
+ * Cette classe gere les donnees et actions sur la partie visuelle des ennemis, ses responsabilites sont de :
  * - charger et stocker les ressources d'images des ennemis
- * - stocker les types d'ennemis
+ * - stocker les donnees correspondants types d'ennemis
  * - faire la correspondance entre les types d'ennemis et l'ennemi a ajouter 
  * - ajouter un ennemi a la vue
+ * - stocker la grille d'ennemis et gerer les operations qui y sont liees
  */
 
 package byteDefense.view;
@@ -13,14 +14,12 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import byteDefense.model.ennemies.Ennemy;
-import byteDefense.model.ennemies.Wave;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class EnnemyView {
 
-	//private Ennemy ennemy;
 	private Pane gridEnnemies;
 	
 	// Donnees correspondant aux composantes visuelles des ennemis 
@@ -31,6 +30,7 @@ public class EnnemyView {
 	public static final int SPYWARE = 5;
 	public static final int TROJAN_HORSE = 6;
 	
+	// Image a ajoute aux ImageView des ennemis ajoutes à la vue
 	private static Image ADWARE_SRC_IMG; 
 	private static Image BOT_SRC_IMG;
 	private static Image RANSOMWARE_SRC_IMG;
@@ -82,20 +82,27 @@ public class EnnemyView {
 		return ennemyImg;
 	}
 	
-	public void addEnnemy(Ennemy ennemy) {
+	public void addEnnemyView(Ennemy ennemy) {
 		Image ennemyImg = ennemyImageGet(ennemy.getEnnemyType());
 		
 		if (ennemyImg != null) {
 			ImageView imgView = new ImageView();
+			
+			// Fixage des donnees de modele et de vue au noeud de la vue de l'ennemi
 			imgView.setImage(ennemyImg);
 			imgView.setId(Integer.toString(ennemy.getId()));
 			imgView.setTranslateX(ennemy.getX());
 			imgView.setTranslateY(ennemy.getY());	
 			
+			// Liaison des donnees de position entre le modele et la vue
 			imgView.translateXProperty().bind(ennemy.getXProperty());
 			imgView.translateYProperty().bind(ennemy.getYProperty());
 			
 			this.gridEnnemies.getChildren().add(imgView);
 		}
+	}
+	
+	public void removeEnnemy(Ennemy e) {
+		gridEnnemies.getChildren().remove(gridEnnemies.lookup("#" + e.getId()));
 	}
 }
