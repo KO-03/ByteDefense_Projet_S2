@@ -11,18 +11,22 @@
 
 package byteDefense.model.towers;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public abstract class Tower {
 	
 	private static int counterId = 0;
 	
 	private int id;
-	private int x, y;
+	private IntegerProperty xProperty;
+	private IntegerProperty yProperty;
 	private int hp;
 	private int towerType;
 	
 	public Tower(int x, int y, int towerType) {
-		this.x = x;
-		this.y = y;
+		this.xProperty = new SimpleIntegerProperty(x);
+		this.yProperty = new SimpleIntegerProperty(y);
 		this.hp = 0;
 		this.towerType = towerType;
 		this.id = counterId;
@@ -33,12 +37,28 @@ public abstract class Tower {
 		return this.id;
 	}
 	
+	public IntegerProperty getXProperty() {
+		return this.xProperty;
+	}
+	
 	public int getX() {
-		return this.x;
+		return this.xProperty.getValue();
+	}
+	
+	public void setX(int newX) {
+		this.xProperty.setValue(newX);
+	}
+	
+	public IntegerProperty getYProperty() {
+		return this.yProperty;
 	}
 	
 	public int getY() {
-		return this.y;
+		return this.yProperty.getValue();
+	}
+	
+	public void setY(int newY) {
+		this.yProperty.setValue(newY);
 	}
 	
 	public int getHp() {
