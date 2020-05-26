@@ -15,13 +15,16 @@ import java.util.ResourceBundle;
 
 import byteDefense.model.GameMaster;
 import byteDefense.model.ennemies.Ennemy;
-import byteDefense.view.EnnemyView;
+import byteDefense.view.GameObjectView;
 import byteDefense.view.TileMapView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -32,19 +35,31 @@ public class Controller implements Initializable {
     private TilePane gameBoard;
 	@FXML
     private Pane gridEnnemies;
+	@FXML
+    private Pane gridTowers;
+	@FXML
+	private ImageView adcube;
+	@FXML
+	private ImageView antivirus;
+	@FXML
+	private ImageView authentipoint;
+	@FXML
+	private ImageView firewall;
+	@FXML
+	private ImageView sudvpn;
+	
+	private GameObjectView gov;
 	
 	private GameMaster gm;
     private Timeline gameLoop;
     private int time;
-    
-    private EnnemyView eView;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	gm = new GameMaster();
     	
     	new TileMapView(this.gm.getMap(), this.gameBoard);
-		eView = new EnnemyView(this.gridEnnemies);
+    	gov = new GameObjectView(this.gridEnnemies);
 
 		this.generateEnnemiesListener();
 		
@@ -79,9 +94,9 @@ public class Controller implements Initializable {
 	        public void onChanged(ListChangeListener.Change<? extends Ennemy> c) {
 				while (c.next()) {
 					for (Ennemy e : c.getAddedSubList())
-						eView.addEnnemyView(e);
+						gov.addGameObject(e);
 					for (Ennemy e : c.getRemoved())
-						eView.removeEnnemy(e);
+						gov.removeEnnemy(e);
 				}
 	        }
 		});
