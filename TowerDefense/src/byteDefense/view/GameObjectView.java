@@ -124,3 +124,4 @@ public class GameObjectView {
 		grid.getChildren().remove(grid.lookup("#" + gameObject.getId()));
 	}
 }
+

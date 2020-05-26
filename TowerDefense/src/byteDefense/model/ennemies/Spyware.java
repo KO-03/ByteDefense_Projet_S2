@@ -16,6 +16,7 @@ public class Spyware extends Ennemy {
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
 	
+
 	public Spyware(BFS bfsMap) {
 		super(624, 432, 5, bfsMap);
 	}
@@ -48,3 +49,5 @@ public class Spyware extends Ennemy {
 		this.moveEnnemy();
 	}
 }
+
+

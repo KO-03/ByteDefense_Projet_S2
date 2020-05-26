@@ -1,12 +1,13 @@
 /*
  * Ennemy.java
  * Cette classe represente un objet Ennemy, ses responsabilites sont de:
- * - identifier l'ennemi par un identifiant recuperable
  * - recuperer et de decrementer les points de vie de ennemi
+ * - identifier l'ennemi par un identifiant recuperable
  * - recuperer et de fixer les coordonnees xy de ennemi
  * - verifier que l'ennemi est mort ou non
  * - recuperer le type d'ennemi de l'objet
  * - faire se deplacer un ennemi selon le BFS
+ * - faire se deplacer aleatoirement un ennemi
  * - recuperer les caracteristiques de l'ennemi (points d'attaque, point 
  *   de defense, vitesse d'attaque, portee d'attaque et le butin)
  * - stocker le BFS lié à l'ennemi ainsi que sa tuile de départ  
@@ -39,5 +40,5 @@ public abstract class Ennemy extends GameObject {
 		
 		if(this.currentIndTile > 0)
 			this.currentIndTile--;
-    }
+	}
 }

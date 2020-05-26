@@ -107,7 +107,7 @@ public class Wave {
 		return this.ennemies.size();
 	}
 	
-	public void verifieEnnemi() {
+	public void verifyEnnemi() {
 		if(! this.isEmpty())
 			for(int i = this.sizeOfEnnemies() - 1; i > 0; i--) {			
 				Ennemy e = this.ennemies.get(i);
