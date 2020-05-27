@@ -10,8 +10,8 @@ import byteDefense.utilities.BFS;
 
 public abstract class OffensiveEnnemy extends Ennemy {
 
-	public OffensiveEnnemy(int x, int y, int ennemyType, BFS bfsMap) {
-		super(x, y, ennemyType, bfsMap);
+	public OffensiveEnnemy(int x, int y, BFS bfsMap) {
+		super(x, y, bfsMap);
 	}
 
 	public void attackTower() {

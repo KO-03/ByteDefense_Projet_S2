@@ -74,7 +74,7 @@ public class GameObjectView {
 		}
 	}
 	
-	private Image imageGet(int type) {
+	private Image imageGet(GameObject gameObject) {
 		Image img = null;
 
 		switch (type) {
@@ -116,7 +116,7 @@ public class GameObjectView {
 	}
 	
 	public void addGameObject(GameObject gameObject) {
-		Image ennemyImg = imageGet(gameObject.getType());
+		Image ennemyImg = imageGet(gameObject);
 		
 		if (ennemyImg != null) {
 			ImageView imgView = new ImageView();

@@ -17,7 +17,7 @@
 
 package byteDefense.model.ennemies;
 
-import byteDefense.model.TileMap;
+import byteDefense.model.GameArea;
 import byteDefense.utilities.BFS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -131,11 +131,11 @@ public class Wave {
 		return this.ennemies.size();
 	}
 	
-	public void verifyEnnemi(TileMap map) {
+	public void verifyEnnemi(GameArea gameArea, Ennemy ennemy) {
 		if(! this.isEmpty())
 			for(int i = this.sizeOfEnnemies() - 1; i > 0; i--) {			
 				Ennemy e = this.ennemies.get(i);
-				if(! e.isAlive() || e.getX() == map.tilePosX(bfsMap.ARRIVAL_POINT) && e.getY() == map.tilePosY(bfsMap.ARRIVAL_POINT)) 
+				if(! e.isAlive() || e.getX() == gameArea.tilePosX(bfsMap.ARRIVAL_POINT) && e.getY() == gameArea.tilePosY(bfsMap.ARRIVAL_POINT)) 
 					this.removeEnnemy(e);
 			}
 	}

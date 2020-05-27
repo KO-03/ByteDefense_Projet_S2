@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="byteDefense.model.TileMap" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/model/TileMap.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="byteDefense.model.GameArea" project="TowerDefense" 
+    file="/TowerDefense/src/byteDefense/model/GameArea.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-89" y="-164"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,16 +73,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="byteDefense.view.EnnemyView" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/view/EnnemyView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1338" y="-332"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="byteDefense.view.TileMapView" project="TowerDefense" 
+  <class id="9" language="java" name="byteDefense.view.TileMapView" project="TowerDefense" 
     file="/TowerDefense/src/byteDefense/view/TileMapView.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-66" y="238"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -91,7 +82,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="byteDefense.model.towers.Tower" project="TowerDefense" 
+  <class id="10" language="java" name="byteDefense.model.towers.Tower" project="TowerDefense" 
     file="/TowerDefense/src/byteDefense/model/towers/Tower.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="589" y="-388"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -100,7 +91,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="byteDefense.controller.Controller" project="TowerDefense" 
+  <class id="11" language="java" name="byteDefense.controller.Controller" project="TowerDefense" 
     file="/TowerDefense/src/byteDefense/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="215" y="-242"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -109,7 +100,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="byteDefense.Main" project="TowerDefense" 
+  <class id="12" language="java" name="byteDefense.Main" project="TowerDefense" 
     file="/TowerDefense/src/byteDefense/Main.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-89" y="-372"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -118,30 +109,30 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="14">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <generalization id="15">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <generalization id="16">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <association id="17">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="18" name="map">        
+  <association id="13">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="14" name="map">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="19" minimum="0" maximum="1">        
+      <multiplicity id="15" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <generalization id="16">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="17">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="18">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

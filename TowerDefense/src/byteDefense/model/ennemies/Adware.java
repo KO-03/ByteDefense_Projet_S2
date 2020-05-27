@@ -27,7 +27,7 @@ public class Adware extends OffensiveEnnemy {
 	private int bornTurn;
 	
 	public Adware(BFS bfsMap) {
-		super(624, 432, 2, bfsMap);
+		super(624, 432, bfsMap);
 	}
 
 	public float getAttack() {

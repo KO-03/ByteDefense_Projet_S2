@@ -12,7 +12,7 @@ package byteDefense.view;
 import java.io.File;
 import java.net.MalformedURLException;
 
-import byteDefense.model.TileMap;
+import byteDefense.model.GameArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -36,10 +36,10 @@ public class TileMapView {
 	private static Image HORIZONTAL_WALL_SRC_IMG;
 	private static Image TOWER_ZONE_SRC_IMG;
 
-	private TileMap map;
+	private GameArea map;
 	private TilePane gameBoard;
 
-	public TileMapView(TileMap map, TilePane gameBoard) {
+	public TileMapView(GameArea map, TilePane gameBoard) {
 		this.map = map;
 		this.gameBoard = gameBoard;
 		this.imageLoader();
@@ -91,7 +91,7 @@ public class TileMapView {
 
 	private void generateMapView() {
 		Image tileImg;
-		int tilesSize = TileMap.tilesSize;
+		int tilesSize = GameArea.tilesSize;
 		
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {

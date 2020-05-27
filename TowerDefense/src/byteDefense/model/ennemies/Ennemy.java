@@ -16,8 +16,8 @@ public abstract class Ennemy extends GameObject {
 	private static BFS bfs;
 	private int currentIndTile;
 	
-	public Ennemy(int x, int y, int ennemyType, BFS bfsMap) {
-		super(x, y, ennemyType);
+	public Ennemy(int x, int y, BFS bfsMap) {
+		super(x, y);
 		bfs = bfsMap;
 		this.currentIndTile = 20;
 	}

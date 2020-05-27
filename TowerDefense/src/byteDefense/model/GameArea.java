@@ -12,13 +12,13 @@ import java.util.ArrayList;
 
 import byteDefense.utilities.TileMapReader;
 
-public class TileMap {
+public class GameArea {
 	
 	public static int tilesSize;
 	
 	private ArrayList<Integer> tilesList;
 	
-	public TileMap() {
+	public GameArea() {
 		this.tilesList = new ArrayList<>();
 		this.tilesList = new TileMapReader("./resources/tiles.txt").readFile();
 		tilesSize = mapSize();
@@ -33,15 +33,15 @@ public class TileMap {
 	}
 	
 	public int tileIndex(int x, int y) {
-		return x + TileMap.tilesSize * y;
+		return x + GameArea.tilesSize * y;
 	}
 	
 	public int tilePosX(int pos) {
-		return pos%TileMap.tilesSize;
+		return pos%GameArea.tilesSize;
 	}
 
 	public int tilePosY(int pos) {
-		return pos/TileMap.tilesSize;
+		return pos/GameArea.tilesSize;
 	}
 	
 	public ArrayList<Integer> getTilesList(){

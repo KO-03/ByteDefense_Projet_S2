@@ -22,7 +22,7 @@ public class Bot extends Ennemy {
 	private static final int LOOT = 0;
 	
 	public Bot(BFS bfsMap) {
-		super(624, 432, 3, bfsMap);
+		super(624, 432, bfsMap);
 	}
 	
 	public float getAttack() {

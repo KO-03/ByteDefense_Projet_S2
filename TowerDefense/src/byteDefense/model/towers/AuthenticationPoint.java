@@ -14,7 +14,7 @@ public class AuthenticationPoint extends Tower {
 	private static final int COST = 0;
 
 	public AuthenticationPoint(int x, int y) {
-		super(x, y, 9);
+		super(x, y);
 	}
 	
 	public float getAttack() {

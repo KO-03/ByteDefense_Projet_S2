@@ -17,20 +17,20 @@ import byteDefense.utilities.BFS;
 public class GameMaster {
 
 	private Wave waveEnnemy;
-	private TileMap map;
+	private GameArea gameArea;
 	private BFS bfsMap;
 	
 	public GameMaster() {
-		this.map = new TileMap();
+		this.gameArea = new GameArea();
 		this.bfsMap = new BFS(21);
 		
-		this.bfsMap.createPathList(map);
+		this.bfsMap.createPathList(gameArea);
 		
 		this.waveEnnemy = new Wave(1, bfsMap); 
 	}
 	
-	public TileMap getMap() {
-		return this.map;
+	public GameArea getMap() {
+		return this.gameArea;
 	}
 	
 	public BFS getBfs() {
@@ -45,14 +45,11 @@ public class GameMaster {
 		if (this.waveEnnemy.getIndLastEnnemySpawn() < this.waveEnnemy.getWaveEnnemiesQty())
 			this.waveEnnemy.fillEnnemyList();
 		
-		Ennemy e;
+		Ennemy ennemy;
 		for (int i = this.waveEnnemy.sizeOfEnnemies() - 1; i >= 0; i--) {
-			e = this.waveEnnemy.getEnnemies().get(i);
+			ennemy = this.waveEnnemy.getEnnemies().get(i);
 			
-			if (e.getcurrentIndTile() > this.getBfs().ARRIVAL_POINT)
-				e.act();
-			else if (e.getcurrentIndTile() == this.getBfs().ARRIVAL_POINT)
-				this.waveEnnemy.removeEnnemy(e);
+			this.waveEnnemy.verifyEnnemi(gameArea, ennemy);
 		}
 	}
 }

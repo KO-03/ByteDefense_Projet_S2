@@ -14,7 +14,7 @@ public class Firewall extends Tower {
 	private static final int COST = 0;
 
 	public Firewall(int x, int y) {
-		super(x, y, 10);
+		super(x, y);
 	}
 	
 	public float getAttack() {

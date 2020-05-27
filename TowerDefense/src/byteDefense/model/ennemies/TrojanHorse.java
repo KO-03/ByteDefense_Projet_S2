@@ -22,7 +22,7 @@ public class TrojanHorse extends Ennemy {
 	private static final int LOOT = 0;
 	
 	public TrojanHorse(BFS bfsMap) {
-		super(624, 432, 6, bfsMap);
+		super(624, 432, bfsMap);
 	}
 	
 	public float getAttack() {

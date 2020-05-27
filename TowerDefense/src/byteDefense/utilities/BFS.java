@@ -2,7 +2,7 @@ package byteDefense.utilities;
 
 import java.util.*;
 
-import byteDefense.model.TileMap;
+import byteDefense.model.GameArea;
 import javafx.geometry.Point2D;
 
 public class BFS {
@@ -28,7 +28,7 @@ public class BFS {
 		return index == 2 || index == 3 ||  index == 5;
 	}
 	
-	public  void createPathList(TileMap map) {
+	public  void createPathList(GameArea map) {
 		int tilesIndex = 0;
 		for(int i = 0; i < map.getTilesList().size()-1; i++) {
 			tilesIndex = map.getTilesList().get(i);

@@ -22,7 +22,7 @@ public class Ransomware extends OffensiveEnnemy {
 	private static final int LOOT = 0;
 	
 	public Ransomware(BFS bfsMap) {
-		super(624, 432, 4, bfsMap);
+		super(624, 432, bfsMap);
 	}
 	
 	public float getAttack() {

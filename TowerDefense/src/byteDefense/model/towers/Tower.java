@@ -15,8 +15,8 @@ import byteDefense.model.GameObject;
 
 public abstract class Tower extends GameObject {
 	
-	public Tower(int x, int y, int type) {
-		super(x, y, type);
+	public Tower(int x, int y) {
+		super(x, y);
 	}
 	
 	public abstract void act();

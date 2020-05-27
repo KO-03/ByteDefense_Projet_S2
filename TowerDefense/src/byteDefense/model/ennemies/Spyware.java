@@ -24,7 +24,7 @@ public class Spyware extends Ennemy {
 	
 
 	public Spyware(BFS bfsMap) {
-		super(624, 432, 5, bfsMap);
+		super(624, 432, bfsMap);
 	}
 	
 	public float getAttack() {

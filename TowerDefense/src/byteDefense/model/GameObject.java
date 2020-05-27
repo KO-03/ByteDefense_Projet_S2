@@ -19,12 +19,10 @@ public abstract class GameObject {
 	private IntegerProperty xProperty;
 	private IntegerProperty yProperty;
 	private int hp;
-	private int type;
 	
-	public GameObject(int x, int y, int type) {
+	public GameObject(int x, int y) {
 		this.xProperty = new SimpleIntegerProperty(x);
 		this.yProperty = new SimpleIntegerProperty(y);
-		this.type = type;
 		this.id = counterId;
 		counterId++;
 	}
@@ -67,10 +65,6 @@ public abstract class GameObject {
 
 	public boolean isAlive() {
 		return this.hp > 0;
-	}
-	
-	public int getType() {
-		return this.type;
 	}
 	
 	public abstract float getAttack();
