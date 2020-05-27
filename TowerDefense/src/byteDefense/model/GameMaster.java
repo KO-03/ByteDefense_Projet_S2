@@ -41,7 +41,7 @@ public class GameMaster {
 		return this.waveEnnemy;
 	}
 	
-	public void onTurn() {
+	public void oneTurn() {
         if (this.waveEnnemy.getIndLastEnnemySpawn() < this.waveEnnemy.getWaveEnnemiesQty())
             this.waveEnnemy.fillEnnemyList();
         
