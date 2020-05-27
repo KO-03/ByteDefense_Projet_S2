@@ -42,13 +42,17 @@ public class GameMaster {
 	}
 	
 	public void onTurn() {
-		if (this.waveEnnemy.getIndLastEnnemySpawn() < this.waveEnnemy.getWaveEnnemiesQty())
-			this.waveEnnemy.fillEnnemyList();
-		
-		Ennemy ennemy;
-		for (int i = this.waveEnnemy.sizeOfEnnemies() - 1; i >= 0; i--) {
-			ennemy = this.waveEnnemy.getEnnemies().get(i);
-			this.waveEnnemy.verifyEnnemi(gameArea, ennemy);
-		}
+        if (this.waveEnnemy.getIndLastEnnemySpawn() < this.waveEnnemy.getWaveEnnemiesQty())
+            this.waveEnnemy.fillEnnemyList();
+        
+        Ennemy e;
+        for (int i = this.waveEnnemy.sizeOfEnnemies() - 1; i >= 0; i--) {
+            e = this.waveEnnemy.getEnnemies().get(i);
+            
+            if (e.getcurrentIndTile() > this.getBfs().ARRIVAL_POINT)
+                e.act();
+            else if (e.getcurrentIndTile() == this.getBfs().ARRIVAL_POINT)
+                this.waveEnnemy.removeEnnemy(e);
+        }
 	}
 }
