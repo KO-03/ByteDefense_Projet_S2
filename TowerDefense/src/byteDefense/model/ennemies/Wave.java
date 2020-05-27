@@ -11,8 +11,7 @@
  * - recuperer un ennemi selon son identifiant
  * - verifier si la liste d'ennemis est pas vide
  * - recuperer la taille de la liste d'ennemis
- * - verifier l'etat d'un pour le supprimer de la liste d'ennemis
- * - 
+ * - verifier l'etat d'un ennemi pour le supprimer de la liste d'ennemis
  */
 
 package byteDefense.model.ennemies;
@@ -58,15 +57,15 @@ public class Wave {
 	}
 	
 	private Ennemy createEnnemy() {
-		int indEnnemyType = 0, nbrAddedEnnemy = indLastEnnemySpawn;
-		boolean t = false;
+		int indEnnemyType = 0, ennemyAddedRest = indLastEnnemySpawn;
+		boolean foundCorrectEnnemyType = false;
 		Ennemy ennemy = null;
 		
-		while (!t && indEnnemyType < WAVE_NUMBER) {
-			nbrAddedEnnemy -= waveInfo[WAVE_NUMBER][indEnnemyType];
+		while (!foundCorrectEnnemyType && indEnnemyType < WAVE_NUMBER) {
+			ennemyAddedRest -= waveInfo[WAVE_NUMBER][indEnnemyType];
 
-			if (nbrAddedEnnemy < 0) 
-				t = true;
+			if (ennemyAddedRest < 0) 
+				foundCorrectEnnemyType = true;
 			else
 				indEnnemyType++;
 		}

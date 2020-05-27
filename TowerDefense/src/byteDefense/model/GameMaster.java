@@ -48,7 +48,6 @@ public class GameMaster {
 		Ennemy ennemy;
 		for (int i = this.waveEnnemy.sizeOfEnnemies() - 1; i >= 0; i--) {
 			ennemy = this.waveEnnemy.getEnnemies().get(i);
-			
 			this.waveEnnemy.verifyEnnemi(gameArea, ennemy);
 		}
 	}
