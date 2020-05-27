@@ -13,6 +13,9 @@ public class GameMaster {
 	public GameMaster() {
 		this.map = new TileMap();
 		this.bfsMap = new BFS(21);
+		
+		this.bfsMap.createPathList(map);
+		
 		this.waveEnnemy = new Wave(1, bfsMap); 
 	}
 	

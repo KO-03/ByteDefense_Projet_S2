@@ -1,5 +1,6 @@
 package byteDefense.model.ennemies;
 
+import byteDefense.model.TileMap;
 import byteDefense.utilities.BFS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -107,11 +108,11 @@ public class Wave {
 		return this.ennemies.size();
 	}
 	
-	public void verifyEnnemi() {
+	public void verifyEnnemi(TileMap map) {
 		if(! this.isEmpty())
 			for(int i = this.sizeOfEnnemies() - 1; i > 0; i--) {			
 				Ennemy e = this.ennemies.get(i);
-				if(! e.isAlive() || e.getX() == BFS.getX(bfsMap.ARRIVAL_POINT) && e.getY() == BFS.getY(bfsMap.ARRIVAL_POINT)) 
+				if(! e.isAlive() || e.getX() == map.tilePosX(bfsMap.ARRIVAL_POINT) && e.getY() == map.tilePosY(bfsMap.ARRIVAL_POINT)) 
 					this.ennemies.remove(i);
 			}
 	}

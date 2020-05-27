@@ -35,4 +35,16 @@ public class TileMap {
 	public int tileIndex(int x, int y) {
 		return x + TileMap.tilesSize * y;
 	}
+	
+	public int tilePosX(int pos) {
+		return pos%TileMap.tilesSize;
+	}
+
+	public int tilePosY(int pos) {
+		return pos/TileMap.tilesSize;
+	}
+	
+	public ArrayList<Integer> getTilesList(){
+		return this.tilesList;
+	}
 }

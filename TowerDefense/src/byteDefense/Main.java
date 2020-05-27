@@ -16,8 +16,10 @@ public class Main extends Application{
 		
 		try {
 			BorderPane root = FXMLLoader.load(getClass().getResource("view/GameView.fxml"));
-			Scene scene = new Scene(root,900,936);
+			Scene scene = new Scene(root,890,926);
 			primaryStage.setScene(scene);
+			primaryStage.setResizable(false);
+            primaryStage.setTitle("Byte Defense");
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
