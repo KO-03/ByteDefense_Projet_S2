@@ -21,8 +21,9 @@ import byteDefense.model.towers.Antivirus;
 import byteDefense.model.towers.AuthenticationPoint;
 import byteDefense.model.towers.Firewall;
 import byteDefense.model.towers.SudVPN;
-import byteDefense.view.GameObjectView;
+import byteDefense.view.EnnemyView;
 import byteDefense.view.TileMapView;
+import byteDefense.view.TowerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
@@ -54,7 +55,7 @@ public class Controller implements Initializable {
 	@FXML
 	private ImageView sudvpn;
 	
-	private GameObjectView gov;
+	private EnnemyView ev;
 	
 	private GameMaster gm;
     private Timeline gameLoop;
@@ -65,7 +66,7 @@ public class Controller implements Initializable {
     	gm = new GameMaster();
     	
     	new TileMapView(this.gm.getMap(), this.gameBoard);
-    	gov = new GameObjectView(this.gridEnnemies);
+    	ev = new EnnemyView(this.gridEnnemies);
 
 		this.generateEnnemiesListener();
 
@@ -120,9 +121,9 @@ public class Controller implements Initializable {
 	        public void onChanged(ListChangeListener.Change<? extends Ennemy> c) {
 				while (c.next()) {
 					for (Ennemy e : c.getAddedSubList())
-						gov.addGameObject(e);
+						ev.addGameObject(e);
 					for (Ennemy e : c.getRemoved())
-						gov.removeEnnemy(e);
+						ev.removeEnnemy(e);
 				}
 	        }
 		});
@@ -145,7 +146,7 @@ public class Controller implements Initializable {
 				int y = ((int) event.getSceneY()-74)/48*48;
 				
 				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
-					new GameObjectView(gridTowers).addGameObject(new AdCube(x, y));
+					new TowerView(gridTowers).addGameObject(new AdCube(x, y));
 					System.out.println("+ AdCube");
 				}
 				adcube.setX(129);
@@ -169,7 +170,7 @@ public class Controller implements Initializable {
 				int y = ((int) event.getSceneY()-74)/48*48;
 				
 				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
-					new GameObjectView(gridTowers).addGameObject(new Antivirus(x, y));;
+					new TowerView(gridTowers).addGameObject(new Antivirus(x, y));;
 					System.out.println("+ Antivirus");
 				}
 				antivirus.setX(213);
@@ -193,7 +194,7 @@ public class Controller implements Initializable {
 				int y = ((int) event.getSceneY()-74)/48*48;
 				
 				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
-					new GameObjectView(gridTowers).addGameObject(new AuthenticationPoint(x, y));;
+					new TowerView(gridTowers).addGameObject(new AuthenticationPoint(x, y));;
 					System.out.println("+ Point d'authentification");
 				}
 				authentipoint.setX(298);
@@ -217,7 +218,7 @@ public class Controller implements Initializable {
 				int y = ((int) event.getSceneY()-74)/48*48;
 				
 				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
-					new GameObjectView(gridTowers).addGameObject(new Firewall(x, y));;
+					new TowerView(gridTowers).addGameObject(new Firewall(x, y));;
 					System.out.println("+ Pare feu");
 				}
 				firewall.setX(383);
@@ -241,7 +242,7 @@ public class Controller implements Initializable {
 				int y = ((int) event.getSceneY()-74)/48*48;
 				
 				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
-					new GameObjectView(gridTowers).addGameObject(new SudVPN(x, y));;
+					new TowerView(gridTowers).addGameObject(new SudVPN(x, y));;
 					System.out.println("+ SudVPN");
 				}
 				sudvpn.setX(466);
