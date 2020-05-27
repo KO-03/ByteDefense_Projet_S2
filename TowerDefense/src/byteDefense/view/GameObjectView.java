@@ -1,3 +1,14 @@
+/*
+ * GameObjectView.java
+ * Cette classe gere la partie visuelle d'un objet de jeu, ses responsabilites sont :
+ * - stocker la grille correspondante pour l'objet de jeu (grille d'ennemis ou de tourelles)
+ * - charger et stocker les ressources d'images des ennemis et des tourelles
+ * - stocker les types d'ennemis et de tourelles
+ * - faire la correspondance entre les types de d'ennemis, de tourelles et les donnees de l'objet de jeu a ajouter 
+ * - ajouter un ennemi ou une tourelle à la vue
+ * - supprimer un ennemi ou une tourelle de la vue.
+ */
+
 package byteDefense.view;
 
 import java.io.File;
@@ -62,10 +73,10 @@ public class GameObjectView {
 		}
 	}
 	
-	private Image imageGet(int towerType) {
+	private Image imageGet(int type) {
 		Image img = null;
 
-		switch (towerType) {
+		switch (type) {
 			case ADCUBE:
 				img = ADCUBE_SRC_IMG;
 				break;

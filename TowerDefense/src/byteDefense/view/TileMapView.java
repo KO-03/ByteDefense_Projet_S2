@@ -6,6 +6,7 @@
  * - faire la correspondance entre les types de tiles et les donnees de la tilemap a ajouter 
  * - ajouter la tilemap à la vue.
  */
+
 package byteDefense.view;
 
 import java.io.File;

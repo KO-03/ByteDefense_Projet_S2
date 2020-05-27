@@ -1,12 +1,12 @@
 /*
  * Controller.java
  * Cette classe fait le lien entre le modele et la vue, ses responsabilitees sont :
- * - initialiser la TileMap et sa vue
- * - initialiser une vague d'ennemi et sa vue
- * - initialiser les tourelles et leur vue
- * - stocker le BFS et realiser les actions necessaires son application sur la vue
- * - gerer la gameLoop et les actions du jeu (mouvements de ennemis selon le BFS, 
- *   ajout de nouveaux ennemis a la vue selon le modele)
+ * - initialiser le gameMaster
+ * - initialiser la	vue du GameObject
+ * - initialiser la vue de la TileMap
+ * - gerer la gameLoop et les actions du jeu (effectuer un tour)
+ * - gerer les entites de vue (tourelle, plateau de jeu, grille d'ennemis et de tourelles)
+ * - gerer le glisser deposer d'une tourelle et la positionner
  */
 
 package byteDefense.controller;
