@@ -1,3 +1,13 @@
+/*
+ * GameMaster.java
+ * Cette classe represente un maitre de jeu, ses responsabilites sont de:
+ * - rassembler les differentes actions ayant lieu lors d'un tour
+ * - lancer le bfs pour le deplacement des ennemies
+ * - faire tourner les vagues
+ * - faire agir tous les ennemies et de les retirer s'ils sont morts ou s'ils sont arrivé
+ *
+ */
+
 package byteDefense.model;
 
 import byteDefense.model.ennemies.Ennemy;
