@@ -54,7 +54,7 @@
                      <children>
                         <ImageView pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../resources/play-button.png" />
+                              <Image url="@../../../resources/icons/play-button.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="15.0" right="15.0" />
@@ -62,7 +62,7 @@
                         </ImageView>
                         <ImageView fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../resources/pause-button.png" />
+                              <Image url="@../../../resources/icons/pause-button.png" />
                            </image>
                            <HBox.margin>
                               <Insets top="6.0" />
@@ -114,7 +114,7 @@
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../resources/attack.png" />
+                                    <Image url="@../../../resources/icons/attack.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets right="8.0" />
@@ -136,7 +136,7 @@
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../resources/defense.png" />
+                                    <Image url="@../../../resources/icons/defense.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets right="8.0" />
@@ -158,7 +158,7 @@
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../resources/speed.png" />
+                                    <Image url="@../../../resources/icons/speed.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets right="8.0" />
@@ -180,7 +180,7 @@
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../resources/range.png" />
+                                    <Image url="@../../../resources/icons/range.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets right="8.0" />
@@ -202,7 +202,7 @@
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../resources/cost.png" />
+                                    <Image url="@../../../resources/icons/cost.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets right="8.0" />
@@ -354,7 +354,7 @@
                                     </Label>
                                     <ImageView fx:id="adcube" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../resources/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.PNG" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -362,7 +362,7 @@
                                     </ImageView>
                                     <ImageView fx:id="antivirus" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                                        <image>
-                                          <Image url="@../../../resources/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.PNG" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -370,7 +370,7 @@
                                     </ImageView>
                                     <ImageView fx:id="authentipoint" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                                        <image>
-                                          <Image url="@../../../resources/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.PNG" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -378,7 +378,7 @@
                                     </ImageView>
                                     <ImageView fx:id="firewall" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                                        <image>
-                                          <Image url="@../../../resources/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.PNG" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -386,7 +386,7 @@
                                     </ImageView>
                                     <ImageView fx:id="sudvpn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                                        <image>
-                                          <Image url="@../../../resources/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.PNG" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
