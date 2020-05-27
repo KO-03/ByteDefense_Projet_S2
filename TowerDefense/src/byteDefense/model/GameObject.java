@@ -1,9 +1,13 @@
 /*
  * GameObject.java
- * Cette classe parent permet de gérer :
- * - la génération des identifiants des objets du jeu (Tourelles et ennemies)
- * - la gestion
- * 
+ * Cette classe parent permet de gerer :
+ * - identifier la GameObject par un identifiant recuperable
+ * - recuperer et de fixer les coordonnees xy de la GameObject
+ * - recuperer et de decrementer les points de vie de la GameObject
+ * - verifier que la GameObject est mort ou non
+ * - recuperer le type de GameObject
+ * - recuperer les caracteristiques de l'ennemi (points d'attaque, point 
+ *   de defense, vitesse d'attaque, portee d'attaque et l'action)
  */
 
 package byteDefense.model;
