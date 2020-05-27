@@ -4,7 +4,7 @@
  * - rassembler les differentes actions ayant lieu lors d'un tour
  * - lancer le bfs pour le deplacement des ennemies
  * - faire tourner les vagues
- * - faire agir tous les ennemies et de les retirer s'ils sont morts ou s'ils sont arrivé
+ * - faire agir tous les ennemies et de les retirer s'ils sont morts ou s'ils sont arrivï¿½
  *
  */
 
@@ -42,17 +42,16 @@ public class GameMaster {
 	}
 	
 	public void oneTurn() {
-        if (this.waveEnnemy.getIndLastEnnemySpawn() < this.waveEnnemy.getWaveEnnemiesQty())
-            this.waveEnnemy.fillEnnemyList();
-        
-        Ennemy e;
-        for (int i = this.waveEnnemy.sizeOfEnnemies() - 1; i >= 0; i--) {
-            e = this.waveEnnemy.getEnnemies().get(i);
-            
-            if (e.getcurrentIndTile() > this.getBfs().ARRIVAL_POINT)
-                e.act();
-            else if (e.getcurrentIndTile() == this.getBfs().ARRIVAL_POINT)
-                this.waveEnnemy.removeEnnemy(e);
-        }
+		if (this.waveEnnemy.getIndLastEnnemySpawn() < this.waveEnnemy.getWaveEnnemiesQty())
+			this.waveEnnemy.fillEnnemyList();
+		
+		Ennemy e;
+		for (int i = this.waveEnnemy.sizeOfEnnemies() - 1; i >= 0; i--) {
+			e = this.waveEnnemy.getEnnemies().get(i);
+			if (e.getcurrentIndTile() > this.getBfs().ARRIVAL_POINT)
+				e.act();
+			else if (e.getcurrentIndTile() == this.getBfs().ARRIVAL_POINT)
+				this.waveEnnemy.removeEnnemy(e);
+		}
 	}
 }

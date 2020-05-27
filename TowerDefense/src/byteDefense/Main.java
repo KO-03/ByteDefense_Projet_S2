@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 public class Main extends Application{
 
 	public void start(Stage primaryStage) {
-		
 		try {
 			BorderPane root = FXMLLoader.load(getClass().getResource("view/GameView.fxml"));
 			Scene scene = new Scene(root,890,926);

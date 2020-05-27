@@ -39,11 +39,11 @@ import javafx.util.Duration;
 public class Controller implements Initializable {
 	
 	@FXML
-    private TilePane gameBoard;
+	private TilePane gameBoard;
 	@FXML
-    private Pane gridEnnemies;
+	private Pane gridEnnemies;
 	@FXML
-    private Pane gridTowers;
+	private Pane gridTowers;
 	@FXML
 	private ImageView adcube;
 	@FXML
@@ -54,22 +54,21 @@ public class Controller implements Initializable {
 	private ImageView firewall;
 	@FXML
 	private ImageView sudvpn;
-	
+		
 	private EnnemyView ev;
-	
 	private GameMaster gm;
-    private Timeline gameLoop;
-    private int time;
-    
-    @Override
+	private Timeline gameLoop;
+	private int time;
+
+	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	gm = new GameMaster();
-    	
-    	new TileMapView(this.gm.getMap(), this.gameBoard);
-    	ev = new EnnemyView(this.gridEnnemies);
-
+		gm = new GameMaster();
+		
+		new TileMapView(this.gm.getMap(), this.gameBoard);
+		ev = new EnnemyView(this.gridEnnemies);
+		
 		this.generateEnnemiesListener();
-
+	
 		adcube.setX(129);
 		adcube.setY(741);
 		antivirus.setX(213);
@@ -86,12 +85,12 @@ public class Controller implements Initializable {
 		gridTowers.getChildren().add(authentipoint);
 		gridTowers.getChildren().add(firewall);
 		gridTowers.getChildren().add(sudvpn);
-        
-        this.dragAndDrop();
+	    
+	    this.dragAndDrop();
 		
 		this.initAnimation();
 		this.gameLoop.play();
-    }
+	}
     
     private void initAnimation() {
 		this.gameLoop = new Timeline();
