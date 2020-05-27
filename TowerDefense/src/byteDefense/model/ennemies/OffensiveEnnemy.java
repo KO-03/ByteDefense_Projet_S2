@@ -1,3 +1,9 @@
+/*
+ * OffensiveEnnemy.java
+ * Cette classe represente un objet OffensiveEnnemy, c'est-a-dire un ennemi qui attaque des tourelles, ses responsabilites sont de :
+ * - d'attaquer une tourelle
+ */
+
 package byteDefense.model.ennemies;
 
 import byteDefense.utilities.BFS;

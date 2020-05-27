@@ -1,3 +1,20 @@
+/*
+ * Wave.java
+ * Cette classe represente un objet Wave, ses responsabilites sont de : 
+ * - stocker et recuperer la liste d'ennemis
+ * - stocker le BFS que la vague d'ennemi doit suivre
+ * - stocker l'indice du derniere ennemi qui est ajoute a la vague
+ * - stocker le numero de la vague dans un niveau du jeu
+ * - remplir la liste d'ennemi en fonction des ennemis deja ajoutes
+ * - calculer et stocker le nombre d'ennemis selon le numero de la vague
+ * - gerer les suppression d'ennemis
+ * - recuperer un ennemi selon son identifiant
+ * - verifier si la liste d'ennemis est pas vide
+ * - recuperer la taille de la liste d'ennemis
+ * - verifier l'etat d'un pour le supprimer de la liste d'ennemis
+ * - 
+ */
+
 package byteDefense.model.ennemies;
 
 import byteDefense.model.TileMap;
@@ -13,16 +30,22 @@ public class Wave {
 	private BFS bfsMap;
 	private int indLastEnnemySpawn;
 	private final int WAVE_NUMBER;
+	private final int WAVE_ENNEMIES_QTY;
 	
 	public Wave(int waveNumber, BFS bfsMap) {
 		this.ennemies = FXCollections.observableArrayList(); 
 		this.bfsMap = bfsMap;
 		this.indLastEnnemySpawn = 0;
 		this.WAVE_NUMBER = waveNumber;
+		this.WAVE_ENNEMIES_QTY = waveEnnemyQuantity();
 	}
 	
 	public int getIndLastEnnemySpawn() {
 		return this.indLastEnnemySpawn;
+	}
+	
+	public int getWaveEnnemiesQty() {
+		return this.WAVE_ENNEMIES_QTY;
 	}
 	
 	public int waveEnnemyQuantity() {
@@ -113,7 +136,7 @@ public class Wave {
 			for(int i = this.sizeOfEnnemies() - 1; i > 0; i--) {			
 				Ennemy e = this.ennemies.get(i);
 				if(! e.isAlive() || e.getX() == map.tilePosX(bfsMap.ARRIVAL_POINT) && e.getY() == map.tilePosY(bfsMap.ARRIVAL_POINT)) 
-					this.ennemies.remove(i);
+					this.removeEnnemy(e);
 			}
 	}
 }

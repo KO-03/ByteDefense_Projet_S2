@@ -1,6 +1,13 @@
 /*
  * Rookit.java
- * Cette classe represente un objet Rookit.
+ * Cette classe represente un objet Rookit, ses responsabilites sont de :
+ * - stocker et recuperer son attaque
+ * - stocker et recuperer sa defense
+ * - stocker et recuperer sa vitesse d'attaque
+ * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer le montant de son butin
+ * - stocker et gerer son taux d'augmentation d'attaque par tour
+ * - effectuer toutes les actions d'aggissement durant un tour
  */
 
 package byteDefense.model.ennemies;
