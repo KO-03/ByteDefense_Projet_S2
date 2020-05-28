@@ -11,12 +11,12 @@
  * - recuperer un ennemi selon son identifiant
  * - verifier si la liste d'ennemis est pas vide
  * - recuperer la taille de la liste d'ennemis
- * - verifier l'etat d'un ennemi pour le supprimer de la liste d'ennemis
+ * - supprimer un ennemi de la vague en verifiant son etat et sa position
+ * - gerer toutes les actions faites sur la vague d'ennemis.
  */
 
 package byteDefense.model.ennemies;
 
-import byteDefense.model.GameArea;
 import byteDefense.utilities.BFS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,14 +57,14 @@ public class Wave {
 	}
 	
 	private Ennemy createEnnemy() {
-		int indEnnemyType = 0, ennemyAddedRest = indLastEnnemySpawn;
+		int indEnnemyType = 0, ennemyAddedDifference = indLastEnnemySpawn;
 		boolean foundCorrectEnnemyType = false;
 		Ennemy ennemy = null;
 		
 		while (!foundCorrectEnnemyType && indEnnemyType < WAVE_NUMBER) {
-			ennemyAddedRest -= waveInfo[WAVE_NUMBER][indEnnemyType];
+			ennemyAddedDifference -= waveInfo[WAVE_NUMBER][indEnnemyType];
 
-			if (ennemyAddedRest < 0) 
+			if (ennemyAddedDifference < 0) 
 				foundCorrectEnnemyType = true;
 			else
 				indEnnemyType++;
@@ -130,12 +130,27 @@ public class Wave {
 		return this.ennemies.size();
 	}
 	
-	public void verifyEnnemi(GameArea gameArea, Ennemy ennemy) {
-		if(! this.isEmpty())
-			for(int i = this.sizeOfEnnemies() - 1; i > 0; i--) {			
-				Ennemy e = this.ennemies.get(i);
-				if(! e.isAlive() || e.getX() == gameArea.tilePosX(bfsMap.ARRIVAL_POINT) && e.getY() == gameArea.tilePosY(bfsMap.ARRIVAL_POINT)) 
-					this.removeEnnemy(e);
+	public void verifyEnnemyDead(Ennemy e) {
+		if(! e.isAlive() || e.getcurrentIndTile() > this.bfsMap.ARRIVAL_POINT) 
+			this.removeEnnemy(e);
+	}
+	
+	public void waveHandler() {
+		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoute
+		if (this.indLastEnnemySpawn < this.WAVE_ENNEMIES_QTY)
+			this.fillEnnemyList();
+		
+		if(! this.isEmpty()) {
+			Ennemy e;
+			
+			for (int i = this.sizeOfEnnemies() - 1; i >= 0; i--) {
+				e = this.getEnnemies().get(i);
+				// fait agir chaque ennemi tant qu'il n'est pas arrive au bout du chemin
+				if (e.getcurrentIndTile() > this.bfsMap.ARRIVAL_POINT)
+					e.act();
+				
+				verifyEnnemyDead(e);
 			}
+		}
 	}
 }

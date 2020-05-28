@@ -7,6 +7,7 @@
  * - verifier qu'un objet de jeu est mort ou non
  * - recuperer les caracteristiques d'un objet de jeu (points d'attaque, point 
  *   de defense, vitesse d'attaque, portee d'attaque et l'action)
+ * - faire agir un objet de jeu
  */
 
 package byteDefense.model;

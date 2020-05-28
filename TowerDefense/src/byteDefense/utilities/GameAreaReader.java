@@ -1,6 +1,6 @@
 /*
- * TileMapReader.java
- * Cette classe represente un objet TileMapReader, sa responsabilite est de :
+ * GameAreaReader.java
+ * Cette classe represente un objet GameAreaReader, sa responsabilite est de :
  * - lire un fichier contenant une map de tile
  */
 
@@ -10,11 +10,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-public class TileMapReader {
+public class GameAreaReader {
 	
 	private String source;
 	
-	public TileMapReader(String source) {
+	public GameAreaReader(String source) {
 		this.source = source;
 	}
 	

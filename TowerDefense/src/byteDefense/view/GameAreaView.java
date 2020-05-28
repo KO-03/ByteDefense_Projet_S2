@@ -1,6 +1,6 @@
 /*
- * TileMapView.java
- * Cette classe gere la partie visuelle de la Tile Map, ses responsabilites sont de :
+ * GameAreaView.java
+ * Cette classe gere la partie visuelle de la GameArea, ses responsabilites sont de :
  * - charger et stocker les ressources d'images des tiles
  * - stocker les types de tiles
  * - faire la correspondance entre les types de tiles et les donnees de la tilemap a ajouter 
@@ -17,7 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 
-public class TileMapView {
+public class GameAreaView {
 
 	// Donnees correspondant aux composantes visuelles (tiles) de la tilemap 
 	public static final int CORNER = 1;
@@ -39,7 +39,7 @@ public class TileMapView {
 	private GameArea map;
 	private TilePane gameBoard;
 
-	public TileMapView(GameArea map, TilePane gameBoard) {
+	public GameAreaView(GameArea map, TilePane gameBoard) {
 		this.map = map;
 		this.gameBoard = gameBoard;
 		this.imageLoader();

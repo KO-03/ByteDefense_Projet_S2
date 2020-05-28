@@ -1,6 +1,6 @@
 /*
  * EnnemyView.java
- * Cette classe gere la partie visuelle d'un ennemi, ses responsabilites sont :
+ * Cette classe gere la partie visuelle d'un objet de jeu Ennemy, ses responsabilites sont :
  * - charger et stocker les ressources d'images des ennemis
  * - faire la correspondance entre les types de d'ennemis et les ressources d'images des ennemis
  * - supprimer un ennemi de la vue.

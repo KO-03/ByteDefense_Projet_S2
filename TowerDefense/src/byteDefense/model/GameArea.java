@@ -1,16 +1,17 @@
 /*
- * TileMap.java
- * Cette classe represente un objet TileMap, ses responsabilites sont :
- * - creer la liste de tiles
+ * GameArea.java
+ * Cette classe represente un objet GameArea, ses responsabilites sont :
+ * - creer la liste de tiles a partir des donnees lues dans un fichier
  * - recuperer la taille de la map en tiles 
- * - recuperer une case avec ses coordonnees
+ * - calculer l'indice d'une case de la GameArea avec ses coordonnees
+ * - calculer  les coordonnees xy a partir de l'indice de la case
  */
 
 package byteDefense.model;
 
 import java.util.ArrayList;
 
-import byteDefense.utilities.TileMapReader;
+import byteDefense.utilities.GameAreaReader;
 
 public class GameArea {
 	
@@ -20,8 +21,12 @@ public class GameArea {
 	
 	public GameArea() {
 		this.tilesList = new ArrayList<>();
-		this.tilesList = new TileMapReader("./resources/tiles.txt").readFile();
+		this.tilesList = new GameAreaReader("./resources/tiles.txt").readFile();
 		tilesSize = mapSize();
+	}
+	
+	public ArrayList<Integer> getTilesList(){
+		return this.tilesList;
 	}
 	
 	public int mapSize() {
@@ -42,9 +47,5 @@ public class GameArea {
 
 	public int tilePosY(int pos) {
 		return pos/GameArea.tilesSize;
-	}
-	
-	public ArrayList<Integer> getTilesList(){
-		return this.tilesList;
 	}
 }

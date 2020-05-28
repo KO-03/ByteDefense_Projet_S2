@@ -6,7 +6,7 @@
  * - initialiser la vue de la TileMap
  * - gerer la gameLoop et les actions du jeu (effectuer un tour)
  * - gerer les entites de vue (tourelle, plateau de jeu, grille d'ennemis et de tourelles)
- * - gerer le glisser deposer d'une tourelle et la positionner
+ * - gerer le glisser-deposer d'une tourelle et la positionner
  */
 
 package byteDefense.controller;
@@ -22,7 +22,7 @@ import byteDefense.model.towers.AuthenticationPoint;
 import byteDefense.model.towers.Firewall;
 import byteDefense.model.towers.SudVPN;
 import byteDefense.view.EnnemyView;
-import byteDefense.view.TileMapView;
+import byteDefense.view.GameAreaView;
 import byteDefense.view.TowerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -64,7 +64,7 @@ public class Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		gm = new GameMaster();
 		
-		new TileMapView(this.gm.getMap(), this.gameBoard);
+		new GameAreaView(this.gm.getMap(), this.gameBoard);
 		ev = new EnnemyView(this.gridEnnemies);
 		
 		this.generateEnnemiesListener();
@@ -101,11 +101,8 @@ public class Controller implements Initializable {
 				Duration.seconds(0.05), 
 				(ev ->{
 					if (this.time == 10000) {
-						System.out.println("fini");
-
 						this.gameLoop.stop();
 					} else if (this.time % 5 == 0) {
-						System.out.println("un tour");
 						gm.oneTurn();
 					} 
 					this.time++;

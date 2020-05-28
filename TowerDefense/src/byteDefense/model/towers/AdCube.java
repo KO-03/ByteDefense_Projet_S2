@@ -1,6 +1,12 @@
 /*
  * AdCube.java
- * Cette classe represente un objet AdCube.
+ * Cette classe represente un objet AdCube, ses responsabilites sont de :
+ * - stocker et recuperer son attaque
+ * - stocker et recuperer sa defense
+ * - stocker et recuperer sa vitesse d'attaque
+ * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer le montant de son butin
+ * - effectuer toutes les actions d'aggissement durant un tour
  */
 
 package byteDefense.model.towers;

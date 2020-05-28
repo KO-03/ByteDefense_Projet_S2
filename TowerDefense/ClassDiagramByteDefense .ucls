@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="byteDefense.view.TileMapView" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/view/TileMapView.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="byteDefense.view.GameAreaView" project="TowerDefense" 
+    file="/TowerDefense/src/byteDefense/view/GameAreaView.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-66" y="238"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -122,15 +122,15 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <generalization id="16">    
-    <end type="SOURCE" refId="4"/>    
+    <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="7"/>  
   </generalization>  
   <generalization id="17">    
-    <end type="SOURCE" refId="2"/>    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="7"/>  
   </generalization>  
   <generalization id="18">    
-    <end type="SOURCE" refId="6"/>    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="7"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

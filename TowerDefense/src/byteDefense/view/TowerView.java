@@ -1,6 +1,6 @@
 /*
  * TowerView.java
- * Cette classe gere la partie visuelle d'un objet de jeu, ses responsabilites sont :
+ * Cette classe gere la partie visuelle d'un objet de jeu Tower, ses responsabilites sont :
  * - charger et stocker les ressources d'images des tourelles
  * - faire la correspondance entre les types de tourelles et les ressources d'images des tourelles
  */

@@ -1,16 +1,13 @@
 /*
  * GameMaster.java
  * Cette classe represente un maitre de jeu, ses responsabilites sont de:
- * - rassembler les differentes actions ayant lieu lors d'un tour
- * - lancer le bfs pour le deplacement des ennemies
- * - faire tourner les vagues
- * - faire agir tous les ennemies et de les retirer s'ils sont morts ou s'ils sont arrivï¿½
- *
+ * - stocker, initialiser et recuperer les données nécessaires au fonctionnement du jeu (BFS, gameArea, wave...)
+ * - rassembler les differentes actions qui ont lieu lors d'un tour (actions de vagues d'ennemis, de tourelles...)
+ * - 
  */
 
 package byteDefense.model;
 
-import byteDefense.model.ennemies.Ennemy;
 import byteDefense.model.ennemies.Wave;
 import byteDefense.utilities.BFS;
 
@@ -42,16 +39,6 @@ public class GameMaster {
 	}
 	
 	public void oneTurn() {
-		if (this.waveEnnemy.getIndLastEnnemySpawn() < this.waveEnnemy.getWaveEnnemiesQty())
-			this.waveEnnemy.fillEnnemyList();
-		
-		Ennemy e;
-		for (int i = this.waveEnnemy.sizeOfEnnemies() - 1; i >= 0; i--) {
-			e = this.waveEnnemy.getEnnemies().get(i);
-			if (e.getcurrentIndTile() > this.getBfs().ARRIVAL_POINT)
-				e.act();
-			else if (e.getcurrentIndTile() == this.getBfs().ARRIVAL_POINT)
-				this.waveEnnemy.removeEnnemy(e);
-		}
+		this.waveEnnemy.waveHandler();
 	}
 }

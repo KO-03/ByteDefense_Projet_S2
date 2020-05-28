@@ -1,6 +1,7 @@
 /*
  * Tower.java
- * Cette classe represente un objet Tower.
+ * Cette classe represente un objet Tower, ses responsabilites sont de :
+ * - faire agir une tourelle
  */
 
 package byteDefense.model.towers;
