@@ -130,7 +130,7 @@ public class Wave {
 		return this.ennemies.size();
 	}
 	
-	public void verifyEnnemy(Ennemy e) {
+	public void verifyEnnemyState(Ennemy e) {
 		if(! e.isAlive() || e.getcurrentIndTile() == this.bfsMap.ARRIVAL_POINT)
 			this.removeEnnemy(e);
 	}
@@ -149,7 +149,7 @@ public class Wave {
 				if (e.getcurrentIndTile() > this.bfsMap.ARRIVAL_POINT)
 					e.act();
 				
-				this.verifyEnnemy(e);
+				this.verifyEnnemyState(e);
 			}
 		}
 	}

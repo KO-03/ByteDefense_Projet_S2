@@ -6,7 +6,7 @@
  * - initialiser la vue de la TileMap
  * - gerer la gameLoop et les actions du jeu (effectuer un tour)
  * - gerer les entites de vue (tourelle, plateau de jeu, grille d'ennemis et de tourelles)
- * - gerer le glisser-deposer d'une tourelle et la positionner
+ * - gerer le glisser deposer d'une tourelle et la positionner
  */
 
 package byteDefense.controller;
@@ -17,10 +17,6 @@ import java.util.ResourceBundle;
 import byteDefense.model.GameMaster;
 import byteDefense.model.ennemies.Ennemy;
 import byteDefense.model.towers.AdCube;
-import byteDefense.model.towers.Antivirus;
-import byteDefense.model.towers.AuthenticationPoint;
-import byteDefense.model.towers.Firewall;
-import byteDefense.model.towers.SudVPN;
 import byteDefense.view.EnnemyView;
 import byteDefense.view.GameAreaView;
 import byteDefense.view.TowerView;
@@ -68,26 +64,8 @@ public class Controller implements Initializable {
 		ev = new EnnemyView(this.gridEnnemies);
 		
 		this.generateEnnemiesListener();
-	
-		adcube.setX(129);
-		adcube.setY(741);
-		antivirus.setX(213);
-		antivirus.setY(741);
-		authentipoint.setX(298);
-		authentipoint.setY(741);
-		firewall.setX(383);
-		firewall.setY(741);
-		sudvpn.setX(466);
-		sudvpn.setY(741);
-		
-		gridTowers.getChildren().add(adcube);
-		gridTowers.getChildren().add(antivirus);
-		gridTowers.getChildren().add(authentipoint);
-		gridTowers.getChildren().add(firewall);
-		gridTowers.getChildren().add(sudvpn);
-		
-		this.dragAndDrop();
-		
+		this.initInventory();
+		this.whoWasDrag();
 		this.initAnimation();
 		this.gameLoop.play();
 	}
@@ -101,6 +79,8 @@ public class Controller implements Initializable {
 				Duration.seconds(0.05), 
 				(ev ->{
 					if (this.time == 10000) {
+						System.out.println("fini");
+
 						this.gameLoop.stop();
 					} else if (this.time % 5 == 0) {
 						gm.oneTurn();
@@ -125,126 +105,75 @@ public class Controller implements Initializable {
 		});
 	}
 	
-	private void dragAndDrop() { 
-
-		adcube.setOnMouseDragged(new EventHandler <MouseEvent>() {
+	private void initInventory() {
+		adcube.setX(129);
+		adcube.setY(741);
+		antivirus.setX(213);
+		antivirus.setY(741);
+		authentipoint.setX(298);
+		authentipoint.setY(741);
+		firewall.setX(383);
+		firewall.setY(741);
+		sudvpn.setX(466);
+		sudvpn.setY(741);
+		
+		gridTowers.getChildren().add(adcube);
+		gridTowers.getChildren().add(antivirus);
+		gridTowers.getChildren().add(authentipoint);
+		gridTowers.getChildren().add(firewall);
+		gridTowers.getChildren().add(sudvpn);
+	}
+	
+	private void whoWasDrag() {
+		adcube.setOnMouseDragged(event -> {
+			dragAndDrop(adcube, (int) adcube.getX());
+		});
+		antivirus.setOnMouseDragged(event -> {
+			dragAndDrop(antivirus, (int) antivirus.getX());
+		});
+		authentipoint.setOnMouseDragged(event -> {
+			dragAndDrop(authentipoint, (int) authentipoint.getX());
+		});
+		firewall.setOnMouseDragged(event -> {
+			dragAndDrop(firewall, (int) firewall.getX());
+		});
+		sudvpn.setOnMouseDragged(event -> {
+			dragAndDrop(sudvpn, (int) sudvpn.getX());
+		});
+	}
+	
+	private void dragAndDrop(ImageView tower, int initialX) { 
+		tower.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				int x = (int) event.getSceneX()-46;
-				int y = (int) event.getSceneY()-106;
+				int x = (int) event.getX() - 24; // - 24 pour prend le milieu de l'ImageView
+				int y = (int) event.getY() - 24;
 				
-				adcube.setX(x);
-				adcube.setY(y);
+				tower.setX(x);
+				tower.setY(y);
 			}
 		});
-
-		adcube.setOnMouseReleased(new EventHandler <MouseEvent>() {
+		
+		tower.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				int x = ((int) event.getSceneX()-14)/48*48;
-				int y = ((int) event.getSceneY()-74)/48*48;
+				int x = (int) event.getX() / 48 * 48; // / 48 * 48 pour placer l'ImageView dans une tuile
+				int y = (int) event.getY() / 48 * 48;
 				
-				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
+				if (isPlaceable(x, y)) {
 					new TowerView(gridTowers).addGameObject(new AdCube(x, y));
-					System.out.println("+ AdCube");
+					System.out.println(tower);
 				}
-				adcube.setX(129);
-				adcube.setY(741);
-			}
-		});
 
-		antivirus.setOnMouseDragged(new EventHandler <MouseEvent>() {
-			public void handle(MouseEvent event) {
-				int x = (int) event.getSceneX()-46;
-				int y = (int) event.getSceneY()-106;
-				
-				antivirus.setX(x);
-				antivirus.setY(y);
+				tower.setX(initialX);
+				tower.setY(741);
 			}
 		});
-		
-		antivirus.setOnMouseReleased(new EventHandler <MouseEvent>() {
-			public void handle(MouseEvent event) {
-				int x = ((int) event.getSceneX()-14)/48*48;
-				int y = ((int) event.getSceneY()-74)/48*48;
-				
-				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
-					new TowerView(gridTowers).addGameObject(new Antivirus(x, y));;
-					System.out.println("+ Antivirus");
-				}
-				antivirus.setX(213);
-				antivirus.setY(741);
-			}
-		});
-		
-		authentipoint.setOnMouseDragged(new EventHandler <MouseEvent>() {
-			public void handle(MouseEvent event) {
-				int x = (int) event.getSceneX()-46;
-				int y = (int) event.getSceneY()-106;
-				
-				authentipoint.setX(x);
-				authentipoint.setY(y);
-			}
-		});
-		
-		authentipoint.setOnMouseReleased(new EventHandler <MouseEvent>() {
-			public void handle(MouseEvent event) {
-				int x = ((int) event.getSceneX()-14)/48*48;
-				int y = ((int) event.getSceneY()-74)/48*48;
-				
-				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
-					new TowerView(gridTowers).addGameObject(new AuthenticationPoint(x, y));;
-					System.out.println("+ Point d'authentification");
-				}
-				authentipoint.setX(298);
-				authentipoint.setY(741);
-			}
-		});
-		
-		firewall.setOnMouseDragged(new EventHandler <MouseEvent>() {
-			public void handle(MouseEvent event) {
-				int x = (int) event.getSceneX()-46;
-				int y = (int) event.getSceneY()-106;
-				
-				firewall.setX(x);
-				firewall.setY(y);
-			}
-		});
-		
-		firewall.setOnMouseReleased(new EventHandler <MouseEvent>() {
-			public void handle(MouseEvent event) {
-				int x = ((int) event.getSceneX()-14)/48*48;
-				int y = ((int) event.getSceneY()-74)/48*48;
-				
-				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
-					new TowerView(gridTowers).addGameObject(new Firewall(x, y));;
-					System.out.println("+ Pare feu");
-				}
-				firewall.setX(383);
-				firewall.setY(741);
-			}
-		});
-		
-		sudvpn.setOnMouseDragged(new EventHandler <MouseEvent>() {
-			public void handle(MouseEvent event) {
-				int x = (int) event.getSceneX()-46;
-				int y = (int) event.getSceneY()-106;
-				
-				sudvpn.setX(x);
-				sudvpn.setY(y);
-			}
-		});
-		
-		sudvpn.setOnMouseReleased(new EventHandler <MouseEvent>() {
-			public void handle(MouseEvent event) {
-				int x = ((int) event.getSceneX()-14)/48*48;
-				int y = ((int) event.getSceneY()-74)/48*48;
-				
-				if (x >= 48 && y >= 48 && x < 624 && y < 624) {
-					new TowerView(gridTowers).addGameObject(new SudVPN(x, y));;
-					System.out.println("+ SudVPN");
-				}
-				sudvpn.setX(466);
-				sudvpn.setY(741);
-			}
-		});
+	}
+	
+	private boolean isPlaceable(int x, int y) {
+		x = x / 48; // / 48 pour recuperer le numero de la tuile
+		y = y / 48;
+		if (this.gm.getGameArea().onGameArea(x, y) && this.gm.getGameArea().gameAreaCase(x, y) == 7)
+			return true;
+		return false;
 	}
 }
