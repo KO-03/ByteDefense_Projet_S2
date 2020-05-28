@@ -22,18 +22,18 @@ public class GameArea {
 	public GameArea() {
 		this.tilesList = new ArrayList<>();
 		this.tilesList = new GameAreaReader("./resources/tiles.txt").readFile();
-		tilesSize = mapSize();
+		tilesSize = gameAreaSize();
 	}
 	
 	public ArrayList<Integer> getTilesList(){
 		return this.tilesList;
 	}
 	
-	public int mapSize() {
+	public int gameAreaSize() {
 		return (int) Math.sqrt(this.tilesList.size());
 	}
 	
-	public int tileMapCase(int x, int y) {
+	public int gameAreaCase(int x, int y) {
 		return this.tilesList.get(tileIndex(x, y));
 	}
 	
@@ -41,11 +41,11 @@ public class GameArea {
 		return x + GameArea.tilesSize * y;
 	}
 	
-	public int tilePosX(int pos) {
-		return pos%GameArea.tilesSize;
+	public int tilePosX(int indTilePos) {
+		return indTilePos%GameArea.tilesSize;
 	}
 
-	public int tilePosY(int pos) {
-		return pos/GameArea.tilesSize;
+	public int tilePosY(int indTilePos) {
+		return indTilePos/GameArea.tilesSize;
 	}
 }

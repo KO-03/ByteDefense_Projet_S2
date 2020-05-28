@@ -12,16 +12,16 @@ import java.util.ArrayList;
 
 public class GameAreaReader {
 	
-	private String source;
+	private String sourceFile;
 	
-	public GameAreaReader(String source) {
-		this.source = source;
+	public GameAreaReader(String sourceFile) {
+		this.sourceFile = sourceFile;
 	}
 	
 	public ArrayList<Integer> readFile() {
 		ArrayList<Integer> tilesList = new ArrayList<>();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(source));
+			BufferedReader br = new BufferedReader(new FileReader(sourceFile));
 		    String line = null;
 		    
 		    while ((line = br.readLine()) != null) {

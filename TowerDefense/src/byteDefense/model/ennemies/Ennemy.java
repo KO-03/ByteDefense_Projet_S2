@@ -1,6 +1,7 @@
 /*
  * Ennemy.java
  * Cette classe represente un objet Ennemy, ses responsabilites sont de :
+ * - recuperer le butin d'un ennemi
  * - faire se deplacer un ennemi selon le BFS
  * - stocker le BFS lié à l'ennemi ainsi que sa tuile de départ  
  * - stocker et mettre a jour l'indice de la tile courante du BFS où l'ennemi est positionne
@@ -26,6 +27,8 @@ public abstract class Ennemy extends GameObject {
 		return this.currentIndTile;
 	}
 
+	public abstract int getLoot();
+	
 	public void moveEnnemy() {
 		// fixage de la position de l'ennemi en fonction du chemin du BFS
 		this.setX((int)bfs.pathList.get(this.currentIndTile).getX() * 48);

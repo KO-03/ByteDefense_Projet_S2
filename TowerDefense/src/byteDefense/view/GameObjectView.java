@@ -24,7 +24,6 @@ public abstract class GameObjectView {
 	public abstract void imageLoader();
 
 	public abstract Image imageGetter(GameObject gameObject);
-
 	
 	public void addGameObject(GameObject gameObject) {
 		Image ennemyImg = imageGetter(gameObject);

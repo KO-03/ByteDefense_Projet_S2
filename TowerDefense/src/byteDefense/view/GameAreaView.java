@@ -95,7 +95,7 @@ public class GameAreaView {
 		
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {
-				tileImg = this.tileImageGet(this.map.tileMapCase(x, y));
+				tileImg = this.tileImageGet(this.map.gameAreaCase(x, y));
 				
 				if(tileImg != null) {
 					ImageView tile = new ImageView();
