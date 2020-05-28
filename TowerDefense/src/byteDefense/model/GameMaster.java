@@ -26,7 +26,7 @@ public class GameMaster {
 		this.waveEnnemy = new Wave(1, bfsMap); 
 	}
 	
-	public GameArea getMap() {
+	public GameArea getGameArea() {
 		return this.gameArea;
 	}
 	

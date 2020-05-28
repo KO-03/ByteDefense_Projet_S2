@@ -64,7 +64,7 @@ public class Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		gm = new GameMaster();
 		
-		new GameAreaView(this.gm.getMap(), this.gameBoard);
+		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		ev = new EnnemyView(this.gridEnnemies);
 		
 		this.generateEnnemiesListener();
@@ -126,6 +126,7 @@ public class Controller implements Initializable {
 	}
 	
 	private void dragAndDrop() { 
+
 		adcube.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				int x = (int) event.getSceneX()-46;
@@ -135,7 +136,7 @@ public class Controller implements Initializable {
 				adcube.setY(y);
 			}
 		});
-		
+
 		adcube.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				int x = ((int) event.getSceneX()-14)/48*48;
@@ -149,7 +150,7 @@ public class Controller implements Initializable {
 				adcube.setY(741);
 			}
 		});
-		
+
 		antivirus.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				int x = (int) event.getSceneX()-46;

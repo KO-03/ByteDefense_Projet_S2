@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import byteDefense.utilities.GameAreaReader;
 
 public class GameArea {
+
+	public final int TILE_SIZE = 48;
 	
 	public static int tilesSize;
 	
@@ -38,14 +40,19 @@ public class GameArea {
 	}
 	
 	public int tileIndex(int x, int y) {
-		return x + GameArea.tilesSize * y;
+		return x + tilesSize * y;
 	}
 	
 	public int tilePosX(int indTilePos) {
-		return indTilePos%GameArea.tilesSize;
+		return indTilePos % tilesSize;
 	}
 
 	public int tilePosY(int indTilePos) {
-		return indTilePos/GameArea.tilesSize;
+		return indTilePos / tilesSize;
 	}
+	
+	public boolean onGameArea(int x, int y) {
+		return x > 0 && y > 0 && x < tilesSize && y < tilesSize; 
+	}
+	
 }
