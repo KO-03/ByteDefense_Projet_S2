@@ -18,7 +18,7 @@ public abstract class Ennemy extends GameObject {
 	private int currentIndTile;
 	
 	public Ennemy(int x, int y, BFS bfsMap) {
-		super(x, y);
+		super(x, y, 50);
 		bfs = bfsMap;
 		this.currentIndTile = 20;
 	}
@@ -33,9 +33,10 @@ public abstract class Ennemy extends GameObject {
 		// fixage de la position de l'ennemi en fonction du chemin du BFS
 		this.setX((int)bfs.pathList.get(this.currentIndTile).getX() * 48);
 		this.setY((int)bfs.pathList.get(this.currentIndTile).getY() * 48);
-		
+
 		// decrementation de l'indice de la tile courante du BFS
-		if(this.currentIndTile > 0)
+		if(this.currentIndTile > 0) {
 			this.currentIndTile--;
+		}
 	}
 }

@@ -24,9 +24,10 @@ public abstract class GameObject {
 	private IntegerProperty yProperty;
 	private int hp;
 	
-	public GameObject(int x, int y) {
+	public GameObject(int x, int y, int hp) {
 		this.xProperty = new SimpleIntegerProperty(x);
 		this.yProperty = new SimpleIntegerProperty(y);
+		this.hp = hp;
 		this.id = counterId;
 		counterId++;
 	}

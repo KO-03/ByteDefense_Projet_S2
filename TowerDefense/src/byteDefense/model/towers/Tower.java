@@ -12,7 +12,7 @@ import byteDefense.model.GameObject;
 public abstract class Tower extends GameObject {
 	
 	public Tower(int x, int y) {
-		super(x, y);
+		super(x, y, 100);
 	}
 	
 	public abstract int getCost();

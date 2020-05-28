@@ -130,8 +130,8 @@ public class Wave {
 		return this.ennemies.size();
 	}
 	
-	public void verifyEnnemyDead(Ennemy e) {
-		if(! e.isAlive() || e.getcurrentIndTile() > this.bfsMap.ARRIVAL_POINT) 
+	public void verifyEnnemy(Ennemy e) {
+		if(! e.isAlive() || e.getcurrentIndTile() == this.bfsMap.ARRIVAL_POINT)
 			this.removeEnnemy(e);
 	}
 	
@@ -139,7 +139,7 @@ public class Wave {
 		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoute
 		if (this.indLastEnnemySpawn < this.WAVE_ENNEMIES_QTY)
 			this.fillEnnemyList();
-		
+			
 		if(! this.isEmpty()) {
 			Ennemy e;
 			
@@ -149,7 +149,7 @@ public class Wave {
 				if (e.getcurrentIndTile() > this.bfsMap.ARRIVAL_POINT)
 					e.act();
 				
-				verifyEnnemyDead(e);
+				this.verifyEnnemy(e);
 			}
 		}
 	}
