@@ -3,8 +3,8 @@
  * Cette classe represente un objet Ennemy, ses responsabilites sont de :
  * - recuperer le butin d'un ennemi
  * - faire se deplacer un ennemi selon le BFS
- * - stocker le BFS lié à l'ennemi ainsi que sa tuile de départ  
- * - stocker et mettre a jour l'indice de la tile courante du BFS où l'ennemi est positionne
+ * - stocker le BFS liï¿½ ï¿½ l'ennemi ainsi que sa tuile de dï¿½part  
+ * - stocker et mettre a jour l'indice de la tile courante du BFS oï¿½ l'ennemi est positionne
  */
 
 package byteDefense.model.ennemies;
@@ -20,7 +20,7 @@ public abstract class Ennemy extends GameObject {
 	public Ennemy(int x, int y, BFS bfsMap) {
 		super(x, y, 50);
 		bfs = bfsMap;
-		this.currentIndTile = 20;
+		this.currentIndTile = bfs.pathList.size()-1;
 	}
 
 	public int getcurrentIndTile() {

@@ -1,7 +1,7 @@
 /*
  * GameMaster.java
  * Cette classe represente un maitre de jeu, ses responsabilites sont de:
- * - stocker, initialiser et recuperer les données nécessaires au fonctionnement du jeu (BFS, gameArea, wave...)
+ * - stocker, initialiser et recuperer les donnï¿½es nï¿½cessaires au fonctionnement du jeu (BFS, gameArea, wave...)
  * - rassembler les differentes actions qui ont lieu lors d'un tour (actions de vagues d'ennemis, de tourelles...)
  * - 
  */
@@ -19,10 +19,7 @@ public class GameMaster {
 	
 	public GameMaster() {
 		this.gameArea = new GameArea();
-		this.bfsMap = new BFS(21);
-		
-		this.bfsMap.createPathList(gameArea);
-		
+		this.bfsMap = new BFS(gameArea);	
 		this.waveEnnemy = new Wave(1, bfsMap); 
 	}
 	

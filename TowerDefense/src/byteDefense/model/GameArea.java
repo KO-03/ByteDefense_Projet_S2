@@ -51,6 +51,10 @@ public class GameArea {
 		return indTilePos / tilesSize;
 	}
 	
+	public boolean isWalkable(int index) {
+		return index == 2 || index == 3 ||  index == 5;
+	}
+	
 	public boolean onGameArea(int x, int y) {
 		return x > 0 && y > 0 && x < tilesSize && y < tilesSize; 
 	}
