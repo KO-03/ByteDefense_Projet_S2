@@ -17,6 +17,7 @@ import byteDefense.model.towers.AuthenticationPoint;
 import byteDefense.model.towers.Firewall;
 import byteDefense.model.towers.SudVPN;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class TowerView extends GameObjectView {
@@ -27,17 +28,30 @@ public class TowerView extends GameObjectView {
 	private static Image authenticationPointImg;
 	private static Image sudvpnImg;
 
-	public TowerView(Pane grid) {
-		super(grid);
+	private ImageView adcube;
+	private ImageView antivirus;
+	private ImageView authentipoint;
+	private ImageView firewall;
+	private ImageView sudvpn;
+	
+	public TowerView(Pane gridTowers, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
+		super(gridTowers);
+		this.adcube = adcube;
+		this.antivirus = antivirus;
+		this.authentipoint = authentificatipoint;
+		this.firewall = firewall;
+		this.sudvpn = sudvpn;
+		
+		this.initInventory();
 	}
 	
 	public void imageLoader() {
 		try {	
-			adcubeImg = new Image(new File("./resources/character.png").toURI().toURL().toString()); 
-			antivirusImg = new Image(new File("./resources/character.png").toURI().toURL().toString()); 
-			firewallImg= new Image(new File("./resources/character.png").toURI().toURL().toString()); 
-			authenticationPointImg = new Image(new File("./resources/character.png").toURI().toURL().toString()); 
-			sudvpnImg = new Image(new File("./resources/character.png").toURI().toURL().toString());
+			adcubeImg = new Image(new File("./resources/icons/tower.png").toURI().toURL().toString()); 
+			antivirusImg = new Image(new File("./resources/icons/tower.png").toURI().toURL().toString()); 
+			firewallImg= new Image(new File("./resources/icons/tower.png").toURI().toURL().toString()); 
+			authenticationPointImg = new Image(new File("./resources/icons/tower.png").toURI().toURL().toString()); 
+			sudvpnImg = new Image(new File("./resources/icons/tower.png").toURI().toURL().toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -60,5 +74,24 @@ public class TowerView extends GameObjectView {
 			img = null;
 			
 		return img;
+	}
+	
+	public void initInventory() {
+		adcube.setX(129);
+		adcube.setY(741);
+		antivirus.setX(213);
+		antivirus.setY(741);
+		authentipoint.setX(298);
+		authentipoint.setY(741);
+		firewall.setX(383);
+		firewall.setY(741);
+		sudvpn.setX(466);
+		sudvpn.setY(741);
+		
+		this.getGrid().getChildren().add(adcube);
+		this.getGrid().getChildren().add(antivirus);
+		this.getGrid().getChildren().add(authentipoint);
+		this.getGrid().getChildren().add(firewall);
+		this.getGrid().getChildren().add(sudvpn);
 	}
 }

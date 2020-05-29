@@ -15,7 +15,7 @@
          <children>
             <ImageView disable="true" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../resources/top_background.png" />
+                  <Image url="@../../../resources/backgroundTextures/top_background.png" />
                </image>
             </ImageView>
          </children>
@@ -26,7 +26,7 @@
          <children>
             <ImageView fitHeight="672.0" fitWidth="14.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../resources/left_background.png" />
+                  <Image url="@../../../resources/backgroundTextures/left_background.png" />
                </image>
             </ImageView>
          </children>
@@ -37,7 +37,7 @@
          <children>
             <ImageView fitHeight="672.0" fitWidth="214.0" pickOnBounds="true" scaleZ="0.0">
                <image>
-                  <Image url="@../../../resources/right_background.png" />
+                  <Image url="@../../../resources/backgroundTextures/right_background.png" />
                </image>
             </ImageView>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
@@ -249,7 +249,7 @@
                      <children>
                         <ImageView fitWidth="900.0" pickOnBounds="true" preserveRatio="true" scaleZ="0.0">
                            <image>
-                              <Image url="@../../../resources/stats_background.png" />
+                              <Image url="@../../../resources/backgroundTextures/stats_background.png" />
                            </image>
                         </ImageView>
                         <HBox spacing="150.0">
@@ -301,7 +301,7 @@
                      <children>
                         <ImageView fitWidth="900.0" pickOnBounds="true" preserveRatio="true" scaleZ="0.0">
                            <image>
-                              <Image url="@../../../resources/towers_menu_background.png" />
+                              <Image url="@../../../resources/backgroundTextures/towers_menu_background.png" />
                            </image>
                         </ImageView>
                         <HBox alignment="TOP_CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">

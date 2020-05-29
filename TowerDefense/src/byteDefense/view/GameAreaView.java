@@ -4,7 +4,7 @@
  * - charger et stocker les ressources d'images des tiles
  * - stocker les types de tiles
  * - faire la correspondance entre les types de tiles et les donnees de la tilemap a ajouter 
- * - ajouter la tilemap à la vue.
+ * - ajouter la tilemap ï¿½ la vue.
  */
 
 package byteDefense.view;
@@ -48,13 +48,13 @@ public class GameAreaView {
 	
 	private void imageLoader() {
 		try {
-			CORNER_SRC_IMG = new Image(new File("./resources/corner.png").toURI().toURL().toString()); 
-			HORIZONTAL_PATH_SRC_IMG = new Image(new File("./resources/horizontal_path.png").toURI().toURL().toString()); 
-			VERTICAL_PATH_SRC_IMG= new Image(new File("./resources/vertical_path.png").toURI().toURL().toString()); 
-			VERTICAL_WALL_SRC_IMG = new Image(new File("./resources/vertical_wall.png").toURI().toURL().toString()); 
-			INTERSECTION_PATH_SRC_IMG = new Image(new File("./resources/intersection_path.png").toURI().toURL().toString()); 
-			HORIZONTAL_WALL_SRC_IMG = new Image(new File("./resources/horizontal_wall.png").toURI().toURL().toString()); 
-			TOWER_ZONE_SRC_IMG = new Image(new File("./resources/tower_zone.png").toURI().toURL().toString()); 
+			CORNER_SRC_IMG = new Image(new File("./resources/tilemapTextures/corner.png").toURI().toURL().toString()); 
+			HORIZONTAL_PATH_SRC_IMG = new Image(new File("./resources/tilemapTextures/horizontal_path.png").toURI().toURL().toString()); 
+			VERTICAL_PATH_SRC_IMG= new Image(new File("./resources/tilemapTextures/vertical_path.png").toURI().toURL().toString()); 
+			VERTICAL_WALL_SRC_IMG = new Image(new File("./resources/tilemapTextures/vertical_wall.png").toURI().toURL().toString()); 
+			INTERSECTION_PATH_SRC_IMG = new Image(new File("./resources/tilemapTextures/intersection_path.png").toURI().toURL().toString()); 
+			HORIZONTAL_WALL_SRC_IMG = new Image(new File("./resources/tilemapTextures/horizontal_wall.png").toURI().toURL().toString()); 
+			TOWER_ZONE_SRC_IMG = new Image(new File("./resources/tilemapTextures/tower_zone.png").toURI().toURL().toString()); 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -91,7 +91,7 @@ public class GameAreaView {
 
 	private void generateMapView() {
 		Image tileImg;
-		int tilesSize = GameArea.tilesSize;
+		int tilesSize = GameArea.gameAreSize;
 		
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {

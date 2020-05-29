@@ -30,18 +30,18 @@ public class EnnemyView extends GameObjectView {
 	private static Image spywareImg;
 	private static Image trojanHorseImg;
 
-	public EnnemyView(Pane grid) {
-		super(grid);
+	public EnnemyView(Pane gridEnnemy) {
+		super(gridEnnemy);
 	}
 	
 	public void imageLoader() {
 		try {
-			adwareImg = new Image(new File("./resources/character.png").toURI().toURL().toString()); 
-			botImg = new Image(new File("./resources/character.png").toURI().toURL().toString()); 
-			ransomwareImg= new Image(new File("./resources/character.png").toURI().toURL().toString()); 
-			rookitImg = new Image(new File("./resources/character.png").toURI().toURL().toString()); 
-			spywareImg = new Image(new File("./resources/character.png").toURI().toURL().toString()); 
-			trojanHorseImg = new Image(new File("./resources/character.png").toURI().toURL().toString());
+			adwareImg = new Image(new File("./resources/ennemiesTextures/character.png").toURI().toURL().toString()); 
+			botImg = new Image(new File("./resources/ennemiesTextures/character.png").toURI().toURL().toString()); 
+			ransomwareImg= new Image(new File("./resources/ennemiesTextures/character.png").toURI().toURL().toString()); 
+			rookitImg = new Image(new File("./resources/ennemiesTextures/character.png").toURI().toURL().toString()); 
+			spywareImg = new Image(new File("./resources/ennemiesTextures/character.png").toURI().toURL().toString()); 
+			trojanHorseImg = new Image(new File("./resources/ennemiesTextures/character.png").toURI().toURL().toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

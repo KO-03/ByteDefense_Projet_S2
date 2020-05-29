@@ -15,16 +15,16 @@ import byteDefense.utilities.GameAreaReader;
 
 public class GameArea {
 
-	public final int TILE_SIZE = 48;
+	public static final int TILE_SIZE = 48;
 	
-	public static int tilesSize;
+	public static int gameAreSize;
 	
 	private ArrayList<Integer> tilesList;
 	
 	public GameArea() {
 		this.tilesList = new ArrayList<>();
 		this.tilesList = new GameAreaReader("./resources/tiles.txt").readFile();
-		tilesSize = gameAreaSize();
+		gameAreSize = gameAreaSize();
 	}
 	
 	public ArrayList<Integer> getTilesList(){
@@ -40,23 +40,33 @@ public class GameArea {
 	}
 	
 	public int tileIndex(int x, int y) {
-		return x + tilesSize * y;
+		return x + gameAreSize * y;
 	}
 	
 	public int tilePosX(int indTilePos) {
-		return indTilePos % tilesSize;
+		return indTilePos % gameAreSize;
 	}
 
 	public int tilePosY(int indTilePos) {
-		return indTilePos / tilesSize;
+		return indTilePos / gameAreSize;
 	}
 	
 	public boolean isWalkable(int index) {
 		return index == 2 || index == 3 ||  index == 5;
 	}
 	
-	public boolean onGameArea(int x, int y) {
-		return x > 0 && y > 0 && x < tilesSize && y < tilesSize; 
+	private boolean onGameArea(int x, int y) {
+		return x > 0 && y > 0 && x < gameAreSize && y < gameAreSize; 
+	}
+	
+	public boolean isPlaceable(int x, int y) {
+		x = x / TILE_SIZE; 
+		y = y / TILE_SIZE;
+		
+		if (this.onGameArea(x, y) && this.gameAreaCase(x, y) == 7)
+			return true;
+		
+		return false;
 	}
 	
 }

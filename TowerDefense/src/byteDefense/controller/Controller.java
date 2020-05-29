@@ -14,6 +14,7 @@ package byteDefense.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import byteDefense.model.GameArea;
 import byteDefense.model.GameMaster;
 import byteDefense.model.ennemies.Ennemy;
 import byteDefense.model.towers.AdCube;
@@ -52,20 +53,21 @@ public class Controller implements Initializable {
 	private ImageView sudvpn;
 		
 	private EnnemyView ev;
+	private TowerView tv;
 	private GameMaster gm;
 	private Timeline gameLoop;
 	private int time;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		gm = new GameMaster();
+		this.gm = new GameMaster();
 		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
-		ev = new EnnemyView(this.gridEnnemies);
+		this.ev = new EnnemyView(this.gridEnnemies);
+		this.tv = new TowerView(gridTowers, adcube, antivirus, authentipoint, firewall, sudvpn);
 		
 		this.generateEnnemiesListener();
-		this.initInventory();
-		this.whoWasDrag();
+		this.mouseDraggedOnTowers();
 		this.initAnimation();
 		this.gameLoop.play();
 	}
@@ -105,26 +107,7 @@ public class Controller implements Initializable {
 		});
 	}
 	
-	private void initInventory() {
-		adcube.setX(129);
-		adcube.setY(741);
-		antivirus.setX(213);
-		antivirus.setY(741);
-		authentipoint.setX(298);
-		authentipoint.setY(741);
-		firewall.setX(383);
-		firewall.setY(741);
-		sudvpn.setX(466);
-		sudvpn.setY(741);
-		
-		gridTowers.getChildren().add(adcube);
-		gridTowers.getChildren().add(antivirus);
-		gridTowers.getChildren().add(authentipoint);
-		gridTowers.getChildren().add(firewall);
-		gridTowers.getChildren().add(sudvpn);
-	}
-	
-	private void whoWasDrag() {
+	private void mouseDraggedOnTowers() {
 		adcube.setOnMouseDragged(event -> {
 			dragAndDrop(adcube, (int) adcube.getX());
 		});
@@ -143,10 +126,13 @@ public class Controller implements Initializable {
 	}
 	
 	private void dragAndDrop(ImageView tower, int initialX) { 
+		int TileSize = GameArea.TILE_SIZE;
+		
 		tower.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				int x = (int) event.getX() - 24; // - 24 pour prend le milieu de l'ImageView
-				int y = (int) event.getY() - 24;
+				
+				int x = (int) event.getX() - TileSize / 2; // - 24 pour prend le milieu de l'ImageView
+				int y = (int) event.getY() - TileSize / 2;
 				
 				tower.setX(x);
 				tower.setY(y);
@@ -155,11 +141,11 @@ public class Controller implements Initializable {
 		
 		tower.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				int x = (int) event.getX() / 48 * 48; // / 48 * 48 pour placer l'ImageView dans une tuile
-				int y = (int) event.getY() / 48 * 48;
+				int x = (int) event.getX() / TileSize * TileSize; // / 48 * 48 pour placer l'ImageView dans une tuile
+				int y = (int) event.getY() / TileSize * TileSize;
 				
-				if (isPlaceable(x, y)) {
-					new TowerView(gridTowers).addGameObject(new AdCube(x, y));
+				if (gm.getGameArea().isPlaceable(x, y)) {
+					tv.addGameObject(new AdCube(x, y));
 					System.out.println(tower);
 				}
 
@@ -167,13 +153,5 @@ public class Controller implements Initializable {
 				tower.setY(741);
 			}
 		});
-	}
-	
-	private boolean isPlaceable(int x, int y) {
-		x = x / 48; // / 48 pour recuperer le numero de la tuile
-		y = y / 48;
-		if (this.gm.getGameArea().onGameArea(x, y) && this.gm.getGameArea().gameAreaCase(x, y) == 7)
-			return true;
-		return false;
 	}
 }

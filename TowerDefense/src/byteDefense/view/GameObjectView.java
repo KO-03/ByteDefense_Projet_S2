@@ -21,6 +21,10 @@ public abstract class GameObjectView {
 		this.imageLoader();
 	}
 	
+	public Pane getGrid() {
+		return this.grid;
+	}
+	
 	public abstract void imageLoader();
 
 	public abstract Image imageGetter(GameObject gameObject);
