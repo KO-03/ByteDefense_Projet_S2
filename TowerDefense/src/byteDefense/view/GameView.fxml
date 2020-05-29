@@ -314,7 +314,7 @@
                                     <Insets left="25.0" right="25.0" />
                                  </HBox.margin>
                               </Text>
-                              <GridPane fx:id="inventory" alignment="CENTER" hgap="20.0" style="-fx-border-color: white; -fx-border-width: 1;" vgap="15.0">
+                              <GridPane alignment="CENTER" hgap="20.0" style="-fx-border-color: white; -fx-border-width: 1;" vgap="15.0">
                                 <columnConstraints>
                                   <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="64.0" />
                                   <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="64.0" />
@@ -354,7 +354,7 @@
                                     </Label>
                                     <ImageView fx:id="adcube" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -362,7 +362,7 @@
                                     </ImageView>
                                     <ImageView fx:id="antivirus" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -370,7 +370,7 @@
                                     </ImageView>
                                     <ImageView fx:id="authentipoint" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -378,7 +378,7 @@
                                     </ImageView>
                                     <ImageView fx:id="firewall" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -386,7 +386,7 @@
                                     </ImageView>
                                     <ImageView fx:id="sudvpn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.PNG" />
+                                          <Image url="@../../../resources/icons/tower.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
