@@ -31,10 +31,11 @@ public class BFS {
 			this.adj[i] = new LinkedList<Integer>();
 
 		this.fillGraph();	
-		this.BFS_algo(ARRIVAL_POINT);
+		this.BFS_algo(this.ARRIVAL_POINT);
 	}
 
 	private void addEdge(int v, int w) {
+		this.adj[v].add(w);
 	}
 
 	private  void createPathList() {
@@ -50,7 +51,7 @@ public class BFS {
 
 	private void fillGraph() {
 		for (int i = 0; i < this.adj.length; i++) {
-			int [] neightbour = fillNeightbours(pathList.get(i));
+			int [] neightbour = this.fillNeightbours(this.pathList.get(i));
 			for (int j = 0; j < neightbour.length; j++) {
 				if (neightbour[j]!=-1)
 					this.addEdge(i, neightbour[j]);
@@ -88,18 +89,18 @@ public class BFS {
 
 		visited[s] = true;
 		queue.add(s);
-		bfsPath.add(this.pathList.get(s));
+		this.bfsPath.add(this.pathList.get(s));
 
 		while (queue.size() != 0) {
 			s = queue.poll();
 			
-			Iterator<Integer> i = adj[s].listIterator();
+			Iterator<Integer> i = this.adj[s].listIterator();
 			while (i.hasNext()) {
 				int n = i.next();
 				if (!visited[n]) {
 					visited[n] = true;
 					queue.add(n);
-					bfsPath.add(this.pathList.get(n));
+					this.bfsPath.add(this.pathList.get(n));
 				}
 			}
 		}

@@ -35,7 +35,7 @@ public class GameArea {
 	}
 	
 	public int gameAreaCase(int x, int y) {
-		return this.tilesList.get(tileIndex(x, y));
+		return this.tilesList.get(this.tileIndex(x, y));
 	}
 	
 	public int tileIndex(int x, int y) {

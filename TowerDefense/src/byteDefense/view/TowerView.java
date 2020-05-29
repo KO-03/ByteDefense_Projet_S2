@@ -77,16 +77,16 @@ public class TowerView extends GameObjectView {
 	}
 	
 	public void initInventory() {
-		adcube.setX(129);
-		adcube.setY(741);
-		antivirus.setX(213);
-		antivirus.setY(741);
-		authentipoint.setX(298);
-		authentipoint.setY(741);
-		firewall.setX(383);
-		firewall.setY(741);
-		sudvpn.setX(466);
-		sudvpn.setY(741);
+		this.adcube.setX(129);
+		this.adcube.setY(741);
+		this.antivirus.setX(213);
+		this.antivirus.setY(741);
+		this.authentipoint.setX(298);
+		this.authentipoint.setY(741);
+		this.firewall.setX(383);
+		this.firewall.setY(741);
+		this.sudvpn.setX(466);
+		this.sudvpn.setY(741);
 		
 		this.getGrid().getChildren().add(adcube);
 		this.getGrid().getChildren().add(antivirus);

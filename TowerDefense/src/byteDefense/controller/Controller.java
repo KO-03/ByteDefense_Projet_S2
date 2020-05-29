@@ -85,7 +85,7 @@ public class Controller implements Initializable {
 
 						this.gameLoop.stop();
 					} else if (this.time % 5 == 0) {
-						gm.aTurn();
+						this.gm.aTurn();
 					} 
 					this.time++;
 				}));
@@ -131,7 +131,7 @@ public class Controller implements Initializable {
 		tower.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				
-				int x = (int) event.getX() - TileSize / 2; // - 24 pour prend le milieu de l'ImageView
+				int x = (int) event.getX() - TileSize / 2; 
 				int y = (int) event.getY() - TileSize / 2;
 				
 				tower.setX(x);
@@ -141,7 +141,7 @@ public class Controller implements Initializable {
 		
 		tower.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				int x = (int) event.getX() / TileSize * TileSize; // / 48 * 48 pour placer l'ImageView dans une tuile
+				int x = (int) event.getX() / TileSize * TileSize; 
 				int y = (int) event.getY() / TileSize * TileSize;
 				
 				if (gm.getGameArea().isPlaceable(x, y)) {
