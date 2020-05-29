@@ -16,15 +16,14 @@ import byteDefense.utilities.GameAreaReader;
 public class GameArea {
 
 	public static final int TILE_SIZE = 48;
-	
-	public static int gameAreSize;
+	public static int gameAreaSize;
 	
 	private ArrayList<Integer> tilesList;
 	
 	public GameArea() {
 		this.tilesList = new ArrayList<>();
 		this.tilesList = new GameAreaReader("./resources/tiles.txt").readFile();
-		gameAreSize = gameAreaSize();
+		gameAreaSize = gameAreaSize();
 	}
 	
 	public ArrayList<Integer> getTilesList(){
@@ -40,15 +39,15 @@ public class GameArea {
 	}
 	
 	public int tileIndex(int x, int y) {
-		return x + gameAreSize * y;
+		return x + gameAreaSize * y;
 	}
 	
 	public int tilePosX(int indTilePos) {
-		return indTilePos % gameAreSize;
+		return indTilePos % gameAreaSize;
 	}
 
 	public int tilePosY(int indTilePos) {
-		return indTilePos / gameAreSize;
+		return indTilePos / gameAreaSize;
 	}
 	
 	public boolean isWalkable(int index) {
@@ -56,7 +55,7 @@ public class GameArea {
 	}
 	
 	private boolean onGameArea(int x, int y) {
-		return x > 0 && y > 0 && x < gameAreSize && y < gameAreSize; 
+		return x > 0 && y > 0 && x < gameAreaSize && y < gameAreaSize; 
 	}
 	
 	public boolean isPlaceable(int x, int y) {

@@ -19,8 +19,8 @@ public class GameMaster {
 	
 	public GameMaster() {
 		this.gameArea = new GameArea();
-		this.bfsMap = new BFS(gameArea);	
-		this.waveEnnemy = new Wave(1, bfsMap); 
+		this.bfsMap = new BFS(this.gameArea);	
+		this.waveEnnemy = new Wave(1, this.bfsMap); 
 	}
 	
 	public GameArea getGameArea() {
@@ -35,7 +35,7 @@ public class GameMaster {
 		return this.waveEnnemy;
 	}
 	
-	public void oneTurn() {
+	public void aTurn() {
 		this.waveEnnemy.waveHandler();
 	}
 }

@@ -91,7 +91,7 @@ public class GameAreaView {
 
 	private void generateMapView() {
 		Image tileImg;
-		int tilesSize = GameArea.gameAreSize;
+		int tilesSize = GameArea.gameAreaSize;
 		
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {

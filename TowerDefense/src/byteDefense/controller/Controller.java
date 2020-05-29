@@ -85,7 +85,7 @@ public class Controller implements Initializable {
 
 						this.gameLoop.stop();
 					} else if (this.time % 5 == 0) {
-						gm.oneTurn();
+						gm.aTurn();
 					} 
 					this.time++;
 				}));

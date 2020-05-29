@@ -28,15 +28,16 @@ public class Wave {
 	private ObservableList<Ennemy> ennemies;
 	private BFS bfsMap;
 	private int indLastEnnemySpawn;
-	private final int WAVE_NUMBER;
-	private final int WAVE_ENNEMIES_QTY;
+	private int waveNumber;
+	private int waveNumberQty;
+	private int tour = 0;
 	
 	public Wave(int waveNumber, BFS bfsMap) {
 		this.ennemies = FXCollections.observableArrayList(); 
 		this.bfsMap = bfsMap;
 		this.indLastEnnemySpawn = 0;
-		this.WAVE_NUMBER = waveNumber;
-		this.WAVE_ENNEMIES_QTY = waveEnnemyQuantity();
+		this.waveNumber = waveNumber;
+		this.waveNumberQty = waveEnnemyQuantity();
 	}
 	
 	public int getIndLastEnnemySpawn() {
@@ -44,14 +45,14 @@ public class Wave {
 	}
 	
 	public int getWaveEnnemiesQty() {
-		return this.WAVE_ENNEMIES_QTY;
+		return this.waveNumberQty;
 	}
 	
 	public int waveEnnemyQuantity() {
 		int ennemyQty = 0;
 		
-		for (int i = 0; i < waveInfo[WAVE_NUMBER].length; i++)
-			ennemyQty += waveInfo[WAVE_NUMBER][i];
+		for (int i = 0; i < waveInfo[waveNumber].length; i++)
+			ennemyQty += waveInfo[waveNumber][i];
 		
 		return ennemyQty;
 	}
@@ -61,8 +62,8 @@ public class Wave {
 		boolean foundCorrectEnnemyType = false;
 		Ennemy ennemy = null;
 		
-		while (!foundCorrectEnnemyType && indEnnemyType < WAVE_NUMBER) {
-			ennemyAddedDifference -= waveInfo[WAVE_NUMBER][indEnnemyType];
+		while (!foundCorrectEnnemyType && indEnnemyType < waveNumber) {
+			ennemyAddedDifference -= waveInfo[waveNumber][indEnnemyType];
 
 			if (ennemyAddedDifference < 0) 
 				foundCorrectEnnemyType = true;
@@ -130,26 +131,21 @@ public class Wave {
 		return this.ennemies.size();
 	}
 	
-	public void verifyEnnemyState(Ennemy e) {
-		if(! e.isAlive() || e.getcurrentIndTile() == this.bfsMap.ARRIVAL_POINT)
-			this.removeEnnemy(e);
-	}
-	
 	public void waveHandler() {
 		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoute
-		if (this.indLastEnnemySpawn < this.WAVE_ENNEMIES_QTY)
+		if (this.indLastEnnemySpawn < this.waveNumberQty)
 			this.fillEnnemyList();
-			
+		
 		if(! this.isEmpty()) {
 			Ennemy e;
 			
 			for (int i = this.sizeOfEnnemies() - 1; i >= 0; i--) {
 				e = this.getEnnemies().get(i);
 				// fait agir chaque ennemi tant qu'il n'est pas arrive au bout du chemin
-				if (e.getcurrentIndTile() > this.bfsMap.ARRIVAL_POINT)
+				if (e.getCurrentIndTile() > this.bfsMap.ARRIVAL_POINT)
 					e.act();
-				
-				this.verifyEnnemyState(e);
+				else if (e.getCurrentIndTile() == this.bfsMap.ARRIVAL_POINT || ! e.isAlive())
+					this.removeEnnemy(e);
 			}
 		}
 	}

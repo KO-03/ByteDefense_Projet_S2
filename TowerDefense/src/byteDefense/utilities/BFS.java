@@ -12,12 +12,14 @@ import byteDefense.model.GameArea;
 import javafx.geometry.Point2D;
 
 public class BFS {
+
+	public final int ARRIVAL_POINT = 0;
+	
 	private int verticeSize;
 	private GameArea gameArea;
 	private LinkedList<Integer> adj[]; //liste des tiles voisines, remplie avec fill graph
 	public  ArrayList<Point2D> pathList =  new ArrayList<>();
 	public ArrayList<Point2D> bfsPath = new ArrayList<>();// ordre du bfs apres algo
-	public int ARRIVAL_POINT = 0;
 
 	public BFS(GameArea gameArea) {
 		this.gameArea = gameArea;
@@ -29,6 +31,7 @@ public class BFS {
 			adj[i] = new LinkedList<Integer>();
 
 		this.fillGraph();	
+		this.BFS_algo(ARRIVAL_POINT);
 	}
 
 	private void addEdge(int v, int w) {
@@ -37,9 +40,10 @@ public class BFS {
 
 	private  void createPathList() {
 		int tilesIndex = 0;
-		for(int i = 0; i < this.gameArea.getTilesList().size()-1; i++) {
+		
+		for (int i = 0; i < this.gameArea.getTilesList().size() - 1; i++) {
 			tilesIndex = this.gameArea.getTilesList().get(i);
-			if(this.gameArea.isWalkable(tilesIndex)) {
+			if (this.gameArea.isWalkable(tilesIndex)) {
 				pathList.add(new Point2D(gameArea.tilePosX(i), gameArea.tilePosY(i)));
 			}
 		}
@@ -47,10 +51,10 @@ public class BFS {
 
 	private void fillGraph() {
 		for (int i = 0; i < this.adj.length; i++) {
-			int [] voisins = fillNeightbours(pathList.get(i));
-			for(int j = 0; j < voisins.length; j++) {
-				if(voisins[j]!=-1)
-					this.addEdge(i, voisins[j]);
+			int [] neightbour = fillNeightbours(pathList.get(i));
+			for (int j = 0; j < neightbour.length; j++) {
+				if (neightbour[j]!=-1)
+					this.addEdge(i, neightbour[j]);
 			}
 		}
 	}
@@ -60,10 +64,10 @@ public class BFS {
 		int y = (int) index.getY();
 
 		int[] neightbours = new int[] {
-				neightboursTileIndex(x, y-1), 
-				neightboursTileIndex(x+1, y), 
-				neightboursTileIndex(x, y+1), 
-				neightboursTileIndex(x-1, y)
+				neightboursTileIndex(x, y - 1), 
+				neightboursTileIndex(x + 1, y), 
+				neightboursTileIndex(x, y + 1), 
+				neightboursTileIndex(x - 1, y)
 		};	
 		return neightbours;
 	}
@@ -71,7 +75,7 @@ public class BFS {
 	private int neightboursTileIndex(int x, int y) {
 		Point2D check  = new Point2D(x, y);
 		for (int i = 0; i < pathList.size(); i++) {
-			if( check.getX() == pathList.get(i).getX() && check.getY() == pathList.get(i).getY()) {
+			if (check.getX() == pathList.get(i).getX() && check.getY() == pathList.get(i).getY()) {
 				return i;
 			}
 		}
@@ -79,7 +83,6 @@ public class BFS {
 	}
 
 	public void BFS_algo(int s) {
-
 		boolean visited[] = new boolean[verticeSize];
 
 		LinkedList<Integer> queue = new LinkedList<Integer>();

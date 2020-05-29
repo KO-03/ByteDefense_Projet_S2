@@ -16,15 +16,16 @@ import byteDefense.utilities.BFS;
 public abstract class Ennemy extends GameObject {
 
 	private static BFS bfs;
+	
 	private int currentIndTile;
 	
 	public Ennemy(int x, int y, BFS bfsMap) {
 		super(x, y, 50);
 		bfs = bfsMap;
-		this.currentIndTile = bfs.pathList.size()-1;
+		this.currentIndTile = bfs.bfsPath.size() - 1;
 	}
 
-	public int getcurrentIndTile() {
+	public int getCurrentIndTile() {
 		return this.currentIndTile;
 	}
 
@@ -32,12 +33,11 @@ public abstract class Ennemy extends GameObject {
 	
 	public void moveEnnemy() {
 		// fixage de la position de l'ennemi en fonction du chemin du BFS
-		this.setX((int)bfs.pathList.get(this.currentIndTile).getX() * GameArea.TILE_SIZE);
-		this.setY((int)bfs.pathList.get(this.currentIndTile).getY() * GameArea.TILE_SIZE);
-
+		this.setX((int)bfs.bfsPath.get(this.currentIndTile).getX() * GameArea.TILE_SIZE);
+		this.setY((int)bfs.bfsPath.get(this.currentIndTile).getY() * GameArea.TILE_SIZE);
+		
 		// decrementation de l'indice de la tile courante du BFS
-		if(this.currentIndTile > 0) {
+		if(this.currentIndTile > 0)
 			this.currentIndTile--;
-		}
 	}
 }
