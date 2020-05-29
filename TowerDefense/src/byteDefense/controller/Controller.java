@@ -64,7 +64,7 @@ public class Controller implements Initializable {
 		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnnemyView(this.gridEnnemies);
-		this.tv = new TowerView(gridTowers, adcube, antivirus, authentipoint, firewall, sudvpn);
+		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
 		
 		this.generateEnnemiesListener();
 		this.mouseDraggedOnTowers();
@@ -79,7 +79,7 @@ public class Controller implements Initializable {
 		
 		KeyFrame kf = new KeyFrame(
 				Duration.seconds(0.05), 
-				(ev ->{
+				(event ->{
 					if (this.time == 10000) {
 						System.out.println("fini");
 
@@ -108,20 +108,20 @@ public class Controller implements Initializable {
 	}
 	
 	private void mouseDraggedOnTowers() {
-		adcube.setOnMouseDragged(event -> {
-			dragAndDrop(adcube, (int) adcube.getX());
+		this.adcube.setOnMouseDragged(event -> {
+			dragAndDrop(this.adcube, (int) this.adcube.getX());
 		});
-		antivirus.setOnMouseDragged(event -> {
-			dragAndDrop(antivirus, (int) antivirus.getX());
+		this.antivirus.setOnMouseDragged(event -> {
+			dragAndDrop(this.antivirus, (int) this.antivirus.getX());
 		});
-		authentipoint.setOnMouseDragged(event -> {
-			dragAndDrop(authentipoint, (int) authentipoint.getX());
+		this.authentipoint.setOnMouseDragged(event -> {
+			dragAndDrop(this.authentipoint, (int) this.authentipoint.getX());
 		});
-		firewall.setOnMouseDragged(event -> {
-			dragAndDrop(firewall, (int) firewall.getX());
+		this.firewall.setOnMouseDragged(event -> {
+			dragAndDrop(this.firewall, (int) this.firewall.getX());
 		});
-		sudvpn.setOnMouseDragged(event -> {
-			dragAndDrop(sudvpn, (int) sudvpn.getX());
+		this.sudvpn.setOnMouseDragged(event -> {
+			dragAndDrop(this.sudvpn, (int) this.sudvpn.getX());
 		});
 	}
 	

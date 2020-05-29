@@ -21,7 +21,7 @@ public class GameAreaReader {
 	public ArrayList<Integer> readFile() {
 		ArrayList<Integer> tilesList = new ArrayList<>();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(sourceFile));
+			BufferedReader br = new BufferedReader(new FileReader(this.sourceFile));
 		    String line = null;
 		    
 		    while ((line = br.readLine()) != null) {

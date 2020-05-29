@@ -25,17 +25,16 @@ public class BFS {
 		this.gameArea = gameArea;
 		this.createPathList();
 		this.verticeSize = this.pathList.size();
-		adj = new LinkedList[this.pathList.size()];
+		this.adj = new LinkedList[this.pathList.size()];
 
 		for (int i = 0; i < this.pathList.size(); ++i)
-			adj[i] = new LinkedList<Integer>();
+			this.adj[i] = new LinkedList<Integer>();
 
 		this.fillGraph();	
 		this.BFS_algo(ARRIVAL_POINT);
 	}
 
 	private void addEdge(int v, int w) {
-		adj[v].add(w);
 	}
 
 	private  void createPathList() {
@@ -44,7 +43,7 @@ public class BFS {
 		for (int i = 0; i < this.gameArea.getTilesList().size() - 1; i++) {
 			tilesIndex = this.gameArea.getTilesList().get(i);
 			if (this.gameArea.isWalkable(tilesIndex)) {
-				pathList.add(new Point2D(gameArea.tilePosX(i), gameArea.tilePosY(i)));
+				this.pathList.add(new Point2D(this.gameArea.tilePosX(i), this.gameArea.tilePosY(i)));
 			}
 		}
 	}
@@ -74,8 +73,8 @@ public class BFS {
 
 	private int neightboursTileIndex(int x, int y) {
 		Point2D check  = new Point2D(x, y);
-		for (int i = 0; i < pathList.size(); i++) {
-			if (check.getX() == pathList.get(i).getX() && check.getY() == pathList.get(i).getY()) {
+		for (int i = 0; i < this.pathList.size(); i++) {
+			if (check.getX() == this.pathList.get(i).getX() && check.getY() == this.pathList.get(i).getY()) {
 				return i;
 			}
 		}
@@ -83,7 +82,7 @@ public class BFS {
 	}
 
 	public void BFS_algo(int s) {
-		boolean visited[] = new boolean[verticeSize];
+		boolean visited[] = new boolean[this.verticeSize];
 
 		LinkedList<Integer> queue = new LinkedList<Integer>();
 
