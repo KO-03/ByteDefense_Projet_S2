@@ -14,17 +14,17 @@ package byteDefense.model.ennemies;
 import byteDefense.utilities.BFS;
 
 public class TrojanHorse extends Ennemy {
-	
+
 	private static final float ATTACK = 0;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
-	
+
 	public TrojanHorse(BFS bfsMap) {
 		super(624, 432, bfsMap);
 	}
-	
+
 	public float getAttack() {
 		return ATTACK;
 	}

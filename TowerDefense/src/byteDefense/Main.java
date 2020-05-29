@@ -18,7 +18,7 @@ public class Main extends Application{
 			Scene scene = new Scene(root,890,926);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
-            primaryStage.setTitle("Byte Defense");
+			primaryStage.setTitle("Byte Defense");
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

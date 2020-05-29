@@ -15,11 +15,11 @@ public abstract class OffensiveEnnemy extends Ennemy {
 	}
 
 	public void attackTower() {
-		
+
 	}
-	
+
 	public abstract void act();
-	
+
 	public abstract float getAttack();
 
 	public abstract int getDefense();
@@ -27,6 +27,6 @@ public abstract class OffensiveEnnemy extends Ennemy {
 	public abstract int getAttackSpeed();
 
 	public abstract int getAttackRange();
-	
+
 	public abstract int getLoot();
 }

@@ -17,26 +17,26 @@ import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
 
 public class Rookit extends OffensiveEnnemy {
-	
+
 	public static final float INCREASE_ATTACK_RATE = 1.20F;
 	private static FloatProperty attack = new SimpleFloatProperty(1);
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
-	
+
 	public Rookit(BFS bfsMap) {
 		super(624, 432, bfsMap);
 	}
-	
+
 	public float getAttack() {
 		return attack.getValue();
 	}
-	
+
 	public FloatProperty getAttackProperty() {
 		return attack;
 	}
-	
+
 	private void increaseAttack() {
 		attack.setValue(this.getAttack() * INCREASE_ATTACK_RATE);
 	}

@@ -23,9 +23,9 @@ public class Adware extends OffensiveEnnemy {
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
-	
+
 	private int bornTurn;
-	
+
 	public Adware(BFS bfsMap) {
 		super(624, 432, bfsMap);
 	}

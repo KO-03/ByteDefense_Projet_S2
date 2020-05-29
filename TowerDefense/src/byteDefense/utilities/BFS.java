@@ -14,7 +14,7 @@ import javafx.geometry.Point2D;
 public class BFS {
 
 	public final int ARRIVAL_POINT = 0;
-	
+
 	private int verticeSize;
 	private GameArea gameArea;
 	private LinkedList<Integer> adj[]; //liste des tiles voisines, remplie avec fill graph
@@ -40,7 +40,7 @@ public class BFS {
 
 	private  void createPathList() {
 		int tilesIndex = 0;
-		
+
 		for (int i = 0; i < this.gameArea.getTilesList().size() - 1; i++) {
 			tilesIndex = this.gameArea.getTilesList().get(i);
 			if (this.gameArea.isWalkable(tilesIndex)) {
@@ -93,7 +93,7 @@ public class BFS {
 
 		while (queue.size() != 0) {
 			s = queue.poll();
-			
+
 			Iterator<Integer> i = this.adj[s].listIterator();
 			while (i.hasNext()) {
 				int n = i.next();

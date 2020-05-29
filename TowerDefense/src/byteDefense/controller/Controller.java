@@ -34,7 +34,7 @@ import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 public class Controller implements Initializable {
-	
+
 	@FXML
 	private TilePane gameBoard;
 	@FXML
@@ -51,7 +51,7 @@ public class Controller implements Initializable {
 	private ImageView firewall;
 	@FXML
 	private ImageView sudvpn;
-		
+
 	private EnnemyView ev;
 	private TowerView tv;
 	private GameMaster gm;
@@ -61,22 +61,22 @@ public class Controller implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.gm = new GameMaster();
-		
+
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnnemyView(this.gridEnnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
-		
+
 		this.generateEnnemiesListener();
 		this.mouseDraggedOnTowers();
 		this.initAnimation();
 		this.gameLoop.play();
 	}
-	
+
 	private void initAnimation() {
 		this.gameLoop = new Timeline();
 		this.time = 0;
 		this.gameLoop.setCycleCount(Timeline.INDEFINITE);
-		
+
 		KeyFrame kf = new KeyFrame(
 				Duration.seconds(0.05), 
 				(event ->{
@@ -89,7 +89,7 @@ public class Controller implements Initializable {
 					} 
 					this.time++;
 				}));
-		
+
 		this.gameLoop.getKeyFrames().add(kf);
 	}
 
@@ -106,7 +106,7 @@ public class Controller implements Initializable {
 			}
 		});
 	}
-	
+
 	private void mouseDraggedOnTowers() {
 		this.adcube.setOnMouseDragged(event -> {
 			dragAndDrop(this.adcube, (int) this.adcube.getX());
@@ -124,26 +124,26 @@ public class Controller implements Initializable {
 			dragAndDrop(this.sudvpn, (int) this.sudvpn.getX());
 		});
 	}
-	
+
 	private void dragAndDrop(ImageView tower, int initialX) { 
 		int TileSize = GameArea.TILE_SIZE;
-		
+
 		tower.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				
+
 				int x = (int) event.getX() - TileSize / 2; 
 				int y = (int) event.getY() - TileSize / 2;
-				
+
 				tower.setX(x);
 				tower.setY(y);
 			}
 		});
-		
+
 		tower.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				int x = (int) event.getX() / TileSize * TileSize; 
 				int y = (int) event.getY() / TileSize * TileSize;
-				
+
 				if (gm.getGameArea().isPlaceable(x, y)) {
 					tv.addGameObject(new AdCube(x, y));
 					System.out.println(tower);

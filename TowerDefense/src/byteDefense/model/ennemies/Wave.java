@@ -22,16 +22,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Wave {
-	
+
 	private static int[][] waveInfo = {{5, 5}, {5, 3, 2}, {5, 3, 2, 3}, {4, 3, 2, 3, 2}, {4, 3, 3, 3, 2, 1}};
-	
+
 	private ObservableList<Ennemy> ennemies;
 	private BFS bfsMap;
 	private int indLastEnnemySpawn;
 	private int waveNumber;
 	private int waveNumberQty;
-	private int tour = 0;
-	
+
 	public Wave(int waveNumber, BFS bfsMap) {
 		this.ennemies = FXCollections.observableArrayList(); 
 		this.bfsMap = bfsMap;
@@ -39,29 +38,29 @@ public class Wave {
 		this.waveNumber = waveNumber;
 		this.waveNumberQty = waveEnnemyQuantity();
 	}
-	
+
 	public int getIndLastEnnemySpawn() {
 		return this.indLastEnnemySpawn;
 	}
-	
+
 	public int getWaveEnnemiesQty() {
 		return this.waveNumberQty;
 	}
-	
+
 	public int waveEnnemyQuantity() {
 		int ennemyQty = 0;
-		
+
 		for (int i = 0; i < waveInfo[waveNumber].length; i++)
 			ennemyQty += waveInfo[waveNumber][i];
-		
+
 		return ennemyQty;
 	}
-	
+
 	private Ennemy createEnnemy() {
 		int indEnnemyType = 0, ennemyAddedDifference = indLastEnnemySpawn;
 		boolean foundCorrectEnnemyType = false;
 		Ennemy ennemy = null;
-		
+
 		while (!foundCorrectEnnemyType && indEnnemyType < waveNumber) {
 			ennemyAddedDifference -= waveInfo[waveNumber][indEnnemyType];
 
@@ -70,75 +69,75 @@ public class Wave {
 			else
 				indEnnemyType++;
 		}
-		
+
 		switch (indEnnemyType + 1) {
-			case 1:
-				ennemy = new Rookit(bfsMap);
-				break;
-			case 2:
-				ennemy = new Adware(bfsMap);
-				break;
-			case 3:
-				ennemy = new Bot(bfsMap);
-				break;
-			case 4:
-				ennemy = new Ransomware(bfsMap);
-				break;
-			case 5:
-				ennemy = new Spyware(bfsMap);
-			case 6:
-				ennemy = new TrojanHorse(bfsMap);
-				break;
+		case 1:
+			ennemy = new Rookit(bfsMap);
+			break;
+		case 2:
+			ennemy = new Adware(bfsMap);
+			break;
+		case 3:
+			ennemy = new Bot(bfsMap);
+			break;
+		case 4:
+			ennemy = new Ransomware(bfsMap);
+			break;
+		case 5:
+			ennemy = new Spyware(bfsMap);
+		case 6:
+			ennemy = new TrojanHorse(bfsMap);
+			break;
 		}
-		
+
 		return ennemy;
 	}
-	
+
 	private void addEnnemy(Ennemy ennemy) {
 		this.ennemies.add(ennemy);
 	}
-	
+
 	public void fillEnnemyList() {
 		Ennemy ennemy = createEnnemy(); 
-		
+
 		if (ennemy != null) {
 			addEnnemy(ennemy);
 			indLastEnnemySpawn++;
 		}
 	}
-	
+
 	public void removeEnnemy(Ennemy e) {
 		this.ennemies.remove(e);
 	}
-	
+
 	public ObservableList<Ennemy> getEnnemies() {
 		return this.ennemies;
 	}
-	
+
 	public Ennemy getEnnemy(int id) {
 		for(Ennemy e : this.ennemies)
 			if(e.getId() == id)
 				return e;
-		
+
 		return null;
 	}
-	
+
 	public boolean isEmpty() {
 		return this.ennemies.size() <= 0;
 	}
-	
+
 	public int sizeOfEnnemies() {
 		return this.ennemies.size();
 	}
-	
+
 	public void waveHandler() {
 		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoute
 		if (this.indLastEnnemySpawn < this.waveNumberQty)
 			this.fillEnnemyList();
-		
+
 		if(! this.isEmpty()) {
 			Ennemy e;
-			
+
 			for (int i = this.sizeOfEnnemies() - 1; i >= 0; i--) {
 				e = this.getEnnemies().get(i);
 				// fait agir chaque ennemi tant qu'il n'est pas arrive au bout du chemin

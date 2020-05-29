@@ -22,7 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 public class EnnemyView extends GameObjectView {
-	
+
 	private static Image adwareImg; 
 	private static Image botImg;
 	private static Image ransomwareImg;
@@ -33,7 +33,7 @@ public class EnnemyView extends GameObjectView {
 	public EnnemyView(Pane gridEnnemy) {
 		super(gridEnnemy);
 	}
-	
+
 	public void imageLoader() {
 		try {
 			adwareImg = new Image(new File("./resources/ennemiesTextures/character.png").toURI().toURL().toString()); 
@@ -46,10 +46,10 @@ public class EnnemyView extends GameObjectView {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Image imageGetter(GameObject gameObject) {
 		Image img;
-		
+
 		if (gameObject instanceof Rookit)
 			img = rookitImg;
 		else if (gameObject instanceof Adware)
@@ -64,7 +64,7 @@ public class EnnemyView extends GameObjectView {
 			img = trojanHorseImg;
 		else
 			img = null;
-			
+
 		return img;
 	}
 

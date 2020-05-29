@@ -21,7 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class TowerView extends GameObjectView {
-	
+
 	private static Image adcubeImg; 
 	private static Image antivirusImg;
 	private static Image firewallImg;
@@ -33,7 +33,7 @@ public class TowerView extends GameObjectView {
 	private ImageView authentipoint;
 	private ImageView firewall;
 	private ImageView sudvpn;
-	
+
 	public TowerView(Pane gridTowers, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
 		super(gridTowers);
 		this.adcube = adcube;
@@ -41,10 +41,10 @@ public class TowerView extends GameObjectView {
 		this.authentipoint = authentificatipoint;
 		this.firewall = firewall;
 		this.sudvpn = sudvpn;
-		
+
 		this.initInventory();
 	}
-	
+
 	public void imageLoader() {
 		try {	
 			adcubeImg = new Image(new File("./resources/icons/tower.png").toURI().toURL().toString()); 
@@ -56,10 +56,10 @@ public class TowerView extends GameObjectView {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Image imageGetter(GameObject gameObject) {
 		Image img;
-		
+
 		if (gameObject instanceof AdCube)
 			img = adcubeImg;
 		else if (gameObject instanceof Antivirus)
@@ -72,10 +72,10 @@ public class TowerView extends GameObjectView {
 			img = sudvpnImg;
 		else
 			img = null;
-			
+
 		return img;
 	}
-	
+
 	public void initInventory() {
 		this.adcube.setX(129);
 		this.adcube.setY(741);
@@ -87,7 +87,7 @@ public class TowerView extends GameObjectView {
 		this.firewall.setY(741);
 		this.sudvpn.setX(466);
 		this.sudvpn.setY(741);
-		
+
 		this.getGrid().getChildren().add(adcube);
 		this.getGrid().getChildren().add(antivirus);
 		this.getGrid().getChildren().add(authentipoint);

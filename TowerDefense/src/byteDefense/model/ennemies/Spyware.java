@@ -21,12 +21,12 @@ public class Spyware extends Ennemy {
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
-	
+
 
 	public Spyware(BFS bfsMap) {
 		super(624, 432, bfsMap);
 	}
-	
+
 	public float getAttack() {
 		return ATTACK;
 	}
@@ -50,7 +50,7 @@ public class Spyware extends Ennemy {
 	public float getMoveSpeed() {
 		return MOVE_SPEED;
 	}
-	
+
 	public void act() {
 		this.moveEnnemy();
 	}

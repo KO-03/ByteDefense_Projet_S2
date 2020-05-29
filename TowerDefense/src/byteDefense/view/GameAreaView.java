@@ -45,7 +45,7 @@ public class GameAreaView {
 		this.imageLoader();
 		this.generateMapView();
 	}
-	
+
 	private void imageLoader() {
 		try {
 			CORNER_SRC_IMG = new Image(new File("./resources/tilemapTextures/corner.png").toURI().toURL().toString()); 
@@ -64,27 +64,27 @@ public class GameAreaView {
 		Image tileImg = null;
 
 		switch (mapCase) {
-			case CORNER:
-				tileImg = CORNER_SRC_IMG;
-				break;
-			case HORIZONTAL_PATH:
-				tileImg = HORIZONTAL_PATH_SRC_IMG;
-				break;
-			case VERTICAL_PATH:
-				tileImg = VERTICAL_PATH_SRC_IMG;
-				break;
-			case VERTICAL_WALL:
-				tileImg = VERTICAL_WALL_SRC_IMG;
-				break;
-			case INTERSECTION_PATH:
-				tileImg = INTERSECTION_PATH_SRC_IMG;
-				break;
-			case HORIZONTAL_WALL:
-				tileImg = HORIZONTAL_WALL_SRC_IMG;
-				break;
-			case TOWER_ZONE:
-				tileImg = TOWER_ZONE_SRC_IMG;
-				break;
+		case CORNER:
+			tileImg = CORNER_SRC_IMG;
+			break;
+		case HORIZONTAL_PATH:
+			tileImg = HORIZONTAL_PATH_SRC_IMG;
+			break;
+		case VERTICAL_PATH:
+			tileImg = VERTICAL_PATH_SRC_IMG;
+			break;
+		case VERTICAL_WALL:
+			tileImg = VERTICAL_WALL_SRC_IMG;
+			break;
+		case INTERSECTION_PATH:
+			tileImg = INTERSECTION_PATH_SRC_IMG;
+			break;
+		case HORIZONTAL_WALL:
+			tileImg = HORIZONTAL_WALL_SRC_IMG;
+			break;
+		case TOWER_ZONE:
+			tileImg = TOWER_ZONE_SRC_IMG;
+			break;
 		}
 		return tileImg;
 	}
@@ -92,11 +92,11 @@ public class GameAreaView {
 	private void generateMapView() {
 		Image tileImg;
 		int tilesSize = GameArea.gameAreaSize;
-		
+
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {
 				tileImg = this.tileImageGet(this.map.gameAreaCase(x, y));
-				
+
 				if(tileImg != null) {
 					ImageView tile = new ImageView();
 					tile.setImage(tileImg);

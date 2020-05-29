@@ -12,7 +12,7 @@
 package byteDefense.model.towers;
 
 public class AdCube extends Tower {
-	
+
 	private static final float ATTACK = 0;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
@@ -22,7 +22,7 @@ public class AdCube extends Tower {
 	public AdCube(int x, int y) {
 		super(x, y);
 	}
-	
+
 	public float getAttack() {
 		return ATTACK;
 	}
@@ -42,8 +42,8 @@ public class AdCube extends Tower {
 	public int getCost() {
 		return COST;
 	}
-	
+
 	public void act() {
-		
+
 	}
 }
