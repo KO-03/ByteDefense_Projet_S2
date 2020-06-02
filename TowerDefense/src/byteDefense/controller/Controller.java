@@ -16,8 +16,13 @@ import java.util.ResourceBundle;
 
 import byteDefense.model.GameArea;
 import byteDefense.model.GameMaster;
+import byteDefense.model.GameObject;
 import byteDefense.model.ennemies.Ennemy;
 import byteDefense.model.towers.AdCube;
+import byteDefense.model.towers.Antivirus;
+import byteDefense.model.towers.AuthenticationPoint;
+import byteDefense.model.towers.Firewall;
+import byteDefense.model.towers.SudVPN;
 import byteDefense.view.EnnemyView;
 import byteDefense.view.GameAreaView;
 import byteDefense.view.TowerView;
@@ -70,6 +75,19 @@ public class Controller implements Initializable {
 		this.mouseDraggedOnTowers();
 		this.initAnimation();
 		this.gameLoop.play();
+		
+		this.gm.getGameEnvironment().getGameObjectsList().addListener((ListChangeListener <GameObject>) c-> {
+			while (c.next()) {
+				if (c.wasRemoved()) {
+					for (GameObject gameObject : c.getRemoved()) {
+						if (gameObject instanceof Ennemy)
+							gridEnnemies.getChildren().remove(this.gridEnnemies.lookup("#" + gameObject.getId()));
+						else
+							gridTowers.getChildren().remove(this.gridEnnemies.lookup("#" + gameObject.getId()));
+					}
+				}
+			}
+		});
 	}
 
 	private void initAnimation() {
@@ -78,7 +96,7 @@ public class Controller implements Initializable {
 		this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.05), 
+				Duration.seconds(0.5), 
 				(event ->{
 					if (this.time == 10000) {
 						System.out.println("fini");
@@ -126,13 +144,13 @@ public class Controller implements Initializable {
 	}
 
 	private void dragAndDrop(ImageView tower, int initialX) { 
-		int TileSize = GameArea.TILE_SIZE;
+		int tileSize = GameArea.TILE_SIZE;
 
 		tower.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 
-				int x = (int) event.getX() - TileSize / 2; 
-				int y = (int) event.getY() - TileSize / 2;
+				int x = (int) event.getX() - tileSize / 2; 
+				int y = (int) event.getY() - tileSize / 2;
 
 				tower.setX(x);
 				tower.setY(y);
@@ -141,12 +159,20 @@ public class Controller implements Initializable {
 
 		tower.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				int x = (int) event.getX() / TileSize * TileSize; 
-				int y = (int) event.getY() / TileSize * TileSize;
+				int x = (int) event.getX() / tileSize * tileSize; 
+				int y = (int) event.getY() / tileSize * tileSize;
 
 				if (gm.getGameArea().isPlaceable(x, y)) {
-					tv.addGameObject(new AdCube(x, y));
-					System.out.println(tower);
+					if (tower == adcube)
+						tv.addGameObject(new AdCube(x, y, gm.getGameEnvironment()));
+					else if (tower == antivirus)
+						tv.addGameObject(new Antivirus(x, y, gm.getGameEnvironment()));
+					else if (tower == authentipoint)
+						tv.addGameObject(new AuthenticationPoint(x, y, gm.getGameEnvironment()));
+					else if (tower == firewall)
+						tv.addGameObject(new Firewall(x, y, gm.getGameEnvironment()));
+					else if (tower == sudvpn)
+						tv.addGameObject(new SudVPN(x, y, gm.getGameEnvironment()));
 				}
 
 				tower.setX(initialX);

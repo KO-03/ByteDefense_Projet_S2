@@ -23,13 +23,17 @@ public abstract class GameObject {
 	private IntegerProperty xProperty;
 	private IntegerProperty yProperty;
 	private int hp;
+	
+	protected GameEnvironment gameEnv;
 
-	public GameObject(int x, int y, int hp) {
+	public GameObject(int x, int y, int hp, GameEnvironment gameEnv) {
 		this.xProperty = new SimpleIntegerProperty(x);
 		this.yProperty = new SimpleIntegerProperty(y);
 		this.hp = hp;
 		this.id = counterId;
 		counterId++;
+		this.gameEnv = gameEnv;
+		gameEnv.addGameObject(this);
 	}
 
 	public int getId() {

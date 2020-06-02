@@ -11,6 +11,7 @@
 
 package byteDefense.model.ennemies;
 
+import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
 public class Bot extends Ennemy {
@@ -21,8 +22,8 @@ public class Bot extends Ennemy {
 	private static final int ATTACK_RANGE = 0;
 	private static final int LOOT = 0;
 
-	public Bot(BFS bfsMap) {
-		super(624, 432, bfsMap);
+	public Bot(BFS bfsMap, GameEnvironment gameEnv) {
+		super(624, 432, bfsMap, gameEnv);
 	}
 
 	public float getAttack() {

@@ -11,16 +11,18 @@
 
 package byteDefense.model.towers;
 
+import byteDefense.model.GameEnvironment;
+
 public class AdCube extends Tower {
 
-	private static final float ATTACK = 0;
+	private static final float ATTACK = 10;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 0;
+	private static final int ATTACK_RANGE = 1;
 	private static final int COST = 0;
 
-	public AdCube(int x, int y) {
-		super(x, y);
+	public AdCube(int x, int y, GameEnvironment gameEnv) {
+		super(x, y, gameEnv);
 	}
 
 	public float getAttack() {
@@ -44,6 +46,6 @@ public class AdCube extends Tower {
 	}
 
 	public void act() {
-
+		super.shoot(super.findEnnemy());
 	}
 }

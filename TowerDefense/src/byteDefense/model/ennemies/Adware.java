@@ -13,6 +13,7 @@
 
 package byteDefense.model.ennemies;
 
+import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
 public class Adware extends OffensiveEnnemy {
@@ -26,8 +27,8 @@ public class Adware extends OffensiveEnnemy {
 
 	private int bornTurn;
 
-	public Adware(BFS bfsMap) {
-		super(624, 432, bfsMap);
+	public Adware(BFS bfsMap, GameEnvironment gameEnv) {
+		super(624, 432, bfsMap, gameEnv);
 	}
 
 	public float getAttack() {

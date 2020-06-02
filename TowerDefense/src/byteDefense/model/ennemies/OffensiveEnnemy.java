@@ -6,12 +6,13 @@
 
 package byteDefense.model.ennemies;
 
+import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
 public abstract class OffensiveEnnemy extends Ennemy {
 
-	public OffensiveEnnemy(int x, int y, BFS bfsMap) {
-		super(x, y, bfsMap);
+	public OffensiveEnnemy(int x, int y, BFS bfsMap, GameEnvironment gameEnv) {
+		super(x, y, bfsMap, gameEnv);
 	}
 
 	public void attackTower() {

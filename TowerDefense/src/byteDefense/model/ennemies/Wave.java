@@ -17,6 +17,7 @@
 
 package byteDefense.model.ennemies;
 
+import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,13 +31,15 @@ public class Wave {
 	private int indLastEnnemySpawn;
 	private int waveNumber;
 	private int waveNumberQty;
+	private GameEnvironment gameEnv;
 
-	public Wave(int waveNumber, BFS bfsMap) {
+	public Wave(int waveNumber, BFS bfsMap, GameEnvironment gameEnv) {
 		this.ennemies = FXCollections.observableArrayList(); 
 		this.bfsMap = bfsMap;
 		this.indLastEnnemySpawn = 0;
 		this.waveNumber = waveNumber;
 		this.waveNumberQty = waveEnnemyQuantity();
+		this.gameEnv = gameEnv;
 	}
 
 	public int getIndLastEnnemySpawn() {
@@ -72,21 +75,21 @@ public class Wave {
 
 		switch (indEnnemyType + 1) {
 		case 1:
-			ennemy = new Rookit(bfsMap);
+			ennemy = new Rookit(bfsMap, gameEnv);
 			break;
 		case 2:
-			ennemy = new Adware(bfsMap);
+			ennemy = new Adware(bfsMap, gameEnv);
 			break;
 		case 3:
-			ennemy = new Bot(bfsMap);
+			ennemy = new Bot(bfsMap, gameEnv);
 			break;
 		case 4:
-			ennemy = new Ransomware(bfsMap);
+			ennemy = new Ransomware(bfsMap, gameEnv);
 			break;
 		case 5:
-			ennemy = new Spyware(bfsMap);
+			ennemy = new Spyware(bfsMap, gameEnv);
 		case 6:
-			ennemy = new TrojanHorse(bfsMap);
+			ennemy = new TrojanHorse(bfsMap, gameEnv);
 			break;
 		}
 
@@ -143,8 +146,9 @@ public class Wave {
 				// fait agir chaque ennemi tant qu'il n'est pas arrive au bout du chemin
 				if (e.getCurrentIndTile() > this.bfsMap.ARRIVAL_POINT)
 					e.act();
-				else if (e.getCurrentIndTile() == this.bfsMap.ARRIVAL_POINT || ! e.isAlive())
+				else if (e.getCurrentIndTile() == this.bfsMap.ARRIVAL_POINT || ! e.isAlive()) {
 					this.removeEnnemy(e);
+				}
 			}
 		}
 	}

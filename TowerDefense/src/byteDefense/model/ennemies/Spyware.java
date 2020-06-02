@@ -11,6 +11,7 @@
 
 package byteDefense.model.ennemies;
 
+import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
 public class Spyware extends Ennemy {
@@ -23,8 +24,8 @@ public class Spyware extends Ennemy {
 	private static final int LOOT = 0;
 
 
-	public Spyware(BFS bfsMap) {
-		super(624, 432, bfsMap);
+	public Spyware(BFS bfsMap, GameEnvironment gameEnv) {
+		super(624, 432, bfsMap, gameEnv);
 	}
 
 	public float getAttack() {

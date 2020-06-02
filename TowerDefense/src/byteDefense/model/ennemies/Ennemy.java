@@ -10,6 +10,7 @@
 package byteDefense.model.ennemies;
 
 import byteDefense.model.GameArea;
+import byteDefense.model.GameEnvironment;
 import byteDefense.model.GameObject;
 import byteDefense.utilities.BFS;
 
@@ -19,8 +20,8 @@ public abstract class Ennemy extends GameObject {
 
 	private int currentIndTile;
 
-	public Ennemy(int x, int y, BFS bfsMap) {
-		super(x, y, 50);
+	public Ennemy(int x, int y, BFS bfsMap, GameEnvironment gameEnv) {
+		super(x, y, 50, gameEnv);
 		bfs = bfsMap;
 		this.currentIndTile = bfs.bfsPath.size() - 1;
 	}

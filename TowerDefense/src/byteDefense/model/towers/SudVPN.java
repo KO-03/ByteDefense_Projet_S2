@@ -11,6 +11,8 @@
 
 package byteDefense.model.towers;
 
+import byteDefense.model.GameEnvironment;
+
 public class SudVPN extends Tower {
 
 	private static final float ATTACK = 0;
@@ -19,8 +21,8 @@ public class SudVPN extends Tower {
 	private static final int ATTACK_RANGE = 0;
 	private static final int COST = 0;
 
-	public SudVPN(int x, int y) {
-		super(x, y);
+	public SudVPN(int x, int y, GameEnvironment gameEnv) {
+		super(x, y, gameEnv);
 	}
 
 	public float getAttack() {
@@ -42,8 +44,8 @@ public class SudVPN extends Tower {
 	public int getCost() {
 		return COST;
 	}
-
+	
 	public void act() {
-
+		super.shoot(super.findEnnemy());
 	}
 }

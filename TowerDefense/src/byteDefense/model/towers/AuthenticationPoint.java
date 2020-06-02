@@ -11,6 +11,8 @@
 
 package byteDefense.model.towers;
 
+import byteDefense.model.GameEnvironment;
+
 public class AuthenticationPoint extends Tower {
 
 	private static final float ATTACK = 0;
@@ -19,8 +21,8 @@ public class AuthenticationPoint extends Tower {
 	private static final int ATTACK_RANGE = 0;
 	private static final int COST = 0;
 
-	public AuthenticationPoint(int x, int y) {
-		super(x, y);
+	public AuthenticationPoint(int x, int y, GameEnvironment gameEnv) {
+		super(x, y, gameEnv);
 	}
 
 	public float getAttack() {
@@ -44,6 +46,6 @@ public class AuthenticationPoint extends Tower {
 	}
 
 	public void act() {
-
+		super.shoot(super.findEnnemy());
 	}
 }
