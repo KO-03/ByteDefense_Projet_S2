@@ -1,6 +1,21 @@
-Tower-Defense
+BYTE DEFENSE
 ======
 Projet tuteuré Tower Defense - Mennad Chalabi, Kowsikan Sivakaran, Simon Zou
 -----
 ###		IUT DE MONTREUIL - UNIV PARIS 8
-###				BYTE DEFENSE
+
+### Screenplay
+
+
+
+###				Fonctionnalités
+
+* Interface HUD fait avec scenebuilder 2.0 et JavaFX
+  * Ressources et images libre de droits
+  * Contrôles et menus
+* Carte 
+* Vagues et ennemies
+* Systèmes de ressources
+* Tourelles
+
+> So this is a quote
