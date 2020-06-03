@@ -21,12 +21,14 @@ public class GameMaster {
 	private ArrayList<Wave> waves;
 	private GameArea gameArea;
 	private BFS bfsMap;
-	
-	public GameMaster() {
+	private int wallet;
+
+	public GameMaster(int initialWallet) {
 		this.gameArea = new GameArea();
 		this.bfsMap = new BFS(this.gameArea);	
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfsMap); 
+		this.wallet=initialWallet;
 	}
 	
 	public GameArea getGameArea() {
@@ -48,4 +50,27 @@ public class GameMaster {
 	public void aTurn() {
 		this.waveServices.waveHandler(this.waves.get(0));
 	}
+	
+	public int getWallet() {
+		return wallet;
+	}
+
+	public boolean addMoney(int amount) {
+		if(amount<0 || this.wallet+amount>Integer.MAX_VALUE)
+			return false;
+		else {
+			this.wallet += amount;
+			return true;
+		}
+	}
+	
+	public boolean debitMoney(int amount) {
+		if(amount<0 || this.wallet-amount<0)
+			return false;
+		else {
+			this.wallet -= amount;
+			return true;
+		}
+	}
+
 }
