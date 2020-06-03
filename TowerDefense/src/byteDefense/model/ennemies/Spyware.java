@@ -16,7 +16,7 @@ import byteDefense.utilities.BFS;
 public class Spyware extends Ennemy {
 
 	private static final int MOVE_SPEED = 2;
-	private static final float ATTACK = 0;
+	private static final int ATTACK = 0;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
@@ -27,7 +27,7 @@ public class Spyware extends Ennemy {
 		super(624, 432, bfsMap);
 	}
 
-	public float getAttack() {
+	public int getAttack() {
 		return ATTACK;
 	}
 

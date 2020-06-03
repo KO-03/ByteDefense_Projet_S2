@@ -3,6 +3,7 @@
  * Cette classe gere la partie visuelle d'un objet de jeu Tower, ses responsabilites sont :
  * - charger et stocker les ressources d'images des tourelles
  * - faire la correspondance entre les types de tourelles et les ressources d'images des tourelles
+ * - initialiser et ajouter les ImagesView de chaque types de tourelles à la grille des tourelles
  */
 
 package byteDefense.view;
@@ -93,6 +94,5 @@ public class TowerView extends GameObjectView {
 		this.getGrid().getChildren().add(authentipoint);
 		this.getGrid().getChildren().add(firewall);
 		this.getGrid().getChildren().add(sudvpn);
-
 	}
 }
