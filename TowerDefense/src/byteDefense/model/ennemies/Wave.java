@@ -1,151 +1,64 @@
 /*
  * Wave.java
- * Cette classe represente un objet Wave, ses responsabilites sont de : 
- * - stocker et recuperer la liste d'ennemis
- * - stocker le BFS que la vague d'ennemi doit suivre
- * - stocker l'indice du derniere ennemi qui est ajoute a la vague
- * - stocker le numero de la vague dans un niveau du jeu
- * - remplir la liste d'ennemi en fonction des ennemis deja ajoutes
- * - calculer et stocker le nombre d'ennemis selon le numero de la vague
- * - gerer les suppression d'ennemis
- * - recuperer un ennemi selon son identifiant
- * - verifier si la liste d'ennemis est pas vide
- * - recuperer la taille de la liste d'ennemis
- * - supprimer un ennemi de la vague en verifiant son etat et sa position
- * - gerer toutes les actions faites sur la vague d'ennemis.
+ * Cette classe represente un objet Wave, ces responsabilites sont de :
+ * - stocker le numero de la vague
+ * - stocker et recuperer la vitesse de deplacement des ennemis de la vague
+ * - stocker et recuperer la cadence d'ajout des ennemis de la vague
+ * - stocker, recuperer, supprimer et empiler les ennemies a ajouter (WaveEntities) dans une pile d'ennemis 
+ * - verifier si tous les ennemis ont ete ajoutees (si la pile est vide)
  */
 
 package byteDefense.model.ennemies;
 
-import byteDefense.utilities.BFS;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.Stack;
 
 public class Wave {
 
-	private static int[][] waveInfo = {{5, 5}, {5, 3, 2}, {5, 3, 2, 3}, {4, 3, 2, 3, 2}, {4, 3, 3, 3, 2, 1}};
-
-	private ObservableList<Ennemy> ennemies;
-	private BFS bfsMap;
-	private int indLastEnnemySpawn;
 	private int waveNumber;
-	private int waveNumberQty;
-
-	public Wave(int waveNumber, BFS bfsMap) {
-		this.ennemies = FXCollections.observableArrayList(); 
-		this.bfsMap = bfsMap;
-		this.indLastEnnemySpawn = 0;
+	private int moveSpeed;
+	private int spawnRate;
+	private Stack<WaveEntities> waveEntities;
+	
+	public Wave(int waveNumber, int moveSpeed, int spawnRate, Stack<WaveEntities> waveEntities) {
 		this.waveNumber = waveNumber;
-		this.waveNumberQty = waveEnnemyQuantity();
+		this.moveSpeed = moveSpeed;
+		this.spawnRate = spawnRate;
+		this.waveEntities = waveEntities;
 	}
-
-	public int getIndLastEnnemySpawn() {
-		return this.indLastEnnemySpawn;
+	
+	public int getWaveNumber() {
+		return this.waveNumber;
 	}
-
-	public int getWaveEnnemiesQty() {
-		return this.waveNumberQty;
+	
+	public Stack<WaveEntities> getEnnemiesInfos() {
+		return this.waveEntities;
 	}
-
-	public int waveEnnemyQuantity() {
-		int ennemyQty = 0;
-
-		for (int i = 0; i < waveInfo[waveNumber].length; i++)
-			ennemyQty += waveInfo[waveNumber][i];
-
-		return ennemyQty;
+	
+	public int getMoveSpeed() {
+		return this.moveSpeed;
 	}
-
-	private Ennemy createEnnemy() {
-		int indEnnemyType = 0, ennemyAddedDifference = indLastEnnemySpawn;
-		boolean foundCorrectEnnemyType = false;
-		Ennemy ennemy = null;
-
-		while (!foundCorrectEnnemyType && indEnnemyType < waveNumber) {
-			ennemyAddedDifference -= waveInfo[waveNumber][indEnnemyType];
-
-			if (ennemyAddedDifference < 0) 
-				foundCorrectEnnemyType = true;
-			else
-				indEnnemyType++;
-		}
-
-		switch (indEnnemyType + 1) {
-		case 1:
-			ennemy = new Rookit(bfsMap);
-			break;
-		case 2:
-			ennemy = new Adware(bfsMap);
-			break;
-		case 3:
-			ennemy = new Bot(bfsMap);
-			break;
-		case 4:
-			ennemy = new Ransomware(bfsMap);
-			break;
-		case 5:
-			ennemy = new Spyware(bfsMap);
-		case 6:
-			ennemy = new TrojanHorse(bfsMap);
-			break;
-		}
-
-		return ennemy;
+	
+	public int getSpawnRate() {
+		return this.spawnRate;
 	}
-
-	private void addEnnemy(Ennemy ennemy) {
-		this.ennemies.add(ennemy);
+	
+	public void getWaveEntity() {
+		this.waveEntities.peek();
 	}
-
-	public void fillEnnemyList() {
-		Ennemy ennemy = createEnnemy(); 
-
-		if (ennemy != null) {
-			addEnnemy(ennemy);
-			indLastEnnemySpawn++;
-		}
+	
+	public int getEnnemyType() {
+		return this.waveEntities.peek().getEnnemyType();
 	}
-
-	public void removeEnnemy(Ennemy e) {
-		this.ennemies.remove(e);
+	
+	public void removeWaveEntity() {
+		this.waveEntities.pop();
 	}
-
-	public ObservableList<Ennemy> getEnnemies() {
-		return this.ennemies;
+	
+	public void decrementEnnemyQty() {
+		this.waveEntities.peek().decrementQuantity();
 	}
-
-	public Ennemy getEnnemy(int id) {
-		for(Ennemy e : this.ennemies)
-			if(e.getId() == id)
-				return e;
-
-		return null;
-	}
-
+	
 	public boolean isEmpty() {
-		return this.ennemies.size() <= 0;
-	}
-
-	public int sizeOfEnnemies() {
-		return this.ennemies.size();
-	}
-
-	public void waveHandler() {
-		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoute
-		if (this.indLastEnnemySpawn < this.waveNumberQty)
-			this.fillEnnemyList();
-
-		if(! this.isEmpty()) {
-			Ennemy e;
-
-			for (int i = this.sizeOfEnnemies() - 1; i >= 0; i--) {
-				e = this.getEnnemies().get(i);
-				// fait agir chaque ennemi tant qu'il n'est pas arrive au bout du chemin
-				if (e.getCurrentIndTile() > this.bfsMap.ARRIVAL_POINT)
-					e.act();
-				else if (e.getCurrentIndTile() == this.bfsMap.ARRIVAL_POINT || ! e.isAlive())
-					this.removeEnnemy(e);
-			}
-		}
+		return this.waveEntities.empty();
 	}
 }
