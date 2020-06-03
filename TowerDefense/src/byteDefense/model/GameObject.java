@@ -72,7 +72,7 @@ public abstract class GameObject {
 		return this.hp > 0;
 	}
 
-	public abstract float getAttack();
+	public abstract int getAttack();
 
 	public abstract int getDefense();
 

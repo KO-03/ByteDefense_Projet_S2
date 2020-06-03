@@ -18,6 +18,10 @@ import byteDefense.model.GameArea;
 import byteDefense.model.GameMaster;
 import byteDefense.model.ennemies.Ennemy;
 import byteDefense.model.towers.AdCube;
+import byteDefense.model.towers.Antivirus;
+import byteDefense.model.towers.AuthenticationPoint;
+import byteDefense.model.towers.Firewall;
+import byteDefense.model.towers.SudVPN;
 import byteDefense.view.EnnemyView;
 import byteDefense.view.GameAreaView;
 import byteDefense.view.TowerView;
@@ -94,7 +98,7 @@ public class Controller implements Initializable {
 	}
 
 	private void generateEnnemiesListener() {
-		this.gm.getWaveEnnemy().getEnnemies().addListener(new ListChangeListener<Ennemy>() {
+		this.gm.getWaveServices().getEnnemies().addListener(new ListChangeListener<Ennemy>() {
 			@Override
 			public void onChanged(ListChangeListener.Change<? extends Ennemy> c) {
 				while (c.next()) {
@@ -145,9 +149,17 @@ public class Controller implements Initializable {
 				int y = (int) event.getY() / TileSize * TileSize;
 
 				if (gm.getGameArea().isPlaceable(x, y)) {
-					tv.addGameObject(new AdCube(x, y));
-					System.out.println(tower);
-				}
+                    if (tower == adcube)
+                        tv.addGameObject(new AdCube(x, y));
+                    else if (tower == antivirus)
+                        tv.addGameObject(new Antivirus(x, y));
+                    else if (tower == authentipoint)
+                        tv.addGameObject(new AuthenticationPoint(x, y));
+                    else if (tower == firewall)
+                        tv.addGameObject(new Firewall(x, y));
+                    else if (tower == sudvpn)
+                        tv.addGameObject(new SudVPN(x, y));
+                }
 
 				tower.setX(initialX);
 				tower.setY(741);

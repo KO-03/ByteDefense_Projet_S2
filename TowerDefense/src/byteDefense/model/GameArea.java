@@ -22,7 +22,7 @@ public class GameArea {
 	
 	public GameArea() {
 		this.tilesList = new ArrayList<>();
-		this.tilesList = new GameAreaReader("./resources/tiles.txt").readFile();
+		this.tilesList = GameAreaReader.readFile("./resources/tiles.txt");
 		gameAreaSize = gameAreaSize();
 	}
 	
@@ -67,5 +67,4 @@ public class GameArea {
 		
 		return false;
 	}
-	
 }

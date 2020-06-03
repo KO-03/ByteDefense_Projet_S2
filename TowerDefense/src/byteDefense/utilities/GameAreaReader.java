@@ -1,7 +1,6 @@
 /*
  * GameAreaReader.java
- * Cette classe represente un objet GameAreaReader, sa responsabilite est de :
- * - lire un fichier contenant une map de tile
+ * Cette classe construit la liste des tiles du jeu par la lecture d'un fichier contenant les donnees correspondantes 
  */
 
 package byteDefense.utilities;
@@ -12,17 +11,11 @@ import java.util.ArrayList;
 
 public class GameAreaReader {
 
-	private String sourceFile;
-
-	public GameAreaReader(String sourceFile) {
-		this.sourceFile = sourceFile;
-	}
-
-	public ArrayList<Integer> readFile() {
+	public static ArrayList<Integer> readFile(String sourceFile) {
 		ArrayList<Integer> tilesList = new ArrayList<>();
 
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(this.sourceFile));
+			BufferedReader br = new BufferedReader(new FileReader(sourceFile));
 			String line = null;
 
 			while ((line = br.readLine()) != null) {
