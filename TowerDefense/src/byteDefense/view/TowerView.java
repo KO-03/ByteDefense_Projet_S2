@@ -3,6 +3,7 @@
  * Cette classe gere la partie visuelle d'un objet de jeu Tower, ses responsabilites sont :
  * - charger et stocker les ressources d'images des tourelles
  * - faire la correspondance entre les types de tourelles et les ressources d'images des tourelles
+ * - initialiser et ajouter les ImagesView de chaque types de tourelles à la grille des tourelles
  */
 
 package byteDefense.view;
@@ -47,11 +48,11 @@ public class TowerView extends GameObjectView {
 
 	public void imageLoader() {
 		try {	
-			adcubeImg = new Image(new File("./resources/icons/tower.png").toURI().toURL().toString()); 
-			antivirusImg = new Image(new File("./resources/icons/tower.png").toURI().toURL().toString()); 
-			firewallImg= new Image(new File("./resources/icons/tower.png").toURI().toURL().toString()); 
-			authenticationPointImg = new Image(new File("./resources/icons/tower.png").toURI().toURL().toString()); 
-			sudvpnImg = new Image(new File("./resources/icons/tower.png").toURI().toURL().toString());
+			adcubeImg = new Image(new File("./resources/towerTextures/adcube.png").toURI().toURL().toString()); 
+			antivirusImg = new Image(new File("./resources/towerTextures/antivirus.png").toURI().toURL().toString()); 
+			firewallImg= new Image(new File("./resources/towerTextures/firewall.png").toURI().toURL().toString()); 
+			authenticationPointImg = new Image(new File("./resources/towerTextures/authPoint.png").toURI().toURL().toString()); 
+			sudvpnImg = new Image(new File("./resources/towerTextures/sudvpn.png").toURI().toURL().toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

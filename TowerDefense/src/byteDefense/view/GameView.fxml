@@ -354,7 +354,7 @@
                                     </Label>
                                     <ImageView fx:id="adcube" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.png" />
+                                          <Image url="@../../../resources/towerTextures/adcube.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -362,7 +362,7 @@
                                     </ImageView>
                                     <ImageView fx:id="antivirus" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.png" />
+                                          <Image url="@../../../resources/towerTextures/antivirus.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -370,7 +370,7 @@
                                     </ImageView>
                                     <ImageView fx:id="authentipoint" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.png" />
+                                          <Image url="@../../../resources/towerTextures/authpoint.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -378,7 +378,7 @@
                                     </ImageView>
                                     <ImageView fx:id="firewall" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.png" />
+                                          <Image url="@../../../resources/towerTextures/firewall.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />
@@ -386,7 +386,7 @@
                                     </ImageView>
                                     <ImageView fx:id="sudvpn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                                        <image>
-                                          <Image url="@../../../resources/icons/tower.png" />
+                                          <Image url="@../../../resources/towerTextures/sudvpn.png" />
                                        </image>
                                        <GridPane.margin>
                                           <Insets />

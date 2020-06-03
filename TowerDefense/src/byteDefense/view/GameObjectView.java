@@ -30,15 +30,15 @@ public abstract class GameObjectView {
 	public abstract Image imageGetter(GameObject gameObject);
 
 	public void addGameObject(GameObject gameObject) {
-		Image ennemyImg = imageGetter(gameObject);
+		Image gameObjectImg = imageGetter(gameObject);
 
-		if (ennemyImg != null) {
+		if (gameObjectImg != null) {
 			ImageView imgView = new ImageView();
-			imgView.setImage(ennemyImg);
+			imgView.setImage(gameObjectImg);
 			imgView.setId(Integer.toString(gameObject.getId()));
 			imgView.setTranslateX(gameObject.getX());
 			imgView.setTranslateY(gameObject.getY());	
-
+			
 			imgView.translateXProperty().bind(gameObject.getXProperty());
 			imgView.translateYProperty().bind(gameObject.getYProperty());
 

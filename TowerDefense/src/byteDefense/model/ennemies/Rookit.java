@@ -14,13 +14,11 @@ package byteDefense.model.ennemies;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
-import javafx.beans.property.FloatProperty;
-import javafx.beans.property.SimpleFloatProperty;
 
 public class Rookit extends OffensiveEnnemy {
 
 	public static final float INCREASE_ATTACK_RATE = 1.20F;
-	private static FloatProperty attack = new SimpleFloatProperty(1);
+	private static int attack = 0;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
@@ -30,16 +28,12 @@ public class Rookit extends OffensiveEnnemy {
 		super(624, 432, bfsMap, gameEnv);
 	}
 
-	public float getAttack() {
-		return attack.getValue();
-	}
-
-	public FloatProperty getAttackProperty() {
+	public int getAttack() {
 		return attack;
 	}
 
 	private void increaseAttack() {
-		attack.setValue(this.getAttack() * INCREASE_ATTACK_RATE);
+		attack = (int)(attack * INCREASE_ATTACK_RATE);
 	}
 
 	public int getDefense() {

@@ -4,7 +4,7 @@
  * - charger et stocker les ressources d'images des tiles
  * - stocker les types de tiles
  * - faire la correspondance entre les types de tiles et les donnees de la tilemap a ajouter 
- * - ajouter la tilemap � la vue.
+ * - ajouter la tilemap a la vue.
  */
 
 package byteDefense.view;

@@ -112,7 +112,7 @@ public class Controller implements Initializable {
 	}
 
 	private void generateEnnemiesListener() {
-		this.gm.getWaveEnnemy().getEnnemies().addListener(new ListChangeListener<Ennemy>() {
+		this.gm.getWaveServices().getEnnemies().addListener(new ListChangeListener<Ennemy>() {
 			@Override
 			public void onChanged(ListChangeListener.Change<? extends Ennemy> c) {
 				while (c.next()) {
@@ -174,7 +174,6 @@ public class Controller implements Initializable {
 					else if (tower == sudvpn)
 						tv.addGameObject(new SudVPN(x, y, gm.getGameEnvironment()));
 				}
-
 				tower.setX(initialX);
 				tower.setY(741);
 			}

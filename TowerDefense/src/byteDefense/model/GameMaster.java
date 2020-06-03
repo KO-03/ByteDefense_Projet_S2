@@ -8,13 +8,21 @@
 
 package byteDefense.model;
 
+import java.util.ArrayList;
+
 import byteDefense.model.ennemies.Wave;
+
 import byteDefense.model.towers.Tower;
+
+import byteDefense.model.ennemies.WaveServices;
+
 import byteDefense.utilities.BFS;
+import byteDefense.utilities.WaveReader;
 
 public class GameMaster {
 
-	private Wave waveEnnemy;
+	private WaveServices waveServices;
+	private ArrayList<Wave> waves;
 	private GameArea gameArea;
 	private BFS bfsMap;
 	private GameEnvironment gameEnv;
@@ -23,7 +31,9 @@ public class GameMaster {
 		this.gameArea = new GameArea();
 		this.bfsMap = new BFS(this.gameArea);
 		this.gameEnv = new GameEnvironment();
-		this.waveEnnemy = new Wave(1, this.bfsMap, this.gameEnv);
+		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
+		this.waveServices = new WaveServices(this.bfsMap); 
+
 	}
 	
 	public GameArea getGameArea() {
@@ -34,8 +44,12 @@ public class GameMaster {
 		return this.bfsMap;
 	}
 	
-	public Wave getWaveEnnemy() {
-		return this.waveEnnemy;
+	public WaveServices getWaveServices() {
+		return this.waveServices;
+	}
+	
+	public void removeTopWave() {
+		this.waves.remove(0);
 	}
 	
 	public GameEnvironment getGameEnvironment() {
@@ -45,7 +59,7 @@ public class GameMaster {
 	public void aTurn() {
 		GameObject gameObject;
 
-		this.waveEnnemy.waveHandler();
+		this.waveServices.waveHandler(this.waves.get(0));
 		
 		for (int i = this.getGameEnvironment().getGameObjectsList().size() - 1; i >= 0; i--) {
 			gameObject = this.getGameEnvironment().getGameObjectsList().get(i);
