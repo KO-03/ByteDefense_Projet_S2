@@ -15,22 +15,21 @@
 package byteDefense.model.ennemies;
 
 import byteDefense.factories.EnnemyFactory;
+import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class WaveServices {
 
-	private ObservableList<Ennemy> ennemies;
 	private BFS bfsMap;
-
-	public WaveServices(BFS bfsMap) {
-		this.ennemies = FXCollections.observableArrayList();
+	private GameEnvironment gameEnv;
+	
+	public WaveServices(BFS bfsMap, GameEnvironment gameEnvironment) {
 		this.bfsMap = bfsMap;
+		this.gameEnv = gameEnvironment;
 	}
 	
 	private void addEnnemy(Ennemy ennemy) {
-		this.ennemies.add(ennemy);
+		this.gameEnv.addGameObject(ennemy);
 	}
 	
 	private Ennemy createEnnemy(Wave wave) {
@@ -40,56 +39,34 @@ public class WaveServices {
 		if (wave.getEnnemiesInfos().peek().everyEnnemiesSpawned())
 			wave.removeWaveEntity();
 
-		return EnnemyFactory.getInstance(ennemyType, bfsMap);
+		return EnnemyFactory.getInstance(ennemyType, this.bfsMap, this.gameEnv);
 	}
 
 	public void fillEnnemyList(Wave wave) {
 		Ennemy ennemy = createEnnemy(wave); 
 
-		if (ennemy != null) 
+		if (ennemy != null)
 			addEnnemy(ennemy);
 	}
 
 	public void removeEnnemy(Ennemy e) {
-		this.ennemies.remove(e);
+		this.gameEnv.removeGameObject(e);
 	}
-
-	public ObservableList<Ennemy> getEnnemies() {
-		return this.ennemies;
-	}
-
-	public Ennemy getEnnemy(int id) {
-		for(Ennemy e : this.ennemies)
-			if(e.getId() == id)
-				return e;
-
-		return null;
-	}
-
-	public boolean isEmpty() {
-		return this.ennemies.size() <= 0;
-	}
-
-	public int sizeOfEnnemies() {
-		return this.ennemies.size();
-	}
-
+	/*
 	public void waveHandler(Wave wave) {
 		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
 		if (!wave.isEmpty())
 			this.fillEnnemyList(wave);
 
-		if(! this.isEmpty()) {
-			Ennemy e;
-			
-			for (int i = this.sizeOfEnnemies() - 1; i >= 0; i--) {
-				e = this.getEnnemies().get(i);
-				// fait agir chaque ennemi tant qu'il n'est pas arrive au bout du chemin
-				if (e.getCurrentIndTile() > this.bfsMap.ARRIVAL_POINT)
-					e.act();
-				else if (e.getCurrentIndTile() == this.bfsMap.ARRIVAL_POINT || !e.isAlive())
-					this.removeEnnemy(e);
-			}
+		Ennemy e;
+		
+		for (int i = this.gameEnv.getGameObjectsList().size() - 1; i >= 0; i--) {
+			e = this.gameEnv.getGameObjectsList().get(i);
+			// fait agir chaque ennemi tant qu'il n'est pas arrive au bout du chemin
+			if (e instanceof Ennemy && e.getCurrentIndTile() > this.bfsMap.ARRIVAL_POINT)
+				e.act();
+			else if (e.getCurrentIndTile() == this.bfsMap.ARRIVAL_POINT || !e.isAlive())
+				this.removeEnnemy(e);
 		}
-	}
+	}*/
 }

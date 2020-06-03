@@ -46,7 +46,7 @@ public class TrojanHorse extends Ennemy {
 		return LOOT;
 	}
 
-	public void act() {
-		this.moveEnnemy();
+	public void actSpecific() {
+		super.act();
 	}
 }

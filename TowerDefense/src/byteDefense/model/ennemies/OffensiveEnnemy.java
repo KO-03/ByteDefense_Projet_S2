@@ -16,6 +16,6 @@ public abstract class OffensiveEnnemy extends Ennemy {
 	}
 
 	public void attackTower() {
-
+		super.shoot(super.findTarget());
 	}
 }

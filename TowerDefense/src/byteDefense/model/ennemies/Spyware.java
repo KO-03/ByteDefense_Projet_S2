@@ -52,8 +52,8 @@ public class Spyware extends Ennemy {
 		return MOVE_SPEED;
 	}
 
-	public void act() {
-		this.moveEnnemy();
+	public void actSpecific() {
+		super.act();
 	}
 }
 

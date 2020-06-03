@@ -89,10 +89,10 @@ public class TowerView extends GameObjectView {
 		this.sudvpn.setX(466);
 		this.sudvpn.setY(741);
 
-		this.getGrid().getChildren().add(adcube);
-		this.getGrid().getChildren().add(antivirus);
-		this.getGrid().getChildren().add(authentipoint);
-		this.getGrid().getChildren().add(firewall);
-		this.getGrid().getChildren().add(sudvpn);
+		this.getGrid().getChildren().add(this.adcube);
+		this.getGrid().getChildren().add(this.antivirus);
+		this.getGrid().getChildren().add(this.authentipoint);
+		this.getGrid().getChildren().add(this.firewall);
+		this.getGrid().getChildren().add(this.sudvpn);
 	}
 }

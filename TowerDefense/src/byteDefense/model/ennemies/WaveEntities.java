@@ -22,7 +22,7 @@ public class WaveEntities {
 	}
 	
 	public boolean everyEnnemiesSpawned() {
-		return quantity == 0;
+		return this.quantity == 0;
 	}
 	
 	public void decrementQuantity() {

@@ -45,7 +45,7 @@ public class Antivirus extends Tower {
 		return COST;
 	}
 
-	public void act() {
-		super.shoot(super.findEnnemy());
+	public void actSpecific() {
+		super.act();
 	}
 }

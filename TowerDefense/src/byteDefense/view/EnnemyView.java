@@ -67,8 +67,4 @@ public class EnnemyView extends GameObjectView {
 
 		return img;
 	}
-
-	public void removeEnnemy(GameObject gameObject) {
-		super.grid.getChildren().remove(super.grid.lookup("#" + gameObject.getId()));
-	}
 }

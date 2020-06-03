@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import byteDefense.model.GameArea;
+import byteDefense.model.GameEnvironment;
 import byteDefense.model.GameMaster;
 import byteDefense.model.GameObject;
 import byteDefense.model.ennemies.Ennemy;
@@ -71,23 +72,10 @@ public class Controller implements Initializable {
 		this.ev = new EnnemyView(this.gridEnnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
 
-		this.generateEnnemiesListener();
+		this.generateGameobjectListListener();
 		this.mouseDraggedOnTowers();
 		this.initAnimation();
 		this.gameLoop.play();
-		
-		this.gm.getGameEnvironment().getGameObjectsList().addListener((ListChangeListener <GameObject>) c-> {
-			while (c.next()) {
-				if (c.wasRemoved()) {
-					for (GameObject gameObject : c.getRemoved()) {
-						if (gameObject instanceof Ennemy)
-							gridEnnemies.getChildren().remove(this.gridEnnemies.lookup("#" + gameObject.getId()));
-						else
-							gridTowers.getChildren().remove(this.gridEnnemies.lookup("#" + gameObject.getId()));
-					}
-				}
-			}
-		});
 	}
 
 	private void initAnimation() {
@@ -111,15 +99,20 @@ public class Controller implements Initializable {
 		this.gameLoop.getKeyFrames().add(kf);
 	}
 
-	private void generateEnnemiesListener() {
-		this.gm.getWaveServices().getEnnemies().addListener(new ListChangeListener<Ennemy>() {
-			@Override
-			public void onChanged(ListChangeListener.Change<? extends Ennemy> c) {
-				while (c.next()) {
-					for (Ennemy e : c.getAddedSubList())
-						ev.addGameObject(e);
-					for (Ennemy e : c.getRemoved())
-						ev.removeEnnemy(e);
+	private void generateGameobjectListListener() {
+		this.gm.getGameEnvironment().getGameObjectsList().addListener((ListChangeListener <GameObject>) c-> {
+			while (c.next()) {
+				for (GameObject gameObject : c.getAddedSubList()) {
+					if (gameObject instanceof Ennemy)
+						ev.addGameObject(gameObject);
+					else
+						tv.addGameObject(gameObject);
+				}
+				for (GameObject gameObject : c.getRemoved()) {
+					if (gameObject instanceof Ennemy)
+						this.gridEnnemies.getChildren().remove(this.gridEnnemies.lookup("#" + gameObject.getId()));
+					else
+						this.gridTowers.getChildren().remove(this.gridTowers.lookup("#" + gameObject.getId()));
 				}
 			}
 		});
@@ -163,16 +156,17 @@ public class Controller implements Initializable {
 				int y = (int) event.getY() / tileSize * tileSize;
 
 				if (gm.getGameArea().isPlaceable(x, y)) {
+					GameEnvironment ge = gm.getGameEnvironment();
 					if (tower == adcube)
-						tv.addGameObject(new AdCube(x, y, gm.getGameEnvironment()));
+						ge.addGameObject(new AdCube(x, y, ge));
 					else if (tower == antivirus)
-						tv.addGameObject(new Antivirus(x, y, gm.getGameEnvironment()));
+						ge.addGameObject(new Antivirus(x, y, ge));
 					else if (tower == authentipoint)
-						tv.addGameObject(new AuthenticationPoint(x, y, gm.getGameEnvironment()));
+						ge.addGameObject(new AuthenticationPoint(x, y, ge));
 					else if (tower == firewall)
-						tv.addGameObject(new Firewall(x, y, gm.getGameEnvironment()));
+						ge.addGameObject(new Firewall(x, y, ge));
 					else if (tower == sudvpn)
-						tv.addGameObject(new SudVPN(x, y, gm.getGameEnvironment()));
+						ge.addGameObject(new SudVPN(x, y, ge));
 				}
 				tower.setX(initialX);
 				tower.setY(741);

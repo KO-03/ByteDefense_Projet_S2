@@ -41,4 +41,13 @@ public abstract class Ennemy extends GameObject {
 		if(this.currentIndTile > 0)
 			this.currentIndTile--;
 	}
+	
+	public boolean ennemyArrived() {
+		return this.currentIndTile <= bfs.ARRIVAL_POINT;
+	}
+	
+	public void act() {
+		if (!this.ennemyArrived())
+			this.moveEnnemy();
+	}
 }

@@ -51,7 +51,8 @@ public class Adware extends OffensiveEnnemy {
 		return LOOT;
 	}
 
-	public void act() {
-		this.moveEnnemy();
+	public void actSpecific() {
+		super.act();
+		super.attackTower();
 	}
 }

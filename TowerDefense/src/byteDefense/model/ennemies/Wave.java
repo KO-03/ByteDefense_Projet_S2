@@ -37,7 +37,6 @@ public class Wave {
 	public int getMoveSpeed() {
 		return this.moveSpeed;
 	}
-
 	
 	public int getSpawnRate() {
 		return this.spawnRate;

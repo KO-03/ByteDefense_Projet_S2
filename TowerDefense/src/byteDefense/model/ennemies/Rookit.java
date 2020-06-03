@@ -52,8 +52,9 @@ public class Rookit extends OffensiveEnnemy {
 		return LOOT;
 	}
 
-	public void act() {
+	public void actSpecific() {
 		this.increaseAttack();
-		super.moveEnnemy();
+		super.act();
+		super.attackTower();
 	}
 }

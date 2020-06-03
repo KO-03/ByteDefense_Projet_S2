@@ -12,6 +12,8 @@
 
 package byteDefense.model;
 
+import byteDefense.model.ennemies.Ennemy;
+import byteDefense.model.towers.Tower;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -30,10 +32,9 @@ public abstract class GameObject {
 		this.xProperty = new SimpleIntegerProperty(x);
 		this.yProperty = new SimpleIntegerProperty(y);
 		this.hp = hp;
+		this.gameEnv = gameEnv;
 		this.id = counterId;
 		counterId++;
-		this.gameEnv = gameEnv;
-		gameEnv.addGameObject(this);
 	}
 
 	public int getId() {
@@ -75,7 +76,30 @@ public abstract class GameObject {
 	public boolean isAlive() {
 		return this.hp > 0;
 	}
-
+	
+	public boolean isATower() {
+		return this instanceof Tower;
+	}
+	
+	public GameObject findTarget() {
+		for(GameObject gameObject : this.gameEnv.getGameObjectsList()){
+			if ((this.isATower() && gameObject instanceof Ennemy) || (!this.isATower() && gameObject instanceof Tower)) {
+				if ((this.getY() - this.getAttackRange() * GameArea.TILE_SIZE <= gameObject.getY() && gameObject.getY() <= this.getY() + this.getAttackRange() * GameArea.TILE_SIZE) &&
+					(this.getX() - this.getAttackRange() * GameArea.TILE_SIZE <= gameObject.getX() && gameObject.getX() <= this.getX() + this.getAttackRange() * GameArea.TILE_SIZE)) {
+					System.out.println("Piou piou !");
+					return gameObject;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public void shoot(GameObject tower) {
+		if(tower != null) {
+			tower.decrementHp((int) this.getAttack());
+		}
+	}
+	
 	public abstract int getAttack();
 
 	public abstract int getDefense();
