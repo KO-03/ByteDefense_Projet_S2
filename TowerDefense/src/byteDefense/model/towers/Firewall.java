@@ -19,7 +19,7 @@ public class Firewall extends Tower {
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
-	private static final int COST = 0;
+	private static final int COST = 35;
 
 	public Firewall(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, gameEnv);

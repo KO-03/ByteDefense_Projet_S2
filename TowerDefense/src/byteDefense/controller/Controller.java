@@ -14,7 +14,6 @@ package byteDefense.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.GameMaster;
@@ -25,6 +24,7 @@ import byteDefense.model.towers.Antivirus;
 import byteDefense.model.towers.AuthenticationPoint;
 import byteDefense.model.towers.Firewall;
 import byteDefense.model.towers.SudVPN;
+import byteDefense.model.towers.Tower;
 import byteDefense.view.EnnemyView;
 import byteDefense.view.GameAreaView;
 import byteDefense.view.TowerView;
@@ -34,6 +34,7 @@ import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -58,6 +59,12 @@ public class Controller implements Initializable {
 	private ImageView firewall;
 	@FXML
 	private ImageView sudvpn;
+    @FXML
+    private Label waveNbr;
+    @FXML
+    private Label ennemiesNbr;
+    @FXML
+    private Label byteCoin;//Argent du jeu
 
 	private EnnemyView ev;
 	private TowerView tv;
@@ -72,11 +79,15 @@ public class Controller implements Initializable {
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnnemyView(this.gridEnnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
-
+		this.setListners();
 		this.generateGameobjectListListener();
 		this.mouseDraggedOnTowers();
 		this.initAnimation();
 		this.gameLoop.play();
+	}
+	
+	private void setListners() {
+		this.byteCoin.textProperty().bind(this.gm.getWalletProperty().asString());	
 	}
 
 	private void initAnimation() {
@@ -85,14 +96,16 @@ public class Controller implements Initializable {
 		this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.1), 
+				Duration.seconds(0.05), 
 				(event ->{
 					if (this.time == 10000) {
 						System.out.println("fini");
 						this.gameLoop.stop();
 					} else if (this.time % 5 == 0) {
 						this.gm.aTurn();
-					} 
+						System.out.println(this.gm.getWallet());
+						this.gm.addMoney(1);
+					}
 					this.time++;
 				}));
 
@@ -101,19 +114,27 @@ public class Controller implements Initializable {
 
 	private void generateGameobjectListListener() {
 		this.gm.getGameEnvironment().getGameObjectsList().addListener((ListChangeListener <GameObject>) c-> {
+			int nbrEnnemiesAdded = 0;
+			int nbrEnnemiesRemoved = 0;
 			while (c.next()) {
 				for (GameObject gameObject : c.getAddedSubList()) {
-					if (gameObject instanceof Ennemy)
+					if (gameObject instanceof Ennemy) {
 						this.ev.addGameObject(gameObject);
+						nbrEnnemiesAdded++;
+					}
 					else
 						this.tv.addGameObject(gameObject);
 				}
 				for (GameObject gameObject : c.getRemoved()) {
-					if (gameObject instanceof Ennemy)
-						this.gridEnnemies.getChildren().remove(this.gridEnnemies.lookup("#" + gameObject.getId()));
+					if (gameObject instanceof Ennemy) {
+						this.gridEnnemies.getChildren().remove(this.gridEnnemies.lookup("#" + gameObject.getId()));				
+						nbrEnnemiesRemoved++;
+					}
 					else
 						this.gridTowers.getChildren().remove(this.gridTowers.lookup("#" + gameObject.getId()));
 				}
+				int oldNbrEnnemies=Integer.parseInt(this.ennemiesNbr.getText());
+				this.ennemiesNbr.setText(""+ (oldNbrEnnemies-nbrEnnemiesRemoved+nbrEnnemiesAdded));
 			}
 		});
 	}
@@ -148,22 +169,38 @@ public class Controller implements Initializable {
 
 		tower.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
+				Tower newTower = null;
 				int x = (int) event.getX() / tileSize * tileSize; 
 				int y = (int) event.getY() / tileSize * tileSize;
 
 				if (gm.getGameArea().isPlaceable(x, y)) {
 					GameEnvironment ge = gm.getGameEnvironment();
 					
-					if (tower == adcube)
-						ge.addGameObject(new AdCube(x, y, ge));
-					else if (tower == antivirus)
-						ge.addGameObject(new Antivirus(x, y, ge));
-					else if (tower == authentipoint)
-						ge.addGameObject(new AuthenticationPoint(x, y, ge));
-					else if (tower == firewall)
-						ge.addGameObject(new Firewall(x, y, ge));
-					else if (tower == sudvpn)
-						ge.addGameObject(new SudVPN(x, y, ge));
+					if (tower == adcube) {
+						newTower = new AdCube(x, y, ge);
+						if(gm.debitMoney(newTower.getCost()))
+							ge.addGameObject(newTower);
+					}
+					else if (tower == antivirus) {
+						newTower = new Antivirus(x, y, ge);
+						if(gm.debitMoney(newTower.getCost()))
+							ge.addGameObject(newTower);
+					}
+					else if (tower == authentipoint) {
+						newTower = new AuthenticationPoint(x, y, ge);
+						if(gm.debitMoney(newTower.getCost()))
+							ge.addGameObject(newTower);					
+					}
+					else if (tower == firewall) {
+						newTower = new Firewall(x, y, ge);
+						if(gm.debitMoney(newTower.getCost()))
+							ge.addGameObject(newTower);					
+					}
+					else if (tower == sudvpn) {
+						newTower = new SudVPN(x, y, ge);
+						if(gm.debitMoney(newTower.getCost()))
+							ge.addGameObject(newTower);
+					}
 				}
 				tower.setX(initialX);
 				tower.setY(741); // 741 est l'ordonnee des imageView des tourelles dans leur menu d'achat

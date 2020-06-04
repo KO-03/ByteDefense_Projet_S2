@@ -22,7 +22,7 @@ public class Rookit extends OffensiveEnnemy {
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
-	private static final int LOOT = 0;
+	private static final int LOOT = 1;
 
 	public Rookit(BFS bfsMap, GameEnvironment gameEnv) {
 		super(624, 432, bfsMap, gameEnv);

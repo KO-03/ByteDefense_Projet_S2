@@ -20,7 +20,7 @@ public class TrojanHorse extends Ennemy {
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
-	private static final int LOOT = 0;
+	private static final int LOOT = 20;
 
 	public TrojanHorse(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
