@@ -110,9 +110,9 @@ public class Controller implements Initializable {
 				}
 				for (GameObject gameObject : c.getRemoved()) {
 					if (gameObject instanceof Ennemy)
-						this.gridEnnemies.getChildren().remove(this.gridEnnemies.lookup("#" + gameObject.getId()));
+						this.ev.removeEnnemy(gameObject);
 					else
-						this.gridTowers.getChildren().remove(this.gridTowers.lookup("#" + gameObject.getId()));
+						this.tv.removeEnnemy(gameObject);
 				}
 			}
 		});
