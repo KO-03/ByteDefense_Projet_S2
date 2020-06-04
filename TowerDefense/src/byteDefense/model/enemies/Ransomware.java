@@ -1,6 +1,6 @@
 /*
- * TrojanHorse.java
- * Cette classe represente un objet TrojanHorse, ses responsabilites sont de :
+ * Ransomware.java
+ * Cette classe represente un objet Ransomware, ses responsabilites sont de :
  * - stocker et recuperer son attaque
  * - stocker et recuperer sa defense
  * - stocker et recuperer sa vitesse d'attaque
@@ -9,20 +9,20 @@
  * - effectuer toutes les actions d'aggissement durant un tour
  */
 
-package byteDefense.model.ennemies;
+package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class TrojanHorse extends Ennemy {
+public class Ransomware extends OffensiveEnnemy {
 
-	private static final int ATTACK = 0;
-	private static final int DEFENSE = 0;
-	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 0;
-	private static final int LOOT = 20;
+	private static final int ATTACK = 1;
+	private static final int DEFENSE = 20;
+	private static final int ATTACK_RANGE = 3;
+	private static final int ATTACK_SPEED = 1;
+	private static final int LOOT = 40;
 
-	public TrojanHorse(BFS bfsMap, GameEnvironment gameEnv) {
+	public Ransomware(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
 	}
 
@@ -46,7 +46,9 @@ public class TrojanHorse extends Ennemy {
 		return LOOT;
 	}
 
-	public void actSpecific() {
-		super.act();
+	public void act() {
+		if (!this.isArrived())
+			this.moveEnnemy();
+		super.attackTower();
 	}
 }

@@ -1,33 +1,28 @@
 /*
- * Adware.java
- * Cette classe represente un objet Adware, ses responsabilites sont de :
+ * Bot.java
+ * Cette classe represente un objet Bot, ses responsabilites sont de :
  * - stocker et recuperer son attaque
  * - stocker et recuperer sa defense
  * - stocker et recuperer sa vitesse d'attaque
  * - stocker et recuperer sa portee d'attaque
  * - stocker et recuperer le montant de son butin
- * - stocker son taux de reproduction
- * - gerer son tour de naissance dans une vague
  * - effectuer toutes les actions d'aggissement durant un tour
  */
 
-package byteDefense.model.ennemies;
+package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class Adware extends OffensiveEnnemy {
+public class Bot extends Ennemy {
 
-	private static final float REPRODUCTION_RATE = 0;
-	private static final int ATTACK = 25;
-	private static final int DEFENSE = 0;
+	private static final int ATTACK = 10;
+	private static final int DEFENSE = 10;
+	private static final int ATTACK_RANGE = 0;
 	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 1;
-	private static final int LOOT = 1;
+	private static final int LOOT = 30;
 
-	private int bornTurn;
-
-	public Adware(BFS bfsMap, GameEnvironment gameEnv) {
+	public Bot(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
 	}
 
@@ -51,8 +46,8 @@ public class Adware extends OffensiveEnnemy {
 		return LOOT;
 	}
 
-	public void actSpecific() {
-		super.act();
-		super.attackTower();
+	public void act() {
+		if (!this.isArrived())
+			this.moveEnnemy();
 	}
 }

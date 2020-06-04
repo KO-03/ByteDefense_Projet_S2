@@ -1,6 +1,9 @@
 /*
  * GameAreaReader.java
- * Cette classe construit la liste des tiles du jeu par la lecture d'un fichier contenant les donnees correspondantes 
+ * Cette classe gere la recuperation des donnees du plateau du jeu,ses responsabilites sont de :
+ * - lire le fichier stockant les informations pour chaque niveau
+ * - construire une tilesList a partir des donnees d'une ligne lue
+ * - construire la liste de chaque niveau du jeu en fonction des tilesList construites
  */
 
 package byteDefense.utilities;
@@ -23,11 +26,12 @@ public class GameAreaReader {
 		return tilesList;
 	}
 	
+	// Fonction qui retourne la liste des tilesList contruites par récupération des donnees d'un fichier
 	public static ArrayList<ArrayList<Integer>> generateLevelsTilesList(String sourceFile) {
 		ArrayList<ArrayList<Integer>> levelsTilesList = new ArrayList<>();
-		int level = 0;
-		String levelLine;
 		ArrayList<Integer> tilesList;
+		String levelLine; // ligne du fichier contenant les donnees d'un niveau precis
+		int level = 0;
 		
 		try {
 			List<String> allLines = Files.readAllLines(Paths.get(sourceFile));
@@ -47,24 +51,4 @@ public class GameAreaReader {
 		}
 		return levelsTilesList;
 	}
-	
-	/*
-	public static ArrayList<Integer> readFile(String sourceFile) {
-		ArrayList<Integer> tilesList = new ArrayList<>();
-
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(sourceFile));
-			String line = null;
-
-			while ((line = br.readLine()) != null) {
-				String[] values = line.split(", ");
-				for (int i = 0; i < values.length; i++)
-					tilesList.add(Integer.parseInt(values[i]));
-			}
-			br.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return tilesList;
-	}*/
 }

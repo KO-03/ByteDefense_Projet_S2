@@ -1,10 +1,12 @@
 /*
  * GameAreaView.java
  * Cette classe gere la partie visuelle de la GameArea (plateau de jeu), ses responsabilites sont de :
- * - charger et stocker les ressources d'images des tiles
- * - stocker les types de tiles
- * - faire la correspondance entre les types de tiles et les donnees de la gameArea a ajouter 
- * - ajouter la gameArea a la vue tile par tile
+ * - stocker la GameArea
+ * - stocker la grille de tuile de la vue
+ * - charger et stocker les textures des tiles
+ * - stocker les donnees des types de tiles
+ * - faire la correspondance entre les types de tiles et les donnees de la GameArea a ajouter 
+ * - ajouter la gameArea tile par tile a la grille 
  */
 
 package byteDefense.view;

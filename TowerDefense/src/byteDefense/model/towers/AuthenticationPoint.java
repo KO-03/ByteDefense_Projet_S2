@@ -5,7 +5,8 @@
  * - stocker et recuperer sa defense
  * - stocker et recuperer sa vitesse d'attaque
  * - stocker et recuperer sa portee d'attaque
- * - stocker et recuperer le montant de son butin
+ * - stocker et recuperer le montant de son cout
+ * - stocker le taux reduction de vitesse de ses tirs 
  * - effectuer toutes les actions d'aggissement durant un tour
  */
 
@@ -15,11 +16,12 @@ import byteDefense.model.GameEnvironment;
 
 public class AuthenticationPoint extends Tower {
 
-	private static final int ATTACK = 30;
-	private static final int DEFENSE = 0;
-	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 5;
-	private static final int COST = 30;
+	private static final float SPEED_REDUCTION_RATE = 0.50F;
+	private static final int ATTACK = 10;
+	private static final int DEFENSE = 30;
+	private static final int ATTACK_SPEED = 2;
+	private static final int ATTACK_RANGE = 3;
+	private static final int COST = 20;
 
 	public AuthenticationPoint(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, gameEnv);
@@ -45,7 +47,7 @@ public class AuthenticationPoint extends Tower {
 		return COST;
 	}
 
-	public void actSpecific() {
-		super.act();
+	public void act() {
+		super.attackEnnemy();
 	}
 }

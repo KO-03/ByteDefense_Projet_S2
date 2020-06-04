@@ -1,3 +1,11 @@
+/*
+ * BulletView.java
+ *  Cette classe gere la partie visuelle d'une Bullet (un tir), ses responsabilites sont de :
+ *  - stocker la grille dans laquelle les tirs sont affiches
+ *  - ajouter un tir a la vue
+ *  - supprimer un tir de la vue
+ */
+
 package byteDefense.view;
 
 import byteDefense.model.Bullet;
@@ -17,6 +25,7 @@ public class BulletView {
 	
 	public void addBulletView(Bullet bullet) {
 		int tileCenter = GameArea.TILE_SIZE / 2;
+		
 		Circle circ = new Circle();
 		circ.setId(Integer.toString(bullet.getId()));
 		circ.setTranslateX(bullet.getX() + tileCenter);

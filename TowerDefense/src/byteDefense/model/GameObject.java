@@ -1,18 +1,22 @@
 /*
  * GameObject.java
- * Cette classe parent permet de gerer :
+ * Cette classe parent represente un objet de jeu (un ennemi ou une tourelle), ses responsabilites sont de :
  * - identifier un objet de jeu par un identifiant recuperable
- * - recuperer et de fixer les coordonnees xy d'un objet de jeu
- * - recuperer et de decrementer les points de vie d'un objet de jeu
+ * - recuperer et fixer les coordonnees xy d'un objet de jeu
+ * - recuperer l'indice courant correpondant aux coordonnees xy de l'objet de jeu 
+ * - recuperer et decrementer les points de vie d'un objet de jeu
  * - verifier qu'un objet de jeu est mort ou non
+ * - verifier si le gameObject est une tourelle ou un ennemi
+ * - trouver une cible aux alentours de l'objet de jeu
+ * - faire tirer un objet de jeu sur une cible
+ * - gerer les actions de tirs d'un objet de jeu
  * - recuperer les caracteristiques d'un objet de jeu (points d'attaque, point 
  *   de defense, vitesse d'attaque, portee d'attaque et l'action)
- * - faire agir un objet de jeu
  */
 
 package byteDefense.model;
 
-import byteDefense.model.ennemies.Ennemy;
+import byteDefense.model.enemies.Ennemy;
 import byteDefense.model.towers.Tower;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -26,7 +30,7 @@ public abstract class GameObject {
 	private IntegerProperty yProperty;
 	private int hp;
 	
-	protected GameEnvironment gameEnv;
+	private GameEnvironment gameEnv;
 
 	public GameObject(int x, int y, int hp, GameEnvironment gameEnv) {
 		this.xProperty = new SimpleIntegerProperty(x);
@@ -90,7 +94,6 @@ public abstract class GameObject {
 			if ((this.isTower() && gameObject instanceof Ennemy) || (!this.isTower() && gameObject instanceof Tower)) {
 				if ((this.getY() - this.getAttackRange() * GameArea.TILE_SIZE <= gameObject.getY() && gameObject.getY() <= this.getY() + this.getAttackRange() * GameArea.TILE_SIZE) &&
 					(this.getX() - this.getAttackRange() * GameArea.TILE_SIZE <= gameObject.getX() && gameObject.getX() <= this.getX() + this.getAttackRange() * GameArea.TILE_SIZE)) {
-					System.out.println("Piou piou !");
 					return gameObject;
 				}
 			}
@@ -98,13 +101,24 @@ public abstract class GameObject {
 		return null;
 	}
 	
+	public void shoot(GameObject target) {
+		this.gameEnv.addBullet(new Bullet(getX(), getY(), target, this));
+	}
+	
+	public void shootHandler() {
+		GameObject target = this.findTarget();
+		
+		if (target != null)
+			this.shoot(target);
+	}
+	
 	public abstract int getAttack();
 
 	public abstract int getDefense();
 
+	public abstract int getAttackRange();
+	
 	public abstract int getAttackSpeed();
 
-	public abstract int getAttackRange();
-
-	public abstract void actSpecific();
+	public abstract void act();
 }

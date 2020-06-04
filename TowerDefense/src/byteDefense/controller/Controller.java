@@ -4,9 +4,11 @@
  * - initialiser le gameMaster
  * - initialiser la vue des ennemis et celle des tourelles
  * - initialiser la vue de la GameArea
- * - gerer la gameLoop et les actions du jeu (effectuer un tour)
+ * - gerer la gameLoop et les actions du jeu (effectuer un tour et les actions des tirs)
  * - gerer les entites de vue (tourelle, plateau de jeu, grille d'ennemis et de tourelles)
  * - creer les listener sur la liste des GameObject de l'environnement de jeu
+ * - creer le listener sur les byteCoin (argent du joueur) pour son affichage dynamique
+ * - fixer dynamiquement l'affichage du nombre d'ennemis (l'attribut nbrEnemies) en fonction de leur evolution dans le modele
  * - gerer le glisser deposer d'une tourelle et son positionnement
  */
 
@@ -20,7 +22,7 @@ import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.GameMaster;
 import byteDefense.model.GameObject;
-import byteDefense.model.ennemies.Ennemy;
+import byteDefense.model.enemies.Ennemy;
 import byteDefense.model.towers.AdCube;
 import byteDefense.model.towers.Antivirus;
 import byteDefense.model.towers.AuthenticationPoint;
@@ -49,9 +51,7 @@ public class Controller implements Initializable {
 	@FXML
 	private TilePane gameBoard;
 	@FXML
-	private Pane gridEnnemies;
-	@FXML
-	private Pane gridTowers;
+	private Pane grid;
 	@FXML
 	private ImageView adcube;
 	@FXML
@@ -65,38 +65,48 @@ public class Controller implements Initializable {
     @FXML
     private Label waveNbr;
     @FXML
-    private Label ennemiesNbr;
+    private Label enemiesNbr;
     @FXML
-    private Label byteCoin;//Argent du jeu
+    private Label byteCoin; // Argent du jeu
+    @FXML
+    private Label attackStat;
+    @FXML
+    private Label attackSpeedStat;
+    @FXML
+    private Label defenseStat;
+    @FXML
+    private Label attackRangeStat;
 
+	private GameMaster gm;
+	private int nbrEnemies;
 	private EnnemyView ev;
 	private TowerView tv;
-	private GameMaster gm;
 	private BulletView bv;
 	private Timeline gameLoop;
 	private int time;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.gm = new GameMaster(15);
+		this.gm = new GameMaster();
+		this.nbrEnemies = 0;
 		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
-		this.ev = new EnnemyView(this.gridEnnemies);
-		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
-		this.bv = new BulletView(this.gridTowers);
+		this.ev = new EnnemyView(this.grid);
+		this.tv = new TowerView(this.grid, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
+		this.bv = new BulletView(this.grid);
 		
 		this.generateGameObjectListListener();
 		this.generateBulletsListener();
-		this.setListners();
+		this.generateWalletListener();
 		this.mouseDraggedOnTowers();
 		this.initAnimation();
 		this.gameLoop.play();
 	}
-	
-	private void setListners() {
+
+	private void generateWalletListener() {
 		this.byteCoin.textProperty().bind(this.gm.getWalletProperty().asString());	
 	}
-
+	
 	private void initAnimation() {
 		this.gameLoop = new Timeline();
         this.time = 0;
@@ -110,7 +120,6 @@ public class Controller implements Initializable {
 						this.gameLoop.stop();
 					} else if (this.time % 5 == 0) {
 						this.gm.aTurn();
-						this.gm.addMoney(1);
 					} else
                     	this.gm.getGameEnvironment().bulletsHandler();
 					this.time++;
@@ -122,26 +131,22 @@ public class Controller implements Initializable {
 
 	private void generateGameObjectListListener() {
 		this.gm.getGameEnvironment().getGameObjectsList().addListener((ListChangeListener <GameObject>) c-> {
-			int nbrEnnemiesAdded = 0;
-			int nbrEnnemiesRemoved = 0;
 			while (c.next()) {
 				for (GameObject gameObject : c.getAddedSubList()) {
 					if (gameObject instanceof Ennemy) {
 						this.ev.addGameObject(gameObject);
-						nbrEnnemiesAdded++;
-					}
-					else
+						nbrEnemies++;
+					} else
 						this.tv.addGameObject(gameObject);
 				}
 				for (GameObject gameObject : c.getRemoved()) {
 					if (gameObject instanceof Ennemy) {
 						this.ev.removeGameObject(gameObject);				
-						nbrEnnemiesRemoved++;
+						nbrEnemies--;
 					} else
 						this.tv.removeGameObject(gameObject);
 				}
-				int oldNbrEnnemies=Integer.parseInt(this.ennemiesNbr.getText());
-				this.ennemiesNbr.setText(""+ (oldNbrEnnemies-nbrEnnemiesRemoved+nbrEnnemiesAdded));
+				this.enemiesNbr.setText(Integer.toString(nbrEnemies));
 			}
 		});
 	}
@@ -194,31 +199,20 @@ public class Controller implements Initializable {
 				if (gm.getGameArea().isPlaceable(x, y)) {
 					GameEnvironment ge = gm.getGameEnvironment();
 					
-					if (tower == adcube) {
+					if (tower == adcube)
 						newTower = new AdCube(x, y, ge);
-						if(gm.debitMoney(newTower.getCost()))
-							ge.addGameObject(newTower);
-					}
-					else if (tower == antivirus) {
+					else if (tower == antivirus)
 						newTower = new Antivirus(x, y, ge);
-						if(gm.debitMoney(newTower.getCost()))
-							ge.addGameObject(newTower);
-					}
-					else if (tower == authentipoint) {
+					else if (tower == authentipoint)
 						newTower = new AuthenticationPoint(x, y, ge);
-						if(gm.debitMoney(newTower.getCost()))
-							ge.addGameObject(newTower);					
-					}
-					else if (tower == firewall) {
+					else if (tower == firewall)
 						newTower = new Firewall(x, y, ge);
-						if(gm.debitMoney(newTower.getCost()))
-							ge.addGameObject(newTower);					
-					}
-					else if (tower == sudvpn) {
+					else if (tower == sudvpn)
 						newTower = new SudVPN(x, y, ge);
-						if(gm.debitMoney(newTower.getCost()))
-							ge.addGameObject(newTower);
-					}
+					
+					// le joueur ne possede pas assez de byteCoin pour acheter la tourelle
+					if(gm.debitMoney(newTower.getCost()))
+						ge.addGameObject(newTower);
 				}
 				tower.setX(initialX);
 				tower.setY(741); // 741 est l'ordonnee des imageView des tourelles dans leur menu d'achat

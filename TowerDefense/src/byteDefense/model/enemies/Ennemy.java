@@ -1,13 +1,13 @@
 /*
  * Ennemy.java
- * Cette classe represente un objet Ennemy, ses responsabilites sont de :
- * - recuperer le butin d'un ennemi
- * - faire se deplacer un ennemi selon le BFS
- * - stocker le BFS liee l'ennemi ainsi que sa tuile de d�part  
- * - stocker et mettre a jour l'indice de la tile courante du BFS ou l'ennemi est positionne
+ * Cette classe represente un objet Ennemy (un ennemi), ses responsabilites sont de :
+ * - stocker et recuperer l'indice de la tile courante de l'ennemi dans le BFS 
+ * - stocker le BFS dans lequel l'ennemi se deplace
+ * - faire se deplacer un ennemi selon le BFS et mettre a jour l'indice de la tile courante
+ * - verifier si un ennemi est arrive au bout du chemin
  */
 
-package byteDefense.model.ennemies;
+package byteDefense.model.enemies;
 
 import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
@@ -16,8 +16,7 @@ import byteDefense.utilities.BFS;
 
 public abstract class Ennemy extends GameObject {
 
-	private BFS bfs;
-
+	private static BFS bfs;
 	private int currentIndTile;
 	
 	public Ennemy(BFS bfsMap, GameEnvironment gameEnv) {
@@ -37,17 +36,11 @@ public abstract class Ennemy extends GameObject {
 		this.setX(GameArea.tilePosX(this.currentIndTile) * GameArea.TILE_SIZE);
 		this.setY(GameArea.tilePosY(this.currentIndTile) * GameArea.TILE_SIZE);
 
-		// decrementation de l'indice de la tile courante du BFS
-		if(!this.ennemyArrived())// -1 correspond au point d'arrivée
-			this.currentIndTile = this.bfs.cameFrom[this.currentIndTile];
+		if(!this.isArrived()) 
+			this.currentIndTile = bfs.cameFrom[this.currentIndTile];
 	}
 	
-	public boolean ennemyArrived() {
-		return this.currentIndTile == -1;
+	public boolean isArrived() {
+		return this.currentIndTile == -1; // -1 correspond au point d'arrivée
 	}
-	
-	public void act() {
-		if (!this.ennemyArrived())
-			this.moveEnnemy();
-	}
-}
+ }

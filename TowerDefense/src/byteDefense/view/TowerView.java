@@ -1,9 +1,9 @@
 /*
  * TowerView.java
- * Cette classe gere la partie visuelle d'un objet de jeu Tower, ses responsabilites sont :
- * - charger et stocker les ressources d'images des tourelles
- * - faire la correspondance entre les types de tourelles et les ressources d'images des tourelles
- * - initialiser et ajouter les ImagesView de chaque types de tourelles à la grille des tourelles
+ * Cette classe gere la partie visuelle d'un objet de jeu Tower (une tourelle), ses responsabilites sont de :
+ * - charger et stocker les textures des tourelles
+ * - faire la correspondance entre les types de tourelles et leurs textures
+ * - initialiser  les ImagesView de chaques types de tourelles et les ajouter à la grille où elles sont affichees
  */
 
 package byteDefense.view;
@@ -35,15 +35,15 @@ public class TowerView extends GameObjectView {
 	private ImageView firewall;
 	private ImageView sudvpn;
 
-	public TowerView(Pane gridTowers, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
-		super(gridTowers);
+	public TowerView(Pane grid, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
+		super(grid);
 		this.adcube = adcube;
 		this.antivirus = antivirus;
 		this.authentipoint = authentificatipoint;
 		this.firewall = firewall;
 		this.sudvpn = sudvpn;
 
-		this.initInventory();
+		this.initInventory(grid);
 	}
 
 	public void imageLoader() {
@@ -77,7 +77,7 @@ public class TowerView extends GameObjectView {
 		return img;
 	}
 
-	public void initInventory() {
+	public void initInventory(Pane grid) {
 		this.adcube.setX(129);
 		this.adcube.setY(741);
 		this.antivirus.setX(213);
@@ -89,10 +89,10 @@ public class TowerView extends GameObjectView {
 		this.sudvpn.setX(466);
 		this.sudvpn.setY(741);
 
-		this.getGrid().getChildren().add(this.adcube);
-		this.getGrid().getChildren().add(this.antivirus);
-		this.getGrid().getChildren().add(this.authentipoint);
-		this.getGrid().getChildren().add(this.firewall);
-		this.getGrid().getChildren().add(this.sudvpn);
+		grid.getChildren().add(this.adcube);
+		grid.getChildren().add(this.antivirus);
+		grid.getChildren().add(this.authentipoint);
+		grid.getChildren().add(this.firewall);
+		grid.getChildren().add(this.sudvpn);
 	}
 }

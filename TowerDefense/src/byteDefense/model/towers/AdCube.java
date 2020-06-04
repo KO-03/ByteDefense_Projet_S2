@@ -5,7 +5,7 @@
  * - stocker et recuperer sa defense
  * - stocker et recuperer sa vitesse d'attaque
  * - stocker et recuperer sa portee d'attaque
- * - stocker et recuperer le montant de son butin
+ * - stocker et recuperer le montant de son cout
  * - effectuer toutes les actions d'aggissement durant un tour
  */
 
@@ -15,11 +15,11 @@ import byteDefense.model.GameEnvironment;
 
 public class AdCube extends Tower {
 
-	private static final int ATTACK = 30;
-	private static final int DEFENSE = 0;
-	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 5;
-	private static final int COST = 15;
+	private static final int ATTACK = 10;
+	private static final int DEFENSE = 20;
+	private static final int ATTACK_SPEED = 4;
+	private static final int ATTACK_RANGE = 3;
+	private static final int COST = 5;
 
 	public AdCube(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, gameEnv);
@@ -45,7 +45,7 @@ public class AdCube extends Tower {
 		return COST;
 	}
 
-	public void actSpecific() {
-		super.act();
+	public void act() {
+		super.attackEnnemy();
 	}
 }

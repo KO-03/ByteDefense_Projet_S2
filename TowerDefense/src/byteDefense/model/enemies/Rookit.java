@@ -1,39 +1,45 @@
 /*
  * Rookit.java
  * Cette classe represente un objet Rookit, ses responsabilites sont de :
- * - stocker et recuperer son attaque
+ * - stocker, recuperer et incrementer son attaque
  * - stocker et recuperer sa defense
  * - stocker et recuperer sa vitesse d'attaque
  * - stocker et recuperer sa portee d'attaque
  * - stocker et recuperer le montant de son butin
- * - stocker et gerer son taux d'augmentation d'attaque par tour
+ * - stocker taux d'augmentation d'attaque par tour
  * - effectuer toutes les actions d'aggissement durant un tour
  */
 
-package byteDefense.model.ennemies;
+package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
 public class Rookit extends OffensiveEnnemy {
 
-	public static final float INCREASE_ATTACK_RATE = 1.20F;
-	private static int attack = 50;
-	private static final int DEFENSE = 0;
-	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 3;
-	private static final int LOOT = 1;
+	public static final float INCREASE_ATTACK_RATE = 1.10F;
+	private static final int DEFENSE = 20;
+	private static final int ATTACK_RANGE = 4;
+	private static final int ATTACK_SPEED = 3;
+	private static final int LOOT = 10;
+	
+	private int attack;
 
 	public Rookit(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
+		this.attack = 10; 
 	}
-
+	
 	public int getAttack() {
-		return attack;
+		return this.attack;
 	}
 
+	public void setAttack(int newAttack) {
+		this.attack = newAttack;
+	}
+	
 	private void increaseAttack() {
-		attack = (int)(attack * INCREASE_ATTACK_RATE);
+		this.setAttack((int)(this.attack * INCREASE_ATTACK_RATE));
 	}
 
 	public int getDefense() {
@@ -52,9 +58,10 @@ public class Rookit extends OffensiveEnnemy {
 		return LOOT;
 	}
 
-	public void actSpecific() {
+	public void act() {
+		if (!this.isArrived())
+			this.moveEnnemy();
 		this.increaseAttack();
-		super.act();
 		super.attackTower();
 	}
 }

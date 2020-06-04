@@ -1,6 +1,6 @@
 /*
- * Spyware.java
- * Cette classe represente un objet Spyware, ses responsabilites sont de :
+ * TrojanHorse.java
+ * Cette classe represente un objet TrojanHorse, ses responsabilites sont de :
  * - stocker et recuperer son attaque
  * - stocker et recuperer sa defense
  * - stocker et recuperer sa vitesse d'attaque
@@ -9,22 +9,20 @@
  * - effectuer toutes les actions d'aggissement durant un tour
  */
 
-package byteDefense.model.ennemies;
+package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class Spyware extends Ennemy {
+public class TrojanHorse extends Ennemy {
 
-	private static final int MOVE_SPEED = 2;
-	private static final int ATTACK = 0;
-	private static final int DEFENSE = 0;
-	private static final int ATTACK_SPEED = 0;
+	private static final int ATTACK = 40;
+	private static final int DEFENSE = 40;
 	private static final int ATTACK_RANGE = 0;
-	private static final int LOOT = 2;
+	private static final int ATTACK_SPEED = 0;
+	private static final int LOOT = 80;
 
-
-	public Spyware(BFS bfsMap, GameEnvironment gameEnv) {
+	public TrojanHorse(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
 	}
 
@@ -48,13 +46,8 @@ public class Spyware extends Ennemy {
 		return LOOT;
 	}
 
-	public float getMoveSpeed() {
-		return MOVE_SPEED;
-	}
-
-	public void actSpecific() {
-		super.act();
+	public void act() {
+		if (!this.isArrived())
+			this.moveEnnemy();
 	}
 }
-
-

@@ -7,13 +7,13 @@
 package byteDefense.factories;
 
 import byteDefense.model.GameEnvironment;
-import byteDefense.model.ennemies.Adware;
-import byteDefense.model.ennemies.Bot;
-import byteDefense.model.ennemies.Ennemy;
-import byteDefense.model.ennemies.Ransomware;
-import byteDefense.model.ennemies.Rookit;
-import byteDefense.model.ennemies.Spyware;
-import byteDefense.model.ennemies.TrojanHorse;
+import byteDefense.model.enemies.Adware;
+import byteDefense.model.enemies.Bot;
+import byteDefense.model.enemies.Ennemy;
+import byteDefense.model.enemies.Ransomware;
+import byteDefense.model.enemies.Rookit;
+import byteDefense.model.enemies.Spyware;
+import byteDefense.model.enemies.TrojanHorse;
 import byteDefense.utilities.BFS;
 
 public class EnnemyFactory {

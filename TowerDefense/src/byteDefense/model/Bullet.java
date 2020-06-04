@@ -1,3 +1,13 @@
+/*
+ * Bullet.java
+ * Cette classe represente un objet Bullet (un tir), ses responsabilites sont de :
+ * - stocker, recuperer et fixer les coordonnees xy du tir
+ * - stocker et recuperer la cible du tir
+ * - stocker le tireur 
+ * - identifier un tir par un identifiant recuperable
+ * - recuperer les coordonnees de la cible du tir
+ */
+
 package byteDefense.model;
 
 import javafx.beans.property.IntegerProperty;
@@ -65,7 +75,7 @@ public class Bullet {
 		return this.targetY;
 	}
 	
-	public void damaged() {
+	public void woundTarget() {
 		this.targetObject.decrementHp((int) this.shooterObject.getAttack());
 	}
 

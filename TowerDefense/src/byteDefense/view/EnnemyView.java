@@ -1,8 +1,8 @@
 /*
  * EnnemyView.java
- * Cette classe gere la partie visuelle d'un objet de jeu Ennemy, ses responsabilites sont :
- * - charger et stocker les ressources d'images des ennemis
- * - faire la correspondance entre les types de d'ennemis et les ressources d'images des ennemis
+ * Cette classe gere la partie visuelle d'un objet de jeu Ennemy (un ennemi), ses responsabilites sont de :
+ * - charger et stocker les textures des ennemis
+ * - faire la correspondance entre les types de d'ennemis et leurs textures
  */
 
 package byteDefense.view;
@@ -11,12 +11,12 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 import byteDefense.model.GameObject;
-import byteDefense.model.ennemies.Adware;
-import byteDefense.model.ennemies.Bot;
-import byteDefense.model.ennemies.Ransomware;
-import byteDefense.model.ennemies.Rookit;
-import byteDefense.model.ennemies.Spyware;
-import byteDefense.model.ennemies.TrojanHorse;
+import byteDefense.model.enemies.Adware;
+import byteDefense.model.enemies.Bot;
+import byteDefense.model.enemies.Ransomware;
+import byteDefense.model.enemies.Rookit;
+import byteDefense.model.enemies.Spyware;
+import byteDefense.model.enemies.TrojanHorse;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
@@ -29,8 +29,8 @@ public class EnnemyView extends GameObjectView {
 	private static Image spywareImg;
 	private static Image trojanHorseImg;
 
-	public EnnemyView(Pane gridEnnemy) {
-		super(gridEnnemy);
+	public EnnemyView(Pane grid) {
+		super(grid);
 	}
 
 	public void imageLoader() {

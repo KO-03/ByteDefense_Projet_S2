@@ -1,28 +1,33 @@
 /*
- * Ransomware.java
- * Cette classe represente un objet Ransomware, ses responsabilites sont de :
+ * Adware.java
+ * Cette classe represente un objet Adware, ses responsabilites sont de :
  * - stocker et recuperer son attaque
  * - stocker et recuperer sa defense
  * - stocker et recuperer sa vitesse d'attaque
  * - stocker et recuperer sa portee d'attaque
  * - stocker et recuperer le montant de son butin
+ * - stocker son taux de reproduction
+ * - gerer son tour de naissance dans une vague
  * - effectuer toutes les actions d'aggissement durant un tour
  */
 
-package byteDefense.model.ennemies;
+package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class Ransomware extends OffensiveEnnemy {
+public class Adware extends OffensiveEnnemy {
 
-	private static final int ATTACK = 25;
-	private static final int DEFENSE = 0;
-	private static final int ATTACK_SPEED = 0;
+	private static final float REPRODUCTION_RATE = 0;
+	private static final int ATTACK = 20;
+	private static final int DEFENSE = 10;
 	private static final int ATTACK_RANGE = 1;
-	private static final int LOOT = 2;
+	private static final int ATTACK_SPEED = 3;
+	private static final int LOOT = 20;
 
-	public Ransomware(BFS bfsMap, GameEnvironment gameEnv) {
+	private int bornTurn;
+
+	public Adware(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
 	}
 
@@ -46,8 +51,9 @@ public class Ransomware extends OffensiveEnnemy {
 		return LOOT;
 	}
 
-	public void actSpecific() {
-		super.act();
+	public void act() {
+		if (!this.isArrived())
+			this.moveEnnemy();
 		super.attackTower();
 	}
 }

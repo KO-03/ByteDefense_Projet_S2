@@ -1,10 +1,17 @@
 /*
  * GameArea.java
- * Cette classe represente un objet GameArea, ses responsabilites sont :
- * - creer la liste de tiles a partir des donnees lues dans un fichier
- * - recuperer la taille de la map en tiles 
- * - calculer l'indice d'une case de la GameArea avec ses coordonnees
+ * Cette classe represente un objet GameArea (plateau de jeu), ses responsabilites sont :
+ * - stocker les listes donnees des differents niveaux dans une liste
+ * - stocker la dimension d'une tuile (TILE_SIZE)
+ * - calculer et stocker la dimension en nombre de tuile du plateau de jeu (gameAreaTilesSize)
+ * - stocker le point d'arrivee et de depart des ennemis sur le plateau de jeu
+ * - stocker et recuperer la liste de tuiles (tilesList) a partir du niveau
+ * - recuperer une donnee d'une tuile de la tilesList a partir de coordonnees xy
+ * - calculer l'indice d'une case dans le plateau de jeu à partir de ses coordonnees xy
  * - calculer  les coordonnees xy a partir de l'indice de la case
+ * - verifier si la case a un indice precis est un chemin ou pas
+ * - verifier si la case a une coordonnee xy precise entre dans les limites de la GameArea
+ * - verifier si l'on peut placer une tourelle sur une case a une coordonnee xy precise 
  */
 
 package byteDefense.model;
@@ -15,22 +22,21 @@ import byteDefense.utilities.GameAreaReader;
 
 public class GameArea {
 	
+	private static ArrayList<ArrayList<Integer>> levelsTilesList;
 	public static final int TILE_SIZE = 48;
 	public static int gameAreaTilesSize;
-	
 	public static int arrivalPoint = 28;
 	public static int spawnPoint = 139;
 	
-	private static ArrayList<ArrayList<Integer>> levelsTilesList;
 	private ArrayList<Integer> tilesList;
 	
 	public GameArea() {
 		levelsTilesList = GameAreaReader.generateLevelsTilesList("./resources/tiles.txt");
 		this.tilesList = fixLevelTilesList(1);
-		gameAreaTilesSize = gameAreaSize();
+		gameAreaTilesSize = gameAreaTilesSize();
 	}
 	
-	public ArrayList<Integer> fixLevelTilesList(int level) {
+	private ArrayList<Integer> fixLevelTilesList(int level) {
 		return levelsTilesList.get(level - 1);
 	}
 	
@@ -38,7 +44,7 @@ public class GameArea {
 		return this.tilesList;
 	}
 	
-	public int gameAreaSize() {
+	private int gameAreaTilesSize() {
 		return (int) Math.sqrt(this.tilesList.size());
 	}
 	

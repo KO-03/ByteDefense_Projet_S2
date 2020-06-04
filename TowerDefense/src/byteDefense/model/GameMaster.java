@@ -1,17 +1,20 @@
 /*
  * GameMaster.java
- * Cette classe represente un maitre de jeu, ses responsabilites sont de:
- * - stocker, initialiser et recuperer les donn�es n�cessaires au fonctionnement du jeu (BFS, gameArea, wave...)
- * - rassembler les differentes actions qui ont lieu lors d'un tour (actions de vagues d'ennemis, de tourelles...)
- * - 
+ * Cette classe represente le GameMaster (maitre de jeu), ses responsabilites sont de:
+ * - stocker, initialiser et recuperer les donnees necessaires au fonctionnement du jeu 
+ *   (classe des services des Wave, la liste des waves, BFS, le plateau du jeu, l'environnement du jeu...)
+ * - supprimer la Wave fini (celle au-dessus de la liste de vague) 
+ * - fixer l'argent du jeu 
+ * - gerer le gain et le debit d'argent, ainsi que leurs exceptions
+ * - rassembler les differentes actions qui ont lieu lors d'un tour (ajout d'ennemis a la vague, actions dans l'environnement, gain d'argent...) 
  */
 
 package byteDefense.model;
 
 import java.util.ArrayList;
 
-import byteDefense.model.ennemies.Wave;
-import byteDefense.model.ennemies.WaveServices;
+import byteDefense.model.enemies.Wave;
+import byteDefense.model.enemies.WaveServices;
 import byteDefense.utilities.BFS;
 import byteDefense.utilities.WaveReader;
 import javafx.beans.property.IntegerProperty;
@@ -24,15 +27,15 @@ public class GameMaster {
 	private GameArea gameArea;
 	private BFS bfs;
 	private GameEnvironment gameEnv;
-	private final IntegerProperty walletProperty;
+	private IntegerProperty walletProperty;
 
-	public GameMaster(int initialWallet) {
+	public GameMaster() {
 		this.gameArea = new GameArea();
 		this.bfs = new BFS(this.gameArea);
 		this.gameEnv = new GameEnvironment();
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
-		this.walletProperty = new SimpleIntegerProperty(initialWallet);
+		this.walletProperty = new SimpleIntegerProperty(30);
 	}
 	
 	public GameArea getGameArea() {
@@ -47,7 +50,7 @@ public class GameMaster {
 		return this.waveServices;
 	}
 	
-	public void removeTopWave() {
+	private void removeTopWave() {
 		this.waves.remove(0);
 	}
 	
@@ -55,20 +58,20 @@ public class GameMaster {
 		return this.gameEnv;
 	}
 	
-	public final int getWallet() {
-		return this.walletProperty.getValue();
-	}
-	
 	public IntegerProperty getWalletProperty() {
 		return this.walletProperty;
 	}
 	
-	public void setWallet(int amount) {
+	private final int getWallet() {
+		return this.walletProperty.getValue();
+	}
+	
+	private void setWallet(int amount) {
 		this.walletProperty.set(amount);
 	}
 
-	public boolean addMoney(int amount) {
-		if(amount<0 || this.getWallet()+amount>Integer.MAX_VALUE)
+	private boolean addMoney(int amount) {
+		if(amount < 0 || this.getWallet() + amount > Integer.MAX_VALUE)
 			return false;
 		else {
 			this.setWallet(this.getWallet()+amount);
@@ -77,7 +80,7 @@ public class GameMaster {
 	}
 	
 	public boolean debitMoney(int amount) {
-		if(amount<0 || this.getWallet()-amount<0)
+		if(amount < 0 || this.getWallet() - amount < 0)
 			return false;
 		else {
 			this.setWallet(this.getWallet()-amount);
@@ -88,8 +91,9 @@ public class GameMaster {
 	public void aTurn() {
 		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
 		if (!this.waves.get(0).isEmpty())
-			this.waveServices.fillEnnemyList(this.waves.get(0));
+			this.waveServices.addEnnemy(this.waves.get(0));
 		
 		this.gameEnv.gameObjectsHandler(this.bfs);
+		this.addMoney(1);
 	}
 }

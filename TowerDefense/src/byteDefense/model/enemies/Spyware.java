@@ -1,6 +1,6 @@
 /*
- * Bot.java
- * Cette classe represente un objet Bot, ses responsabilites sont de :
+ * Spyware.java
+ * Cette classe represente un objet Spyware, ses responsabilites sont de :
  * - stocker et recuperer son attaque
  * - stocker et recuperer sa defense
  * - stocker et recuperer sa vitesse d'attaque
@@ -9,20 +9,22 @@
  * - effectuer toutes les actions d'aggissement durant un tour
  */
 
-package byteDefense.model.ennemies;
+package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class Bot extends Ennemy {
+public class Spyware extends Ennemy {
 
-	private static final int ATTACK = 0;
-	private static final int DEFENSE = 0;
-	private static final int ATTACK_SPEED = 0;
+	private static final int MOVE_SPEED = 2;
+	private static final int ATTACK = 30;
+	private static final int DEFENSE = 10;
 	private static final int ATTACK_RANGE = 0;
-	private static final int LOOT = 1;
+	private static final int ATTACK_SPEED = 0;
+	private static final int LOOT = 50;
 
-	public Bot(BFS bfsMap, GameEnvironment gameEnv) {
+
+	public Spyware(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
 	}
 
@@ -46,7 +48,14 @@ public class Bot extends Ennemy {
 		return LOOT;
 	}
 
-	public void actSpecific() {
-		super.act();
+	public float getMoveSpeed() {
+		return MOVE_SPEED;
+	}
+
+	public void act() {
+		if (!this.isArrived())
+			this.moveEnnemy();
 	}
 }
+
+

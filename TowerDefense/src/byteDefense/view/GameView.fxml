@@ -125,7 +125,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Label styleClass="label-subSubHeader" text="0">
+                              <Label fx:id="attackStat" styleClass="label-subSubHeader" text="0">
                                  <HBox.margin>
                                     <Insets left="6.0" />
                                  </HBox.margin>
@@ -147,7 +147,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Label styleClass="label-subSubHeader" text="0">
+                              <Label fx:id="defenseStat" styleClass="label-subSubHeader" text="0">
                                  <padding>
                                     <Insets left="6.0" />
                                  </padding>
@@ -169,7 +169,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Label styleClass="label-subSubHeader" text="0">
+                              <Label fx:id="attackSpeedStat" styleClass="label-subSubHeader" text="0">
                                  <padding>
                                     <Insets left="6.0" />
                                  </padding>
@@ -191,7 +191,7 @@
                                     <Font size="17.0" />
                                  </font>
                               </Text>
-                              <Label styleClass="label-subSubHeader" text="0">
+                              <Label fx:id="attackRangeStat" styleClass="label-subSubHeader" text="0">
                                  <padding>
                                     <Insets left="6.0" />
                                  </padding>
@@ -274,7 +274,7 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
-                                    <Label fx:id="ennemiesNbr" styleClass="label-subHeader" text="0" />
+                                    <Label fx:id="enemiesNbr" styleClass="label-subHeader" text="0" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="42.0" top="3.0" />
@@ -410,8 +410,7 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <TilePane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="672.0" style="-fx-background-color: #1e838c;" tileAlignment="CENTER_RIGHT" />
-            <Pane fx:id="gridEnnemies" prefHeight="672.0" prefWidth="672.0" />
-            <Pane fx:id="gridTowers" prefHeight="672.0" prefWidth="672.0" />
+            <Pane fx:id="grid" prefHeight="672.0" prefWidth="672.0" />
          </children>
       </Pane>
    </center>
