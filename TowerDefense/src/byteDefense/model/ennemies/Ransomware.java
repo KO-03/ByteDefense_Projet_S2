@@ -16,10 +16,10 @@ import byteDefense.utilities.BFS;
 
 public class Ransomware extends OffensiveEnnemy {
 
-	private static final int ATTACK = 0;
+	private static final int ATTACK = 25;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 0;
+	private static final int ATTACK_RANGE = 1;
 	private static final int LOOT = 0;
 
 	public Ransomware(BFS bfsMap, GameEnvironment gameEnv) {

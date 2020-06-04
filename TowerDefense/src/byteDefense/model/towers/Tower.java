@@ -12,7 +12,7 @@ import byteDefense.model.GameEnvironment;
 import byteDefense.model.GameObject;
 
 public abstract class Tower extends GameObject {
-
+	
 	public Tower(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, 100, gameEnv);
 	}
@@ -22,8 +22,7 @@ public abstract class Tower extends GameObject {
 	public void act() {
 		GameObject target = super.findTarget();
 		
-		if (target != null) {
+		if (target != null)
 			super.gameEnv.addBullet(new Bullet(super.getX(), super.getY(), target, this));
-		}
 	}
 }

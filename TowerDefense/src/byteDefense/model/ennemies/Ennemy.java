@@ -49,6 +49,5 @@ public abstract class Ennemy extends GameObject {
 	public void act() {
 		if (!this.ennemyArrived())
 			this.moveEnnemy();
-		
 	}
 }

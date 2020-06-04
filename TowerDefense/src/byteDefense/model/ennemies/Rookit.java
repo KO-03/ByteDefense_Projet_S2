@@ -18,10 +18,10 @@ import byteDefense.utilities.BFS;
 public class Rookit extends OffensiveEnnemy {
 
 	public static final float INCREASE_ATTACK_RATE = 1.20F;
-	private static int attack = 0;
+	private static int attack = 50;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 0;
+	private static final int ATTACK_RANGE = 3;
 	private static final int LOOT = 0;
 
 	public Rookit(BFS bfsMap, GameEnvironment gameEnv) {
