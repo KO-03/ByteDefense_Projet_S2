@@ -26,7 +26,7 @@ public class BulletView {
 		ImageView bulletImgView = new ImageView();
 		
 		bulletImgView.setImage(this.bulletImg);
-		
+		bulletImgView.setId(Integer.toString(bullet.getId()));
 		bulletImgView.setTranslateX(bullet.getX());
 		bulletImgView.setTranslateY(bullet.getY());	
 

@@ -34,8 +34,8 @@ public abstract class Ennemy extends GameObject {
 
 	public void moveEnnemy() {
 		// fixage de la position de l'ennemi en fonction du chemin du BFS
-		this.setX(GameArea.tilePosX(this.currentIndTile)* GameArea.TILE_SIZE);
-		this.setY(GameArea.tilePosY(this.currentIndTile)* GameArea.TILE_SIZE);
+		this.setX(GameArea.tilePosX(this.currentIndTile) * GameArea.TILE_SIZE);
+		this.setY(GameArea.tilePosY(this.currentIndTile) * GameArea.TILE_SIZE);
 
 		// decrementation de l'indice de la tile courante du BFS
 		if(!this.ennemyArrived())// -1 correspond au point d'arrivée
@@ -49,5 +49,6 @@ public abstract class Ennemy extends GameObject {
 	public void act() {
 		if (!this.ennemyArrived())
 			this.moveEnnemy();
+		
 	}
 }

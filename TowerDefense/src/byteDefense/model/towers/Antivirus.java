@@ -15,10 +15,10 @@ import byteDefense.model.GameEnvironment;
 
 public class Antivirus extends Tower {
 
-	private static final int ATTACK = 0;
+	private static final int ATTACK = 30;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 0;
+	private static final int ATTACK_RANGE = 5;
 	private static final int COST = 0;
 
 	public Antivirus(int x, int y, GameEnvironment gameEnv) {

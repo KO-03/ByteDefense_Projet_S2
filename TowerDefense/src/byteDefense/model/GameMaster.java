@@ -80,6 +80,6 @@ public class GameMaster {
 		if (!this.waves.get(0).isEmpty())
 			this.waveServices.fillEnnemyList(this.waves.get(0));
 		
-		this.gameEnv.gameEnvironmentHandler(this.bfs);
+		this.gameEnv.gameObjectsHandler(this.bfs);
 	}
 }

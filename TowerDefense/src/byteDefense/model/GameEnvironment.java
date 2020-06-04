@@ -47,27 +47,29 @@ public class GameEnvironment {
 		return this.bullets;
 	}
 	
-	public void gameEnvironmentHandler(BFS bfs) {
+	public void gameObjectsHandler(BFS bfs) {
 		GameObject go;
-		Bullet bullet;
 		
 		for (int i = this.gameObjectsList.size() - 1; i >= 0; i--) {
 			go = gameObjectsList.get(i);
 
-			go.act();
+			go.actSpecific();
 			if(!go.isAlive() || (go instanceof Ennemy && go.getCurrentIndTile() == -1))
 				this.removeGameObject(go);
 		}
+	}
+	
+	public void bulletsHandler() {
+		Bullet bullet;
 		
 		for (int i = 0; i < this.bullets.size(); i++) {
 			bullet = this.bullets.get(i);
 			
-			bullet.update();
 			if (bullet.isArrived()) {
 				bullet.damaged();
 				this.removeBullet(bullet);
-			}
+			} else
+				bullet.update();
 		}
-
 	}
 }

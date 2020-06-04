@@ -18,7 +18,7 @@ public class AdCube extends Tower {
 	private static final int ATTACK = 30;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
-	private static final int ATTACK_RANGE = 1;
+	private static final int ATTACK_RANGE = 5;
 	private static final int COST = 0;
 
 	public AdCube(int x, int y, GameEnvironment gameEnv) {

@@ -86,7 +86,7 @@ public abstract class GameObject {
 	}
 	
 	public GameObject findTarget() {
-		for(GameObject gameObject : this.gameEnv.getGameObjectsList()){
+		for(GameObject gameObject : this.gameEnv.getGameObjectsList()) {
 			if ((this.isTower() && gameObject instanceof Ennemy) || (!this.isTower() && gameObject instanceof Tower)) {
 				if ((this.getY() - this.getAttackRange() * GameArea.TILE_SIZE <= gameObject.getY() && gameObject.getY() <= this.getY() + this.getAttackRange() * GameArea.TILE_SIZE) &&
 					(this.getX() - this.getAttackRange() * GameArea.TILE_SIZE <= gameObject.getX() && gameObject.getX() <= this.getX() + this.getAttackRange() * GameArea.TILE_SIZE)) {
@@ -106,5 +106,5 @@ public abstract class GameObject {
 
 	public abstract int getAttackRange();
 
-	public abstract void act();
+	public abstract void actSpecific();
 }

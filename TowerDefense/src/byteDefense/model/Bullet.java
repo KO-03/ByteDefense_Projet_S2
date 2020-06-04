@@ -23,7 +23,6 @@ public class Bullet {
 		
 		this.id = GameObject.counterId;
 		GameObject.counterId++;
-		
 	}
 	
 	public int getId() {
@@ -53,33 +52,35 @@ public class Bullet {
 	public void setY(int newY) {
 		this.yProperty.setValue(newY);
 	}
+
+	public GameObject getTargetObject() {
+		return this.targetObject;
+	}
 	
 	public void update() {
 		if (this.getX() != targetX && this.getY() != targetY) {
 			if (this.getX() > targetX) {
-				this.setX(this.getX() - 1);
+				this.setX(this.getX() - 24);
 			}
 			else if (this.getX() < targetX){
-				this.setX(this.getX() + 1);
+				this.setX(this.getX() + 24);
 			}
 				
 			if (this.getY() > targetY) {
-				this.setY(this.getY() - 1);
+				this.setY(this.getY() - 24);
 			}
 			else if (this.getY() < targetY) {
-				this.setY(this.getY() + 1);
+				this.setY(this.getY() + 24);
 			}
 		}
 	}
 	
 	public boolean isArrived() {
-		return this.getX() != this.targetObject.getX() && this.getY() != this.targetObject.getX();
+		return this.getX() == this.targetObject.getX() && this.getY() == this.targetObject.getX();
 	}
 	
 	public void damaged() {
 		this.targetObject.decrementHp((int) this.shooterObject.getAttack());
-		System.out.println(this.targetObject + " -" + this.shooterObject.getAttack());
-		System.out.println(this.targetObject.getHp());
 	}
 
 }

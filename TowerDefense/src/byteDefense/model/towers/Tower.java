@@ -20,9 +20,10 @@ public abstract class Tower extends GameObject {
 	public abstract int getCost();
 	
 	public void act() {
-GameObject target = super.findTarget();
+		GameObject target = super.findTarget();
 		
-		if (target != null)
+		if (target != null) {
 			super.gameEnv.addBullet(new Bullet(super.getX(), super.getY(), target, this));
+		}
 	}
 }

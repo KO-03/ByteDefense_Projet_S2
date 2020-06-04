@@ -51,7 +51,7 @@ public class TowerView extends GameObjectView {
 			adcubeImg = new Image(new File("./resources/towerTextures/adcube.png").toURI().toURL().toString()); 
 			antivirusImg = new Image(new File("./resources/towerTextures/antivirus.png").toURI().toURL().toString()); 
 			firewallImg= new Image(new File("./resources/towerTextures/firewall.png").toURI().toURL().toString()); 
-			authenticationPointImg = new Image(new File("./resources/towerTextures/authPoint.png").toURI().toURL().toString()); 
+			authenticationPointImg = new Image(new File("./resources/towerTextures/authpoint.png").toURI().toURL().toString()); 
 			sudvpnImg = new Image(new File("./resources/towerTextures/sudvpn.png").toURI().toURL().toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

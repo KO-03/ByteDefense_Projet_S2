@@ -33,6 +33,7 @@ import byteDefense.view.TowerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -77,7 +78,7 @@ public class Controller implements Initializable {
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.gridTowers);
 		
-		this.generateGameobjectListListener();
+		this.generateGameObjectListListener();
 		this.generateBulletsListener();
 		this.mouseDraggedOnTowers();
 		this.initAnimation();
@@ -86,25 +87,25 @@ public class Controller implements Initializable {
 
 	private void initAnimation() {
 		this.gameLoop = new Timeline();
-		this.time = 0;
-		this.gameLoop.setCycleCount(Timeline.INDEFINITE);
+        this.time = 0;
+        this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
-		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.1), 
-				(event ->{
-					if (this.time == 10000) {
-						System.out.println("fini");
-						this.gameLoop.stop();
-					} else if (this.time % 5 == 0) {
-						this.gm.aTurn();
-					} 
-					this.time++;
-				}));
-
-		this.gameLoop.getKeyFrames().add(kf);
+        KeyFrame kf = new KeyFrame(
+                Duration.seconds(0.3), 
+                (event ->{
+                    if (this.time == 10000) {
+                        System.out.println("fini");
+                        this.gameLoop.stop();
+                    } else if (this.time % 5 == 0) {
+                       this.gm.aTurn();
+                    } else
+                    	this.gm.getGameEnvironment().bulletsHandler();
+                    this.time++;
+                }));
+        this.gameLoop.getKeyFrames().add(kf);
 	}
 
-	private void generateGameobjectListListener() {
+	private void generateGameObjectListListener() {
 		this.gm.getGameEnvironment().getGameObjectsList().addListener((ListChangeListener <GameObject>) c-> {
 			while (c.next()) {
 				for (GameObject gameObject : c.getAddedSubList()) {
@@ -114,9 +115,17 @@ public class Controller implements Initializable {
 						this.tv.addGameObject(gameObject);
 				}
 				for (GameObject gameObject : c.getRemoved()) {
-					if (gameObject instanceof Ennemy)
+					if (gameObject instanceof Ennemy) {
+						ObservableList<Bullet> bullets = this.gm.getGameEnvironment().getBullets();
+						
+						for (int i = 0; i < bullets.size(); i++) {
+							Bullet bullet = bullets.get(i);
+							
+							if (bullet.getTargetObject() == gameObject)
+								this.bv.removeBulletImgView(bullet);
+						}
 						this.ev.removeGameObject(gameObject);
-					else
+					} else
 						this.tv.removeGameObject(gameObject);
 				}
 			}

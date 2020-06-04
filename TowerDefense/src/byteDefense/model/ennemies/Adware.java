@@ -19,7 +19,7 @@ import byteDefense.utilities.BFS;
 public class Adware extends OffensiveEnnemy {
 
 	private static final float REPRODUCTION_RATE = 0;
-	private static final int ATTACK = 0;
+	private static final int ATTACK = 25;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
