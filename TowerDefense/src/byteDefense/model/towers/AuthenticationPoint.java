@@ -19,7 +19,7 @@ public class AuthenticationPoint extends Tower {
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 5;
-	private static final int COST = 0;
+	private static final int COST = 30;
 
 	public AuthenticationPoint(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, gameEnv);

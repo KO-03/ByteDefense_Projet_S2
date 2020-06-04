@@ -14,6 +14,8 @@ import byteDefense.model.ennemies.Wave;
 import byteDefense.model.ennemies.WaveServices;
 import byteDefense.utilities.BFS;
 import byteDefense.utilities.WaveReader;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class GameMaster {
 
@@ -22,7 +24,7 @@ public class GameMaster {
 	private GameArea gameArea;
 	private BFS bfs;
 	private GameEnvironment gameEnv;
-	private int wallet;
+	private final IntegerProperty walletProperty;
 
 	public GameMaster(int initialWallet) {
 		this.gameArea = new GameArea();
@@ -30,7 +32,7 @@ public class GameMaster {
 		this.gameEnv = new GameEnvironment();
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
-		this.wallet = initialWallet;
+		this.walletProperty = new SimpleIntegerProperty(initialWallet);
 	}
 	
 	public GameArea getGameArea() {
@@ -53,24 +55,32 @@ public class GameMaster {
 		return this.gameEnv;
 	}
 	
-	public int getWallet() {
-		return wallet;
+	public final int getWallet() {
+		return this.walletProperty.getValue();
+	}
+	
+	public IntegerProperty getWalletProperty() {
+		return this.walletProperty;
+	}
+	
+	public void setWallet(int amount) {
+		this.walletProperty.set(amount);
 	}
 
 	public boolean addMoney(int amount) {
-		if(amount<0 || this.wallet+amount>Integer.MAX_VALUE)
+		if(amount<0 || this.getWallet()+amount>Integer.MAX_VALUE)
 			return false;
 		else {
-			this.wallet += amount;
+			this.setWallet(this.getWallet()+amount);
 			return true;
 		}
 	}
 	
 	public boolean debitMoney(int amount) {
-		if(amount<0 || this.wallet-amount<0)
+		if(amount<0 || this.getWallet()-amount<0)
 			return false;
 		else {
-			this.wallet -= amount;
+			this.setWallet(this.getWallet()-amount);
 			return true;
 		}
 	}

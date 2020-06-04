@@ -20,7 +20,7 @@ public class Ransomware extends OffensiveEnnemy {
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 1;
-	private static final int LOOT = 0;
+	private static final int LOOT = 2;
 
 	public Ransomware(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);

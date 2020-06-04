@@ -21,7 +21,7 @@ public class Spyware extends Ennemy {
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 0;
-	private static final int LOOT = 0;
+	private static final int LOOT = 2;
 
 
 	public Spyware(BFS bfsMap, GameEnvironment gameEnv) {

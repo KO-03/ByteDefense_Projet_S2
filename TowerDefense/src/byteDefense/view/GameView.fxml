@@ -261,7 +261,7 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
-                                    <Label styleClass="label-subHeader" text="0" />
+                                    <Label fx:id="waveNbr" styleClass="label-subHeader" text="0" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="42.0" top="3.0" />
@@ -274,7 +274,7 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
-                                    <Label styleClass="label-subHeader" text="0" />
+                                    <Label fx:id="ennemiesNbr" styleClass="label-subHeader" text="0" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="42.0" top="3.0" />
@@ -287,7 +287,7 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
-                                    <Label styleClass="label-subHeader" text="0" />
+                                    <Label fx:id="byteCoin" styleClass="label-subHeader" text="0" />
                                  </children>
                                  <HBox.margin>
                                     <Insets left="42.0" top="3.0" />
@@ -327,27 +327,27 @@
                                   <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" />
                                 </rowConstraints>
                                  <children>
-                                    <Label styleClass="label-subSubHeader" text="0" GridPane.rowIndex="1">
+                                    <Label fx:id="costAdcube" styleClass="label-subHeader" text="0" GridPane.rowIndex="1">
                                        <padding>
                                           <Insets left="6.0" />
                                        </padding>
                                     </Label>
-                                    <Label styleClass="label-subSubHeader" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Label styleClass="label-subHeader" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <padding>
                                           <Insets left="6.0" />
                                        </padding>
                                     </Label>
-                                    <Label styleClass="label-subSubHeader" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <Label styleClass="label-subHeader" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <padding>
                                           <Insets left="6.0" />
                                        </padding>
                                     </Label>
-                                    <Label styleClass="label-subSubHeader" text="0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Label styleClass="label-subHeader" text="0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <padding>
                                           <Insets left="6.0" />
                                        </padding>
                                     </Label>
-                                    <Label styleClass="label-subSubHeader" text="0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                    <Label styleClass="label-subHeader" text="0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                        <padding>
                                           <Insets left="6.0" />
                                        </padding>
