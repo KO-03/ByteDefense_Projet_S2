@@ -15,7 +15,7 @@ import byteDefense.model.GameEnvironment;
 
 public class AdCube extends Tower {
 
-	private static final int ATTACK = 0;
+	private static final int ATTACK = 30;
 	private static final int DEFENSE = 0;
 	private static final int ATTACK_SPEED = 0;
 	private static final int ATTACK_RANGE = 1;

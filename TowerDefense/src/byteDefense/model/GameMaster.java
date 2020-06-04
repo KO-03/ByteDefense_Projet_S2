@@ -22,13 +22,15 @@ public class GameMaster {
 	private GameArea gameArea;
 	private BFS bfs;
 	private GameEnvironment gameEnv;
-	
-	public GameMaster() {
+	private int wallet;
+
+	public GameMaster(int initialWallet) {
 		this.gameArea = new GameArea();
 		this.bfs = new BFS(this.gameArea);
 		this.gameEnv = new GameEnvironment();
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
+		this.wallet = initialWallet;
 	}
 	
 	public GameArea getGameArea() {
@@ -51,11 +53,33 @@ public class GameMaster {
 		return this.gameEnv;
 	}
 	
+	public int getWallet() {
+		return wallet;
+	}
+
+	public boolean addMoney(int amount) {
+		if(amount<0 || this.wallet+amount>Integer.MAX_VALUE)
+			return false;
+		else {
+			this.wallet += amount;
+			return true;
+		}
+	}
+	
+	public boolean debitMoney(int amount) {
+		if(amount<0 || this.wallet-amount<0)
+			return false;
+		else {
+			this.wallet -= amount;
+			return true;
+		}
+	}
+	
 	public void aTurn() {
 		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
 		if (!this.waves.get(0).isEmpty())
 			this.waveServices.fillEnnemyList(this.waves.get(0));
-			
+		
 		this.gameEnv.gameEnvironmentHandler(this.bfs);
 	}
 }

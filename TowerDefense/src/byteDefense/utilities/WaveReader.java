@@ -1,9 +1,9 @@
 /*
  * WaveReader.java
- * Les responsabilites de cette classe sont de :
- * - lire le fichier fichier stockant les informations pour chaque Wave
- * - construire une Wave à partir des données (moveSpeed, spawnRate et ennemyInfos de la pile) de la ligne lue correspondant au numéro de la vague
- * - empiler les ennemis (WaveEntities) à ajouter dans une pile pour la construction des Waves
+ * Cette classe gere la recuperation des donnees des Waves (vagues d'ennemis),ses responsabilites sont de :
+ * - lire le fichier stockant les informations pour chaque Wave
+ * - construire une Wave a partir des donnees (moveSpeed, spawnRate et ennemyInfos de la pile) d'une ligne lue correspondant au numero de la vague
+ * - empiler les ennemis (WaveEntities) a ajouter dans une pile pour la construction des Waves
  * - construire la liste des vagues du jeu en fonction des Waves construites
  */
 
@@ -62,7 +62,7 @@ public class WaveReader {
 			List<String> allLines = Files.readAllLines(Paths.get(sourceFile));
 			int fileSize = allLines.size();
 			
-			// recuperation dans le fichier des informations de la vague la ligne correspondant au numero de la vague
+			// recuperation dans le fichier la ligne correspondant au numero de la vague
 			while (waveNumber < fileSize && (waveLine = allLines.get(waveNumber)) != null) {
 				wave = createWaveInstance(waveLine, waveNumber + 1);
 				

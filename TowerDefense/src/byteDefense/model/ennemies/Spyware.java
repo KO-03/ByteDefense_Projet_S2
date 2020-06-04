@@ -25,7 +25,7 @@ public class Spyware extends Ennemy {
 
 
 	public Spyware(BFS bfsMap, GameEnvironment gameEnv) {
-		super(624, 432, bfsMap, gameEnv);
+		super(bfsMap, gameEnv);
 	}
 
 	public int getAttack() {

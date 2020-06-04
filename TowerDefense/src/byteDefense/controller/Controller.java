@@ -2,11 +2,12 @@
  * Controller.java
  * Cette classe fait le lien entre le modele et la vue, ses responsabilitees sont :
  * - initialiser le gameMaster
- * - initialiser la	vue du GameObject
- * - initialiser la vue de la TileMap
+ * - initialiser la vue des ennemis et celle des tourelles
+ * - initialiser la vue de la GameArea
  * - gerer la gameLoop et les actions du jeu (effectuer un tour)
  * - gerer les entites de vue (tourelle, plateau de jeu, grille d'ennemis et de tourelles)
- * - gerer le glisser deposer d'une tourelle et la positionner
+ * - creer les listener sur la liste des GameObject de l'environnement de jeu
+ * - gerer le glisser deposer d'une tourelle et son positionnement
  */
 
 package byteDefense.controller;
@@ -66,8 +67,8 @@ public class Controller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.gm = new GameMaster();
-
+		this.gm = new GameMaster(15);
+		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnnemyView(this.gridEnnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
@@ -84,11 +85,10 @@ public class Controller implements Initializable {
 		this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.5), 
+				Duration.seconds(0.1), 
 				(event ->{
 					if (this.time == 10000) {
 						System.out.println("fini");
-
 						this.gameLoop.stop();
 					} else if (this.time % 5 == 0) {
 						this.gm.aTurn();
@@ -104,9 +104,9 @@ public class Controller implements Initializable {
 			while (c.next()) {
 				for (GameObject gameObject : c.getAddedSubList()) {
 					if (gameObject instanceof Ennemy)
-						ev.addGameObject(gameObject);
+						this.ev.addGameObject(gameObject);
 					else
-						tv.addGameObject(gameObject);
+						this.tv.addGameObject(gameObject);
 				}
 				for (GameObject gameObject : c.getRemoved()) {
 					if (gameObject instanceof Ennemy)
@@ -141,12 +141,8 @@ public class Controller implements Initializable {
 
 		tower.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-
-				int x = (int) event.getX() - tileSize / 2; 
-				int y = (int) event.getY() - tileSize / 2;
-
-				tower.setX(x);
-				tower.setY(y);
+				tower.setX((int) event.getX() - tileSize / 2);
+				tower.setY((int) event.getY() - tileSize / 2);
 			}
 		});
 
@@ -157,6 +153,7 @@ public class Controller implements Initializable {
 
 				if (gm.getGameArea().isPlaceable(x, y)) {
 					GameEnvironment ge = gm.getGameEnvironment();
+					
 					if (tower == adcube)
 						ge.addGameObject(new AdCube(x, y, ge));
 					else if (tower == antivirus)
@@ -169,7 +166,7 @@ public class Controller implements Initializable {
 						ge.addGameObject(new SudVPN(x, y, ge));
 				}
 				tower.setX(initialX);
-				tower.setY(741);
+				tower.setY(741); // 741 est l'ordonnee des imageView des tourelles dans leur menu d'achat
 			}
 		});
 	}

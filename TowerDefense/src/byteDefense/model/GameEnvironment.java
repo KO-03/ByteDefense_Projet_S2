@@ -1,7 +1,6 @@
 package byteDefense.model;
 
 import byteDefense.model.ennemies.Ennemy;
-import byteDefense.model.towers.Tower;
 import byteDefense.utilities.BFS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,7 +40,7 @@ public class GameEnvironment {
 			go = gameObjectsList.get(i);
 
 			go.act();
-			if(!go.isAlive() || (go instanceof Ennemy && go.getCurrentIndTile() == bfs.ARRIVAL_POINT))
+			if(!go.isAlive() || (go instanceof Ennemy && go.getCurrentIndTile() == -1))
 				this.removeGameObject(go);
 		}
 	}

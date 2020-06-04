@@ -1,8 +1,9 @@
 /*
  * GameObjectView.java
- * Cette classe gere la partie visuelle d'un objet de jeu, ses responsabilites sont :
- * - stocker la grille correspondante pour l'objet de jeu (grille d'ennemis ou de tourelles)
- * - ajouter un ennemi ou une tourelle a la vue
+ * Cette classe gere la partie visuelle d'un objet de jeu (Ennemy ou Tower), ses responsabilites sont :
+ * - stocker la grille correspondante pour l'objet de jeu (gridEnnemies ou de gridTowers)
+ * - ajouter un objet de jeu a la vue
+ * - supprimer un objet de jeu de la vue (de la grille)
  */
 
 package byteDefense.view;

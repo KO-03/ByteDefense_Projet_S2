@@ -16,34 +16,34 @@ import byteDefense.utilities.BFS;
 
 public abstract class Ennemy extends GameObject {
 
-	private static BFS bfs;
+	private BFS bfs;
 
 	private int currentIndTile;
-
-	public Ennemy(int x, int y, BFS bfsMap, GameEnvironment gameEnv) {
-		super(x, y, 50, gameEnv);
+	
+	public Ennemy(BFS bfsMap, GameEnvironment gameEnv) {
+		super(GameArea.tilePosX(GameArea.spawnPoint), GameArea.tilePosY(GameArea.spawnPoint), 50, gameEnv);
 		bfs = bfsMap;
-		this.currentIndTile = bfs.bfsPath.size() - 1;
+		this.currentIndTile = GameArea.tileIndex(super.getX(), super.getY());
 	}
 
 	public int getCurrentIndTile() {
 		return this.currentIndTile;
 	}
-
+	
 	public abstract int getLoot();
 
 	public void moveEnnemy() {
 		// fixage de la position de l'ennemi en fonction du chemin du BFS
-		this.setX((int)bfs.bfsPath.get(this.currentIndTile).getX() * GameArea.TILE_SIZE);
-		this.setY((int)bfs.bfsPath.get(this.currentIndTile).getY() * GameArea.TILE_SIZE);
+		this.setX(GameArea.tilePosX(this.currentIndTile)* GameArea.TILE_SIZE);
+		this.setY(GameArea.tilePosY(this.currentIndTile)* GameArea.TILE_SIZE);
 
 		// decrementation de l'indice de la tile courante du BFS
-		if(this.currentIndTile > 0)
-			this.currentIndTile--;
+		if(!this.ennemyArrived())// -1 correspond au point d'arrivée
+			this.currentIndTile = this.bfs.cameFrom[this.currentIndTile];
 	}
 	
 	public boolean ennemyArrived() {
-		return this.currentIndTile <= bfs.ARRIVAL_POINT;
+		return this.currentIndTile == -1;
 	}
 	
 	public void act() {

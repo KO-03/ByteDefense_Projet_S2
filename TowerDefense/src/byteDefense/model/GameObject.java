@@ -65,6 +65,10 @@ public abstract class GameObject {
 		this.yProperty.setValue(newY);
 	}	
 
+	public int getCurrentIndTile() {
+		return GameArea.tileIndex(this.getX(), this.getY());
+	}
+	
 	public int getHp() {
 		return this.hp;
 	}

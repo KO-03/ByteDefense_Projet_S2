@@ -1,108 +1,81 @@
 /*
  * BFS.java
- * Cette classe contruit le graphe correspondant aux chemins et leurs voisins
- * et lance l'alogrithme du bfs pour founir le plus court chemin.
+ * Cette classe explore la gameArea et fourni les chemins les plus courts vers le point de lancement
+ * 
  */
 
 package byteDefense.utilities;
 
-import java.util.*;
+import java.util.LinkedList;
 
 import byteDefense.model.GameArea;
-import javafx.geometry.Point2D;
 
 public class BFS {
-
-	public final int ARRIVAL_POINT = 0;
-
-	private int verticeSize;
-	private GameArea gameArea;
-	private LinkedList<Integer> adj[]; //liste des tiles voisines, remplie avec fill graph
-	public  ArrayList<Point2D> pathList =  new ArrayList<>();
-	public ArrayList<Point2D> bfsPath = new ArrayList<>();// ordre du bfs apres algo
+	
+	int tilesIndex = 0;
+	int gameAreaDimension;
+	public GameArea gameArea;
+	public int[] cameFrom;
 
 	public BFS(GameArea gameArea) {
 		this.gameArea = gameArea;
-		this.createPathList();
-		this.verticeSize = this.pathList.size();
-		this.adj = new LinkedList[this.pathList.size()];
-
-		for (int i = 0; i < this.pathList.size(); ++i)
-			this.adj[i] = new LinkedList<Integer>();
-
-		this.fillGraph();	
-		this.BFS_algo(this.ARRIVAL_POINT);
+		this.gameAreaDimension = (int) Math.pow(this.gameArea.gameAreaSize(), 2);
+		this.cameFrom = new int[gameAreaDimension];
+		this.BFS_algo(GameArea.arrivalPoint);	
 	}
 
-	private void addEdge(int v, int w) {
-		this.adj[v].add(w);
-	}
-
-	private  void createPathList() {
-		int tilesIndex = 0;
-
-		for (int i = 0; i < this.gameArea.getTilesList().size() - 1; i++) {
-			tilesIndex = this.gameArea.getTilesList().get(i);
-			if (this.gameArea.isWalkable(tilesIndex)) {
-				this.pathList.add(new Point2D(this.gameArea.tilePosX(i), this.gameArea.tilePosY(i)));
-			}
-		}
-	}
-
-	private void fillGraph() {
-		for (int i = 0; i < this.adj.length; i++) {
-			int [] neightbour = this.fillNeightbours(this.pathList.get(i));
-			for (int j = 0; j < neightbour.length; j++) {
-				if (neightbour[j]!=-1)
-					this.addEdge(i, neightbour[j]);
-			}
-		}
-	}
-
-	private int[] fillNeightbours(Point2D index) {
-		int x = (int) index.getX();
-		int y = (int) index.getY();
-
+	private int[] foundNeightbours(int index) {
+		int x = GameArea.tilePosX(index);
+		int y = GameArea.tilePosY(index);	
+		int up = GameArea.tileIndex(x, y-1);
+		int right = GameArea.tileIndex(x + 1, y);
+		int down = GameArea.tileIndex(x, y + 1);
+		int left = GameArea.tileIndex(x - 1, y);
+	
 		int[] neightbours = new int[] {
-				neightboursTileIndex(x, y - 1), 
-				neightboursTileIndex(x + 1, y), 
-				neightboursTileIndex(x, y + 1), 
-				neightboursTileIndex(x - 1, y)
+				this.lookTileValue(up),
+				this.lookTileValue(right), 
+				this.lookTileValue(down), 
+				this.lookTileValue(left)
 		};	
 		return neightbours;
 	}
-
-	private int neightboursTileIndex(int x, int y) {
-		Point2D check  = new Point2D(x, y);
-		for (int i = 0; i < this.pathList.size(); i++) {
-			if (check.getX() == this.pathList.get(i).getX() && check.getY() == this.pathList.get(i).getY()) {
-				return i;
-			}
+	
+	private int lookTileValue(int value) {
+		if(this.gameArea.isWalkable(this.gameArea.getTilesList().get(value))) 
+			return value;
+		else
+			return -1;
+	}
+	
+	private boolean isInCameFrom(int value) {
+		for(int i : this.cameFrom) {
+			if(i == value)
+				return true;
 		}
-		return -1;
+		return false;
 	}
 
-	public void BFS_algo(int s) {
-		boolean visited[] = new boolean[this.verticeSize];
-
+	public void BFS_algo(int start) {
 		LinkedList<Integer> queue = new LinkedList<Integer>();
-
-		visited[s] = true;
-		queue.add(s);
-		this.bfsPath.add(this.pathList.get(s));
-
+		
+		queue.add(start);
+		
+		this.cameFrom[start] = -1;
+	
 		while (queue.size() != 0) {
-			s = queue.poll();
-
-			Iterator<Integer> i = this.adj[s].listIterator();
-			while (i.hasNext()) {
-				int n = i.next();
-				if (!visited[n]) {
-					visited[n] = true;
-					queue.add(n);
-					this.bfsPath.add(this.pathList.get(n));
+			int current = queue.poll();
+			int [] neightbour = this.foundNeightbours(current);
+			int next;
+			for(int i =0 ; i<neightbour.length; i++) {
+				if(neightbour[i]!=-1) {
+					next= neightbour[i];					
+					if (!this.isInCameFrom(next)) {
+						queue.add(next);
+						this.cameFrom[next] = current;
+					}
 				}
 			}
-		}
-	}
+		}		
+	}	
 }
