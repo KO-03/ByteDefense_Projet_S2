@@ -59,8 +59,8 @@ public class Rookit extends OffensiveEnnemy {
 	}
 
 	public void act() {
-		if (!this.isArrived())
-			this.moveEnnemy();
+		if (!super.isArrived())
+			super.moveEnnemy();
 		this.increaseAttack();
 		super.attackTower();
 	}

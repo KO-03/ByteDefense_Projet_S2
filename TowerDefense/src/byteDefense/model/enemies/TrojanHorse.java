@@ -47,7 +47,7 @@ public class TrojanHorse extends Ennemy {
 	}
 
 	public void act() {
-		if (!this.isArrived())
-			this.moveEnnemy();
+		if (!super.isArrived())
+			super.moveEnnemy();
 	}
 }

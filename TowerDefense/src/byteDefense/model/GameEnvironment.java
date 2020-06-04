@@ -49,7 +49,7 @@ public class GameEnvironment {
 		GameObject go;
 		
 		for (int i = this.gameObjectsList.size() - 1; i >= 0; i--) {
-			go = gameObjectsList.get(i);
+			go = this.gameObjectsList.get(i);
 
 			go.act();
 			// Si l'objet de jeu est mort, ou qu'il est un ennemi et qu'il est arrive au bout du chemin, il est supprime

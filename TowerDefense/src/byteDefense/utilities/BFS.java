@@ -19,7 +19,7 @@ public class BFS {
 	public BFS(GameArea gameArea) {
 		this.gameArea = gameArea;
 		this.gameAreaDimension = (int) Math.pow(GameArea.gameAreaTilesSize, 2);
-		this.cameFrom = new int[gameAreaDimension];
+		this.cameFrom = new int[this.gameAreaDimension];
 		this.BFS_algo(GameArea.arrivalPoint);	
 	}
 

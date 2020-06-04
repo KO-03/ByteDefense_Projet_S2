@@ -47,8 +47,8 @@ public class Ransomware extends OffensiveEnnemy {
 	}
 
 	public void act() {
-		if (!this.isArrived())
-			this.moveEnnemy();
+		if (!super.isArrived())
+			super.moveEnnemy();
 		super.attackTower();
 	}
 }

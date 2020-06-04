@@ -135,18 +135,18 @@ public class Controller implements Initializable {
 				for (GameObject gameObject : c.getAddedSubList()) {
 					if (gameObject instanceof Ennemy) {
 						this.ev.addGameObject(gameObject);
-						nbrEnemies++;
+						this.nbrEnemies++;
 					} else
 						this.tv.addGameObject(gameObject);
 				}
 				for (GameObject gameObject : c.getRemoved()) {
 					if (gameObject instanceof Ennemy) {
 						this.ev.removeGameObject(gameObject);				
-						nbrEnemies--;
+						this.nbrEnemies--;
 					} else
 						this.tv.removeGameObject(gameObject);
 				}
-				this.enemiesNbr.setText(Integer.toString(nbrEnemies));
+				this.enemiesNbr.setText(Integer.toString(this.nbrEnemies));
 			}
 		});
 	}
