@@ -14,16 +14,24 @@ import java.util.ArrayList;
 import byteDefense.utilities.GameAreaReader;
 
 public class GameArea {
-
-	public static final int TILE_SIZE = 48;
-	public static int gameAreaSize;
 	
+	public static final int TILE_SIZE = 48;
+	public static int gameAreaTilesSize;
+	
+	public static int arrivalPoint = 28;
+	public static int spawnPoint = 139;
+	
+	private static ArrayList<ArrayList<Integer>> levelsTilesList;
 	private ArrayList<Integer> tilesList;
 	
 	public GameArea() {
-		this.tilesList = new ArrayList<>();
-		this.tilesList = GameAreaReader.readFile("./resources/tiles.txt");
-		gameAreaSize = gameAreaSize();
+		levelsTilesList = GameAreaReader.generateLevelsTilesList("./resources/tiles.txt");
+		this.tilesList = fixLevelTilesList(1);
+		gameAreaTilesSize = gameAreaSize();
+	}
+	
+	public ArrayList<Integer> fixLevelTilesList(int level) {
+		return levelsTilesList.get(level - 1);
 	}
 	
 	public ArrayList<Integer> getTilesList(){
@@ -35,19 +43,19 @@ public class GameArea {
 	}
 	
 	public int gameAreaCase(int x, int y) {
-		return this.tilesList.get(this.tileIndex(x, y));
+		return this.tilesList.get(tileIndex(x, y));
 	}
 	
-	public int tileIndex(int x, int y) {
-		return x + gameAreaSize * y;
+	public static int tileIndex(int x, int y) {
+		return x + gameAreaTilesSize * y;
 	}
 	
-	public int tilePosX(int indTilePos) {
-		return indTilePos % gameAreaSize;
+	public static int tilePosX(int indTilePos) {
+		return indTilePos % gameAreaTilesSize;
 	}
 
-	public int tilePosY(int indTilePos) {
-		return indTilePos / gameAreaSize;
+	public static int tilePosY(int indTilePos) {
+		return indTilePos / gameAreaTilesSize;
 	}
 	
 	public boolean isWalkable(int index) {
@@ -55,7 +63,7 @@ public class GameArea {
 	}
 	
 	private boolean onGameArea(int x, int y) {
-		return x > 0 && y > 0 && x < gameAreaSize && y < gameAreaSize; 
+		return x > 0 && y > 0 && x < gameAreaTilesSize && y < gameAreaTilesSize; 
 	}
 	
 	public boolean isPlaceable(int x, int y) {

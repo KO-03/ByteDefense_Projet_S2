@@ -1,10 +1,10 @@
 /*
  * GameAreaView.java
- * Cette classe gere la partie visuelle de la GameArea, ses responsabilites sont de :
+ * Cette classe gere la partie visuelle de la GameArea (plateau de jeu), ses responsabilites sont de :
  * - charger et stocker les ressources d'images des tiles
  * - stocker les types de tiles
- * - faire la correspondance entre les types de tiles et les donnees de la tilemap a ajouter 
- * - ajouter la tilemap a la vue.
+ * - faire la correspondance entre les types de tiles et les donnees de la gameArea a ajouter 
+ * - ajouter la gameArea a la vue tile par tile
  */
 
 package byteDefense.view;
@@ -91,7 +91,7 @@ public class GameAreaView {
 
 	private void generateMapView() {
 		Image tileImg;
-		int tilesSize = GameArea.gameAreaSize;
+		int tilesSize = GameArea.gameAreaTilesSize;
 
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {
