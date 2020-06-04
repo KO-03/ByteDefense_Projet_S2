@@ -15,6 +15,7 @@ package byteDefense.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import byteDefense.model.Bullet;
 import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.GameMaster;
@@ -25,6 +26,7 @@ import byteDefense.model.towers.Antivirus;
 import byteDefense.model.towers.AuthenticationPoint;
 import byteDefense.model.towers.Firewall;
 import byteDefense.model.towers.SudVPN;
+import byteDefense.view.BulletView;
 import byteDefense.view.EnnemyView;
 import byteDefense.view.GameAreaView;
 import byteDefense.view.TowerView;
@@ -62,6 +64,7 @@ public class Controller implements Initializable {
 	private EnnemyView ev;
 	private TowerView tv;
 	private GameMaster gm;
+	private BulletView bv;
 	private Timeline gameLoop;
 	private int time;
 
@@ -72,8 +75,10 @@ public class Controller implements Initializable {
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnnemyView(this.gridEnnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
-
+		this.bv = new BulletView(this.gridTowers);
+		
 		this.generateGameobjectListListener();
+		this.generateBulletsListener();
 		this.mouseDraggedOnTowers();
 		this.initAnimation();
 		this.gameLoop.play();
@@ -110,14 +115,25 @@ public class Controller implements Initializable {
 				}
 				for (GameObject gameObject : c.getRemoved()) {
 					if (gameObject instanceof Ennemy)
-						this.ev.removeEnnemy(gameObject);
+						this.ev.removeGameObject(gameObject);
 					else
-						this.tv.removeEnnemy(gameObject);
+						this.tv.removeGameObject(gameObject);
 				}
 			}
 		});
 	}
 
+	private void generateBulletsListener() {
+		this.gm.getGameEnvironment().getBullets().addListener((ListChangeListener <Bullet>) c-> {
+			while (c.next()) {
+				for (Bullet bullet : c.getAddedSubList())
+					this.bv.addBulletImgView(bullet);
+				for (Bullet bullet : c.getRemoved())
+					this.bv.removeBulletImgView(bullet);
+			}
+		});
+	}
+	
 	private void mouseDraggedOnTowers() {
 		this.adcube.setOnMouseDragged(event -> {
 			dragAndDrop(this.adcube, (int) this.adcube.getX());

@@ -6,16 +6,21 @@
 
 package byteDefense.model.ennemies;
 
+import byteDefense.model.Bullet;
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.GameObject;
 import byteDefense.utilities.BFS;
 
 public abstract class OffensiveEnnemy extends Ennemy {
 
-	public OffensiveEnnemy(int x, int y, BFS bfsMap, GameEnvironment gameEnv) {
+	public OffensiveEnnemy(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
 	}
 
 	public void attackTower() {
-		super.shoot(super.findTarget());
+		GameObject target = super.findTarget();
+		
+		if (target != null)
+			super.gameEnv.addBullet(new Bullet(super.getX(), super.getY(), target, this));
 	}
 }

@@ -4,7 +4,7 @@
  * - lire le fichier stockant les informations pour chaque Wave
  * - construire une Wave a partir des donnees (moveSpeed, spawnRate et ennemyInfos de la pile) d'une ligne lue correspondant au numero de la vague
  * - empiler les ennemis (WaveEntities) a ajouter dans une pile pour la construction des Waves
- * - construire la liste des vagues du jeu en fonction des Waves construites
+ * - construire la liste des Waves du jeu en fonction des Waves construites
  */
 
 package byteDefense.utilities;
@@ -52,6 +52,7 @@ public class WaveReader {
 		return new Wave(waveNumber, moveSpeed, spawnRate, waveEntities);
 	}
 	
+	// Fonction qui retourne une liste des vagues contruites par récupération des donnees d'un fichier
 	public static ArrayList<Wave> generateWaves(String sourceFile) {
 		ArrayList<Wave> waves = new ArrayList<>();
 		int waveNumber = 0;

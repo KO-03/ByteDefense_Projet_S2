@@ -25,7 +25,7 @@ public class Rookit extends OffensiveEnnemy {
 	private static final int LOOT = 0;
 
 	public Rookit(BFS bfsMap, GameEnvironment gameEnv) {
-		super(624, 432, bfsMap, gameEnv);
+		super(bfsMap, gameEnv);
 	}
 
 	public int getAttack() {

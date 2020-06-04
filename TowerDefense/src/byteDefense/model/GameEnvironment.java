@@ -8,9 +8,11 @@ import javafx.collections.ObservableList;
 public class GameEnvironment {
 	
 	private ObservableList<GameObject> gameObjectsList;
+	private ObservableList<Bullet> bullets;
 
 	public GameEnvironment() {
 		this.gameObjectsList = FXCollections.observableArrayList();
+		this.bullets = FXCollections.observableArrayList();
 	}
 	
 	public void addGameObject(GameObject gameObject) {
@@ -33,8 +35,21 @@ public class GameEnvironment {
 		return null;
 	}
 	
+	public void addBullet(Bullet bullet) {
+		this.bullets.add(bullet);
+	}
+	
+	public void removeBullet(Bullet bullet) {
+		this.bullets.remove(bullet);
+	}
+	
+	public ObservableList<Bullet> getBullets() {
+		return this.bullets;
+	}
+	
 	public void gameEnvironmentHandler(BFS bfs) {
 		GameObject go;
+		Bullet bullet;
 		
 		for (int i = this.gameObjectsList.size() - 1; i >= 0; i--) {
 			go = gameObjectsList.get(i);
@@ -43,5 +58,16 @@ public class GameEnvironment {
 			if(!go.isAlive() || (go instanceof Ennemy && go.getCurrentIndTile() == -1))
 				this.removeGameObject(go);
 		}
+		
+		for (int i = 0; i < this.bullets.size(); i++) {
+			bullet = this.bullets.get(i);
+			
+			bullet.update();
+			if (bullet.isArrived()) {
+				bullet.damaged();
+				this.removeBullet(bullet);
+			}
+		}
+
 	}
 }

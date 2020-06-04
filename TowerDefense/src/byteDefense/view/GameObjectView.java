@@ -47,7 +47,7 @@ public abstract class GameObjectView {
 		}
 	}
 	
-	public void removeEnnemy(GameObject gameObject) {
+	public void removeGameObject(GameObject gameObject) {
 		this.grid.getChildren().remove(this.grid.lookup("#" + gameObject.getId()));
 	}
 }

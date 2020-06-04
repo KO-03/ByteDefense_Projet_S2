@@ -19,7 +19,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class GameObject {
 
-	private static int counterId = 0;
+	protected static int counterId = 0;
 
 	private int id;
 	private IntegerProperty xProperty;
@@ -81,13 +81,13 @@ public abstract class GameObject {
 		return this.hp > 0;
 	}
 	
-	public boolean isATower() {
+	public boolean isTower() {
 		return this instanceof Tower;
 	}
 	
 	public GameObject findTarget() {
 		for(GameObject gameObject : this.gameEnv.getGameObjectsList()){
-			if ((this.isATower() && gameObject instanceof Ennemy) || (!this.isATower() && gameObject instanceof Tower)) {
+			if ((this.isTower() && gameObject instanceof Ennemy) || (!this.isTower() && gameObject instanceof Tower)) {
 				if ((this.getY() - this.getAttackRange() * GameArea.TILE_SIZE <= gameObject.getY() && gameObject.getY() <= this.getY() + this.getAttackRange() * GameArea.TILE_SIZE) &&
 					(this.getX() - this.getAttackRange() * GameArea.TILE_SIZE <= gameObject.getX() && gameObject.getX() <= this.getX() + this.getAttackRange() * GameArea.TILE_SIZE)) {
 					System.out.println("Piou piou !");
@@ -96,12 +96,6 @@ public abstract class GameObject {
 			}
 		}
 		return null;
-	}
-	
-	public void shoot(GameObject tower) {
-		if(tower != null) {
-			tower.decrementHp((int) this.getAttack());
-		}
 	}
 	
 	public abstract int getAttack();
