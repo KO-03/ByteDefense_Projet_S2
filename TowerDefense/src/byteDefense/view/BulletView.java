@@ -1,42 +1,37 @@
 package byteDefense.view;
 
-import java.io.File;
-import java.net.MalformedURLException;
-
 import byteDefense.model.Bullet;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import byteDefense.model.GameArea;
+import javafx.animation.TranslateTransition;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 public class BulletView {
 	
 	private Pane grid;
-	private Image bulletImg;
 	
 	public BulletView(Pane grid) {
 		this.grid = grid;
-		try {
-			bulletImg = new Image(new File("./resources/icons/attack.png").toURI().toURL().toString());
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
 	}
 	
-	public void addBulletImgView(Bullet bullet) {
-		ImageView bulletImgView = new ImageView();
+	public void addBulletView(Bullet bullet) {
+		int tileCenter = GameArea.TILE_SIZE / 2;
+		Circle circ = new Circle();
+		circ.setId(Integer.toString(bullet.getId()));
+		circ.setTranslateX(bullet.getX() + tileCenter);
+		circ.setTranslateY(bullet.getY() + tileCenter);
+		circ.setRadius(5);
 		
-		bulletImgView.setImage(this.bulletImg);
-		bulletImgView.setId(Integer.toString(bullet.getId()));
-		bulletImgView.setTranslateX(bullet.getX());
-		bulletImgView.setTranslateY(bullet.getY());	
-
-		bulletImgView.translateXProperty().bind(bullet.getXProperty());
-		bulletImgView.translateYProperty().bind(bullet.getYProperty());
-
-		this.grid.getChildren().add(bulletImgView);
+		this.grid.getChildren().add(circ);
+		
+		TranslateTransition tt = new TranslateTransition(Duration.millis(250), circ);
+		tt.setToX(bullet.getTargetX() + tileCenter);
+		tt.setToY(bullet.getTargetY() + tileCenter);
+		tt.play();
 	}
 	
-	public void removeBulletImgView(Bullet bullet) {
+	public void removeBulletView(Bullet bullet) {
 		this.grid.getChildren().remove(this.grid.lookup("#" + bullet.getId()));
 	}
 }

@@ -33,7 +33,6 @@ import byteDefense.view.TowerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -115,17 +114,9 @@ public class Controller implements Initializable {
 						this.tv.addGameObject(gameObject);
 				}
 				for (GameObject gameObject : c.getRemoved()) {
-					if (gameObject instanceof Ennemy) {
-						ObservableList<Bullet> bullets = this.gm.getGameEnvironment().getBullets();
-						
-						for (int i = 0; i < bullets.size(); i++) {
-							Bullet bullet = bullets.get(i);
-							
-							if (bullet.getTargetObject() == gameObject)
-								this.bv.removeBulletImgView(bullet);
-						}
+					if (gameObject instanceof Ennemy)
 						this.ev.removeGameObject(gameObject);
-					} else
+					else
 						this.tv.removeGameObject(gameObject);
 				}
 			}
@@ -136,9 +127,9 @@ public class Controller implements Initializable {
 		this.gm.getGameEnvironment().getBullets().addListener((ListChangeListener <Bullet>) c-> {
 			while (c.next()) {
 				for (Bullet bullet : c.getAddedSubList())
-					this.bv.addBulletImgView(bullet);
+					this.bv.addBulletView(bullet);
 				for (Bullet bullet : c.getRemoved())
-					this.bv.removeBulletImgView(bullet);
+					this.bv.removeBulletView(bullet);
 			}
 		});
 	}

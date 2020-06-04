@@ -62,14 +62,12 @@ public class GameEnvironment {
 	public void bulletsHandler() {
 		Bullet bullet;
 		
-		for (int i = 0; i < this.bullets.size(); i++) {
+		for (int i = this.bullets.size() - 1; i >= 0; i--) {
 			bullet = this.bullets.get(i);
 			
-			if (bullet.isArrived()) {
+			this.removeBullet(bullet);
+			if (bullet.getTargetObject().isAlive())
 				bullet.damaged();
-				this.removeBullet(bullet);
-			} else
-				bullet.update();
 		}
 	}
 }

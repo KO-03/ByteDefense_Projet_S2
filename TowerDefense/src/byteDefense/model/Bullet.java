@@ -57,26 +57,12 @@ public class Bullet {
 		return this.targetObject;
 	}
 	
-	public void update() {
-		if (this.getX() != targetX && this.getY() != targetY) {
-			if (this.getX() > targetX) {
-				this.setX(this.getX() - 24);
-			}
-			else if (this.getX() < targetX){
-				this.setX(this.getX() + 24);
-			}
-				
-			if (this.getY() > targetY) {
-				this.setY(this.getY() - 24);
-			}
-			else if (this.getY() < targetY) {
-				this.setY(this.getY() + 24);
-			}
-		}
+	public int getTargetX() {
+		return this.targetX;
 	}
-	
-	public boolean isArrived() {
-		return this.getX() == this.targetObject.getX() && this.getY() == this.targetObject.getX();
+
+	public int getTargetY() {
+		return this.targetY;
 	}
 	
 	public void damaged() {
