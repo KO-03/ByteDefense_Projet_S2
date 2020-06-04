@@ -131,7 +131,7 @@ public class Controller implements Initializable {
 						nbrEnnemiesRemoved++;
 					}
 					else
-						this.gridTowers.getChildren().remove(this.gridTowers.lookup("#" + gameObject.getId()));
+						this.tv.removeEnnemy(gameObject);
 				}
 				int oldNbrEnnemies=Integer.parseInt(this.ennemiesNbr.getText());
 				this.ennemiesNbr.setText(""+ (oldNbrEnnemies-nbrEnnemiesRemoved+nbrEnnemiesAdded));
