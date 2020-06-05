@@ -1,6 +1,9 @@
 /*
  * BFS.java
- * Cette classe explore la gameArea et fourni les chemins les plus courts vers le point de lancement
+ * Cette classe explore la carte accessible dans la gameArea (un ArrayList<Integer>)
+ * et fourni les chemins les plus courts vers le point de lancement.
+ * - Le chemin du bfs est stockee dans un tableau à une dimension du nombre de tiles de la carte
+ * || cameFrom[indiceTile] = indiceParentDeLaTile ||
  */
 
 package byteDefense.utilities;
@@ -18,7 +21,7 @@ public class BFS {
 
 	public BFS(GameArea gameArea) {
 		this.gameArea = gameArea;
-		this.gameAreaDimension = (int) Math.pow(GameArea.gameAreaTilesSize, 2);
+		this.gameAreaDimension = (int) Math.pow(GameArea.gameAreaTilesSize, 2);// (largeurDuTerrain^2)
 		this.cameFrom = new int[this.gameAreaDimension];
 		this.BFS_algo(GameArea.arrivalPoint);	
 	}
@@ -51,7 +54,6 @@ public class BFS {
 		for (int i : this.cameFrom)
 			if (i == value)
 				return true;
-			
 		return false;
 	}
 
@@ -59,7 +61,7 @@ public class BFS {
 		LinkedList<Integer> queue = new LinkedList<Integer>();
 		
 		queue.add(start);
-		this.cameFrom[start] = -1;
+		this.cameFrom[start] = -1;//premier sommet du BFS
 		
 		while (queue.size() != 0) {
 			int current = queue.poll();
