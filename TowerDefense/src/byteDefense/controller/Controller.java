@@ -188,7 +188,7 @@ public class Controller implements Initializable {
 				int x = (int) event.getX() / tileSize * tileSize; 
 				int y = (int) event.getY() / tileSize * tileSize;
 
-				if (gm.getGameArea().isPlaceable(x, y)) {
+				if (gm.getGameArea().isPlaceable(x, y) && !gm.isReserved(x, y)) {
 					GameEnvironment ge = gm.getGameEnvironment();
 					
 					if (tower == adcube)

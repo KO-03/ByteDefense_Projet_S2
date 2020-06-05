@@ -113,4 +113,14 @@ public class GameEnvironment {
     	this.removeLivingObject();
 		this.livingObjectAttack();
 	}
+	
+	public boolean checkPosition(int x, int y) {
+		int tileSize = GameArea.TILE_SIZE;
+		
+		for (Tower tower: this.towers) {
+			if (tower.getX() / tileSize * tileSize == x && tower.getY() / tileSize * tileSize == y)
+				return true;
+		}
+		return false;
+	}
 }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import byteDefense.model.enemies.Wave;
 import byteDefense.model.enemies.WaveServices;
+import byteDefense.model.towers.Tower;
 import byteDefense.utilities.BFS;
 import byteDefense.utilities.WaveReader;
 import javafx.beans.property.IntegerProperty;
@@ -74,7 +75,7 @@ public class GameMaster {
 		if(amount < 0 || this.getWallet() + amount > Integer.MAX_VALUE)
 			return false;
 		else {
-			this.setWallet(this.getWallet()+amount);
+			this.setWallet(this.getWallet() + amount);
 			return true;
 		}
 	}
@@ -83,7 +84,7 @@ public class GameMaster {
 		if(amount < 0 || this.getWallet() - amount < 0)
 			return false;
 		else {
-			this.setWallet(this.getWallet()-amount);
+			this.setWallet(this.getWallet() - amount);
 			return true;
 		}
 	}
@@ -95,5 +96,9 @@ public class GameMaster {
 		
 		this.gameEnv.enemiesMove();
 		this.addMoney(1);
+	}
+	
+	public boolean isReserved(int x, int y) {
+		return this.gameEnv.checkPosition(x, y);
 	}
 }
