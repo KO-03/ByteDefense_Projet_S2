@@ -5,7 +5,8 @@
  * - stocker et recuperer la cible du tir
  * - stocker le tireur 
  * - identifier un tir par un identifiant recuperable
- * - recuperer les coordonnees de la cible du tir
+ * - stocker et recuperer les coordonnees de la cible du tir
+ * - blesser la cible selon les degats du tireur
  */
 
 package byteDefense.model;

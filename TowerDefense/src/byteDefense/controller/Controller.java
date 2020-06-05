@@ -78,7 +78,7 @@ public class Controller implements Initializable {
     private Label attackRangeStat;
 
 	private GameMaster gm;
-	private int nbrEnemies;
+	private int enemiesNbrModel;
 	private EnnemyView ev;
 	private TowerView tv;
 	private BulletView bv;
@@ -88,7 +88,7 @@ public class Controller implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.gm = new GameMaster();
-		this.nbrEnemies = 0;
+		this.enemiesNbrModel = 0;
 		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnnemyView(this.grid);
@@ -135,18 +135,18 @@ public class Controller implements Initializable {
 				for (GameObject gameObject : c.getAddedSubList()) {
 					if (gameObject instanceof Ennemy) {
 						this.ev.addGameObject(gameObject);
-						this.nbrEnemies++;
+						this.enemiesNbrModel++;
 					} else
 						this.tv.addGameObject(gameObject);
 				}
 				for (GameObject gameObject : c.getRemoved()) {
 					if (gameObject instanceof Ennemy) {
 						this.ev.removeGameObject(gameObject);				
-						this.nbrEnemies--;
+						this.enemiesNbrModel--;
 					} else
 						this.tv.removeGameObject(gameObject);
 				}
-				this.enemiesNbr.setText(Integer.toString(this.nbrEnemies));
+				this.enemiesNbr.setText(Integer.toString(this.enemiesNbrModel));
 			}
 		});
 	}
