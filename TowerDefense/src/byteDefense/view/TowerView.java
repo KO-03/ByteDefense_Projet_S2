@@ -11,7 +11,7 @@ package byteDefense.view;
 import java.io.File;
 import java.net.MalformedURLException;
 
-import byteDefense.model.GameObject;
+import byteDefense.model.LivingObject;
 import byteDefense.model.towers.AdCube;
 import byteDefense.model.towers.Antivirus;
 import byteDefense.model.towers.AuthenticationPoint;
@@ -21,7 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class TowerView extends GameObjectView {
+public class TowerView extends LivingObjectView {
 
 	private static Image adcubeImg; 
 	private static Image antivirusImg;
@@ -58,18 +58,18 @@ public class TowerView extends GameObjectView {
 		}
 	}
 
-	public Image imageGetter(GameObject gameObject) {
+	public Image imageGetter(LivingObject livingObject) {
 		Image img;
 
-		if (gameObject instanceof AdCube)
+		if (livingObject instanceof AdCube)
 			img = adcubeImg;
-		else if (gameObject instanceof Antivirus)
+		else if (livingObject instanceof Antivirus)
 			img = antivirusImg;
-		else if (gameObject instanceof Firewall)
+		else if (livingObject instanceof Firewall)
 			img = firewallImg;
-		else if (gameObject instanceof AuthenticationPoint)
+		else if (livingObject instanceof AuthenticationPoint)
 			img = authenticationPointImg;
-		else if (gameObject instanceof SudVPN)
+		else if (livingObject instanceof SudVPN)
 			img = sudvpnImg;
 		else
 			img = null;

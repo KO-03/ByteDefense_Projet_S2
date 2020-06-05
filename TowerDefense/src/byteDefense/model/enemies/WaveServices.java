@@ -23,7 +23,7 @@ public class WaveServices {
 		this.gameEnv = gameEnvironment;
 	}
 	
-	private Ennemy createEnnemy(Wave wave) {
+	private Enemy createEnnemy(Wave wave) {
 		int ennemyType = wave.getEnnemyType();
 		
 		wave.decrementEnnemyQty();
@@ -34,9 +34,9 @@ public class WaveServices {
 	}
 
 	public void addEnnemy(Wave wave) {
-		Ennemy ennemy = createEnnemy(wave); 
+		Enemy ennemy = createEnnemy(wave); 
 
 		if (ennemy != null)
-			this.gameEnv.addGameObject(ennemy);
+			this.gameEnv.addEnemy(ennemy);
 	}
 }

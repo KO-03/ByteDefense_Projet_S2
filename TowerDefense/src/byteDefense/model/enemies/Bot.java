@@ -14,7 +14,7 @@ package byteDefense.model.enemies;
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class Bot extends Ennemy {
+public class Bot extends Enemy {
 
 	private static final int ATTACK = 10;
 	private static final int DEFENSE = 10;
@@ -46,7 +46,7 @@ public class Bot extends Ennemy {
 		return LOOT;
 	}
 
-	public void act() {
+	public void move() {
 		if (!super.isArrived())
 			super.moveEnnemy();
 	}

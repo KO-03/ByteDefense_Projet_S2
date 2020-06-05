@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="byteDefense.model.enemies.Ennemy" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/model/enemies/Ennemy.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="byteDefense.model.enemies.Enemy" project="TowerDefense" 
+    file="/TowerDefense/src/byteDefense/model/enemies/Enemy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="884" y="100"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="byteDefense.model.enemies.OffensiveEnnemy" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/model/enemies/OffensiveEnnemy.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="byteDefense.model.enemies.OffensiveEnemy" project="TowerDefense" 
+    file="/TowerDefense/src/byteDefense/model/enemies/OffensiveEnemy.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="476" y="187"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -83,31 +83,31 @@
     </display>  
   </class>  
   <generalization id="10">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="11">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
-  <generalization id="11">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
   <generalization id="12">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="2"/>  
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
   </generalization>  
   <generalization id="13">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
   <generalization id="14">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <generalization id="15">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
   <generalization id="16">    
-    <end type="SOURCE" refId="7"/>    
+    <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

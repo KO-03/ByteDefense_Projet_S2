@@ -21,8 +21,7 @@ import byteDefense.model.Bullet;
 import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.GameMaster;
-import byteDefense.model.GameObject;
-import byteDefense.model.enemies.Ennemy;
+import byteDefense.model.enemies.Enemy;
 import byteDefense.model.towers.AdCube;
 import byteDefense.model.towers.Antivirus;
 import byteDefense.model.towers.AuthenticationPoint;
@@ -113,39 +112,35 @@ public class Controller implements Initializable {
         this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.3), 
+				Duration.seconds(0.5), 
 				(event ->{
-					if (this.time == 10000) {
-						System.out.println("fini");
+					if (this.time == 10000)
 						this.gameLoop.stop();
-					} else if (this.time % 5 == 0) {
+					else if (this.time % 5 == 0)
 						this.gm.aTurn();
-					} else
-                    	this.gm.getGameEnvironment().bulletsHandler();
+                	this.gm.getGameEnvironment().gameAction();
 					this.time++;
 				}));
 
 		this.gameLoop.getKeyFrames().add(kf);
-
 	}
 
 	private void generateGameObjectListListener() {
-		this.gm.getGameEnvironment().getGameObjectsList().addListener((ListChangeListener <GameObject>) c-> {
+		this.gm.getGameEnvironment().getTowers().addListener((ListChangeListener <Tower>) c-> {
 			while (c.next()) {
-				for (GameObject gameObject : c.getAddedSubList()) {
-					if (gameObject instanceof Ennemy) {
-						this.ev.addGameObject(gameObject);
-						this.enemiesNbrModel++;
-					} else
-						this.tv.addGameObject(gameObject);
-				}
-				for (GameObject gameObject : c.getRemoved()) {
-					if (gameObject instanceof Ennemy) {
-						this.ev.removeGameObject(gameObject);				
-						this.enemiesNbrModel--;
-					} else
-						this.tv.removeGameObject(gameObject);
-				}
+				for (Tower tower : c.getAddedSubList())
+					this.tv.addLivingObject(tower);
+				for (Tower tower : c.getRemoved())
+					this.tv.removeGameObject(tower);
+			}
+		});
+		
+		this.gm.getGameEnvironment().getEnemies().addListener((ListChangeListener <Enemy>) c-> {
+			while (c.next()) {
+				for (Enemy enemy : c.getAddedSubList())
+					this.ev.addLivingObject(enemy);
+				for (Enemy enemy : c.getRemoved())
+					this.ev.removeGameObject(enemy);
 				this.enemiesNbr.setText(Integer.toString(this.enemiesNbrModel));
 			}
 		});
@@ -212,7 +207,7 @@ public class Controller implements Initializable {
 					
 					// le joueur ne possede pas assez de byteCoin pour acheter la tourelle
 					if(gm.debitMoney(newTower.getCost()))
-						ge.addGameObject(newTower);
+						ge.addTower(newTower);
 				}
 				tower.setX(initialX);
 				tower.setY(741); // 741 est l'ordonnee des imageView des tourelles dans leur menu d'achat

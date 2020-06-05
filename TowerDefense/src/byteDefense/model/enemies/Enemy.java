@@ -11,15 +11,15 @@ package byteDefense.model.enemies;
 
 import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
-import byteDefense.model.GameObject;
+import byteDefense.model.LivingObject;
 import byteDefense.utilities.BFS;
 
-public abstract class Ennemy extends GameObject {
+public abstract class Enemy extends LivingObject {
 
 	private static BFS bfs;
 	private int currentIndTile;
 	
-	public Ennemy(BFS bfsMap, GameEnvironment gameEnv) {
+	public Enemy(BFS bfsMap, GameEnvironment gameEnv) {
 		super(GameArea.tilePosX(GameArea.spawnPoint), GameArea.tilePosY(GameArea.spawnPoint), 50, gameEnv);
 		bfs = bfsMap;
 		this.currentIndTile = GameArea.tileIndex(super.getX(), super.getY());
@@ -43,4 +43,6 @@ public abstract class Ennemy extends GameObject {
 	public boolean isArrived() {
 		return this.currentIndTile == -1; // -1 correspond au point d'arrivée
 	}
+	
+	public abstract void move();
  }

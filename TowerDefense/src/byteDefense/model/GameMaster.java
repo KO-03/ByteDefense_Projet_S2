@@ -92,8 +92,7 @@ public class GameMaster {
 		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
 		if (!this.waves.get(0).isEmpty())
 			this.waveServices.addEnnemy(this.waves.get(0));
-		
-		this.gameEnv.gameObjectsHandler(this.bfs);
+		this.getGameEnvironment().enemiesMove();
 		this.addMoney(1);
 	}
 }

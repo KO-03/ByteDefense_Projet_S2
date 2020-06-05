@@ -10,7 +10,7 @@ package byteDefense.view;
 import java.io.File;
 import java.net.MalformedURLException;
 
-import byteDefense.model.GameObject;
+import byteDefense.model.LivingObject;
 import byteDefense.model.enemies.Adware;
 import byteDefense.model.enemies.Bot;
 import byteDefense.model.enemies.Ransomware;
@@ -20,7 +20,7 @@ import byteDefense.model.enemies.TrojanHorse;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-public class EnnemyView extends GameObjectView {
+public class EnnemyView extends LivingObjectView {
 
 	private static Image adwareImg; 
 	private static Image botImg;
@@ -46,20 +46,20 @@ public class EnnemyView extends GameObjectView {
 		}
 	}
 
-	public Image imageGetter(GameObject gameObject) {
+	public Image imageGetter(LivingObject livingObject) {
 		Image img;
 
-		if (gameObject instanceof Rookit)
+		if (livingObject instanceof Rookit)
 			img = rookitImg;
-		else if (gameObject instanceof Adware)
+		else if (livingObject instanceof Adware)
 			img = adwareImg;
-		else if (gameObject instanceof Bot)
+		else if (livingObject instanceof Bot)
 			img = botImg;
-		else if (gameObject instanceof Ransomware)
+		else if (livingObject instanceof Ransomware)
 			img = ransomwareImg;
-		else if (gameObject instanceof Spyware)
+		else if (livingObject instanceof Spyware)
 			img = spywareImg;
-		else if (gameObject instanceof TrojanHorse)
+		else if (livingObject instanceof TrojanHorse)
 			img = trojanHorseImg;
 		else
 			img = null;

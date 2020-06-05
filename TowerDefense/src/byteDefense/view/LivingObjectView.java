@@ -8,42 +8,42 @@
 
 package byteDefense.view;
 
-import byteDefense.model.GameObject;
+import byteDefense.model.LivingObject;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public abstract class GameObjectView {
+public abstract class LivingObjectView {
 
 	private Pane grid;
 
-	public GameObjectView(Pane grid) {
+	public LivingObjectView(Pane grid) {
 		this.grid = grid;
 		this.imageLoader();
 	}
 
 	public abstract void imageLoader();
 
-	public abstract Image imageGetter(GameObject gameObject);
+	public abstract Image imageGetter(LivingObject livingObject);
 
-	public void addGameObject(GameObject gameObject) {
-		Image gameObjectImg = imageGetter(gameObject);
+	public void addLivingObject(LivingObject livingObject) {
+		Image gameObjectImg = imageGetter(livingObject);
 
 		if (gameObjectImg != null) {
 			ImageView imgView = new ImageView();
 			imgView.setImage(gameObjectImg);
-			imgView.setId(Integer.toString(gameObject.getId()));
-			imgView.setTranslateX(gameObject.getX());
-			imgView.setTranslateY(gameObject.getY());	
+			imgView.setId(Integer.toString(livingObject.getId()));
+			imgView.setTranslateX(livingObject.getX());
+			imgView.setTranslateY(livingObject.getY());	
 			
-			imgView.translateXProperty().bind(gameObject.getXProperty());
-			imgView.translateYProperty().bind(gameObject.getYProperty());
+			imgView.translateXProperty().bind(livingObject.getXProperty());
+			imgView.translateYProperty().bind(livingObject.getYProperty());
 
 			this.grid.getChildren().add(imgView);
 		}
 	}
 	
-	public void removeGameObject(GameObject gameObject) {
-		this.grid.getChildren().remove(this.grid.lookup("#" + gameObject.getId()));
+	public void removeGameObject(LivingObject livingObject) {
+		this.grid.getChildren().remove(this.grid.lookup("#" + livingObject.getId()));
 	}
 }

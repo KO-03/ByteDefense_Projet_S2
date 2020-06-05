@@ -14,7 +14,7 @@ package byteDefense.model.enemies;
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class Ransomware extends OffensiveEnnemy {
+public class Ransomware extends OffensiveEnemy {
 
 	private static final int ATTACK = 1;
 	private static final int DEFENSE = 20;
@@ -46,9 +46,12 @@ public class Ransomware extends OffensiveEnnemy {
 		return LOOT;
 	}
 
-	public void act() {
+	public void move() {
 		if (!super.isArrived())
 			super.moveEnnemy();
+	}
+	
+	public void attack() {
 		super.attackTower();
 	}
 }

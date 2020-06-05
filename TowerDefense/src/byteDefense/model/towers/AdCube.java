@@ -45,7 +45,7 @@ public class AdCube extends Tower {
 		return COST;
 	}
 
-	public void act() {
+	public void attack() {
 		super.attackEnnemy();
 	}
 }

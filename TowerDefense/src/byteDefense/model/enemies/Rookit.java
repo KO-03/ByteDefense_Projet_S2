@@ -15,7 +15,7 @@ package byteDefense.model.enemies;
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class Rookit extends OffensiveEnnemy {
+public class Rookit extends OffensiveEnemy {
 
 	public static final float INCREASE_ATTACK_RATE = 1.10F;
 	private static final int DEFENSE = 20;
@@ -58,9 +58,12 @@ public class Rookit extends OffensiveEnnemy {
 		return LOOT;
 	}
 
-	public void act() {
+	public void move() {
 		if (!super.isArrived())
 			super.moveEnnemy();
+	}
+	
+	public void attack() {
 		this.increaseAttack();
 		super.attackTower();
 	}

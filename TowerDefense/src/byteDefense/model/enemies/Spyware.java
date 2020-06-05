@@ -14,7 +14,7 @@ package byteDefense.model.enemies;
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class Spyware extends Ennemy {
+public class Spyware extends Enemy {
 
 	private static final int MOVE_SPEED = 2;
 	private static final int ATTACK = 30;
@@ -52,7 +52,7 @@ public class Spyware extends Ennemy {
 		return MOVE_SPEED;
 	}
 
-	public void act() {
+	public void move() {
 		if (!super.isArrived())
 			super.moveEnnemy();
 	}

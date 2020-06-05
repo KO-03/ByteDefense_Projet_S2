@@ -16,7 +16,7 @@ package byteDefense.model.enemies;
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class Adware extends OffensiveEnnemy {
+public class Adware extends OffensiveEnemy {
 
 	private static final float REPRODUCTION_RATE = 0;
 	private static final int ATTACK = 20;
@@ -51,9 +51,12 @@ public class Adware extends OffensiveEnnemy {
 		return LOOT;
 	}
 
-	public void act() {
+	public void move() {
 		if (!super.isArrived())
 			super.moveEnnemy();
+	}
+	
+	public void attack() {
 		super.attackTower();
 	}
 }

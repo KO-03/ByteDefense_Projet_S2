@@ -14,7 +14,7 @@ package byteDefense.model.enemies;
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
-public class TrojanHorse extends Ennemy {
+public class TrojanHorse extends Enemy {
 
 	private static final int ATTACK = 40;
 	private static final int DEFENSE = 40;
@@ -46,7 +46,7 @@ public class TrojanHorse extends Ennemy {
 		return LOOT;
 	}
 
-	public void act() {
+	public void move() {
 		if (!super.isArrived())
 			super.moveEnnemy();
 	}

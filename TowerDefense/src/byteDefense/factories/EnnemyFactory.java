@@ -9,7 +9,7 @@ package byteDefense.factories;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.enemies.Adware;
 import byteDefense.model.enemies.Bot;
-import byteDefense.model.enemies.Ennemy;
+import byteDefense.model.enemies.Enemy;
 import byteDefense.model.enemies.Ransomware;
 import byteDefense.model.enemies.Rookit;
 import byteDefense.model.enemies.Spyware;
@@ -18,8 +18,8 @@ import byteDefense.utilities.BFS;
 
 public class EnnemyFactory {
 
-	public static Ennemy getInstance(int ennemyType, BFS bfsMap, GameEnvironment gameEnv) {
-		Ennemy ennemy = null;
+	public static Enemy getInstance(int ennemyType, BFS bfsMap, GameEnvironment gameEnv) {
+		Enemy ennemy = null;
 		
 		switch (ennemyType) {
 		case 1:
