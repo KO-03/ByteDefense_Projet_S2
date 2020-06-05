@@ -46,8 +46,7 @@ public class AuthenticationPoint extends Tower {
 	public int getCost() {
 		return COST;
 	}
-
 	public void attack() {
-		super.attackEnnemy();
+		super.attackEnemy();
 	}
 }

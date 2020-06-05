@@ -14,6 +14,8 @@ import byteDefense.model.GameArea;
 
 public class BFS {
 	
+	public static final int ARRIVAL_POINT = -1; // -1 correspond au point d'arrivée
+	
 	int tilesIndex = 0;
 	int gameAreaDimension;
 	public GameArea gameArea;
@@ -61,7 +63,7 @@ public class BFS {
 		LinkedList<Integer> queue = new LinkedList<Integer>();
 		
 		queue.add(start);
-		this.cameFrom[start] = -1;//premier sommet du BFS
+		this.cameFrom[start] = ARRIVAL_POINT; // premier sommet du BFS
 		
 		while (queue.size() != 0) {
 			int current = queue.poll();

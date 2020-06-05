@@ -46,6 +46,6 @@ public class Firewall extends Tower {
 	}
 	
 	public void attack() {
-		super.attackEnnemy();
+		super.attackEnemy();
 	}
 }

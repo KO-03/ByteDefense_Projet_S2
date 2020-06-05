@@ -24,7 +24,7 @@ public abstract class Tower extends LivingObject {
 		super.getGameEnvironment().addBullet(new Bullet(getX(), getY(), target, this));
 	}
 	
-	public void attackEnnemy() {
+	public void attackEnemy() {
 		Enemy target = this.findTarget();
 		
 		if (target != null)
@@ -32,6 +32,7 @@ public abstract class Tower extends LivingObject {
 	}
 	
 	public Enemy findTarget() {
+		
 		for(Enemy enemy : super.getGameEnvironment().getEnemies()) {
 			if ((this.getY() - this.getAttackRange() * GameArea.TILE_SIZE <= enemy.getY() && enemy.getY() <= this.getY() + this.getAttackRange() * GameArea.TILE_SIZE) &&
 				(this.getX() - this.getAttackRange() * GameArea.TILE_SIZE <= enemy.getX() && enemy.getX() <= this.getX() + this.getAttackRange() * GameArea.TILE_SIZE)) {

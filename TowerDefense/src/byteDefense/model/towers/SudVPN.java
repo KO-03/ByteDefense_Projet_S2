@@ -46,6 +46,6 @@ public class SudVPN extends Tower {
 	}
 	
 	public void attack() {
-		super.attackEnnemy();
+		super.attackEnemy();
 	}
 }

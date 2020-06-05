@@ -1,6 +1,6 @@
 /*
  * GameEnvironment.java
- * Cette classe represente l'environnemnt de jeu ou les objets de jeu et tirs evoluent, ses responsabilites sont de :
+ * Cette classe represente l'environnement de jeu ou les objets de jeu et tirs evoluent, ses responsabilites sont de :
  * - stocker, recuperer la liste des objets de jeu et gerer les actions de ses gameObjects
  * - ajouter et supprimer un objet de jeu a la gameObjectList
  * - recuperer un objet de jeu a la liste de gameObjects a partir de son identifiant

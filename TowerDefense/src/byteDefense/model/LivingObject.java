@@ -16,8 +16,6 @@
 
 package byteDefense.model;
 
-import byteDefense.model.towers.Tower;
-
 public abstract class LivingObject extends GameObject {
 
 	private int hp;
@@ -39,10 +37,6 @@ public abstract class LivingObject extends GameObject {
 
 	public boolean isAlive() {
 		return this.hp > 0;
-	}
-	
-	public boolean isTower() {
-		return this instanceof Tower;
 	}
 	
 	public GameEnvironment getGameEnvironment() {

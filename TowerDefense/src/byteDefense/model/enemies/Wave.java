@@ -21,9 +21,9 @@ public class Wave {
 	private int waveNumber;
 	private int moveSpeed;
 	private int spawnRate;
-	private Stack<WaveEntities> waveEnemies;
+	private Stack<WaveEnemy> waveEnemies;
 	
-	public Wave(int waveNumber, int moveSpeed, int spawnRate, Stack<WaveEntities> waveEnemies) {
+	public Wave(int waveNumber, int moveSpeed, int spawnRate, Stack<WaveEnemy> waveEnemies) {
 		this.moveSpeed = moveSpeed;
 		this.spawnRate = spawnRate;
 		this.waveEnemies = waveEnemies;
@@ -33,31 +33,35 @@ public class Wave {
 		return this.waveNumber;
 	}
 	
-	public Stack<WaveEntities> getEnemiesInfos() {
-		return this.waveEnemies;
-	}
-	
-	public int getEnnemyType() {
-		return this.waveEnemies.peek().getEnnemyType();
-	}
-	
-	public void removeWaveEnnemy() {
-		this.waveEnemies.pop();
-	}
-	
-	public void decrementEnnemyQty() {
-		this.waveEnemies.peek().decrementQuantity();
-	}
-	
-	public boolean isEmpty() {
-		return this.waveEnemies.empty();
-	}
-	
 	public int getMoveSpeed() {
 		return this.moveSpeed;
 	}
 	
 	public int getSpawnRate() {
 		return this.spawnRate;
+	}
+	
+	private WaveEnemy getTopWaveEnemy() {
+		return this.waveEnemies.peek();
+	}
+	
+	public int getEnemyType() {
+		return this.getTopWaveEnemy().getEnemyType();
+	}
+	
+	public boolean isEmpty() {
+		return this.waveEnemies.empty();
+	}
+	
+	public void removeWaveEnemy() {
+		this.waveEnemies.pop();
+	}
+	
+	public void decrementEnemyQty() {
+		this.getTopWaveEnemy().decrementQuantity();
+	}
+	
+	public boolean checkSpawnedEnemies() {
+		return this.getTopWaveEnemy().everyEnemiesSpawned();
 	}
 }

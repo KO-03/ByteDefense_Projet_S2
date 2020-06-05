@@ -35,7 +35,7 @@ public class GameMaster {
 		this.gameEnv = new GameEnvironment();
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
-		this.walletProperty = new SimpleIntegerProperty(30);
+		this.walletProperty = new SimpleIntegerProperty(60);
 	}
 	
 	public GameArea getGameArea() {
@@ -91,8 +91,9 @@ public class GameMaster {
 	public void aTurn() {
 		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
 		if (!this.waves.get(0).isEmpty())
-			this.waveServices.addEnnemy(this.waves.get(0));
-		this.getGameEnvironment().enemiesMove();
+			this.waveServices.addEnemy(this.waves.get(0));
+		
+		this.gameEnv.enemiesMove();
 		this.addMoney(1);
 	}
 }

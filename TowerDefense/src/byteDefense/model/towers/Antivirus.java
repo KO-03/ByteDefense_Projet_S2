@@ -46,6 +46,6 @@ public class Antivirus extends Tower {
 	}
 
 	public void attack() {
-		super.attackEnnemy();
+		super.attackEnemy();
 	}
 }

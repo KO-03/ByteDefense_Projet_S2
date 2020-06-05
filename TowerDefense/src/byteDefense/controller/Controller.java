@@ -29,7 +29,7 @@ import byteDefense.model.towers.Firewall;
 import byteDefense.model.towers.SudVPN;
 import byteDefense.model.towers.Tower;
 import byteDefense.view.BulletView;
-import byteDefense.view.EnnemyView;
+import byteDefense.view.EnemyView;
 import byteDefense.view.GameAreaView;
 import byteDefense.view.TowerView;
 import javafx.animation.KeyFrame;
@@ -78,7 +78,7 @@ public class Controller implements Initializable {
 
 	private GameMaster gm;
 	private int enemiesNbrModel;
-	private EnnemyView ev;
+	private EnemyView ev;
 	private TowerView tv;
 	private BulletView bv;
 	private Timeline gameLoop;
@@ -90,14 +90,13 @@ public class Controller implements Initializable {
 		this.enemiesNbrModel = 0;
 		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
-		this.ev = new EnnemyView(this.grid);
+		this.ev = new EnemyView(this.grid);
 		this.tv = new TowerView(this.grid, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.grid);
 		
-		this.generateGameObjectListListener();
-		this.generateBulletsListener();
+		this.generateGameObjectsListener();
 		this.generateWalletListener();
-		this.mouseDraggedOnTowers();
+		this.mouseDraggedOnShop();
 		this.initAnimation();
 		this.gameLoop.play();
 	}
@@ -125,13 +124,13 @@ public class Controller implements Initializable {
 		this.gameLoop.getKeyFrames().add(kf);
 	}
 
-	private void generateGameObjectListListener() {
+	private void generateGameObjectsListener() {
 		this.gm.getGameEnvironment().getTowers().addListener((ListChangeListener <Tower>) c-> {
 			while (c.next()) {
 				for (Tower tower : c.getAddedSubList())
 					this.tv.addLivingObject(tower);
 				for (Tower tower : c.getRemoved())
-					this.tv.removeGameObject(tower);
+					this.tv.removeLivingObject(tower);
 			}
 		});
 		
@@ -140,13 +139,11 @@ public class Controller implements Initializable {
 				for (Enemy enemy : c.getAddedSubList())
 					this.ev.addLivingObject(enemy);
 				for (Enemy enemy : c.getRemoved())
-					this.ev.removeGameObject(enemy);
+					this.ev.removeLivingObject(enemy);
 				this.enemiesNbr.setText(Integer.toString(this.enemiesNbrModel));
 			}
 		});
-	}
-
-	private void generateBulletsListener() {
+		
 		this.gm.getGameEnvironment().getBullets().addListener((ListChangeListener <Bullet>) c-> {
 			while (c.next()) {
 				for (Bullet bullet : c.getAddedSubList())
@@ -157,7 +154,7 @@ public class Controller implements Initializable {
 		});
 	}
 	
-	private void mouseDraggedOnTowers() {
+	private void mouseDraggedOnShop() {
 		this.adcube.setOnMouseDragged(event -> {
 			dragAndDrop(this.adcube, (int) this.adcube.getX());
 		});

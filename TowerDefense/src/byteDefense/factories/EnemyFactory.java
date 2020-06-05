@@ -1,6 +1,6 @@
 /*
- * EnnemyFactory.java
- * Cette classe gere la fabrication d'instance d'Ennemy, sa responsabilite est de :
+ * EnemyFactory.java
+ * Cette classe gere la fabrication d'instance d'Enemy (un ennemi), sa responsabilite est de :
  * - Creer un ennemi en fonction du type recupere
  */
 
@@ -16,29 +16,29 @@ import byteDefense.model.enemies.Spyware;
 import byteDefense.model.enemies.TrojanHorse;
 import byteDefense.utilities.BFS;
 
-public class EnnemyFactory {
+public class EnemyFactory {
 
-	public static Enemy getInstance(int ennemyType, BFS bfsMap, GameEnvironment gameEnv) {
-		Enemy ennemy = null;
+	public static Enemy getInstance(int enemyType, BFS bfsMap, GameEnvironment gameEnv) {
+		Enemy enemy = null;
 		
-		switch (ennemyType) {
+		switch (enemyType) {
 		case 1:
-			ennemy = new Rookit(bfsMap, gameEnv);
+			enemy = new Rookit(bfsMap, gameEnv);
 			break;
 		case 2:
-			ennemy = new Adware(bfsMap, gameEnv);
+			enemy = new Adware(bfsMap, gameEnv);
 			break;
 		case 3:
-			ennemy = new Bot(bfsMap, gameEnv);
+			enemy = new Bot(bfsMap, gameEnv);
 			break;
 		case 4:
-			ennemy = new Ransomware(bfsMap, gameEnv);
+			enemy = new Ransomware(bfsMap, gameEnv);
 			break;
 		case 5:
-			ennemy = new Spyware(bfsMap, gameEnv);
+			enemy = new Spyware(bfsMap, gameEnv);
 		case 6:
-			ennemy = new TrojanHorse(bfsMap, gameEnv);
+			enemy = new TrojanHorse(bfsMap, gameEnv);
 		}
-		return ennemy;
+		return enemy;
 	}
 }

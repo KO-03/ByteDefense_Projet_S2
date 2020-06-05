@@ -1,6 +1,6 @@
 /*
- * EnnemyView.java
- * Cette classe gere la partie visuelle d'un objet de jeu Ennemy (un ennemi), ses responsabilites sont de :
+ * EnemyView.java
+ * Cette classe gere la partie visuelle d'un objet de jeu Enemy (un ennemi), ses responsabilites sont de :
  * - charger et stocker les textures des ennemis
  * - faire la correspondance entre les types de d'ennemis et leurs textures
  */
@@ -20,7 +20,7 @@ import byteDefense.model.enemies.TrojanHorse;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
-public class EnnemyView extends LivingObjectView {
+public class EnemyView extends LivingObjectView {
 
 	private static Image adwareImg; 
 	private static Image botImg;
@@ -29,18 +29,18 @@ public class EnnemyView extends LivingObjectView {
 	private static Image spywareImg;
 	private static Image trojanHorseImg;
 
-	public EnnemyView(Pane grid) {
+	public EnemyView(Pane grid) {
 		super(grid);
 	}
 
 	public void imageLoader() {
 		try {
-			adwareImg = new Image(new File("./resources/ennemiesTextures/adware.png").toURI().toURL().toString()); 
-			botImg = new Image(new File("./resources/ennemiesTextures/bot.png").toURI().toURL().toString()); 
-			ransomwareImg= new Image(new File("./resources/ennemiesTextures/ransomware.png").toURI().toURL().toString()); 
-			rookitImg = new Image(new File("./resources/ennemiesTextures/rootkit.png").toURI().toURL().toString()); 
-			spywareImg = new Image(new File("./resources/ennemiesTextures/spyware.png").toURI().toURL().toString()); 
-			trojanHorseImg = new Image(new File("./resources/ennemiesTextures/trojan.png").toURI().toURL().toString());
+			adwareImg = new Image(new File("./resources/enemiesTextures/adware.png").toURI().toURL().toString()); 
+			botImg = new Image(new File("./resources/enemiesTextures/bot.png").toURI().toURL().toString()); 
+			ransomwareImg= new Image(new File("./resources/enemiesTextures/ransomware.png").toURI().toURL().toString()); 
+			rookitImg = new Image(new File("./resources/enemiesTextures/rootkit.png").toURI().toURL().toString()); 
+			spywareImg = new Image(new File("./resources/enemiesTextures/spyware.png").toURI().toURL().toString()); 
+			trojanHorseImg = new Image(new File("./resources/enemiesTextures/trojan.png").toURI().toURL().toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

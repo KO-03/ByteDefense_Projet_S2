@@ -1,6 +1,6 @@
 /*
- * OffensiveEnnemy.java
- * Cette classe represente un objet OffensiveEnnemy, c'est-a-dire un ennemi qui attaque des tourelles, ses responsabilites sont de :
+ * OffensiveEnemy.java
+ * Cette classe represente un objet OffensiveEnemy, c'est-a-dire un ennemi qui attaque des tourelles, ses responsabilites sont de :
  * - attaquer une tourelle
  */
 

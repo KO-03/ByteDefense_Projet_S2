@@ -9,7 +9,7 @@
 
 package byteDefense.model.enemies;
 
-import byteDefense.factories.EnnemyFactory;
+import byteDefense.factories.EnemyFactory;
 import byteDefense.model.GameEnvironment;
 import byteDefense.utilities.BFS;
 
@@ -23,19 +23,19 @@ public class WaveServices {
 		this.gameEnv = gameEnvironment;
 	}
 	
-	private Enemy createEnnemy(Wave wave) {
-		int ennemyType = wave.getEnnemyType();
+	private Enemy createEnemy(Wave wave) {
+		int enemyType = wave.getEnemyType();
 		
-		wave.decrementEnnemyQty();
-		if (wave.getEnemiesInfos().peek().everyEnnemiesSpawned())
-			wave.removeWaveEnnemy();
-
-		return EnnemyFactory.getInstance(ennemyType, this.bfsMap, this.gameEnv);
+		wave.decrementEnemyQty();
+		if (wave.checkSpawnedEnemies())
+			wave.removeWaveEnemy();
+		
+		return EnemyFactory.getInstance(enemyType, this.bfsMap, this.gameEnv);
 	}
 
-	public void addEnnemy(Wave wave) {
-		Enemy ennemy = createEnnemy(wave); 
-
+	public void addEnemy(Wave wave) {
+		Enemy ennemy = createEnemy(wave); 
+		
 		if (ennemy != null)
 			this.gameEnv.addEnemy(ennemy);
 	}

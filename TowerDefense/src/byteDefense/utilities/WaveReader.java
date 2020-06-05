@@ -16,18 +16,18 @@ import java.util.List;
 import java.util.Stack;
 
 import byteDefense.model.enemies.Wave;
-import byteDefense.model.enemies.WaveEntities;
+import byteDefense.model.enemies.WaveEnemy;
 
 public class WaveReader {
 	
-	private static void addWaveEnemies(Stack<WaveEntities> wavesEnemies, int ennemyType, int ennemyQty) {
-		wavesEnemies.push(new WaveEntities(ennemyType, ennemyQty));
+	private static void addWaveEnemies(Stack<WaveEnemy> wavesEnemies, int ennemyType, int ennemyQty) {
+		wavesEnemies.push(new WaveEnemy(ennemyType, ennemyQty));
 	}
 	
 	// Fonction qui renvoie une Wave construite à partir des donnees lues pour une ligne du fichier, en la decoupant 
 	private static Wave createWaveInstance(String waveLine, int waveNumber) {
 		String[] waveDatas = waveLine.split(";"); // Decoupage des donnees recuperees
-		Stack<WaveEntities> waveEnemies = new Stack<>(); 
+		Stack<WaveEnemy> waveEnemies = new Stack<>(); 
 		int moveSpeed = 0, spawnRate = 0, waveDatasLength = waveDatas.length;
 
 		// la ligne ne contient pas toutes les donnees necessaires pour la construction d'une Wave

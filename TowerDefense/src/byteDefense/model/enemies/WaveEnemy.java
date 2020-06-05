@@ -1,5 +1,5 @@
 /*
- * WaveEntities.java
+ * WaveEnemy.java
  * Cette classe gere les informations relatives aux ennemis a ajouter a une vague d'ennemis, ses reponsabilites sont de :
  * - stocker et recuperer le type de l'ennemi a ajouter
  * - stocker et decrementer la quantite d'ennemi a ajouter
@@ -8,20 +8,20 @@
 
 package byteDefense.model.enemies;
 
-public class WaveEntities {
-	private int ennemyType;
+public class WaveEnemy {
+	private int enemyType;
 	private int quantity;
 	
-	public WaveEntities(int ennemyType, int quantity) {
-		this.ennemyType = ennemyType;
+	public WaveEnemy(int enemyType, int quantity) {
+		this.enemyType = enemyType;
 		this.quantity = quantity;
 	}
 	
-	public int getEnnemyType() {
-		return this.ennemyType;
+	public int getEnemyType() {
+		return this.enemyType;
 	}
 	
-	public boolean everyEnnemiesSpawned() {
+	public boolean everyEnemiesSpawned() {
 		return this.quantity == 0;
 	}
 	

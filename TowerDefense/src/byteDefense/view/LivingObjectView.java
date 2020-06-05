@@ -1,6 +1,6 @@
 /*
  * GameObjectView.java
- * Cette classe gere la partie visuelle d'un objet de jeu (Ennemy ou Tower), ses responsabilites sont :
+ * Cette classe gere la partie visuelle d'un objet de jeu (Enemy ou Tower), ses responsabilites sont :
  * - stocker la grille ou les objets de jeu sont affiches
  * - ajouter un objet de jeu a la vue (grille)
  * - supprimer un objet de jeu de la vue (grille)
@@ -43,7 +43,7 @@ public abstract class LivingObjectView {
 		}
 	}
 	
-	public void removeGameObject(LivingObject livingObject) {
+	public void removeLivingObject(LivingObject livingObject) {
 		this.grid.getChildren().remove(this.grid.lookup("#" + livingObject.getId()));
 	}
 }
