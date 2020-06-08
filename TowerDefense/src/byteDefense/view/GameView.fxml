@@ -402,6 +402,7 @@
                               <Insets top="15.0" />
                            </padding>
                         </HBox>
+                        <Label fx:id="timer" layoutX="683.0" layoutY="59.0" text="00:00" />
                      </children>
                   </Pane>
                </children>

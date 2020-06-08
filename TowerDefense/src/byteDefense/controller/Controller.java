@@ -83,6 +83,8 @@ public class Controller implements Initializable {
     private ImageView pauseButton;
     @FXML
     private ImageView playButton;
+    @FXML
+    private Label timer;
     
     private GameMaster gm;
 	private int enemiesNbrModel;
@@ -91,11 +93,16 @@ public class Controller implements Initializable {
 	private BulletView bv;
 	private Timeline gameLoop;
 	private int time;
+	private int seconde;
+	private int minute;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.gm = new GameMaster();
 		this.enemiesNbrModel = 0;
+		
+		this.seconde = 0;
+        this.minute = 0;
 		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnemyView(this.gridEnemies);
@@ -132,12 +139,12 @@ public class Controller implements Initializable {
         this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.05), 
+				Duration.seconds(0.25), 
 				(event ->{
-					if (this.time == 10000)
-						this.gameLoop.stop();
-					else if (this.time % 5 == 0)
+					if (this.time % 4 == 0) {
+						timer();
 						this.gm.aTurn();
+					}
 					switch(gm.winConditions()) {
 					case 1:
 						System.out.println("WIN");
@@ -164,6 +171,17 @@ public class Controller implements Initializable {
 				}));
 
 		this.gameLoop.getKeyFrames().add(kf);
+	}
+	
+	private void timer() {
+		this.seconde++;
+		
+		if (seconde == 60) {
+			seconde = 0;
+			minute++;
+		}
+		
+		timer.setText(String.format("%02d", minute) + ":" + String.format("%02d", seconde));
 	}
 
 	private void generateGameObjectsListener() {
