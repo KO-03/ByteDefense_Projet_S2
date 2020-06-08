@@ -16,11 +16,11 @@ import byteDefense.utilities.BFS;
 
 public class Spyware extends Enemy {
 
-	private static final int MOVE_SPEED = 2;
+	private static final float MOVE_SPEED_RATE = 2; // taux d'augmentation de la vitesse de deplacement en pourcentage
 	private static final int ATTACK = 30;
 	private static final int DEFENSE = 10;
-	private static final int ATTACK_RANGE = 0;
-	private static final int ATTACK_SPEED = 0;
+	private static final int ATTACK_SPEED = 0; // vitesse d'attaque en nombre de tour
+	private static final int ATTACK_RANGE = 0; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 50;
 
 
@@ -49,7 +49,7 @@ public class Spyware extends Enemy {
 	}
 
 	public float getMoveSpeed() {
-		return MOVE_SPEED;
+		return MOVE_SPEED_RATE;
 	}
 
 	public void move() {

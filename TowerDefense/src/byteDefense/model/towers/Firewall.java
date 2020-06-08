@@ -17,8 +17,8 @@ public class Firewall extends Tower {
 
 	private static final int ATTACK = 25;
 	private static final int DEFENSE = 20;
-	private static final int ATTACK_SPEED = 4;
-	private static final int ATTACK_RANGE = 4;
+	private static final int ATTACK_SPEED = 4; // vitesse d'attaque en nombre de tour
+	private static final int ATTACK_RANGE = 4; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int COST = 35;
 
 	public Firewall(int x, int y, GameEnvironment gameEnv) {

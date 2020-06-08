@@ -16,11 +16,11 @@ import byteDefense.model.GameEnvironment;
 
 public class AuthenticationPoint extends Tower {
 
-	private static final float SPEED_REDUCTION_RATE = 0.50F;
+	private static final float SPEED_REDUCTION_RATE = 0.50F; // taux de reduction de vitesse de deplacement des ennemis en pourcentage
 	private static final int ATTACK = 10;
 	private static final int DEFENSE = 30;
-	private static final int ATTACK_SPEED = 2;
-	private static final int ATTACK_RANGE = 3;
+	private static final int ATTACK_SPEED = 2; // vitesse d'attaque en nombre de tour
+	private static final int ATTACK_RANGE = 3; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int COST = 20;
 
 	public AuthenticationPoint(int x, int y, GameEnvironment gameEnv) {

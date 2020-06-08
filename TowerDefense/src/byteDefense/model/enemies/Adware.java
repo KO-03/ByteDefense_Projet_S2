@@ -18,14 +18,14 @@ import byteDefense.utilities.BFS;
 
 public class Adware extends OffensiveEnemy {
 
-	private static final float REPRODUCTION_RATE = 0;
+	private static final float REPRODUCTION_RATE = 0; // taux de reproduction en pourcentage
 	private static final int ATTACK = 20;
 	private static final int DEFENSE = 10;
-	private static final int ATTACK_RANGE = 1;
-	private static final int ATTACK_SPEED = 3;
+	private static final int ATTACK_SPEED = 3; // vitesse d'attaque en nombre de tour
+	private static final int ATTACK_RANGE = 1; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 20;
 
-	private int bornTurn;
+	private int bornTurn; // tour de naisssance dans une vague
 
 	public Adware(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);

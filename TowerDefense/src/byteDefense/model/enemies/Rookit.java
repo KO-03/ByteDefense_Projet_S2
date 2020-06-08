@@ -17,17 +17,18 @@ import byteDefense.utilities.BFS;
 
 public class Rookit extends OffensiveEnemy {
 
-	public static final float INCREASE_ATTACK_RATE = 1.10F;
+	public static final float INCREASE_ATTACK_RATE = 1.10F; // taux d'aumgmentation d'attaque en pourcentage
 	private static final int DEFENSE = 20;
-	private static final int ATTACK_RANGE = 4;
-	private static final int ATTACK_SPEED = 3;
+	private static final int ATTACK_SPEED = 3; // vitesse d'attaque en nombre de tour
+	private static final int ATTACK_RANGE = 4; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 10;
 	
 	private int attack;
+	
 
 	public Rookit(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
-		this.attack = 10; 
+		this.attack = 2; 
 	}
 	
 	public int getAttack() {

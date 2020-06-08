@@ -17,8 +17,8 @@ public class SudVPN extends Tower {
 
 	private static final int ATTACK = 40;
 	private static final int DEFENSE = 25;
-	private static final int ATTACK_SPEED = 2;
-	private static final int ATTACK_RANGE = 2;
+	private static final int ATTACK_SPEED = 2; // vitesse d'attaque en nombre de tour
+	private static final int ATTACK_RANGE = 2; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int COST = 40;
 
 	public SudVPN(int x, int y, GameEnvironment gameEnv) {

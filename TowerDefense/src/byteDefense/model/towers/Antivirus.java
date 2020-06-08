@@ -17,8 +17,8 @@ public class Antivirus extends Tower {
 
 	private static final int ATTACK = 35;
 	private static final int DEFENSE = 30;
-	private static final int ATTACK_SPEED = 2;
-	private static final int ATTACK_RANGE = 2;
+	private static final int ATTACK_SPEED = 2; // correspond a la vitesse d'attaque en nombre de tour
+	private static final int ATTACK_RANGE = 2; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int COST = 15;
 
 	public Antivirus(int x, int y, GameEnvironment gameEnv) {

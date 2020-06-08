@@ -18,8 +18,8 @@ public class Bot extends Enemy {
 
 	private static final int ATTACK = 10;
 	private static final int DEFENSE = 10;
-	private static final int ATTACK_RANGE = 0;
-	private static final int ATTACK_SPEED = 0;
+	private static final int ATTACK_SPEED = 0; // vitesse d'attaque en nombre de tour
+	private static final int ATTACK_RANGE = 0; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 30;
 
 	public Bot(BFS bfsMap, GameEnvironment gameEnv) {

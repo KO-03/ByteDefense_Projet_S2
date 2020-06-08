@@ -18,8 +18,8 @@ public class Ransomware extends OffensiveEnemy {
 
 	private static final int ATTACK = 1;
 	private static final int DEFENSE = 20;
-	private static final int ATTACK_RANGE = 3;
-	private static final int ATTACK_SPEED = 1;
+	private static final int ATTACK_SPEED = 1; // correspond a la vitesse d'attaque en nombre de tour
+	private static final int ATTACK_RANGE = 3; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 40;
 
 	public Ransomware(BFS bfsMap, GameEnvironment gameEnv) {
