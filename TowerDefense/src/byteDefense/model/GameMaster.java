@@ -70,23 +70,25 @@ public class GameMaster {
 		this.walletProperty.set(amount);
 	}
 
-	private boolean addMoney(int amount) {
-		if(amount < 0 || this.getWallet() + amount > Integer.MAX_VALUE)
-			return false;
-		else {
-			this.setWallet(this.getWallet() + amount);
-			return true;
+	//Renvoie true si la transaction est réussie
+		private boolean addMoney(int amount) {
+			if(amount < 0 || this.getWallet() + amount > Integer.MAX_VALUE)
+				return false;
+			else {
+				this.setWallet(this.getWallet() + amount);
+				return true;
+			}
 		}
-	}
-	
-	public boolean debitMoney(int amount) {
-		if(amount < 0 || this.getWallet() - amount < 0)
-			return false;
-		else {
-			this.setWallet(this.getWallet() - amount);
-			return true;
+		
+		//Renvoie true si la transaction est réussie et false si ressources insuiffisante
+		public boolean debitMoney(int amount) {
+			if(amount < 0 || this.getWallet() - amount < 0)
+				return false;
+			else {
+				this.setWallet(this.getWallet() - amount);
+				return true;
+			}
 		}
-	}
 	
 	// Fonction qui verifie si tous les ennemies de la vagues ont ete ajoutes a l'environnement ou non
 	private boolean allEnemiesWaveSpawned(Wave wave) {

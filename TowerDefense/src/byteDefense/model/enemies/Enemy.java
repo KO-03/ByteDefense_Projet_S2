@@ -37,7 +37,7 @@ public abstract class Enemy extends LivingObject {
 	}
 	
 	public boolean isArrived() {
-		return this.currentIndTile == BFS.ARRIVAL_POINT; // -1 correspond au point d'arrivée
+		return this.currentIndTile == BFS.STOP_TILE; // -1 correspond au point d'arrivée
 	}
 	
 	public abstract void move();

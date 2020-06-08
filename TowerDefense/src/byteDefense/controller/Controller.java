@@ -79,6 +79,10 @@ public class Controller implements Initializable {
     private Label attackSpeedStat;
     @FXML
     private Label attackRangeStat;
+    @FXML
+    private ImageView pauseButton;
+    @FXML
+    private ImageView playButton;
     
     private GameMaster gm;
 	private int enemiesNbrModel;
@@ -97,7 +101,7 @@ public class Controller implements Initializable {
 		this.ev = new EnemyView(this.gridEnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.gridBullets);
-		
+		this.initCommands();
 		this.generateGameObjectsListener();
 		this.generateWalletListener();
 		this.mouseDraggedOnShop();
@@ -107,6 +111,19 @@ public class Controller implements Initializable {
 
 	private void generateWalletListener() {
 		this.byteCoin.textProperty().bind(this.gm.getWalletProperty().asString());	
+	}
+	
+	private void initCommands() {
+		this.playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+	         this.gameLoop.play();
+	         this.ableMouseDraggedOnTowers();
+	         event.consume();
+	     });
+		this.pauseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+	         this.gameLoop.pause();
+	         this.disableMouseDraggedOnTowers();
+	         event.consume();
+	     });
 	}
 	
 	private void initAnimation() {
@@ -235,5 +252,21 @@ public class Controller implements Initializable {
 				tower.setY(741); // 741 est l'ordonnee des imageView des tourelles dans leur menu d'achat
 			}
 		});
+	}
+	
+	private void disableMouseDraggedOnTowers() {
+		this.adcube.setDisable(true);
+		this.antivirus.setDisable(true);
+		this.authentipoint.setDisable(true);
+		this.firewall.setDisable(true);
+		this.sudvpn.setDisable(true);
+	}
+	
+	private void ableMouseDraggedOnTowers() {
+		this.adcube.setDisable(false);
+		this.antivirus.setDisable(false);
+		this.authentipoint.setDisable(false);
+		this.firewall.setDisable(false);
+		this.sudvpn.setDisable(false);
 	}
 }

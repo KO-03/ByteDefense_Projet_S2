@@ -14,7 +14,7 @@ import byteDefense.model.GameArea;
 
 public class BFS {
 	
-	public static final int ARRIVAL_POINT = -1; // -1 correspond au point d'arrivée
+	public static final int STOP_TILE = -1;// valeur -1 pour les domaines non accessibles
 	
 	int tilesIndex = 0;
 	int gameAreaDimension;
@@ -49,7 +49,7 @@ public class BFS {
 		if (this.gameArea.isWalkable(this.gameArea.getTilesList().get(value))) 
 			return value;
 		else
-			return -1;
+			return STOP_TILE;
 	}
 	
 	private boolean isInCameFrom(int value) {
@@ -63,7 +63,7 @@ public class BFS {
 		LinkedList<Integer> queue = new LinkedList<Integer>();
 		
 		queue.add(start);
-		this.cameFrom[start] = ARRIVAL_POINT; // premier sommet du BFS
+		this.cameFrom[start] = STOP_TILE;//premier sommet du BFS
 		
 		while (queue.size() != 0) {
 			int current = queue.poll();
@@ -71,7 +71,7 @@ public class BFS {
 			int next;
 			
 			for (int i = 0 ; i < neightbour.length; i++) {
-				if (neightbour[i] != -1) {
+				if (neightbour[i] != STOP_TILE) {
 					next = neightbour[i];					
 					if (!this.isInCameFrom(next)) {
 						queue.add(next);

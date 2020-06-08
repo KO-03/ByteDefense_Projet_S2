@@ -52,20 +52,20 @@
                   </Text>
                   <HBox>
                      <children>
-                        <ImageView pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="pauseButton" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../resources/icons/pause-button.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="15.0" top="6.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="playButton" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../resources/icons/play-button.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="15.0" right="15.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <ImageView fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../resources/icons/pause-button.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets top="6.0" />
                            </HBox.margin>
                         </ImageView>
                      </children>
@@ -252,7 +252,7 @@
                               <Image url="@../../../resources/backgroundTextures/stats_background.png" />
                            </image>
                         </ImageView>
-                        <HBox spacing="150.0">
+                        <HBox spacing="100.0">
                            <children>
                               <HBox styleClass="label-subHeader">
                                  <children>
@@ -294,6 +294,9 @@
                                  </HBox.margin>
                               </HBox>
                            </children>
+                           <padding>
+                              <Insets top="6.0" />
+                           </padding>
                         </HBox>
                      </children>
                   </Pane>
