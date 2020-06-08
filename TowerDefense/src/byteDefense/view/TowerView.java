@@ -3,7 +3,8 @@
  * Cette classe gere la partie visuelle d'un objet de jeu Tower (une tourelle), ses responsabilites sont de :
  * - charger et stocker les textures des tourelles
  * - faire la correspondance entre les types de tourelles et leurs textures
- * - initialiser  les ImagesView de chaques types de tourelles et les ajouter à la grille où elles sont affichees
+ * - initialiser les positions des ImagesView des tourelles dans leur menu d'achat et les ajouter à la grille 
+ *   où elles sont affichees
  */
 
 package byteDefense.view;
@@ -23,27 +24,29 @@ import javafx.scene.layout.Pane;
 
 public class TowerView extends LivingObjectView {
 
+	// Textures des tourelles
 	private static Image adcubeImg; 
 	private static Image antivirusImg;
 	private static Image firewallImg;
 	private static Image authenticationPointImg;
 	private static Image sudvpnImg;
 
+	// Noeuds a ajouter a la vue
 	private ImageView adcube;
 	private ImageView antivirus;
 	private ImageView authentipoint;
 	private ImageView firewall;
 	private ImageView sudvpn;
 
-	public TowerView(Pane grid, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
-		super(grid);
+	public TowerView(Pane gameObjectGrid, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
+		super(gameObjectGrid);
 		this.adcube = adcube;
 		this.antivirus = antivirus;
 		this.authentipoint = authentificatipoint;
 		this.firewall = firewall;
 		this.sudvpn = sudvpn;
 
-		this.initInventory(grid);
+		this.initInventory(super.gameObjectGrid);
 	}
 
 	public void imageLoader() {
@@ -76,8 +79,11 @@ public class TowerView extends LivingObjectView {
 
 		return img;
 	}
-
-	public void initInventory(Pane grid) {
+	
+	/* Methode qui initialise les positions des ImagesView des tourelles dans leur menu d'achat 
+	 * et les ajoute à la grille où elles sont affichees
+	 */
+	private void initInventory(Pane gameObjectGrid) {
 		this.adcube.setX(129);
 		this.adcube.setY(741);
 		this.antivirus.setX(213);
@@ -89,10 +95,10 @@ public class TowerView extends LivingObjectView {
 		this.sudvpn.setX(466);
 		this.sudvpn.setY(741);
 
-		grid.getChildren().add(this.adcube);
-		grid.getChildren().add(this.antivirus);
-		grid.getChildren().add(this.authentipoint);
-		grid.getChildren().add(this.firewall);
-		grid.getChildren().add(this.sudvpn);
+		gameObjectGrid.getChildren().add(this.adcube);
+		gameObjectGrid.getChildren().add(this.antivirus);
+		gameObjectGrid.getChildren().add(this.authentipoint);
+		gameObjectGrid.getChildren().add(this.firewall);
+		gameObjectGrid.getChildren().add(this.sudvpn);
 	}
 }

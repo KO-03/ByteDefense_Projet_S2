@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 
 public class EnemyView extends LivingObjectView {
 
+	// Textures des ennemis
 	private static Image adwareImg; 
 	private static Image botImg;
 	private static Image ransomwareImg;
@@ -29,8 +30,8 @@ public class EnemyView extends LivingObjectView {
 	private static Image spywareImg;
 	private static Image trojanHorseImg;
 
-	public EnemyView(Pane grid) {
-		super(grid);
+	public EnemyView(Pane gameObjectGrid) {
+		super(gameObjectGrid);
 	}
 
 	public void imageLoader() {

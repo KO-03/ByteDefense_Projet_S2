@@ -30,6 +30,7 @@ public class GameAreaView {
 	public static final int HORIZONTAL_WALL = 6;
 	public static final int TOWER_ZONE = 7;
 
+	// Textures des tuiles du plateau de jeu
 	private static Image CORNER_SRC_IMG; 
 	private static Image HORIZONTAL_PATH_SRC_IMG;
 	private static Image VERTICAL_PATH_SRC_IMG;
@@ -38,11 +39,11 @@ public class GameAreaView {
 	private static Image HORIZONTAL_WALL_SRC_IMG;
 	private static Image TOWER_ZONE_SRC_IMG;
 
-	private GameArea map;
-	private TilePane gameBoard;
+	private GameArea gameArea; // plateau de jeu
+	private TilePane gameBoard; // grille de tuiles ou le plateau de jeu est affiches
 
-	public GameAreaView(GameArea map, TilePane gameBoard) {
-		this.map = map;
+	public GameAreaView(GameArea gameArea, TilePane gameBoard) {
+		this.gameArea = gameArea;
 		this.gameBoard = gameBoard;
 		this.imageLoader();
 		this.generateMapView();
@@ -93,11 +94,11 @@ public class GameAreaView {
 
 	private void generateMapView() {
 		Image tileImg;
-		int tilesSize = GameArea.gameAreaTilesSize;
+		int tilesSize = GameArea.gameAreaTilesSize; // taille du plateau de jeu en nombre de tuile
 
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {
-				tileImg = this.tileImageGet(this.map.gameAreaCase(x, y));
+				tileImg = this.tileImageGet(this.gameArea.gameAreaCase(x, y));
 
 				if(tileImg != null) {
 					ImageView tile = new ImageView();

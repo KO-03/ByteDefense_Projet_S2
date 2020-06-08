@@ -1,9 +1,7 @@
 /*
- * GameObjectView.java
- * Cette classe gere la partie visuelle d'un objet de jeu (Enemy ou Tower), ses responsabilites sont :
- * - stocker la grille ou les objets de jeu sont affiches
- * - ajouter un objet de jeu a la vue (grille)
- * - supprimer un objet de jeu de la vue (grille)
+ * LivingObjectView.java
+ * Cette classe gere la partie visuelle d'un LivingObject (Enemy ou Tower), sa responsabilite est de :
+ * - ajouter un LivingObject a la vue (grille)
  */
 
 package byteDefense.view;
@@ -13,12 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public abstract class LivingObjectView {
-
-	private Pane grid;
-
-	public LivingObjectView(Pane grid) {
-		this.grid = grid;
+public abstract class LivingObjectView extends GameObjectView {
+	
+	public LivingObjectView(Pane gameObjectGrid) {
+		super(gameObjectGrid);
 		this.imageLoader();
 	}
 
@@ -26,24 +22,20 @@ public abstract class LivingObjectView {
 
 	public abstract Image imageGetter(LivingObject livingObject);
 
-	public void addLivingObject(LivingObject livingObject) {
-		Image gameObjectImg = imageGetter(livingObject);
+	public void addLivingObjectView(LivingObject livingObject) {
+		Image img = imageGetter(livingObject);
 
-		if (gameObjectImg != null) {
+		if (img != null) {
 			ImageView imgView = new ImageView();
-			imgView.setImage(gameObjectImg);
+			imgView.setImage(img);
 			imgView.setId(Integer.toString(livingObject.getId()));
 			imgView.setTranslateX(livingObject.getX());
 			imgView.setTranslateY(livingObject.getY());	
 			
 			imgView.translateXProperty().bind(livingObject.getXProperty());
 			imgView.translateYProperty().bind(livingObject.getYProperty());
-
-			this.grid.getChildren().add(imgView);
+			
+			super.gameObjectGrid.getChildren().add(imgView);
 		}
-	}
-	
-	public void removeLivingObject(LivingObject livingObject) {
-		this.grid.getChildren().remove(this.grid.lookup("#" + livingObject.getId()));
 	}
 }
