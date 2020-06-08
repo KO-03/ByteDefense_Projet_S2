@@ -6,11 +6,11 @@
 
 package byteDefense.model.enemies;
 
-import byteDefense.model.Bullet;
-import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.towers.Tower;
 import byteDefense.utilities.BFS;
+import byteDefense.utilities.ShootUtilities;
+import javafx.collections.ObservableList;
 
 public abstract class OffensiveEnemy extends Enemy {
 
@@ -18,25 +18,18 @@ public abstract class OffensiveEnemy extends Enemy {
 		super(bfsMap, gameEnv);
 	}
 	
-	public void shoot(Tower target) {
-		super.getGameEnvironment().addBullet(new Bullet(getX(), getY(), target, this));
-	}
-	
 	public void attackTower() {
-		Tower target = this.findTarget();
+		ObservableList<Tower> towers = super.getGameEnvironment().getTowers();
+		Tower target = null;
+		int i = 0;
 		
-		if (target != null)
-			this.shoot(target);
-	}
-	
-	public Tower findTarget() {
-		for(Tower tower : super.getGameEnvironment().getTowers()) {
-			if ((this.getY() - this.getAttackRange() * GameArea.TILE_SIZE <= tower.getY() && tower.getY() <= this.getY() + this.getAttackRange() * GameArea.TILE_SIZE) &&
-				(this.getX() - this.getAttackRange() * GameArea.TILE_SIZE <= tower.getX() && tower.getX() <= this.getX() + this.getAttackRange() * GameArea.TILE_SIZE)) {
-				return tower;
-			}
+		while (i < towers.size() && target == null) {
+			target = (Tower)ShootUtilities.checkTargetPosition(towers.get(i), this);
+			i++;
 		}
-		return null;
+		// une cible a ete trouvee aux alentours de l'ennemi
+		if (target != null)
+			ShootUtilities.shoot(this, target, super.getGameEnvironment());
 	}
 	
 	public abstract void attack();
