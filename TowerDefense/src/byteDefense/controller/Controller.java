@@ -68,15 +68,15 @@ public class Controller implements Initializable {
     @FXML
     private Label byteCoin; // Argent du jeu
     @FXML
-    private Label attackStat;
-    @FXML
-    private Label attackSpeedStat;
+	private Label attackStat;
     @FXML
     private Label defenseStat;
     @FXML
+    private Label attackSpeedStat;
+    @FXML
     private Label attackRangeStat;
-
-	private GameMaster gm;
+    
+    private GameMaster gm;
 	private int enemiesNbrModel;
 	private EnemyView ev;
 	private TowerView tv;
@@ -111,13 +111,34 @@ public class Controller implements Initializable {
         this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.5), 
+				Duration.seconds(0.3), 
 				(event ->{
 					if (this.time == 10000)
 						this.gameLoop.stop();
 					else if (this.time % 5 == 0)
 						this.gm.aTurn();
-                	this.gm.getGameEnvironment().gameAction();
+					switch(gm.winConditions()) {
+					case 1:
+						System.out.println("WIN");
+						gameLoop.stop();
+						break;
+					case 2:
+						System.out.println("LOOSE");
+						gameLoop.stop();
+						break;
+					default: 
+						this.gm.getGameEnvironment().gameEnvironmentAction();
+						switch(gm.winConditions()) {
+						case 1:
+							System.out.println("WIN");
+							gameLoop.stop();
+							break;
+						case 2:
+							System.out.println("LOOSE");
+							gameLoop.stop();
+						}
+					}
+					
 					this.time++;
 				}));
 
@@ -128,18 +149,18 @@ public class Controller implements Initializable {
 		this.gm.getGameEnvironment().getTowers().addListener((ListChangeListener <Tower>) c-> {
 			while (c.next()) {
 				for (Tower tower : c.getAddedSubList())
-					this.tv.addLivingObject(tower);
+					this.tv.addLivingObjectView(tower);
 				for (Tower tower : c.getRemoved())
-					this.tv.removeLivingObject(tower);
+					this.tv.removeGameObjectView(tower);
 			}
 		});
 		
 		this.gm.getGameEnvironment().getEnemies().addListener((ListChangeListener <Enemy>) c-> {
 			while (c.next()) {
 				for (Enemy enemy : c.getAddedSubList())
-					this.ev.addLivingObject(enemy);
+					this.ev.addLivingObjectView(enemy);
 				for (Enemy enemy : c.getRemoved())
-					this.ev.removeLivingObject(enemy);
+					this.ev.removeGameObjectView(enemy);
 				this.enemiesNbr.setText(Integer.toString(this.enemiesNbrModel));
 			}
 		});
@@ -149,7 +170,7 @@ public class Controller implements Initializable {
 				for (Bullet bullet : c.getAddedSubList())
 					this.bv.addBulletView(bullet);
 				for (Bullet bullet : c.getRemoved())
-					this.bv.removeBulletView(bullet);
+					this.bv.removeGameObjectView(bullet);
 			}
 		});
 	}
@@ -188,7 +209,7 @@ public class Controller implements Initializable {
 				int x = (int) event.getX() / tileSize * tileSize; 
 				int y = (int) event.getY() / tileSize * tileSize;
 
-				if (gm.getGameArea().isPlaceable(x, y) && !gm.isReserved(x, y)) {
+				if (gm.getGameArea().isPlaceable(x, y) && !gm.tileIsReserved(x, y)) {
 					GameEnvironment ge = gm.getGameEnvironment();
 					
 					if (tower == adcube)
@@ -202,8 +223,8 @@ public class Controller implements Initializable {
 					else if (tower == sudvpn)
 						newTower = new SudVPN(x, y, ge);
 					
-					// le joueur ne possede pas assez de byteCoin pour acheter la tourelle
-					if(gm.debitMoney(newTower.getCost()))
+					// le joueur possede assez de byteCoin pour acheter la tourelle
+					if (gm.debitMoney(newTower.getCost()))
 						ge.addTower(newTower);
 				}
 				tower.setX(initialX);

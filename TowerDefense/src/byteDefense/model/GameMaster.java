@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import byteDefense.model.enemies.Wave;
 import byteDefense.model.enemies.WaveServices;
-import byteDefense.model.towers.Tower;
 import byteDefense.utilities.BFS;
 import byteDefense.utilities.WaveReader;
 import javafx.beans.property.IntegerProperty;
@@ -23,6 +22,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class GameMaster {
 
+	private static final int LOOSE_LIMIT = 200;
+	private int waveNumber;
+	
 	private WaveServices waveServices;
 	private ArrayList<Wave> waves;
 	private GameArea gameArea;
@@ -36,19 +38,16 @@ public class GameMaster {
 		this.gameEnv = new GameEnvironment();
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
-		this.walletProperty = new SimpleIntegerProperty(60);
+		this.walletProperty = new SimpleIntegerProperty(100);
+		this.waveNumber = 0;
 	}
 	
 	public GameArea getGameArea() {
 		return this.gameArea;
 	}
 	
-	public BFS getBfs() {
-		return this.bfs;
-	}
-	
-	public WaveServices getWaveServices() {
-		return this.waveServices;
+	private Wave getTopWave() {
+		return this.waves.get(0);
 	}
 	
 	private void removeTopWave() {
@@ -89,16 +88,42 @@ public class GameMaster {
 		}
 	}
 	
+	// Fonction qui verifie si tous les ennemies de la vagues ont ete ajoutes a l'environnement ou non
+	private boolean allEnemiesWaveSpawned(Wave wave) {
+		return wave.isEmpty();
+	}
+	
+	public boolean tileIsReserved(int x, int y) {
+		return this.gameEnv.checkTowerPosition(x, y);
+	}
+	
 	public void aTurn() {
-		// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
-		if (!this.waves.get(0).isEmpty())
-			this.waveServices.addEnemy(this.waves.get(0));
+		Wave wave = this.getTopWave(); // vague en cours
 		
+		if (this.waveNumber == wave.getWaveNumber()) {
+			// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
+			if (!this.allEnemiesWaveSpawned(wave))
+				this.waveServices.addNewEnemy(wave);
+			else
+				removeTopWave();
+		} else if (gameEnv.getEnemies().size() == 0)
+			waveNumber++;
+			
 		this.gameEnv.enemiesMove();
 		this.addMoney(1);
 	}
 	
-	public boolean isReserved(int x, int y) {
-		return this.gameEnv.checkPosition(x, y);
+	/*
+	 * 0 : continuer
+	 * 1 : win
+	 * 2 : loose
+	 */
+	public int winConditions() {
+		if (this.gameEnv.getEnemyPassed() >= LOOSE_LIMIT)
+			return 2;
+		else if (waves.size() == 0 && gameEnv.getEnemies().size() == 0)
+			return 1;
+		else
+			return 0;
 	}
 }

@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 
 public class GameEnvironment {
 	
+	private int enemyPassed;
 	private ObservableList<Enemy> enemies;
 	private ObservableList<Tower> towers;
 	private ObservableList<Bullet> bullets;
@@ -26,6 +27,11 @@ public class GameEnvironment {
 		this.enemies = FXCollections.observableArrayList();
 		this.towers = FXCollections.observableArrayList();
 		this.bullets = FXCollections.observableArrayList();
+		this.enemyPassed = 0;
+	}
+
+	public int getEnemyPassed() {
+		return this.enemyPassed;
 	}
 	
 	public ObservableList<Enemy> getEnemies() {
@@ -69,17 +75,18 @@ public class GameEnvironment {
 		for (int i = this.enemies.size() - 1; i >= 0; i--) {
 			Enemy enemy = this.enemies.get(i);
 			if (enemy instanceof OffensiveEnemy)
-			((OffensiveEnemy)enemy).attack();
+				((OffensiveEnemy)enemy).attack();
 		}
 		
-		for (int i = this.towers.size() - 1; i >= 0; i--) {
+		for (int i = this.towers.size() - 1; i >= 0; i--)
 			this.towers.get(i).attack();
-		}
 	}
 	
 	public void enemiesMove() {
-		for (int i = this.enemies.size() - 1; i >= 0; i--) {
-			this.enemies.get(i).move();
+		for (Enemy enemy : this.enemies) {
+			enemy.move();
+			if (enemy.isArrived())
+				this.enemyPassed += enemy.getAttack(); 
 		}
 	}
 	
@@ -102,25 +109,27 @@ public class GameEnvironment {
 			bullet = this.bullets.get(i);
 			
 			// Retirer les points de vie a la cible si elle est toujours vivante
-			if (bullet.getTargetObject().isAlive())
+			if (bullet.targetIsAlive())
 				bullet.attackTarget();
+			
 			this.removeBullet(bullet);
 		}
 	}
 	
-	public void gameAction() {
+	public void gameEnvironmentAction() {
 		this.bulletsAction();
     	this.removeLivingObject();
 		this.livingObjectAttack();
 	}
 	
-	public boolean checkPosition(int x, int y) {
+	// Fonction qui verifie si la tuile a des coordonnes xy donnees est occupee par une tourelle ou pas 
+	public boolean checkTowerPosition(int x, int y) {
 		int tileSize = GameArea.TILE_SIZE;
 		
-		for (Tower tower: this.towers) {
+		for (Tower tower: this.towers)
 			if (tower.getX() / tileSize * tileSize == x && tower.getY() / tileSize * tileSize == y)
 				return true;
-		}
+
 		return false;
 	}
 }
