@@ -6,41 +6,33 @@
 
 package byteDefense.model.towers;
 
-import byteDefense.model.Bullet;
-import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
 import byteDefense.model.enemies.Enemy;
+import byteDefense.utilities.ShootUtilities;
+import javafx.collections.ObservableList;
 
 public abstract class Tower extends LivingObject {
 	
 	public Tower(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, 100, gameEnv);
 	}
-
-	public abstract int getCost();
-	
-	public void shoot(Enemy target) {
-		super.getGameEnvironment().addBullet(new Bullet(getX(), getY(), target, this));
-	}
 	
 	public void attackEnemy() {
-		Enemy target = this.findTarget();
+		ObservableList<Enemy> enemies = super.getGameEnvironment().getEnemies();
+		Enemy target = null;
+		int i = 0;
 		
-		if (target != null)
-			this.shoot(target);
-	}
-	
-	public Enemy findTarget() {
-		
-		for(Enemy enemy : super.getGameEnvironment().getEnemies()) {
-			if ((this.getY() - this.getAttackRange() * GameArea.TILE_SIZE <= enemy.getY() && enemy.getY() <= this.getY() + this.getAttackRange() * GameArea.TILE_SIZE) &&
-				(this.getX() - this.getAttackRange() * GameArea.TILE_SIZE <= enemy.getX() && enemy.getX() <= this.getX() + this.getAttackRange() * GameArea.TILE_SIZE)) {
-				return enemy;
-			}
+		while (target == null && i < enemies.size()) {
+			target = (Enemy)ShootUtilities.checkTargetPosition(enemies.get(i), this);
+			i++;
 		}
-		return null;
+		// une cible a ete trouvee aux alentours de la tourelle
+		if (target != null)
+			ShootUtilities.shoot(this, target, super.getGameEnvironment());
 	}
 	
 	public abstract void attack();
+	
+	public abstract int getCost();
 }

@@ -1,17 +1,10 @@
 /*
- * GameObject.java
- * Cette classe parent represente un objet de jeu (un ennemi ou une tourelle), ses responsabilites sont de :
- * - identifier un objet de jeu par un identifiant recuperable
- * - recuperer et fixer les coordonnees xy d'un objet de jeu
- * - recuperer l'indice courant correpondant aux coordonnees xy de l'objet de jeu 
- * - recuperer et decrementer les points de vie d'un objet de jeu
- * - verifier qu'un objet de jeu est mort ou non
- * - verifier si le gameObject est une tourelle ou un ennemi
- * - trouver une cible aux alentours de l'objet de jeu
- * - faire tirer un objet de jeu sur une cible
- * - gerer les actions de tirs d'un objet de jeu
- * - recuperer les caracteristiques d'un objet de jeu (points d'attaque, point 
- *   de defense, vitesse d'attaque, portee d'attaque et l'action)
+ * LivingObject.java
+ * Cette classe parent represente un objet "vivant" du jeu (un ennemi ou une tourelle), ses responsabilites sont de :
+ * - stocker, recuperer et decrementer ses points de vie 
+ * - stocker et recuperer son environnement de jeu
+ * - verifier s'il est mort ou non
+ * - recuperer ses caracteristiques (points d'attaque, points de defense, vitesse d'attaque, portee d'attaque)
  */
 
 package byteDefense.model;
