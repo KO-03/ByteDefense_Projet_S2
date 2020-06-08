@@ -304,7 +304,7 @@
                               <Image url="@../../../resources/backgroundTextures/towers_menu_background.png" />
                            </image>
                         </ImageView>
-                        <HBox alignment="TOP_CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="TOP_CENTER" fillHeight="false">
                            <children>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Tours :">
                                  <font>
@@ -394,6 +394,11 @@
                                     </ImageView>
                                  </children>
                               </GridPane>
+                              <Label fx:id="timer" styleClass="label-header" text="00:00">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
                            </children>
                            <padding>
                               <Insets top="15.0" />

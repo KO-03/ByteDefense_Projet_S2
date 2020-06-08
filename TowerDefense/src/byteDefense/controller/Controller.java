@@ -95,6 +95,8 @@ public class Controller implements Initializable {
     private Button launchWaveBt;
     @FXML
     private Button gameControls;
+    @FXML    
+    private Label timer;
     
     private GameMaster gm;
 	private int enemiesNbrModel;
@@ -105,11 +107,18 @@ public class Controller implements Initializable {
 	private int time;
 	private boolean gameStatus;
 
+	private int seconde;
+	private int minute;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.loadPlayPauseImage();
 		this.gm = new GameMaster();
 		this.enemiesNbrModel = 0;		
+		this.enemiesNbrModel = 0;
+		
+		this.seconde = 0;
+        this.minute = 0;
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnemyView(this.gridEnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
@@ -120,7 +129,7 @@ public class Controller implements Initializable {
 		this.mouseDraggedOnShop();
 		this.initAnimation();
 		this.gameLoop.play();
-		this.gameStatus = true;
+		this.gameStatus = false;
 	}
 
 	private void generateWalletListener() {
@@ -157,31 +166,21 @@ public class Controller implements Initializable {
     	});
     }
 	
-	/*private void initCommands() {
-		this.playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-	         this.gameLoop.play();
-	         this.enableMouseDraggedOnTowers();
-	         event.consume();
-	     });
-		this.pauseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-	         this.gameLoop.pause();
-	         this.disableMouseDraggedOnTowers();
-	         event.consume();
-	     });
-	}
-	*/
 	private void initAnimation() {
 		this.gameLoop = new Timeline();
         this.time = 0;
         this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.05), 
+				Duration.seconds(0.25), 
 				(event ->{
-					if (this.time == 10000)
-						this.gameLoop.stop();
-					else if (this.time % 5 == 0)
+					if (this.time % 4 == 0) {
+						if(this.gameStatus == true && this.gm.isWaveRunning()) {
+							this.gm.addMoney(1);
+							this.timer();
+						}
 						this.gm.aTurn();
+					}
 					switch(gm.winConditions()) {
 					case 1:
 						System.out.println("WIN");
@@ -208,6 +207,17 @@ public class Controller implements Initializable {
 				}));
 
 		this.gameLoop.getKeyFrames().add(kf);
+	}
+	
+	private void timer() {
+		this.seconde++;
+		
+		if (seconde == 60) {
+			seconde = 0;
+			minute++;
+		}
+		
+		timer.setText(String.format("%02d", minute) + ":" + String.format("%02d", seconde));
 	}
 
 	private void generateGameObjectsListener() {
@@ -318,6 +328,8 @@ public class Controller implements Initializable {
    private void launchWave(ActionEvent event) {
     	if(!this.gm.isWaveRunning()) {
     		this.gm.incrementWaveNumber();
+    		if(this.gameStatus ==false)
+    			this.gameStatus = true;
     	}
     }
 }

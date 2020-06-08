@@ -73,7 +73,7 @@ public class GameMaster {
 	}
 
 	//Renvoie true si la transaction est réussie
-		private boolean addMoney(int amount) {
+		public boolean addMoney(int amount) {
 			if(amount < 0 || this.getWallet() + amount > Integer.MAX_VALUE)
 				return false;
 			else {
@@ -116,7 +116,6 @@ public class GameMaster {
 		}
 			
 		this.gameEnv.enemiesMove();
-		this.addMoney(1);
 	}
 	
 	public void incrementWaveNumber() {
