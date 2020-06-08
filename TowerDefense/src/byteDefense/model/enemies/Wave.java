@@ -26,6 +26,7 @@ public class Wave {
 	private ArrayList<WaveEnemy> waveEnemies;
 	
 	public Wave(int waveNumber, int moveSpeed, int spawnRate, ArrayList<WaveEnemy> waveEnemies) {
+		this.waveNumber = waveNumber;
 		this.moveSpeed = moveSpeed;
 		this.spawnRate = spawnRate;
 		this.waveEnemies = waveEnemies;
@@ -75,5 +76,10 @@ public class Wave {
 	
 	public int getEnemyType(WaveEnemy waveEnemy) {
 		return waveEnemy.getEnemyType();
+	}
+
+	public String toString() {
+		return "Wave [waveNumber=" + waveNumber + ", moveSpeed=" + moveSpeed + ", spawnRate=" + spawnRate
+				+ ", waveEnemies=" + waveEnemies + "]";
 	}
 }

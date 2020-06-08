@@ -28,4 +28,8 @@ public class WaveEnemy {
 	public void decrementQuantity() {
 		this.quantity--;
 	}
+
+	public String toString() {
+		return "WaveEnemy [enemyType=" + enemyType + ", quantity=" + quantity + "]";
+	}
 }

@@ -25,11 +25,11 @@ public class WaveServices {
 	
 	private Enemy createEnemy(Wave wave) {
 		WaveEnemy waveEnnemy = wave.getWaveEnemyRandomly();
-		int ennemyType = wave.getEnemyType(waveEnnemy);
-		
+		int enemyType = wave.getEnemyType(waveEnnemy);
+
 		wave.updateWave(waveEnnemy);
 		
-		return EnemyFactory.getInstance(ennemyType, this.bfsMap, this.gameEnv);
+		return EnemyFactory.getInstance(enemyType, this.bfsMap, this.gameEnv);
 	}
 
 	public void addNewEnemy(Wave wave) {

@@ -115,7 +115,7 @@ public class Controller implements Initializable {
         this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.3), 
+				Duration.seconds(0.05), 
 				(event ->{
 					if (this.time == 10000)
 						this.gameLoop.stop();

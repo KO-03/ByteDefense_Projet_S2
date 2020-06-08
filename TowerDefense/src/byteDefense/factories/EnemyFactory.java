@@ -36,6 +36,7 @@ public class EnemyFactory {
 			break;
 		case 5:
 			enemy = new Spyware(bfsMap, gameEnv);
+			break;
 		case 6:
 			enemy = new TrojanHorse(bfsMap, gameEnv);
 		}

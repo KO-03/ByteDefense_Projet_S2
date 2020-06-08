@@ -22,7 +22,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class GameMaster {
 
-	private static final int LOOSE_LIMIT = 200;
+	private static final int LOOSE_LIMIT = 60000000;
 	private int waveNumber;
 	
 	private WaveServices waveServices;
@@ -98,16 +98,18 @@ public class GameMaster {
 	}
 	
 	public void aTurn() {
-		Wave wave = this.getTopWave(); // vague en cours
-		
-		if (this.waveNumber == wave.getWaveNumber()) {
-			// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
-			if (!this.allEnemiesWaveSpawned(wave))
-				this.waveServices.addNewEnemy(wave);
-			else
-				removeTopWave();
-		} else if (gameEnv.getEnemies().size() == 0)
-			waveNumber++;
+		if (this.waves.size() != 0) {
+			Wave wave = this.getTopWave(); // vague en cours
+			
+			if (this.waveNumber + 1 == wave.getWaveNumber()) {
+				// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
+				if (!this.allEnemiesWaveSpawned(wave)) 
+					this.waveServices.addNewEnemy(wave);
+				else
+					removeTopWave();
+			} else if (gameEnv.getEnemies().size() == 0)
+				waveNumber++;
+		}
 			
 		this.gameEnv.enemiesMove();
 		this.addMoney(1);
