@@ -1,10 +1,10 @@
 /*
  * WaveServices.java
- * Cette classe gere les services/actions lies a la Wave (vague d'ennemis), ses responsabilites sont de : 
+ * Cette classe gere les services/actions lies a la Wave (vague d'ennemis) a ajouter a l'environnement, ses responsabilites sont de : 
  * - stocker le BFS que la vague d'ennemis doit suivre
  * - stocker l'environnement de jeu de la vague
  * - creer un ennemi en fonction des ennemis deja ajoutes 
- * - ajouter un ennemi cree a la Wave
+ * - ajouter un ennemi cree a l'environnement
  */
 
 package byteDefense.model.enemies;
@@ -24,19 +24,15 @@ public class WaveServices {
 	}
 	
 	private Enemy createEnemy(Wave wave) {
-		int enemyType = wave.getEnemyType();
+		WaveEnemy waveEnnemy = wave.getWaveEnemyRandomly();
+		int ennemyType = wave.getEnemyType(waveEnnemy);
 		
-		wave.decrementEnemyQty();
-		if (wave.checkSpawnedEnemies())
-			wave.removeWaveEnemy();
+		wave.updateWave(waveEnnemy);
 		
-		return EnemyFactory.getInstance(enemyType, this.bfsMap, this.gameEnv);
+		return EnemyFactory.getInstance(ennemyType, this.bfsMap, this.gameEnv);
 	}
 
-	public void addEnemy(Wave wave) {
-		Enemy ennemy = createEnemy(wave); 
-		
-		if (ennemy != null)
-			this.gameEnv.addEnemy(ennemy);
+	public void addNewEnemy(Wave wave) {
+		this.gameEnv.addEnemy(createEnemy(wave));
 	}
 }
