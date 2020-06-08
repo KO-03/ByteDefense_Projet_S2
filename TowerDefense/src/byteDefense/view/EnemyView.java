@@ -30,8 +30,8 @@ public class EnemyView extends LivingObjectView {
 	private static Image spywareImg;
 	private static Image trojanHorseImg;
 
-	public EnemyView(Pane gameObjectGrid) {
-		super(gameObjectGrid);
+	public EnemyView(Pane gridEnemies) {
+		super(gridEnemies);
 	}
 
 	public void imageLoader() {

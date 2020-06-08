@@ -50,7 +50,11 @@ public class Controller implements Initializable {
 	@FXML
 	private TilePane gameBoard;
 	@FXML
-	private Pane grid;
+    private Pane gridBullets;
+	@FXML
+    private Pane gridEnemies;
+	@FXML
+    private Pane gridTowers;
 	@FXML
 	private ImageView adcube;
 	@FXML
@@ -90,9 +94,9 @@ public class Controller implements Initializable {
 		this.enemiesNbrModel = 0;
 		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
-		this.ev = new EnemyView(this.grid);
-		this.tv = new TowerView(this.grid, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
-		this.bv = new BulletView(this.grid);
+		this.ev = new EnemyView(this.gridEnemies);
+		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
+		this.bv = new BulletView(this.gridBullets);
 		
 		this.generateGameObjectsListener();
 		this.generateWalletListener();

@@ -17,8 +17,8 @@ import javafx.util.Duration;
 
 public class BulletView extends GameObjectView {
 	
-	public BulletView(Pane gameObjectGrid) {
-		super(gameObjectGrid);
+	public BulletView(Pane gridBullets) {
+		super(gridBullets);
 	}
 	
 	public void addBulletView(Bullet bullet) {

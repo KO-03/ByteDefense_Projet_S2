@@ -38,8 +38,8 @@ public class TowerView extends LivingObjectView {
 	private ImageView firewall;
 	private ImageView sudvpn;
 
-	public TowerView(Pane gameObjectGrid, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
-		super(gameObjectGrid);
+	public TowerView(Pane gridTowers, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
+		super(gridTowers);
 		this.adcube = adcube;
 		this.antivirus = antivirus;
 		this.authentipoint = authentificatipoint;

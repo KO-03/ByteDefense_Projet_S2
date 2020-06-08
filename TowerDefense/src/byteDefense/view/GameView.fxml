@@ -410,7 +410,9 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <TilePane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="672.0" style="-fx-background-color: #1e838c;" tileAlignment="CENTER_RIGHT" />
-            <Pane fx:id="grid" prefHeight="672.0" prefWidth="672.0" />
+            <Pane fx:id="gridEnemies" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
+            <Pane fx:id="gridTowers" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
+            <Pane fx:id="gridBullets" prefHeight="672.0" prefWidth="672.0" scaleZ="3.0" />
          </children>
       </Pane>
    </center>
