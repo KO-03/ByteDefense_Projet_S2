@@ -14,6 +14,8 @@
 
 package byteDefense.controller;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,10 +37,13 @@ import byteDefense.view.TowerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -46,6 +51,9 @@ import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 public class Controller implements Initializable {
+	
+	private static Image play;
+	private static Image pause;
 
 	@FXML
 	private TilePane gameBoard;
@@ -83,6 +91,10 @@ public class Controller implements Initializable {
     private ImageView pauseButton;
     @FXML
     private ImageView playButton;
+    @FXML
+    private Button launchWaveBt;
+    @FXML
+    private Button gameControls;
     
     private GameMaster gm;
 	private int enemiesNbrModel;
@@ -91,32 +103,64 @@ public class Controller implements Initializable {
 	private BulletView bv;
 	private Timeline gameLoop;
 	private int time;
+	private boolean gameStatus;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.loadPlayPauseImage();
 		this.gm = new GameMaster();
-		this.enemiesNbrModel = 0;
-		
+		this.enemiesNbrModel = 0;		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnemyView(this.gridEnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.gridBullets);
-		this.initCommands();
+		//this.initCommands();
 		this.generateGameObjectsListener();
 		this.generateWalletListener();
 		this.mouseDraggedOnShop();
 		this.initAnimation();
 		this.gameLoop.play();
+		this.gameStatus = true;
 	}
 
 	private void generateWalletListener() {
 		this.byteCoin.textProperty().bind(this.gm.getWalletProperty().asString());	
 	}
 	
-	private void initCommands() {
+	private void loadPlayPauseImage() {
+		try {
+			play = new Image(new File("./resources/icons/play-button.png").toURI().toURL().toString());
+			pause = new Image(new File("./resources/icons/pause-button.png").toURI().toURL().toString());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+    @FXML
+    private void playAndPause(ActionEvent event) {
+    	this.gameControls.setOnAction(new EventHandler<ActionEvent>() {
+    	    @Override public void handle(ActionEvent e) {    	    	
+				if(gameStatus == true) {
+			        gameControls.setGraphic(new ImageView(pause));
+	    	        gameLoop.pause();
+	    	        disableMouseDraggedOnTowers();
+	    	        gameStatus = false;
+    	    	}else {
+    	    		gameControls.setGraphic(new ImageView(play));
+        	        gameLoop.play();
+        	        enableMouseDraggedOnTowers();
+        	        gameStatus = true;
+    	    	}    	    		    	      
+    	    }
+    	});
+    }
+	
+	/*private void initCommands() {
 		this.playButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 	         this.gameLoop.play();
-	         this.ableMouseDraggedOnTowers();
+	         this.enableMouseDraggedOnTowers();
 	         event.consume();
 	     });
 		this.pauseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -125,7 +169,7 @@ public class Controller implements Initializable {
 	         event.consume();
 	     });
 	}
-	
+	*/
 	private void initAnimation() {
 		this.gameLoop = new Timeline();
         this.time = 0;
@@ -262,11 +306,18 @@ public class Controller implements Initializable {
 		this.sudvpn.setDisable(true);
 	}
 	
-	private void ableMouseDraggedOnTowers() {
+	private void enableMouseDraggedOnTowers() {
 		this.adcube.setDisable(false);
 		this.antivirus.setDisable(false);
 		this.authentipoint.setDisable(false);
 		this.firewall.setDisable(false);
 		this.sudvpn.setDisable(false);
 	}
+	
+    @FXML
+   private void launchWave(ActionEvent event) {
+    	if(!this.gm.isWaveRunning()) {
+    		this.gm.incrementWaveNumber();
+    	}
+    }
 }

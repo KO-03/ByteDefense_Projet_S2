@@ -40,7 +40,7 @@
                   <Image url="@../../../resources/backgroundTextures/right_background.png" />
                </image>
             </ImageView>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Menu :">
                      <font>
@@ -50,56 +50,53 @@
                         <Insets bottom="12.0" left="12.0" />
                      </VBox.margin>
                   </Text>
-                  <HBox>
+                  <HBox alignment="TOP_CENTER">
                      <children>
-                        <ImageView fx:id="pauseButton" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../resources/icons/pause-button.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="15.0" top="6.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <ImageView fx:id="playButton" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../resources/icons/play-button.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="15.0" right="15.0" />
-                           </HBox.margin>
-                        </ImageView>
+                        <Button fx:id="gameControls" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playAndPause" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: none; -fx-border-width: 0;">
+                           <graphic>
+                              <ImageView fitWidth="50.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../../resources/icons/pause-button.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                      <VBox.margin>
                         <Insets bottom="6.0" />
                      </VBox.margin>
                   </HBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0">
                      <children>
-                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Retour">
+                        <Button fx:id="launchWaveBt" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#launchWave" styleClass="encadre" text="Lancer vague">
                            <VBox.margin>
-                              <Insets bottom="6.0" left="10.0" top="6.0" />
+                              <Insets left="10.0" />
                            </VBox.margin>
                         </Button>
                         <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Sauvegarder">
                            <VBox.margin>
-                              <Insets bottom="6.0" left="10.0" top="6.0" />
+                              <Insets left="10.0" />
                            </VBox.margin>
                         </Button>
                         <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Régles">
                            <VBox.margin>
-                              <Insets bottom="6.0" left="10.0" top="6.0" />
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Retour">
+                           <VBox.margin>
+                              <Insets left="10.0" />
                            </VBox.margin>
                         </Button>
                         <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Quitter">
                            <VBox.margin>
-                              <Insets bottom="6.0" left="10.0" top="6.0" />
+                              <Insets left="10.0" />
                            </VBox.margin>
                         </Button>
                      </children>
                   </VBox>
-                  <VBox spacing="12.0">
+                  <VBox alignment="CENTER" spacing="6.0">
                      <VBox.margin>
-                        <Insets left="12.0" />
+                        <Insets left="12.0" top="6.0" />
                      </VBox.margin>
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Infos :">
@@ -107,10 +104,10 @@
                               <Font size="17.0" />
                            </font>
                            <VBox.margin>
-                              <Insets bottom="12.0" left="12.0" />
+                              <Insets bottom="6.0" left="12.0" />
                            </VBox.margin>
                         </Text>
-                        <HBox>
+                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -132,7 +129,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -154,7 +151,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -176,7 +173,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -198,7 +195,7 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox>
+                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -225,7 +222,7 @@
                               <Font size="17.0" />
                            </font>
                         </Text>
-                        <Label styleClass="label-bright" text="Additional informations" wrapText="true">
+                        <Label text="Additional informations" wrapText="true">
                            <padding>
                               <Insets left="6.0" />
                            </padding>

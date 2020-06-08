@@ -23,7 +23,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class GameMaster {
 
 	private static final int LOOSE_LIMIT = 60000000;
-	private int waveNumber;
+	private IntegerProperty waveNumber;
+	private boolean waveStatus;
 	
 	private WaveServices waveServices;
 	private ArrayList<Wave> waves;
@@ -39,7 +40,8 @@ public class GameMaster {
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
 		this.walletProperty = new SimpleIntegerProperty(100);
-		this.waveNumber = 0;
+		this.waveNumber = new SimpleIntegerProperty(-1);
+		this.waveStatus = false;
 	}
 	
 	public GameArea getGameArea() {
@@ -100,21 +102,42 @@ public class GameMaster {
 	}
 	
 	public void aTurn() {
-		if (this.waves.size() != 0) {
+		if (this.waves.size() != 0 && this.waveStatus == true) {
 			Wave wave = this.getTopWave(); // vague en cours
 			
-			if (this.waveNumber + 1 == wave.getWaveNumber()) {
+			if (this.getWaveNumber()+1 == wave.getWaveNumber()) {
 				// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
 				if (!this.allEnemiesWaveSpawned(wave)) 
 					this.waveServices.addNewEnemy(wave);
 				else
 					removeTopWave();
 			} else if (gameEnv.getEnemies().size() == 0)
-				waveNumber++;
+				this.waveStatus = false;		
 		}
 			
 		this.gameEnv.enemiesMove();
 		this.addMoney(1);
+	}
+	
+	public void incrementWaveNumber() {
+		this.waveStatus = true;
+		this.waveNumber.setValue(this.getWaveNumber()+1);
+	}
+	
+	public int getWaveNumber() {
+		return waveNumber.getValue();
+	}
+		
+	public IntegerProperty getWaveNumberProperty() {
+		return waveNumber;
+	}
+
+	public void setWaveNumber(int value) {
+		this.waveNumber.setValue(value);
+	}
+
+	public boolean isWaveRunning() {		
+		return waveStatus;
 	}
 	
 	/*

@@ -15,8 +15,7 @@ import byteDefense.model.GameArea;
 public class BFS {
 	
 	public static final int STOP_TILE = -1;// valeur -1 pour les domaines non accessibles
-	
-	int tilesIndex = 0;
+
 	int gameAreaDimension;
 	public GameArea gameArea;
 	public int[] cameFrom;
@@ -60,7 +59,7 @@ public class BFS {
 	}
 
 	public void BFS_algo(int start) {
-		LinkedList<Integer> queue = new LinkedList<Integer>();
+		LinkedList<Integer> queue = new LinkedList<Integer>(); // FIFO queue
 		
 		queue.add(start);
 		this.cameFrom[start] = STOP_TILE;//premier sommet du BFS
@@ -68,8 +67,7 @@ public class BFS {
 		while (queue.size() != 0) {
 			int current = queue.poll();
 			int [] neightbour = this.foundNeightbours(current);
-			int next;
-			
+			int next;		
 			for (int i = 0 ; i < neightbour.length; i++) {
 				if (neightbour[i] != STOP_TILE) {
 					next = neightbour[i];					
