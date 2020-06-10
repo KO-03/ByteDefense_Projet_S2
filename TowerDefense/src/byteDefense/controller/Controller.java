@@ -51,20 +51,22 @@ import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 public class Controller implements Initializable {
-	
+
 	private static Image play;
 	private static Image pause;
-
+	
 	@FXML
-	private TilePane gameBoard;
+	private TilePane gameBoard; // Plateau de jeu
 	@FXML
-    private Pane gridBullets;
+    private Pane gridBullets; // Grille de tirs
 	@FXML
-    private Pane gridEnemies;
+    private Pane gridEnemies; // Grille d'ennemis
 	@FXML
-    private Pane gridTowers;
+    private Pane gridTowers; // Grille de tourelles
+	
+	// Dans le magasin
 	@FXML
-	private ImageView adcube;
+	private ImageView adcube; 
 	@FXML
 	private ImageView antivirus;
 	@FXML
@@ -73,12 +75,15 @@ public class Controller implements Initializable {
 	private ImageView firewall;
 	@FXML
 	private ImageView sudvpn;
+	
     @FXML
-    private Label waveNbr;
+    private Label waveNbr; // Numero de la vague
     @FXML
-    private Label enemiesNbr;
+    private Label enemiesNbr; // Nombre d'ennemis vivants
     @FXML
     private Label byteCoin; // Argent du jeu
+    
+    // Informations des livingObjects
     @FXML
 	private Label attackStat;
     @FXML
@@ -87,26 +92,26 @@ public class Controller implements Initializable {
     private Label attackSpeedStat;
     @FXML
     private Label attackRangeStat;
-    @FXML
-    private ImageView pauseButton;
-    @FXML
-    private ImageView playButton;
+    
     @FXML
     private Button launchWaveBt;
     @FXML
     private Button gameControls;
-    @FXML    
-    private Label timer;
+    @FXML
+    private ImageView pauseButton; // Bouton pause
+    @FXML
+    private ImageView playButton; // Bouton jouer
+    @FXML
+    private Label timer; // Minuteur
     
     private GameMaster gm;
 	private int enemiesNbrModel;
+	private boolean gameStatus;
 	private EnemyView ev;
 	private TowerView tv;
 	private BulletView bv;
 	private Timeline gameLoop;
 	private int time;
-	private boolean gameStatus;
-
 	private int seconde;
 	private int minute;
 
@@ -114,16 +119,15 @@ public class Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.loadPlayPauseImage();
 		this.gm = new GameMaster();
-		this.enemiesNbrModel = 0;		
 		this.enemiesNbrModel = 0;
-		
 		this.seconde = 0;
         this.minute = 0;
+		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnemyView(this.gridEnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.gridBullets);
-		//this.initCommands();
+		
 		this.generateGameObjectsListener();
 		this.generateWalletListener();
 		this.mouseDraggedOnShop();
@@ -131,7 +135,7 @@ public class Controller implements Initializable {
 		this.gameLoop.play();
 		this.gameStatus = false;
 	}
-
+	
 	private void generateWalletListener() {
 		this.byteCoin.textProperty().bind(this.gm.getWalletProperty().asString());	
 	}
@@ -146,18 +150,17 @@ public class Controller implements Initializable {
 		
 	}
 	
-	
-    @FXML
+	@FXML
     private void playAndPause(ActionEvent event) {
     	this.gameControls.setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {    	    	
 				if(gameStatus == true) {
-			        gameControls.setGraphic(new ImageView(pause));
+			        gameControls.setGraphic(new ImageView(play));
 	    	        gameLoop.pause();
 	    	        disableMouseDraggedOnTowers();
 	    	        gameStatus = false;
     	    	}else {
-    	    		gameControls.setGraphic(new ImageView(play));
+    	    		gameControls.setGraphic(new ImageView(pause));
         	        gameLoop.play();
         	        enableMouseDraggedOnTowers();
         	        gameStatus = true;
@@ -171,55 +174,36 @@ public class Controller implements Initializable {
         this.time = 0;
         this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
-		KeyFrame kf = new KeyFrame(
-				Duration.seconds(0.25), 
-				(event ->{
-					if (this.time % 4 == 0) {
-						if(this.gameStatus == true && this.gm.isWaveRunning()) {
-							this.gm.addMoney(1);
-							this.timer();
-						}
-						this.gm.aTurn();
-					}
-					switch(gm.winConditions()) {
-					case 1:
-						System.out.println("WIN");
-						gameLoop.stop();
-						break;
-					case 2:
-						System.out.println("LOOSE");
-						gameLoop.stop();
-						break;
-					default: 
-						this.gm.getGameEnvironment().gameEnvironmentAction();
-						switch(gm.winConditions()) {
-						case 1:
-							System.out.println("WIN");
-							gameLoop.stop();
-							break;
-						case 2:
-							System.out.println("LOOSE");
-							gameLoop.stop();
-						}
-					}
-					
-					this.time++;
-				}));
-
+		KeyFrame kf = new KeyFrame(Duration.seconds(0.25), (event -> {
+			if (this.time % 4 == 0) {
+				if(this.gameStatus == true && this.gm.isWaveRunning())
+					this.gm.addMoney(1);
+				this.updateTimer();
+				this.gm.aTurn();
+				if (this.gm.playerLooses()) {
+					System.out.println("LOOSE");
+					this.gameLoop.stop();
+				}
+			}
+			this.gm.getGameEnvironment().gameEnvironmentAction();
+			if (this.gm.playerWins()) {
+				System.out.println("WIN");
+				this.gameLoop.stop();
+			}
+			this.time++;
+		}));
 		this.gameLoop.getKeyFrames().add(kf);
 	}
-	
-	private void timer() {
+
+	private void updateTimer() {
 		this.seconde++;
-		
 		if (seconde == 60) {
 			seconde = 0;
 			minute++;
 		}
-		
 		timer.setText(String.format("%02d", minute) + ":" + String.format("%02d", seconde));
 	}
-
+	
 	private void generateGameObjectsListener() {
 		this.gm.getGameEnvironment().getTowers().addListener((ListChangeListener <Tower>) c-> {
 			while (c.next()) {
@@ -280,11 +264,11 @@ public class Controller implements Initializable {
 
 		tower.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				Tower newTower = null;
+				Tower newTower;
 				int x = (int) event.getX() / tileSize * tileSize; 
 				int y = (int) event.getY() / tileSize * tileSize;
 
-				if (gm.getGameArea().isPlaceable(x, y) && !gm.tileIsReserved(x, y)) {
+				if (gm.towerIsPlaceable(x, y) && !gm.tileIsReserved(x, y)) {
 					GameEnvironment ge = gm.getGameEnvironment();
 					
 					if (tower == adcube)
@@ -297,6 +281,8 @@ public class Controller implements Initializable {
 						newTower = new Firewall(x, y, ge);
 					else if (tower == sudvpn)
 						newTower = new SudVPN(x, y, ge);
+					else
+						newTower = null;
 					
 					// le joueur possede assez de byteCoin pour acheter la tourelle
 					if (gm.debitMoney(newTower.getCost()))
@@ -324,11 +310,11 @@ public class Controller implements Initializable {
 		this.sudvpn.setDisable(false);
 	}
 	
-    @FXML
+	@FXML
    private void launchWave(ActionEvent event) {
     	if(!this.gm.isWaveRunning()) {
     		this.gm.incrementWaveNumber();
-    		if(this.gameStatus ==false)
+    		if(this.gameStatus == false)
     			this.gameStatus = true;
     	}
     }

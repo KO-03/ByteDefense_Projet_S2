@@ -22,16 +22,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class GameMaster {
 
-	private static final int LOOSE_LIMIT = 60000000;
-	private IntegerProperty waveNumber;
-	private boolean waveStatus;
+	private static final int PC_HP = 645; // Point de vie de l'ordinateur a proteger
 	
-	private WaveServices waveServices;
-	private ArrayList<Wave> waves;
-	private GameArea gameArea;
+	private GameArea gameArea; // Plateau de jeu
 	private BFS bfs;
-	private GameEnvironment gameEnv;
-	private IntegerProperty walletProperty;
+	private GameEnvironment gameEnv; // Environnement de jeu
+	private WaveServices waveServices;
+	private ArrayList<Wave> waves; // Vagues d'ennemis a ajouter
+	private IntegerProperty waveInProgressNbrProperty; // Numero de la vague en cours
+	private boolean waveStatus;
+	private IntegerProperty walletProperty; // porte-monnaie du joueur
 
 	public GameMaster() {
 		this.gameArea = new GameArea();
@@ -39,13 +39,18 @@ public class GameMaster {
 		this.gameEnv = new GameEnvironment();
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
+		this.waveInProgressNbrProperty = new SimpleIntegerProperty(-1);
 		this.walletProperty = new SimpleIntegerProperty(100);
-		this.waveNumber = new SimpleIntegerProperty(-1);
 		this.waveStatus = false;
 	}
 	
 	public GameArea getGameArea() {
 		return this.gameArea;
+	}
+
+	// Fonction qui verifie si une tourelle est plaçable sur une tuile du plateau de jeu
+	public boolean towerIsPlaceable(int x, int y) {
+		return this.gameArea.isPlaceable(x, y);
 	}
 	
 	private Wave getTopWave() {
@@ -56,8 +61,18 @@ public class GameMaster {
 		this.waves.remove(0);
 	}
 	
+	// Fonction qui verifie si les ennemis de toutes les vagues ont ete ajoutes a l'environnnement ou non  
+	private boolean allWavesAdded() {
+		return this.waves.size() == 0;
+	}
+	
 	public GameEnvironment getGameEnvironment() {
 		return this.gameEnv;
+	}
+	
+	// Fonction qui verifie si une tuile du plateau de jeu est deja prise par une tourelle ou non
+	public boolean tileIsReserved(int x, int y) {
+		return this.gameEnv.checkTowerPosition(x, y);
 	}
 	
 	public IntegerProperty getWalletProperty() {
@@ -72,84 +87,99 @@ public class GameMaster {
 		this.walletProperty.set(amount);
 	}
 
-	//Renvoie true si la transaction est réussie
-		public boolean addMoney(int amount) {
-			if(amount < 0 || this.getWallet() + amount > Integer.MAX_VALUE)
-				return false;
-			else {
-				this.setWallet(this.getWallet() + amount);
-				return true;
-			}
+	/* Fonction qui ajoute de l'argent au porte-monnaie du joueur en verifiant la transaction s'est deroulee
+	 * normalement (le montant a debiter n'est pas negatif et ne depasse pas la limite d'un entier)
+	 */
+	public boolean addMoney(int amount) {
+		if(amount < 0 || this.getWallet() + amount > Integer.MAX_VALUE)
+			return false;
+		else {
+			this.setWallet(this.getWallet() + amount);
+			return true;
 		}
-		
-		//Renvoie true si la transaction est réussie et false si ressources insuiffisante
-		public boolean debitMoney(int amount) {
-			if(amount < 0 || this.getWallet() - amount < 0)
-				return false;
-			else {
-				this.setWallet(this.getWallet() - amount);
-				return true;
-			}
+	}
+	/* Fonction qui debite de l'argent au porte-monnaie du joueur en verifiant si la transaction s'est deroulee  
+	 * normalement (le joueur possede assez d'argent et le montant a debiter n'est pas negatif)
+	 */
+	public boolean debitMoney(int amount) {
+		if(amount < 0 || this.getWallet() - amount < 0)
+			return false;
+		else {
+			this.setWallet(this.getWallet() - amount);
+			return true;
 		}
+	}
 	
 	// Fonction qui verifie si tous les ennemies de la vagues ont ete ajoutes a l'environnement ou non
 	private boolean allEnemiesWaveSpawned(Wave wave) {
 		return wave.isEmpty();
 	}
 	
-	public boolean tileIsReserved(int x, int y) {
-		return this.gameEnv.checkTowerPosition(x, y);
-	}
-	
+	/* Methode qui realise les actions qui ont lieu pendant un tour de la vague
+	 * (ajout d'un ennemi dans l'environnement, suppression de la vague ajoute,
+	 * deplacement des ennemis, gain d'argent chaque tour)  
+	 */
 	public void aTurn() {
-		if (this.waves.size() != 0 && this.waveStatus == true) {
-			Wave wave = this.getTopWave(); // vague en cours
+		// Toutes les vagues n'ont pas ete ajoutes a l'environnement
+		if (!this.allWavesAdded() && this.waveStatus == true) {
+			Wave wave = this.getTopWave();
 			
-			if (this.getWaveNumber()+1 == wave.getWaveNumber()) {
-				// Ajout d'un ennemi a la vague lorsqu'ils n'ont pas tous ete ajoutes
+			// La vague n'est pas terminee
+			if (this.getWaveInProgressNbr() + 1 == wave.getWaveNumber()) { 
+				// Tous les ennemis de la vague en cours n'ont pas tous ete ajoutes
 				if (!this.allEnemiesWaveSpawned(wave)) 
 					this.waveServices.addNewEnemy(wave);
 				else
 					removeTopWave();
-			} else if (gameEnv.getEnemies().size() == 0)
-				this.waveStatus = false;		
+			} else if (this.gameEnv.enemisIsEmpty()) 
+				this.waveStatus = false;
 		}
-			
 		this.gameEnv.enemiesMove();
+	}
+	
+	public int getWaveInProgressNbr() {
+		return this.waveInProgressNbrProperty.getValue();
 	}
 	
 	public void incrementWaveNumber() {
 		this.waveStatus = true;
-		this.waveNumber.setValue(this.getWaveNumber()+1);
+		this.waveInProgressNbrProperty.setValue(this.getWaveInProgressNbr() + 1);
 	}
 	
-	public int getWaveNumber() {
-		return waveNumber.getValue();
-	}
-		
-	public IntegerProperty getWaveNumberProperty() {
-		return waveNumber;
+	public IntegerProperty getWaveInProgressNbrProperty() {
+		return this.waveInProgressNbrProperty;
 	}
 
-	public void setWaveNumber(int value) {
-		this.waveNumber.setValue(value);
+	
+	public void setWaveInProgressNbr(int value) {
+		this.waveInProgressNbrProperty.setValue(value);
 	}
-
+	
 	public boolean isWaveRunning() {		
 		return waveStatus;
 	}
 	
-	/*
-	 * 0 : continuer
-	 * 1 : win
-	 * 2 : loose
+	/* Fonction qui verifie si les ennemis ont reussit a infecte l'ordinateur,
+	 * c'est-a-dire si la somme des points d'attaque des ennemis qui ont atteint 
+	 * le point d'arrivee est superieure aux points de vie de l'ordinateur
 	 */
-	public int winConditions() {
-		if (this.gameEnv.getEnemyPassed() >= LOOSE_LIMIT)
-			return 2;
-		else if (waves.size() == 0 && gameEnv.getEnemies().size() == 0)
-			return 1;
-		else
-			return 0;
+	private boolean infectionSucceed() {
+		return this.gameEnv.getInfectingProgress() >= PC_HP;
+	}
+	
+	/* Fonction qui verifie si le joueur a gagne ou pas la partie, c'est-a-dire si : 
+	 * - tous les ennemis de la vague ont ete ajoutes,
+	 * - tous les ennemis sont morts
+	 * - et les ennemis n'ont pas reussit a infecte l'ordinateur 
+	 */
+	public boolean playerWins() {
+		return this.allWavesAdded() && this.gameEnv.enemisIsEmpty() && ! this.infectionSucceed();
+	}
+	
+	/* Fonction qui verifie si le joueur a perdu ou pas la partie, c'est-a-dire si 
+	 * les ennemis ont reussit a infecte l'ordinateur 
+	 */
+	public boolean playerLooses() {
+		return this.infectionSucceed();
 	}
 }

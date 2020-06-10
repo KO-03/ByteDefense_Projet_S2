@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
 
 public class GameEnvironment {
 	
-	private int enemyPassed;
+	private int infectingProgress;
 	private ObservableList<Enemy> enemies;
 	private ObservableList<Tower> towers;
 	private ObservableList<Bullet> bullets;
@@ -27,11 +27,11 @@ public class GameEnvironment {
 		this.enemies = FXCollections.observableArrayList();
 		this.towers = FXCollections.observableArrayList();
 		this.bullets = FXCollections.observableArrayList();
-		this.enemyPassed = 0;
+		this.infectingProgress = 0;
 	}
 
-	public int getEnemyPassed() {
-		return this.enemyPassed;
+	public int getInfectingProgress() {
+		return this.infectingProgress;
 	}
 	
 	public ObservableList<Enemy> getEnemies() {
@@ -42,6 +42,10 @@ public class GameEnvironment {
 		this.enemies.add(enemy);
 	}
 
+	public boolean enemisIsEmpty() {
+		return this.enemies.size() == 0;
+	}
+	
 	public ObservableList<Tower> getTowers() {
 		return this.towers;
 	}
@@ -86,7 +90,7 @@ public class GameEnvironment {
 		for (Enemy enemy : this.enemies) {
 			enemy.move();
 			if (enemy.isArrived())
-				this.enemyPassed += enemy.getAttack(); 
+				this.infectingProgress += enemy.getAttack(); 
 		}
 	}
 	
@@ -116,13 +120,14 @@ public class GameEnvironment {
 		}
 	}
 	
+	// Methode qui regroupe les actions des tirs et d'attaques des LivingObjects
 	public void gameEnvironmentAction() {
 		this.bulletsAction();
     	this.removeLivingObject();
 		this.livingObjectAttack();
 	}
 	
-	// Fonction qui verifie si la tuile a des coordonnes xy donnees est occupee par une tourelle ou pas 
+	// Fonction qui verifie si la tuile correspond des coordonnes xy donnees est occupee par une tourelle ou pas 
 	public boolean checkTowerPosition(int x, int y) {
 		int tileSize = GameArea.TILE_SIZE;
 		
