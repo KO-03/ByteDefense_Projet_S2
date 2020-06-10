@@ -183,12 +183,14 @@ public class Controller implements Initializable {
 				if (this.gm.playerLooses()) {
 					System.out.println("LOOSE");
 					this.gameLoop.stop();
+					this.disableMouseDraggedOnTowers();
 				}
 			}
 			this.gm.getGameEnvironment().gameEnvironmentAction();
 			if (this.gm.playerWins()) {
 				System.out.println("WIN");
 				this.gameLoop.stop();
+				this.disableMouseDraggedOnTowers();
 			}
 			this.time++;
 		}));
