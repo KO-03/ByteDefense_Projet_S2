@@ -12,6 +12,7 @@
 package byteDefense.model.towers;
 
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.LivingObject;
 
 public class SudVPN extends Tower {
 
@@ -47,5 +48,9 @@ public class SudVPN extends Tower {
 	
 	public void attack() {
 		super.attackEnemy();
+	}
+	
+	public void useSpecialEffect(LivingObject livingObject) {
+		
 	}
 }

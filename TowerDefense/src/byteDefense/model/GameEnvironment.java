@@ -24,10 +24,10 @@ public class GameEnvironment {
 	private ObservableList<Bullet> bullets;
 
 	public GameEnvironment() {
+		this.infectingProgress = 0;
 		this.enemies = FXCollections.observableArrayList();
 		this.towers = FXCollections.observableArrayList();
 		this.bullets = FXCollections.observableArrayList();
-		this.infectingProgress = 0;
 	}
 
 	public int getInfectingProgress() {
@@ -76,19 +76,29 @@ public class GameEnvironment {
 	}
 	
 	public void livingObjectAttack() {
+		Enemy enemy;
+		Tower tower;
+		
 		for (int i = this.enemies.size() - 1; i >= 0; i--) {
-			Enemy enemy = this.enemies.get(i);
+			enemy = this.enemies.get(i);
+			
+			enemy.updateInflictedEffects();
 			if (enemy instanceof OffensiveEnemy)
 				((OffensiveEnemy)enemy).attack();
 		}
 		
-		for (int i = this.towers.size() - 1; i >= 0; i--)
-			this.towers.get(i).attack();
+		for (int i = this.towers.size() - 1; i >= 0; i--) {
+			tower = towers.get(i);
+			
+			tower.updateInflictedEffects();
+			if (!tower.getFrozen())
+				tower.attack();
+		}
 	}
 	
 	public void enemiesMove() {
 		for (Enemy enemy : this.enemies) {
-			enemy.move();
+			enemy.moveEnnemy();
 			if (enemy.isArrived())
 				this.infectingProgress += enemy.getAttack(); 
 		}

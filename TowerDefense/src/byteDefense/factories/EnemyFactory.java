@@ -11,7 +11,7 @@ import byteDefense.model.enemies.Adware;
 import byteDefense.model.enemies.Bot;
 import byteDefense.model.enemies.Enemy;
 import byteDefense.model.enemies.Ransomware;
-import byteDefense.model.enemies.Rookit;
+import byteDefense.model.enemies.Rootkit;
 import byteDefense.model.enemies.Spyware;
 import byteDefense.model.enemies.TrojanHorse;
 import byteDefense.utilities.BFS;
@@ -19,11 +19,11 @@ import byteDefense.utilities.BFS;
 public class EnemyFactory {
 
 	public static Enemy getInstance(int enemyType, BFS bfsMap, GameEnvironment gameEnv) {
-		Enemy enemy = null;
+		Enemy enemy;
 		
 		switch (enemyType) {
 		case 1:
-			enemy = new Rookit(bfsMap, gameEnv);
+			enemy = new Rootkit(bfsMap, gameEnv);
 			break;
 		case 2:
 			enemy = new Adware(bfsMap, gameEnv);
@@ -39,6 +39,9 @@ public class EnemyFactory {
 			break;
 		case 6:
 			enemy = new TrojanHorse(bfsMap, gameEnv);
+			break;
+		default:
+			enemy = null;
 		}
 		return enemy;
 	}

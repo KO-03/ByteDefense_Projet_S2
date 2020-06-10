@@ -12,16 +12,18 @@
 package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.LivingObject;
 import byteDefense.utilities.BFS;
 
 public class Bot extends Enemy {
 
+	private static final float HEALING_RATE = 1.10F;
 	private static final int ATTACK = 10;
 	private static final int DEFENSE = 10;
 	private static final int ATTACK_SPEED = 0; // vitesse d'attaque en nombre de tour
 	private static final int ATTACK_RANGE = 0; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 30;
-
+	
 	public Bot(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
 	}
@@ -45,9 +47,8 @@ public class Bot extends Enemy {
 	public int getLoot() {
 		return LOOT;
 	}
-
-	public void move() {
-		if (!super.isArrived())
-			super.moveEnnemy();
+	
+	public void useSpecialEffect(LivingObject livingObject) {
+		
 	}
 }

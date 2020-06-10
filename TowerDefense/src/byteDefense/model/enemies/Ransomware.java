@@ -12,6 +12,9 @@
 package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.LivingObject;
+import byteDefense.model.effects.SpecialEffect;
+import byteDefense.model.towers.Tower;
 import byteDefense.utilities.BFS;
 
 public class Ransomware extends OffensiveEnemy {
@@ -46,12 +49,21 @@ public class Ransomware extends OffensiveEnemy {
 		return LOOT;
 	}
 
-	public void move() {
-		if (!super.isArrived())
-			super.moveEnnemy();
-	}
-	
 	public void attack() {
 		super.attackTower();
+	}
+	
+	public void frozeTower(Tower tower) {
+		tower.changeFrozen();
+	}
+	
+	public void useSpecialEffect(LivingObject livingObject) {
+		SpecialEffect specialEffect = super.getSpecialEffect();
+		
+		if (!specialEffect.getActivated() && ((Tower)livingObject).getFrozen()) {
+			this.frozeTower(((Tower)livingObject));
+			specialEffect.changeActivated();
+		}
+		livingObject.inflictEffect(specialEffect);
 	}
 }

@@ -35,8 +35,9 @@ public class Bullet extends GameObject {
 	public int getTargetY() {
 		return this.targetObject.getY();
 	}
-	
+
 	public void attackTarget() {
-		this.targetObject.decrementHp((int) this.shooterObject.getAttack());
+		this.shooterObject.useSpecialEffect(targetObject);
+		this.targetObject.setHp(this.targetObject.getHp() - this.shooterObject.getAttack());
 	}
 }

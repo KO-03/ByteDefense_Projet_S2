@@ -12,6 +12,8 @@
 package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.LivingObject;
+import byteDefense.model.effects.SpecialEffect;
 import byteDefense.utilities.BFS;
 
 public class Spyware extends Enemy {
@@ -22,7 +24,6 @@ public class Spyware extends Enemy {
 	private static final int ATTACK_SPEED = 0; // vitesse d'attaque en nombre de tour
 	private static final int ATTACK_RANGE = 0; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 50;
-
 
 	public Spyware(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
@@ -51,10 +52,14 @@ public class Spyware extends Enemy {
 	public float getMoveSpeed() {
 		return MOVE_SPEED_RATE;
 	}
-
-	public void move() {
-		if (!super.isArrived())
-			super.moveEnnemy();
+	
+	public void useSpecialEffect(LivingObject livingObject) {
+		SpecialEffect specialEffect = super.getSpecialEffect();
+		
+		if (!specialEffect.getActivated()) {
+			specialEffect.changeActivated();	
+		}
+		super.inflictEffect(specialEffect);
 	}
 }
 

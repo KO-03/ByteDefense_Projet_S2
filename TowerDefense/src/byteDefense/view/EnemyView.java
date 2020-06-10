@@ -14,7 +14,7 @@ import byteDefense.model.LivingObject;
 import byteDefense.model.enemies.Adware;
 import byteDefense.model.enemies.Bot;
 import byteDefense.model.enemies.Ransomware;
-import byteDefense.model.enemies.Rookit;
+import byteDefense.model.enemies.Rootkit;
 import byteDefense.model.enemies.Spyware;
 import byteDefense.model.enemies.TrojanHorse;
 import javafx.scene.image.Image;
@@ -50,7 +50,7 @@ public class EnemyView extends LivingObjectView {
 	public Image imageGetter(LivingObject livingObject) {
 		Image img;
 
-		if (livingObject instanceof Rookit)
+		if (livingObject instanceof Rootkit)
 			img = rookitImg;
 		else if (livingObject instanceof Adware)
 			img = adwareImg;

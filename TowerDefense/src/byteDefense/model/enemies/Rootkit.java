@@ -1,5 +1,5 @@
 /*
- * Rookit.java
+ * Rootkit.java
  * Cette classe represente un objet Rookit, ses responsabilites sont de :
  * - stocker, recuperer et incrementer son attaque
  * - stocker et recuperer sa defense
@@ -13,22 +13,24 @@
 package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.LivingObject;
+import byteDefense.model.effects.SpecialEffect;
 import byteDefense.utilities.BFS;
 
-public class Rookit extends OffensiveEnemy {
+public class Rootkit extends OffensiveEnemy {
 
 	public static final float INCREASE_ATTACK_RATE = 1.10F; // taux d'aumgmentation d'attaque en pourcentage
+	public static final int INTIAL_ATTACK = 2;
 	private static final int DEFENSE = 20;
 	private static final int ATTACK_SPEED = 3; // vitesse d'attaque en nombre de tour
 	private static final int ATTACK_RANGE = 4; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 10;
 	
 	private int attack;
-	
 
-	public Rookit(BFS bfsMap, GameEnvironment gameEnv) {
+	public Rootkit(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
-		this.attack = 2; 
+		this.attack = INTIAL_ATTACK; 
 	}
 	
 	public int getAttack() {
@@ -39,8 +41,8 @@ public class Rookit extends OffensiveEnemy {
 		this.attack = newAttack;
 	}
 	
-	private void increaseAttack() {
-		this.setAttack((int)(this.attack * INCREASE_ATTACK_RATE));
+	private void increaseAttack(LivingObject livingObject) {
+		this.setAttack((int)(this.attack + livingObject.getDefense() * INCREASE_ATTACK_RATE));
 	}
 
 	public int getDefense() {
@@ -58,14 +60,18 @@ public class Rookit extends OffensiveEnemy {
 	public int getLoot() {
 		return LOOT;
 	}
-
-	public void move() {
-		if (!super.isArrived())
-			super.moveEnnemy();
-	}
 	
 	public void attack() {
-		this.increaseAttack();
 		super.attackTower();
+	}
+	
+	public void useSpecialEffect(LivingObject livingObject) {
+		SpecialEffect specialEffect = super.getSpecialEffect();
+		
+		if (!specialEffect.getActivated()) {
+			this.increaseAttack(livingObject);
+			specialEffect.changeActivated();	
+		}
+		super.inflictEffect(specialEffect);
 	}
 }

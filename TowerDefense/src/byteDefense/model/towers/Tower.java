@@ -14,8 +14,26 @@ import javafx.collections.ObservableList;
 
 public abstract class Tower extends LivingObject {
 	
+	public boolean frozen;
+	
 	public Tower(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, 100, gameEnv);
+		this.frozen = false;
+	}
+
+	public void effectDisperse() {
+		this.changeFrozen();
+	}
+	
+	public boolean getFrozen() {
+		return this.frozen;
+	}
+	
+	public void changeFrozen() {
+		if (this.frozen)
+			this.frozen = false;
+		else 
+			this.frozen = true;
 	}
 	
 	public void attackEnemy() {

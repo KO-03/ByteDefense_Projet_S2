@@ -12,6 +12,7 @@
 package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.LivingObject;
 import byteDefense.utilities.BFS;
 
 public class TrojanHorse extends Enemy {
@@ -46,8 +47,7 @@ public class TrojanHorse extends Enemy {
 		return LOOT;
 	}
 
-	public void move() {
-		if (!super.isArrived())
-			super.moveEnnemy();
+	public void useSpecialEffect(LivingObject livingObject) {
+		
 	}
 }
