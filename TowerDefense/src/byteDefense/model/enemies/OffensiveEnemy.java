@@ -10,7 +10,6 @@ import byteDefense.model.GameEnvironment;
 import byteDefense.model.towers.Tower;
 import byteDefense.utilities.BFS;
 import byteDefense.utilities.ShootUtilities;
-import javafx.collections.ObservableList;
 
 public abstract class OffensiveEnemy extends Enemy {
 
@@ -18,22 +17,12 @@ public abstract class OffensiveEnemy extends Enemy {
 		super(bfsMap, gameEnv);
 	}
 	
-	public Tower findTowerTarget() {
-		ObservableList<Tower> towers = super.getGameEnvironment().getTowers();
-		Tower target = null;
-		int i = 0;
-		
-		while (i < towers.size() && target == null) {
-			target = (Tower)ShootUtilities.checkTargetPosition(towers.get(i), this);
-			i++;
-		}
-		return target;
-	}
-	
 	public void attackTower() {
-		Tower target = findTowerTarget();
+		GameEnvironment gameEnv = super.getGameEnvironment();
+		Tower target = (Tower)ShootUtilities.findTarget(gameEnv.getTowers(), this);
+		
 		// une cible a ete trouvee aux alentours de l'ennemi
 		if (target != null)
-			ShootUtilities.shoot(this, target, super.getGameEnvironment());
+			ShootUtilities.shoot(this, target, gameEnv);
 	}
 }

@@ -10,7 +10,6 @@ import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
 import byteDefense.model.enemies.Enemy;
 import byteDefense.utilities.ShootUtilities;
-import javafx.collections.ObservableList;
 
 public abstract class Tower extends LivingObject {
 	
@@ -32,24 +31,13 @@ public abstract class Tower extends LivingObject {
 			this.frozen = true;
 	}
 	
-	public Enemy findEnemyTarget() {
-		ObservableList<Enemy> enemies = super.getGameEnvironment().getEnemies();
-		Enemy target = null;
-		int i = 0;
-		
-		while (target == null && i < enemies.size()) {
-			target = (Enemy)ShootUtilities.checkTargetPosition(enemies.get(i), this);
-			i++;
-		}
-		return target;
-	}
-	
 	public void attackEnemy() {
-		Enemy target = this.findEnemyTarget();
+		GameEnvironment gameEnv = super.getGameEnvironment();
+		Enemy target = (Enemy)ShootUtilities.findTarget(gameEnv.getEnemies(), this);
 		
-		// une cible a ete trouvee aux alentours de la tourelle
+		// une cible a ete trouvee aux alentours de l'ennemi
 		if (target != null)
-			ShootUtilities.shoot(this, target, super.getGameEnvironment());
+			ShootUtilities.shoot(this, target, gameEnv);
 	}
 	
 	public abstract int getCost();

@@ -12,6 +12,7 @@ import byteDefense.model.Bullet;
 import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
+import javafx.collections.ObservableList;
 
 public class ShootUtilities {
 	
@@ -31,5 +32,16 @@ public class ShootUtilities {
 			return target;
 		}
 		return null;
+	}
+	
+	public static LivingObject findTarget(ObservableList<? extends LivingObject> livingObjectList, LivingObject shooter) {
+		LivingObject target = null;
+		int i = 0;
+		
+		while (i < livingObjectList.size() && target == null) {
+			target = ShootUtilities.checkTargetPosition(livingObjectList.get(i), shooter);
+			i++;
+		}
+		return target;
 	}
 }
