@@ -66,12 +66,12 @@ public class Rootkit extends OffensiveEnemy {
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
-		SpecialEffect specialEffect = super.getSpecialEffect();
+		/*SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated()) {
 			this.increaseAttack(livingObject);
 			specialEffect.changeActivated();	
 		}
-		super.inflictEffect(specialEffect);
+		super.inflictEffect(specialEffect);*/
 	}
 }

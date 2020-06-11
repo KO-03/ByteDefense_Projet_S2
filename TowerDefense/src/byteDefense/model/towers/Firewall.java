@@ -13,6 +13,8 @@ package byteDefense.model.towers;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Firewall extends Tower {
 
@@ -20,7 +22,7 @@ public class Firewall extends Tower {
 	private static final int DEFENSE = 20;
 	private static final int ATTACK_SPEED = 4; // vitesse d'attaque en nombre de tour
 	private static final int ATTACK_RANGE = 4; // portee d'attaque en nombre de tuile du plateau de jeu
-	private static final int COST = 35;
+	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(35);
 
 	public Firewall(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, gameEnv);
@@ -41,11 +43,15 @@ public class Firewall extends Tower {
 	public int getAttackRange() {
 		return ATTACK_RANGE;
 	}
-
-	public int getCost() {
-		return COST;
-	}
 	
+	public static final IntegerProperty getCostProperty() {
+		return COST_PROPERTY;
+	}
+
+	public final int getCost() {
+		return COST_PROPERTY.getValue();
+	}
+
 	public void attack() {
 		super.attackEnemy();
 	}

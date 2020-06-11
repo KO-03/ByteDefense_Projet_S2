@@ -13,7 +13,8 @@ package byteDefense.model.towers;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
-import byteDefense.model.effects.SpecialEffect;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class AdCube extends Tower {
 
@@ -21,7 +22,7 @@ public class AdCube extends Tower {
 	private static final int DEFENSE = 20;
 	private static final int ATTACK_SPEED = 4; // correspond a la vitesse d'attaque en nombre de tour
 	private static final int ATTACK_RANGE = 3; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
-	private static final int COST = 5;
+	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(5);
 
 	public AdCube(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, gameEnv);
@@ -42,9 +43,13 @@ public class AdCube extends Tower {
 	public int getAttackRange() {
 		return ATTACK_RANGE;
 	}
+	
+	public static final IntegerProperty getCostProperty() {
+		return COST_PROPERTY;
+	}
 
-	public int getCost() {
-		return COST;
+	public final int getCost() {
+		return COST_PROPERTY.getValue();
 	}
 
 	public void attack() {

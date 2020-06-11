@@ -54,12 +54,12 @@ public class Spyware extends Enemy {
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
-		SpecialEffect specialEffect = super.getSpecialEffect();
+		/*SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated()) {
 			specialEffect.changeActivated();	
 		}
-		super.inflictEffect(specialEffect);
+		super.inflictEffect(specialEffect);*/
 	}
 }
 

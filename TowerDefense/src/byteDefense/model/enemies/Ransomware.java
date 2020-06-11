@@ -58,12 +58,12 @@ public class Ransomware extends OffensiveEnemy {
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
-		SpecialEffect specialEffect = super.getSpecialEffect();
+		/*SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated() && ((Tower)livingObject).getFrozen()) {
 			this.frozeTower(((Tower)livingObject));
 			specialEffect.changeActivated();
 		}
-		livingObject.inflictEffect(specialEffect);
+		livingObject.inflictEffect(specialEffect);*/
 	}
 }

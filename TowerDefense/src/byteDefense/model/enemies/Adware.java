@@ -70,12 +70,12 @@ public class Adware extends OffensiveEnemy {
 	}*/
 	
 	public void useSpecialEffect(LivingObject livingObject) {
-		SpecialEffect specialEffect = super.getSpecialEffect();
+		/*SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated() && reussitProba(REPRODUCTION_RATE)) {
-			//this.breed(super.getBfs(), super.getGameEnvironment());
+			//this.breed(super.getBfs(), super.getGameEnvironment());	
 			specialEffect.changeActivated();
 		}
-		this.inflictEffect(specialEffect);
+		this.inflictEffect(specialEffect);*/
 	}
 }

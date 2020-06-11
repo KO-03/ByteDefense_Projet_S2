@@ -70,7 +70,7 @@ public class Controller implements Initializable {
 	@FXML
 	private ImageView antivirus;
 	@FXML
-	private ImageView authentipoint;
+	private ImageView authenticationpoint;
 	@FXML
 	private ImageView firewall;
 	@FXML
@@ -93,6 +93,19 @@ public class Controller implements Initializable {
     @FXML
     private Label attackRangeStat;
     
+    // Labels des coûts dans la boutique
+    @FXML
+	private Label costAdcube;
+    @FXML
+	private Label costAntivirus;
+    @FXML
+	private Label costAuthPoint;
+    @FXML
+	private Label costFirewall;
+    @FXML
+	private Label costSudVPN;
+    
+    // Boutons de contrôles
     @FXML
     private Button launchWaveBt;
     @FXML
@@ -103,9 +116,12 @@ public class Controller implements Initializable {
     private ImageView playButton; // Bouton jouer
     @FXML
     private Label timer; // Minuteur
+    @FXML
+    private Label name; // Nom de l'objet du jeu
+    @FXML
+    private Label message;
     
     private GameMaster gm;
-	private int enemiesNbrModel;
 	private boolean gameStatus;
 	private EnemyView ev;
 	private TowerView tv;
@@ -119,25 +135,30 @@ public class Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		this.loadPlayPauseImage();
 		this.gm = new GameMaster();
-		this.enemiesNbrModel = 0;
 		this.seconde = 0;
         this.minute = 0;
 		
 		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
 		this.ev = new EnemyView(this.gridEnemies);
-		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authentipoint, this.firewall, this.sudvpn);
+		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authenticationpoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.gridBullets);
-		
+		this.initPlayAndPause();
 		this.generateGameObjectsListener();
-		this.generateWalletListener();
+		this.createBindAndListeners();
 		this.mouseDraggedOnShop();
 		this.initAnimation();
 		this.gameLoop.play();
 		this.gameStatus = false;
 	}
 	
-	private void generateWalletListener() {
-		this.byteCoin.textProperty().bind(this.gm.getWalletProperty().asString());	
+	private void createBindAndListeners() {
+		this.byteCoin.textProperty().bind(this.gm.getWalletProperty().asString());
+		this.waveNbr.textProperty().bind(this.gm.getWaveInProgressNbrProperty().asString());		
+		this.costAdcube.setText(Integer.toString((AdCube.getCostProperty().getValue())));
+		this.costAntivirus.setText(Integer.toString((Antivirus.getCostProperty().getValue())));
+		this.costAuthPoint.setText(Integer.toString((AuthenticationPoint.getCostProperty().getValue())));
+		this.costFirewall.setText(Integer.toString((Firewall.getCostProperty().getValue())));
+		this.costSudVPN.setText(Integer.toString((SudVPN.getCostProperty().getValue())));
 	}
 	
 	private void loadPlayPauseImage() {
@@ -150,8 +171,7 @@ public class Controller implements Initializable {
 		
 	}
 	
-	@FXML
-    private void playAndPause(ActionEvent event) {
+	private void initPlayAndPause() {
     	this.gameControls.setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {    	    	
 				if(gameStatus == true) {
@@ -176,19 +196,22 @@ public class Controller implements Initializable {
 
 		KeyFrame kf = new KeyFrame(Duration.seconds(0.25), (event -> {
 			if (this.time % 4 == 0) {
-				if(this.gameStatus == true && this.gm.isWaveRunning())
+				if (this.gameStatus == true && this.gm.isWaveRunning()) {
 					this.gm.addMoney(1);
+					message.setText("Vague en cours...");
+				} else
+					message.setText("Lance une vague");
 				this.updateTimer();
 				this.gm.aTurn();
 				if (this.gm.playerLooses()) {
-					System.out.println("LOOSE");
+					message.setText("LOOSE !");
 					this.gameLoop.stop();
 					this.disableMouseDraggedOnTowers();
 				}
 			}
 			this.gm.getGameEnvironment().gameEnvironmentAction();
 			if (this.gm.playerWins()) {
-				System.out.println("WIN");
+				message.setText("WIN !");
 				this.gameLoop.stop();
 				this.disableMouseDraggedOnTowers();
 			}
@@ -217,12 +240,21 @@ public class Controller implements Initializable {
 		});
 		
 		this.gm.getGameEnvironment().getEnemies().addListener((ListChangeListener <Enemy>) c-> {
+			int nbEnemyDead = 0;
+			int nbEnemySpawned= 0;
 			while (c.next()) {
-				for (Enemy enemy : c.getAddedSubList())
+				for (Enemy enemy : c.getAddedSubList()) {
 					this.ev.addLivingObjectView(enemy);
-				for (Enemy enemy : c.getRemoved())
-					this.ev.removeGameObjectView(enemy);
-				this.enemiesNbr.setText(Integer.toString(this.enemiesNbrModel));
+					nbEnemySpawned++;
+				}
+				for (Enemy enemy : c.getRemoved()) {
+					if(enemy.getHp()<=0)
+						this.gm.addMoney(enemy.getLoot());
+					this.ev.removeGameObjectView(enemy);					
+					nbEnemyDead++;
+				}
+				int nbEnemy = Integer.parseInt(this.enemiesNbr.getText());
+				this.enemiesNbr.setText(Integer.toString(nbEnemy-nbEnemyDead+nbEnemySpawned));
 			}
 		});
 		
@@ -243,8 +275,8 @@ public class Controller implements Initializable {
 		this.antivirus.setOnMouseDragged(event -> {
 			dragAndDrop(this.antivirus, (int) this.antivirus.getX());
 		});
-		this.authentipoint.setOnMouseDragged(event -> {
-			dragAndDrop(this.authentipoint, (int) this.authentipoint.getX());
+		this.authenticationpoint.setOnMouseDragged(event -> {
+			dragAndDrop(this.authenticationpoint, (int) this.authenticationpoint.getX());
 		});
 		this.firewall.setOnMouseDragged(event -> {
 			dragAndDrop(this.firewall, (int) this.firewall.getX());
@@ -277,7 +309,7 @@ public class Controller implements Initializable {
 						newTower = new AdCube(x, y, ge);
 					else if (tower == antivirus)
 						newTower = new Antivirus(x, y, ge);
-					else if (tower == authentipoint)
+					else if (tower == authenticationpoint)
 						newTower = new AuthenticationPoint(x, y, ge);
 					else if (tower == firewall)
 						newTower = new Firewall(x, y, ge);
@@ -286,12 +318,12 @@ public class Controller implements Initializable {
 					else
 						newTower = null;
 					
-					// le joueur possede assez de byteCoin pour acheter la tourelle
+					// Si le joueur possede assez de byteCoin pour acheter la tourelle
 					if (gm.debitMoney(newTower.getCost()))
 						ge.addTower(newTower);
 				}
 				tower.setX(initialX);
-				tower.setY(741); // 741 est l'ordonnee des imageView des tourelles dans leur menu d'achat
+				tower.setY(800); // 800 est l'ordonnee des imageView des tourelles dans leur menu d'achat
 			}
 		});
 	}
@@ -299,7 +331,7 @@ public class Controller implements Initializable {
 	private void disableMouseDraggedOnTowers() {
 		this.adcube.setDisable(true);
 		this.antivirus.setDisable(true);
-		this.authentipoint.setDisable(true);
+		this.authenticationpoint.setDisable(true);
 		this.firewall.setDisable(true);
 		this.sudvpn.setDisable(true);
 	}
@@ -307,7 +339,7 @@ public class Controller implements Initializable {
 	private void enableMouseDraggedOnTowers() {
 		this.adcube.setDisable(false);
 		this.antivirus.setDisable(false);
-		this.authentipoint.setDisable(false);
+		this.authenticationpoint.setDisable(false);
 		this.firewall.setDisable(false);
 		this.sudvpn.setDisable(false);
 	}
