@@ -40,10 +40,6 @@ public class Rootkit extends OffensiveEnemy {
 	public void setAttack(int newAttack) {
 		this.attack = newAttack;
 	}
-	
-	private void increaseAttack(LivingObject livingObject) {
-		this.setAttack((int)(this.attack + livingObject.getDefense() * INCREASE_ATTACK_RATE));
-	}
 
 	public int getDefense() {
 		return DEFENSE;
@@ -65,13 +61,17 @@ public class Rootkit extends OffensiveEnemy {
 		super.attackTower();
 	}
 	
+	private void increaseAttack(LivingObject livingObject) {
+		this.setAttack((int)(this.attack + livingObject.getDefense() * INCREASE_ATTACK_RATE));
+	}
+	
 	public void useSpecialEffect(LivingObject livingObject) {
-		/*SpecialEffect specialEffect = super.getSpecialEffect();
+		SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated()) {
 			this.increaseAttack(livingObject);
 			specialEffect.changeActivated();	
 		}
-		super.inflictEffect(specialEffect);*/
+		super.inflictEffect(specialEffect);
 	}
 }

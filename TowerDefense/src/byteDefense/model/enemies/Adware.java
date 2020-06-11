@@ -27,8 +27,11 @@ public class Adware extends OffensiveEnemy {
 	private static final int ATTACK_RANGE = 1; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 20;
 	
-	public Adware(BFS bfsMap, GameEnvironment gameEnv) {
-		super(bfsMap, gameEnv);
+	private BFS bfs;
+	
+	public Adware(BFS bfs, GameEnvironment gameEnv) {
+		super(bfs, gameEnv);
+		this.bfs = bfs;
 	}
 
 	public int getAttack() {
@@ -61,21 +64,21 @@ public class Adware extends OffensiveEnemy {
 	}
 	
 	//permet de savoir si une action probabiliste se réalise 
-	public boolean reussitProba(double pourcent){
+	public boolean reussitProba(float pourcent){
 		return (Math.random() <= pourcent / 100);
 	}
-	/*
+	
 	public void breed(BFS bfs, GameEnvironment gameEnv) {
 		gameEnv.addEnemy(new Adware(bfs, gameEnv));
-	}*/
+	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
-		/*SpecialEffect specialEffect = super.getSpecialEffect();
+		SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated() && reussitProba(REPRODUCTION_RATE)) {
-			//this.breed(super.getBfs(), super.getGameEnvironment());	
+			this.breed(bfs, super.getGameEnvironment());
 			specialEffect.changeActivated();
 		}
-		this.inflictEffect(specialEffect);*/
+		this.inflictEffect(specialEffect);
 	}
 }

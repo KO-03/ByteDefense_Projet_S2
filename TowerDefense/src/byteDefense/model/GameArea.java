@@ -65,7 +65,7 @@ public class GameArea {
 	}
 	
 	public boolean isWalkable(int index) {
-		return index == 2 || index == 3 ||  index == 5;
+		return index == 2 || index == 3 ||  index == 5 || index == 9;
 	}
 	
 	private boolean onGameArea(int x, int y) {

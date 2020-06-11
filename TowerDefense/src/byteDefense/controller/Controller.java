@@ -52,8 +52,8 @@ import javafx.util.Duration;
 
 public class Controller implements Initializable {
 
-	private static Image play;
-	private static Image pause;
+	private static Image playImg;
+	private static Image pauseImg;
 	
 	@FXML
 	private TilePane gameBoard; // Plateau de jeu
@@ -84,6 +84,8 @@ public class Controller implements Initializable {
     private Label byteCoin; // Argent du jeu
     
     // Informations des livingObjects
+    @FXML
+    private Label name; // Nom de l'objet du jeu
     @FXML
 	private Label attackStat;
     @FXML
@@ -117,12 +119,10 @@ public class Controller implements Initializable {
     @FXML
     private Label timer; // Minuteur
     @FXML
-    private Label name; // Nom de l'objet du jeu
-    @FXML
     private Label message;
     
     private GameMaster gm;
-	private boolean gameStatus;
+    private boolean play;
 	private EnemyView ev;
 	private TowerView tv;
 	private BulletView bv;
@@ -142,13 +142,15 @@ public class Controller implements Initializable {
 		this.ev = new EnemyView(this.gridEnemies);
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authenticationpoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.gridBullets);
-		this.initPlayAndPause();
+		
+		
 		this.generateGameObjectsListener();
 		this.createBindAndListeners();
+		this.initPlayAndPause();
 		this.mouseDraggedOnShop();
 		this.initAnimation();
 		this.gameLoop.play();
-		this.gameStatus = false;
+		this.play = true;
 	}
 	
 	private void createBindAndListeners() {
@@ -163,27 +165,26 @@ public class Controller implements Initializable {
 	
 	private void loadPlayPauseImage() {
 		try {
-			play = new Image(new File("./resources/icons/play-button.png").toURI().toURL().toString());
-			pause = new Image(new File("./resources/icons/pause-button.png").toURI().toURL().toString());
+			playImg = new Image(new File("./resources/icons/play-button.png").toURI().toURL().toString());
+			pauseImg = new Image(new File("./resources/icons/pause-button.png").toURI().toURL().toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	private void initPlayAndPause() {
     	this.gameControls.setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {    	    	
-				if(gameStatus == true) {
-			        gameControls.setGraphic(new ImageView(play));
+				if (play) {
+			        gameControls.setGraphic(new ImageView(playImg));
 	    	        gameLoop.pause();
 	    	        disableMouseDraggedOnTowers();
-	    	        gameStatus = false;
-    	    	}else {
-    	    		gameControls.setGraphic(new ImageView(pause));
+	    	        play = false;
+    	    	} else {
+    	    		gameControls.setGraphic(new ImageView(pauseImg));
         	        gameLoop.play();
         	        enableMouseDraggedOnTowers();
-        	        gameStatus = true;
+        	        play = true;
     	    	}    	    		    	      
     	    }
     	});
@@ -195,25 +196,31 @@ public class Controller implements Initializable {
         this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(Duration.seconds(0.25), (event -> {
-			if (this.time % 4 == 0) {
-				if (this.gameStatus == true && this.gm.isWaveRunning()) {
-					this.gm.addMoney(1);
+			if (this.time % 4 == 0) {		
+				if (this.gm.isWaveRunning()) {
 					message.setText("Vague en cours...");
+					if (this.play) {
+						this.gm.addMoney(1);
+						this.gm.runAWave();
+						this.gm.makeEnemiesMove();
+					}
 				} else
 					message.setText("Lance une vague");
+				
 				this.updateTimer();
-				this.gm.aTurn();
+				
 				if (this.gm.playerLooses()) {
 					message.setText("LOOSE !");
 					this.gameLoop.stop();
 					this.disableMouseDraggedOnTowers();
 				}
-			}
-			this.gm.getGameEnvironment().gameEnvironmentAction();
-			if (this.gm.playerWins()) {
-				message.setText("WIN !");
-				this.gameLoop.stop();
-				this.disableMouseDraggedOnTowers();
+			} else {
+				this.gm.getGameEnvironment().gameEnvironmentAction();
+				if (this.gm.playerWins()) {
+					message.setText("WIN !");
+					this.gameLoop.stop();
+					this.disableMouseDraggedOnTowers();
+				}
 			}
 			this.time++;
 		}));
@@ -242,6 +249,7 @@ public class Controller implements Initializable {
 		this.gm.getGameEnvironment().getEnemies().addListener((ListChangeListener <Enemy>) c-> {
 			int nbEnemyDead = 0;
 			int nbEnemySpawned= 0;
+			
 			while (c.next()) {
 				for (Enemy enemy : c.getAddedSubList()) {
 					this.ev.addLivingObjectView(enemy);
@@ -348,8 +356,6 @@ public class Controller implements Initializable {
    private void launchWave(ActionEvent event) {
     	if(!this.gm.isWaveRunning()) {
     		this.gm.incrementWaveNumber();
-    		if(this.gameStatus == false)
-    			this.gameStatus = true;
     	}
     }
 }

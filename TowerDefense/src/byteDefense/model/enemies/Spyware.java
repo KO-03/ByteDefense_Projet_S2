@@ -13,7 +13,6 @@ package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
-import byteDefense.model.effects.SpecialEffect;
 import byteDefense.utilities.BFS;
 
 public class Spyware extends Enemy {

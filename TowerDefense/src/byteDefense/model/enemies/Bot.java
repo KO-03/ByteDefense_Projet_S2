@@ -24,8 +24,8 @@ public class Bot extends Enemy {
 	private static final int ATTACK_RANGE = 0; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 30;
 	
-	public Bot(BFS bfsMap, GameEnvironment gameEnv) {
-		super(bfsMap, gameEnv);
+	public Bot(BFS bfs, GameEnvironment gameEnv) {
+		super(bfs, gameEnv);
 	}
 
 	public int getAttack() {

@@ -30,7 +30,6 @@ public class GameMaster {
 	private WaveServices waveServices;
 	private ArrayList<Wave> waves; // Vagues d'ennemis a ajouter
 	private IntegerProperty waveInProgressNbrProperty; // Numero de la vague en cours
-	private boolean waveStatus;
 	private IntegerProperty walletProperty; // porte-monnaie du joueur
 
 	public GameMaster() {
@@ -39,9 +38,8 @@ public class GameMaster {
 		this.gameEnv = new GameEnvironment();
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
-		this.waveInProgressNbrProperty = new SimpleIntegerProperty(-1);
+		this.waveInProgressNbrProperty = new SimpleIntegerProperty(0);
 		this.walletProperty = new SimpleIntegerProperty(100);
-		this.waveStatus = false;
 	}
 	
 	public GameArea getGameArea() {
@@ -53,7 +51,7 @@ public class GameMaster {
 		return this.gameArea.isPlaceable(x, y);
 	}
 	
-	private Wave getTopWave() {
+	public Wave getTopWave() {
 		return this.waves.get(0);
 	}
 	
@@ -119,22 +117,25 @@ public class GameMaster {
 	 * (ajout d'un ennemi dans l'environnement, suppression de la vague ajoute,
 	 * deplacement des ennemis, gain d'argent chaque tour)  
 	 */
-	public void aTurn() {
-		// Toutes les vagues n'ont pas ete ajoutes a l'environnement
-		if (!this.allWavesAdded() && this.waveStatus == true) {
-			Wave wave = this.getTopWave();
-			
-			// La vague n'est pas terminee
-			if (this.getWaveInProgressNbr() + 1 == wave.getWaveNumber()) { 
-				// Tous les ennemis de la vague en cours n'ont pas tous ete ajoutes
-				if (!this.allEnemiesWaveSpawned(wave)) 
-					this.waveServices.addNewEnemy(wave);
-				else
-					removeTopWave();
-			} else if (this.gameEnv.enemisIsEmpty()) 
-				this.waveStatus = false;
-		}
+	public void makeEnemiesMove() {
 		this.gameEnv.enemiesMove();
+	}
+	
+	public void runAWave() {
+		// Toutes les vagues n'ont pas ete ajoutes a l'environnement et une vague est en cours
+		if (!this.allWavesAdded() && isWaveRunning()) { 
+			Wave wave = this.getTopWave();
+			// Tous les ennemis de la vague en cours n'ont pas tous ete ajoutes
+			if (!this.allEnemiesWaveSpawned(wave))  
+				this.waveServices.addNewEnemy(wave);
+			// Les ennemis sont soit morts soit arrivés
+			if (this.gameEnv.enemisIsEmpty()) 
+				removeTopWave();
+		}
+	}
+	
+	public IntegerProperty getWaveInProgressNbrProperty() {
+		return this.waveInProgressNbrProperty;
 	}
 	
 	public int getWaveInProgressNbr() {
@@ -142,21 +143,15 @@ public class GameMaster {
 	}
 	
 	public void incrementWaveNumber() {
-		this.waveStatus = true;
-		this.waveInProgressNbrProperty.setValue(this.getWaveInProgressNbr() + 1);
+		this.setWaveInProgressNbr(this.getWaveInProgressNbr() + 1);
 	}
-	
-	public IntegerProperty getWaveInProgressNbrProperty() {
-		return this.waveInProgressNbrProperty;
-	}
-
 	
 	public void setWaveInProgressNbr(int value) {
 		this.waveInProgressNbrProperty.setValue(value);
 	}
 	
 	public boolean isWaveRunning() {		
-		return waveStatus;
+		return this.getWaveInProgressNbr() == this.getTopWave().getWaveNumber();
 	}
 	
 	/* Fonction qui verifie si les ennemis ont reussit a infecte l'ordinateur,

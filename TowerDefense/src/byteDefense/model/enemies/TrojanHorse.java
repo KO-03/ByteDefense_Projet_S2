@@ -23,8 +23,8 @@ public class TrojanHorse extends Enemy {
 	private static final int ATTACK_RANGE = 0; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 80;
 
-	public TrojanHorse(BFS bfsMap, GameEnvironment gameEnv) {
-		super(bfsMap, gameEnv);
+	public TrojanHorse(BFS bfs, GameEnvironment gameEnv) {
+		super(bfs, gameEnv);
 	}
 
 	public int getAttack() {

@@ -37,6 +37,10 @@ public abstract class LivingObject extends GameObject {
 		this.hp = newHp;
 	}
 
+	public void receiveDamage(LivingObject shooterObject) {
+		this.setHp(this.getHp() + this.getDefense() - shooterObject.getAttack());
+	}
+	
 	public boolean isAlive() {
 		return this.hp > 0;
 	}
