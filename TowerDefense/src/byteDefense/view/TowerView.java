@@ -34,15 +34,15 @@ public class TowerView extends LivingObjectView {
 	// Noeuds a ajouter a la vue
 	private ImageView adcube;
 	private ImageView antivirus;
-	private ImageView authentipoint;
+	private ImageView authenticationpoint;
 	private ImageView firewall;
 	private ImageView sudvpn;
 
-	public TowerView(Pane gridTowers, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
+	public TowerView(Pane gridTowers, ImageView adcube, ImageView antivirus, ImageView authenticationpoint, ImageView firewall, ImageView sudvpn) {
 		super(gridTowers);
 		this.adcube = adcube;
 		this.antivirus = antivirus;
-		this.authentipoint = authentificatipoint;
+		this.authenticationpoint = authenticationpoint;
 		this.firewall = firewall;
 		this.sudvpn = sudvpn;
 
@@ -84,20 +84,20 @@ public class TowerView extends LivingObjectView {
 	 * et les ajoute à la grille où elles sont affichees
 	 */
 	private void initInventory(Pane gameObjectGrid) {
-		this.adcube.setX(129);
-		this.adcube.setY(741);
-		this.antivirus.setX(213);
-		this.antivirus.setY(741);
-		this.authentipoint.setX(298);
-		this.authentipoint.setY(741);
-		this.firewall.setX(383);
-		this.firewall.setY(741);
-		this.sudvpn.setX(466);
-		this.sudvpn.setY(741);
+		this.adcube.setX(158);
+		this.adcube.setY(800);
+		this.antivirus.setX(236);
+		this.antivirus.setY(800);
+		this.authenticationpoint.setX(314);
+		this.authenticationpoint.setY(800);
+		this.firewall.setX(392);
+		this.firewall.setY(800);
+		this.sudvpn.setX(470);
+		this.sudvpn.setY(800);
 
 		gameObjectGrid.getChildren().add(this.adcube);
 		gameObjectGrid.getChildren().add(this.antivirus);
-		gameObjectGrid.getChildren().add(this.authentipoint);
+		gameObjectGrid.getChildren().add(this.authenticationpoint);
 		gameObjectGrid.getChildren().add(this.firewall);
 		gameObjectGrid.getChildren().add(this.sudvpn);
 	}

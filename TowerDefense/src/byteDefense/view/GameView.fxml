@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
 <?import javafx.geometry.*?>
@@ -9,11 +10,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="byteDefense.controller.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: black;" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="byteDefense.controller.Controller">
    <top>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" scaleZ="0.0" BorderPane.alignment="TOP_LEFT">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" scaleZ="0.0" styleClass="topPane">
          <children>
-            <ImageView disable="true" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitWidth="900.0" preserveRatio="true">
                <image>
                   <Image url="@../../../resources/backgroundTextures/top_background.png" />
                </image>
@@ -33,26 +34,21 @@
       </Pane>
    </left>
    <right>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="TOP_LEFT">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="214.0" styleClass="rightPane" BorderPane.alignment="TOP_LEFT">
          <children>
-            <ImageView fitHeight="672.0" fitWidth="214.0" pickOnBounds="true" scaleZ="0.0">
-               <image>
-                  <Image url="@../../../resources/backgroundTextures/right_background.png" />
-               </image>
-            </ImageView>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="214.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Menu :">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Menu">
                      <font>
                         <Font size="17.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="12.0" left="12.0" />
+                        <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Text>
                   <HBox alignment="TOP_CENTER">
                      <children>
-                        <Button fx:id="gameControls" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playAndPause" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: none; -fx-border-width: 0;">
+                        <Button fx:id="gameControls" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: none; -fx-border-width: 0;">
                            <graphic>
                               <ImageView fitWidth="50.0" pickOnBounds="true">
                                  <image>
@@ -62,51 +58,59 @@
                            </graphic></Button>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="6.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </HBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0">
                      <children>
-                        <Button fx:id="launchWaveBt" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#launchWave" styleClass="encadre" text="Lancer vague">
+                        <Button fx:id="launchWaveBt" maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" onAction="#launchWave" style="-fx-background-color: #1e838c; -fx-text-fill: white;" styleClass="encadre" text="Lancer vague">
                            <VBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="10.0" right="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Sauvegarder">
+                        <Button maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" styleClass="encadre" text="Sauvegarder">
                            <VBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="10.0" right="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Régles">
+                        <Button maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" styleClass="encadre" text="Régles">
                            <VBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="10.0" right="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Retour">
+                        <Button maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" styleClass="encadre" text="Retour">
                            <VBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="10.0" right="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Quitter">
+                        <Button maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" styleClass="encadre" text="Quitter">
                            <VBox.margin>
-                              <Insets left="10.0" />
+                              <Insets left="10.0" right="10.0" />
                            </VBox.margin>
                         </Button>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                   </VBox>
                   <VBox alignment="CENTER" spacing="6.0">
                      <VBox.margin>
-                        <Insets left="12.0" top="6.0" />
+                        <Insets />
                      </VBox.margin>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Infos :">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Information">
                            <font>
                               <Font size="17.0" />
                            </font>
                            <VBox.margin>
-                              <Insets bottom="6.0" left="12.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </Text>
+                        <Label fx:id="name" styleClass="name" textAlignment="CENTER">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
                         <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -195,38 +199,12 @@
                               </Label>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                           <children>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../resources/icons/cost.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets right="8.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subSubHeader" text="Coûts :">
-                                 <font>
-                                    <Font size="17.0" />
-                                 </font>
-                              </Text>
-                              <Label styleClass="label-subSubHeader" text="0">
-                                 <padding>
-                                    <Insets left="6.0" />
-                                 </padding>
-                              </Label>
-                           </children>
-                        </HBox>
+                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subSubHeader" text="Caractéristiques :">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Text>
-                        <Label text="Additional informations" wrapText="true">
-                           <padding>
-                              <Insets left="6.0" />
-                           </padding>
-                        </Label>
                      </children>
                   </VBox>
                </children>
@@ -240,7 +218,7 @@
    <bottom>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <VBox>
+            <VBox alignment="CENTER">
                <children>
                   <Pane scaleZ="0.0">
                      <children>
@@ -249,50 +227,50 @@
                               <Image url="@../../../resources/backgroundTextures/stats_background.png" />
                            </image>
                         </ImageView>
-                        <HBox spacing="100.0">
+                        <HBox alignment="CENTER">
                            <children>
-                              <HBox styleClass="label-subHeader">
+                              <HBox alignment="CENTER" prefWidth="300.0" styleClass="label-subHeader">
                                  <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Vague : ">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bottomLabel" text="Vague : ">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
-                                    <Label fx:id="waveNbr" styleClass="label-subHeader" text="0" />
+                                    <Label fx:id="waveNbr" styleClass="bottomLabel" text="0" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="42.0" top="3.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </HBox>
-                              <HBox styleClass="label-subHeader">
+                              <HBox alignment="CENTER" prefWidth="300.0" styleClass="label-subHeader">
                                  <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Ennemies : ">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bottomLabel" text="Ennemies : ">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
-                                    <Label fx:id="enemiesNbr" styleClass="label-subHeader" text="0" />
+                                    <Label fx:id="enemiesNbr" styleClass="bottomLabel" text="0" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="42.0" top="3.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </HBox>
-                              <HBox styleClass="label-subHeader">
+                              <HBox alignment="CENTER" prefWidth="300.0" styleClass="label-subHeader">
                                  <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="ByteCoin : ">
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="bottomLabel" text="ByteCoin : ">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </Text>
-                                    <Label fx:id="byteCoin" styleClass="label-subHeader" text="0" />
+                                    <Label fx:id="byteCoin" styleClass="bottomLabel" text="0" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="42.0" top="3.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </HBox>
                            </children>
                            <padding>
-                              <Insets top="6.0" />
+                              <Insets top="10.0" />
                            </padding>
                         </HBox>
                      </children>
@@ -304,55 +282,36 @@
                               <Image url="@../../../resources/backgroundTextures/towers_menu_background.png" />
                            </image>
                         </ImageView>
-                        <HBox alignment="TOP_CENTER" fillHeight="false">
+                        <HBox fillHeight="false">
                            <children>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Tours :">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-subHeader" text="Magasin">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="25.0" right="25.0" />
+                                    <Insets left="25.0" right="25.0" top="25.0" />
                                  </HBox.margin>
                               </Text>
-                              <GridPane alignment="CENTER" hgap="20.0" style="-fx-border-color: white; -fx-border-width: 1;" vgap="15.0">
+                              <GridPane hgap="10.0" vgap="5.0">
                                 <columnConstraints>
-                                  <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="64.0" />
-                                  <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="64.0" />
-                                    <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="64.0" />
-                                    <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="64.0" />
-                                    <ColumnConstraints maxWidth="-Infinity" minWidth="-Infinity" prefWidth="64.0" />
+                                  <ColumnConstraints prefWidth="68.0" />
+                                  <ColumnConstraints prefWidth="68.0" />
+                                    <ColumnConstraints prefWidth="68.0" />
+                                    <ColumnConstraints prefWidth="68.0" />
+                                    <ColumnConstraints prefWidth="68.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="64.0" />
-                                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" />
+                                    <RowConstraints />
+                                  <RowConstraints />
+                                  <RowConstraints />
                                 </rowConstraints>
                                  <children>
-                                    <Label fx:id="costAdcube" styleClass="label-subHeader" text="0" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets left="6.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label styleClass="label-subHeader" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets left="6.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label styleClass="label-subHeader" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets left="6.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label styleClass="label-subHeader" text="0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets left="6.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label styleClass="label-subHeader" text="0" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets left="6.0" />
-                                       </padding>
-                                    </Label>
-                                    <ImageView fx:id="adcube" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                    <Label fx:id="costAdcube" styleClass="bottomLabel" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                    <Label fx:id="costAntivirus" styleClass="bottomLabel" text="0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                    <Label fx:id="costAuthPoint" styleClass="bottomLabel" text="0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                    <Label fx:id="costFirewall" styleClass="bottomLabel" text="0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                    <Label fx:id="costSudVPN" styleClass="bottomLabel" text="0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                    <ImageView fx:id="adcube" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <image>
                                           <Image url="@../../../resources/towerTextures/adcube.png" />
                                        </image>
@@ -360,7 +319,7 @@
                                           <Insets />
                                        </GridPane.margin>
                                     </ImageView>
-                                    <ImageView fx:id="antivirus" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                                    <ImageView fx:id="antivirus" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <image>
                                           <Image url="@../../../resources/towerTextures/antivirus.png" />
                                        </image>
@@ -368,7 +327,7 @@
                                           <Insets />
                                        </GridPane.margin>
                                     </ImageView>
-                                    <ImageView fx:id="authentipoint" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                                    <ImageView fx:id="authenticationpoint" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <image>
                                           <Image url="@../../../resources/towerTextures/authpoint.png" />
                                        </image>
@@ -376,7 +335,7 @@
                                           <Insets />
                                        </GridPane.margin>
                                     </ImageView>
-                                    <ImageView fx:id="firewall" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                                    <ImageView fx:id="firewall" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <image>
                                           <Image url="@../../../resources/towerTextures/firewall.png" />
                                        </image>
@@ -384,7 +343,7 @@
                                           <Insets />
                                        </GridPane.margin>
                                     </ImageView>
-                                    <ImageView fx:id="sudvpn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                                    <ImageView fx:id="sudvpn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                                        <image>
                                           <Image url="@../../../resources/towerTextures/sudvpn.png" />
                                        </image>
@@ -392,17 +351,50 @@
                                           <Insets />
                                        </GridPane.margin>
                                     </ImageView>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-bright" text="AdCube" GridPane.halignment="CENTER">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-bright" text="Antivirus" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-bright" text="AuthPoint" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-bright" text="Firewall" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-bright" text="SudVPN" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
                                  </children>
-                              </GridPane>
-                              <Label fx:id="timer" styleClass="label-header" text="00:00">
                                  <HBox.margin>
-                                    <Insets left="20.0" />
+                                    <Insets top="15.0" />
                                  </HBox.margin>
-                              </Label>
+                              </GridPane>
+                              <VBox>
+                                 <children>
+                                    <Label fx:id="timer" style="-fx-font-size: 40;" styleClass="bottomLabel" text="00:00">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="message" style="-fx-font-size: 20; -fx-text-fill: gray;" styleClass="bottomLabel" text="Lance une vague" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="50.0" top="25.0" />
+                                 </HBox.margin>
+                              </VBox>
                            </children>
-                           <padding>
-                              <Insets top="15.0" />
-                           </padding>
                         </HBox>
                      </children>
                   </Pane>
@@ -414,7 +406,12 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TilePane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="672.0" style="-fx-background-color: #1e838c;" tileAlignment="CENTER_RIGHT" />
+            <ImageView pickOnBounds="true" preserveRatio="true" scaleZ="0.0">
+               <image>
+                  <Image url="@../../../resources/backgroundTextures/gameArea.png" />
+               </image>
+            </ImageView>
+            <TilePane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="672.0" tileAlignment="CENTER_RIGHT" />
             <Pane fx:id="gridEnemies" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
             <Pane fx:id="gridTowers" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
             <Pane fx:id="gridBullets" prefHeight="672.0" prefWidth="672.0" scaleZ="3.0" />
