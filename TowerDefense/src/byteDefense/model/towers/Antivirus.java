@@ -24,6 +24,8 @@ public class Antivirus extends Tower {
 	private static final int ATTACK_RANGE = 2; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
 	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(15);
 
+	
+	
 	public Antivirus(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, gameEnv);
 	}
@@ -50,10 +52,6 @@ public class Antivirus extends Tower {
 
 	public final int getCost() {
 		return COST_PROPERTY.getValue();
-	}
-
-	public void attack() {
-		super.attackEnemy();
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {

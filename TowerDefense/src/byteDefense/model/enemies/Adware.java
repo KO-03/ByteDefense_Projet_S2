@@ -15,7 +15,6 @@ package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
-import byteDefense.model.effects.SpecialEffect;
 import byteDefense.utilities.BFS;
 
 public class Adware extends OffensiveEnemy {
@@ -58,13 +57,9 @@ public class Adware extends OffensiveEnemy {
 		if (!super.isArrived())
 			super.moveEnnemy();
 	}
-	
-	public void attack() {
-		super.attackTower();
-	}
-	
+
 	//permet de savoir si une action probabiliste se réalise 
-	public boolean reussitProba(float pourcent){
+	public boolean reussitProba(float pourcent) {
 		return (Math.random() <= pourcent / 100);
 	}
 	
@@ -73,12 +68,12 @@ public class Adware extends OffensiveEnemy {
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
-		SpecialEffect specialEffect = super.getSpecialEffect();
+		/*SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated() && reussitProba(REPRODUCTION_RATE)) {
 			this.breed(bfs, super.getGameEnvironment());
 			specialEffect.changeActivated();
 		}
-		this.inflictEffect(specialEffect);
+		this.inflictEffect(specialEffect);*/
 	}
 }

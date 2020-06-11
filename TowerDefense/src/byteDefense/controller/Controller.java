@@ -122,7 +122,7 @@ public class Controller implements Initializable {
     private Label message;
     
     private GameMaster gm;
-    private boolean play;
+    private boolean playActivated;
 	private EnemyView ev;
 	private TowerView tv;
 	private BulletView bv;
@@ -150,7 +150,7 @@ public class Controller implements Initializable {
 		this.mouseDraggedOnShop();
 		this.initAnimation();
 		this.gameLoop.play();
-		this.play = true;
+		this.playActivated = true;
 	}
 	
 	private void createBindAndListeners() {
@@ -175,16 +175,18 @@ public class Controller implements Initializable {
 	private void initPlayAndPause() {
     	this.gameControls.setOnAction(new EventHandler<ActionEvent>() {
     	    @Override public void handle(ActionEvent e) {    	    	
-				if (play) {
+				if (playActivated) {
 			        gameControls.setGraphic(new ImageView(playImg));
 	    	        gameLoop.pause();
 	    	        disableMouseDraggedOnTowers();
-	    	        play = false;
+	    	        playActivated = false;
+	    	        message.setText("PAUSE");
     	    	} else {
     	    		gameControls.setGraphic(new ImageView(pauseImg));
         	        gameLoop.play();
         	        enableMouseDraggedOnTowers();
-        	        play = true;
+        	        playActivated = true;
+        	        message.setText("PLAY");
     	    	}    	    		    	      
     	    }
     	});
@@ -199,12 +201,9 @@ public class Controller implements Initializable {
 			if (this.time % 4 == 0) {		
 				if (this.gm.isWaveRunning()) {
 					message.setText("Vague en cours...");
-					if (this.play) {
-						this.gm.addMoney(1);
-						this.gm.runAWave();
-						this.gm.makeEnemiesMove();
-					}
-				} else
+					if (this.playActivated)
+						this.gm.aTurn();
+				} else 
 					message.setText("Lance une vague");
 				
 				this.updateTimer();
@@ -354,8 +353,7 @@ public class Controller implements Initializable {
 	
 	@FXML
    private void launchWave(ActionEvent event) {
-    	if(!this.gm.isWaveRunning()) {
+    	if(!this.gm.isWaveRunning())
     		this.gm.incrementWaveNumber();
-    	}
     }
 }

@@ -20,10 +20,6 @@ public abstract class Tower extends LivingObject {
 		super(x, y, 100, gameEnv);
 		this.frozen = false;
 	}
-
-	public void effectDisperse() {
-		this.changeFrozen();
-	}
 	
 	public boolean getFrozen() {
 		return this.frozen;
@@ -36,7 +32,7 @@ public abstract class Tower extends LivingObject {
 			this.frozen = true;
 	}
 	
-	public void attackEnemy() {
+	public Enemy findEnemyTarget() {
 		ObservableList<Enemy> enemies = super.getGameEnvironment().getEnemies();
 		Enemy target = null;
 		int i = 0;
@@ -45,12 +41,16 @@ public abstract class Tower extends LivingObject {
 			target = (Enemy)ShootUtilities.checkTargetPosition(enemies.get(i), this);
 			i++;
 		}
+		return target;
+	}
+	
+	public void attackEnemy() {
+		Enemy target = this.findEnemyTarget();
+		
 		// une cible a ete trouvee aux alentours de la tourelle
 		if (target != null)
 			ShootUtilities.shoot(this, target, super.getGameEnvironment());
 	}
-	
-	public abstract void attack();
 	
 	public abstract int getCost();
 }

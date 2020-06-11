@@ -51,10 +51,6 @@ public class Firewall extends Tower {
 	public final int getCost() {
 		return COST_PROPERTY.getValue();
 	}
-
-	public void attack() {
-		super.attackEnemy();
-	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
 		

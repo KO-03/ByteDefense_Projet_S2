@@ -19,7 +19,7 @@ import byteDefense.utilities.BFS;
 
 public class Rootkit extends OffensiveEnemy {
 
-	public static final float INCREASE_ATTACK_RATE = 1.10F; // taux d'aumgmentation d'attaque en pourcentage
+	public static final float INCREASE_ATTACK_RATE = 0.90F; // taux d'aumgmentation d'attaque en pourcentage
 	public static final int INTIAL_ATTACK = 2;
 	private static final int DEFENSE = 20;
 	private static final int ATTACK_SPEED = 3; // vitesse d'attaque en nombre de tour
@@ -57,12 +57,8 @@ public class Rootkit extends OffensiveEnemy {
 		return LOOT;
 	}
 	
-	public void attack() {
-		super.attackTower();
-	}
-	
 	private void increaseAttack(LivingObject livingObject) {
-		this.setAttack((int)(this.attack + livingObject.getDefense() * INCREASE_ATTACK_RATE));
+		this.setAttack((this.attack + (int)(livingObject.getDefense() * INCREASE_ATTACK_RATE)));
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {

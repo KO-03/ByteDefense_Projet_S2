@@ -42,7 +42,7 @@ public class GameEnvironment {
 		this.enemies.add(enemy);
 	}
 
-	public boolean enemisIsEmpty() {
+	public boolean enemiesIsEmpty() {
 		return this.enemies.size() == 0;
 	}
 	
@@ -84,7 +84,7 @@ public class GameEnvironment {
 			
 			enemy.updateInflictedEffects();
 			if (enemy instanceof OffensiveEnemy)
-				((OffensiveEnemy)enemy).attack();
+				((OffensiveEnemy)enemy).attackTower();
 		}
 		
 		for (int i = this.towers.size() - 1; i >= 0; i--) {
@@ -92,7 +92,7 @@ public class GameEnvironment {
 			
 			tower.updateInflictedEffects();
 			if (!tower.getFrozen())
-				tower.attack();
+				tower.attackEnemy();
 		}
 	}
 	

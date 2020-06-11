@@ -117,11 +117,7 @@ public class GameMaster {
 	 * (ajout d'un ennemi dans l'environnement, suppression de la vague ajoute,
 	 * deplacement des ennemis, gain d'argent chaque tour)  
 	 */
-	public void makeEnemiesMove() {
-		this.gameEnv.enemiesMove();
-	}
-	
-	public void runAWave() {
+	public void aTurn() {
 		// Toutes les vagues n'ont pas ete ajoutes a l'environnement et une vague est en cours
 		if (!this.allWavesAdded() && isWaveRunning()) { 
 			Wave wave = this.getTopWave();
@@ -129,9 +125,11 @@ public class GameMaster {
 			if (!this.allEnemiesWaveSpawned(wave))  
 				this.waveServices.addNewEnemy(wave);
 			// Les ennemis sont soit morts soit arrivés
-			if (this.gameEnv.enemisIsEmpty()) 
+			if (this.gameEnv.enemiesIsEmpty()) 
 				removeTopWave();
 		}
+		this.gameEnv.enemiesMove();
+		this.addMoney(1);
 	}
 	
 	public IntegerProperty getWaveInProgressNbrProperty() {
@@ -168,7 +166,7 @@ public class GameMaster {
 	 * - et les ennemis n'ont pas reussit a infecte l'ordinateur 
 	 */
 	public boolean playerWins() {
-		return this.allWavesAdded() && this.gameEnv.enemisIsEmpty() && ! this.infectionSucceed();
+		return this.allWavesAdded() && this.gameEnv.enemiesIsEmpty() && ! this.infectionSucceed();
 	}
 	
 	/* Fonction qui verifie si le joueur a perdu ou pas la partie, c'est-a-dire si 

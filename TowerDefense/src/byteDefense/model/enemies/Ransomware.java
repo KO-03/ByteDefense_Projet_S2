@@ -48,10 +48,6 @@ public class Ransomware extends OffensiveEnemy {
 	public int getLoot() {
 		return LOOT;
 	}
-
-	public void attack() {
-		super.attackTower();
-	}
 	
 	public void frozeTower(Tower tower) {
 		tower.changeFrozen();
@@ -60,7 +56,7 @@ public class Ransomware extends OffensiveEnemy {
 	public void useSpecialEffect(LivingObject livingObject) {
 		SpecialEffect specialEffect = super.getSpecialEffect();
 		
-		if (!specialEffect.getActivated() && ((Tower)livingObject).getFrozen()) {
+		if (!specialEffect.getActivated() && !((Tower)livingObject).getFrozen()) {
 			this.frozeTower(((Tower)livingObject));
 			specialEffect.changeActivated();
 		}

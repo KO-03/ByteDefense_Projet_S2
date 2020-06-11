@@ -18,7 +18,7 @@ public abstract class OffensiveEnemy extends Enemy {
 		super(bfsMap, gameEnv);
 	}
 	
-	public void attackTower() {
+	public Tower findTowerTarget() {
 		ObservableList<Tower> towers = super.getGameEnvironment().getTowers();
 		Tower target = null;
 		int i = 0;
@@ -27,10 +27,13 @@ public abstract class OffensiveEnemy extends Enemy {
 			target = (Tower)ShootUtilities.checkTargetPosition(towers.get(i), this);
 			i++;
 		}
+		return target;
+	}
+	
+	public void attackTower() {
+		Tower target = findTowerTarget();
 		// une cible a ete trouvee aux alentours de l'ennemi
 		if (target != null)
 			ShootUtilities.shoot(this, target, super.getGameEnvironment());
 	}
-	
-	public abstract void attack();
 }
