@@ -36,6 +36,7 @@ import byteDefense.view.GameAreaView;
 import byteDefense.view.TowerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,6 +49,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class Controller implements Initializable {
@@ -62,7 +64,7 @@ public class Controller implements Initializable {
 	@FXML
     private Pane gridEnemies; // Grille d'ennemis
 	@FXML
-    private Pane gridTowers; // Grille de tourelles
+	private Pane gridTowers; // Grille de tourelles
 	
 	// Dans le magasin
 	@FXML
@@ -143,7 +145,7 @@ public class Controller implements Initializable {
 		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authenticationpoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.gridBullets);
 		
-		
+		this.onMouseOverLivingObject();
 		this.generateGameObjectsListener();
 		this.createBindAndListeners();
 		this.initPlayAndPause();
@@ -156,11 +158,11 @@ public class Controller implements Initializable {
 	private void createBindAndListeners() {
 		this.byteCoin.textProperty().bind(this.gm.getWalletProperty().asString());
 		this.waveNbr.textProperty().bind(this.gm.getWaveInProgressNbrProperty().asString());		
-		this.costAdcube.setText(Integer.toString((AdCube.getCostProperty().getValue())));
-		this.costAntivirus.setText(Integer.toString((Antivirus.getCostProperty().getValue())));
-		this.costAuthPoint.setText(Integer.toString((AuthenticationPoint.getCostProperty().getValue())));
-		this.costFirewall.setText(Integer.toString((Firewall.getCostProperty().getValue())));
-		this.costSudVPN.setText(Integer.toString((SudVPN.getCostProperty().getValue())));
+		this.costAdcube.setText(Integer.toString(AdCube.getCostProperty().getValue()));
+		this.costAntivirus.setText(Integer.toString(Antivirus.getCostProperty().getValue()));
+		this.costAuthPoint.setText(Integer.toString(AuthenticationPoint.getCostProperty().getValue()));
+		this.costFirewall.setText(Integer.toString(Firewall.getCostProperty().getValue()));
+		this.costSudVPN.setText(Integer.toString(SudVPN.getCostProperty().getValue()));
 	}
 	
 	private void loadPlayPauseImage() {
@@ -174,7 +176,8 @@ public class Controller implements Initializable {
 	
 	private void initPlayAndPause() {
     	this.gameControls.setOnAction(new EventHandler<ActionEvent>() {
-    	    @Override public void handle(ActionEvent e) {    	    	
+    	    @Override 
+    	    public void handle(ActionEvent e) {    	    	
 				if (playActivated) {
 			        gameControls.setGraphic(new ImageView(playImg));
 	    	        gameLoop.pause();
@@ -200,23 +203,24 @@ public class Controller implements Initializable {
 		KeyFrame kf = new KeyFrame(Duration.seconds(0.25), (event -> {
 			if (this.time % 4 == 0) {		
 				if (this.gm.isWaveRunning()) {
-					message.setText("Vague en cours...");
+					this.message.setText("Vague en cours...");
 					if (this.playActivated)
 						this.gm.aTurn();
 				} else 
-					message.setText("Lance une vague");
+					this.message.setText("Lance une vague");
 				
 				this.updateTimer();
 				
 				if (this.gm.playerLooses()) {
-					message.setText("LOOSE !");
+					this.message.setText("LOOSE !");
 					this.gameLoop.stop();
 					this.disableMouseDraggedOnTowers();
 				}
 			} else {
 				this.gm.getGameEnvironment().gameEnvironmentAction();
+				this.canBuy();
 				if (this.gm.playerWins()) {
-					message.setText("WIN !");
+					this.message.setText("WIN !");
 					this.gameLoop.stop();
 					this.disableMouseDraggedOnTowers();
 				}
@@ -228,11 +232,11 @@ public class Controller implements Initializable {
 
 	private void updateTimer() {
 		this.seconde++;
-		if (seconde == 60) {
-			seconde = 0;
-			minute++;
+		if (this.seconde == 60) {
+			this.seconde = 0;
+			this.minute++;
 		}
-		timer.setText(String.format("%02d", minute) + ":" + String.format("%02d", seconde));
+		this.timer.setText(String.format("%02d", this.minute) + ":" + String.format("%02d", this.seconde));
 	}
 	
 	private void generateGameObjectsListener() {
@@ -352,8 +356,61 @@ public class Controller implements Initializable {
 	}
 	
 	@FXML
-   private void launchWave(ActionEvent event) {
-    	if(!this.gm.isWaveRunning())
-    		this.gm.incrementWaveNumber();
-    }
+	private void launchWave(ActionEvent event) {
+		if (!this.gm.isWaveRunning())
+			this.gm.incrementWaveNumber();
+	}
+	
+	private void canBuy() {
+		int money = this.gm.getWalletProperty().getValue();
+		
+		if (money >= AdCube.getCostProperty().getValue())
+			this.costAdcube.setTextFill(Color.GREEN);
+		else
+			this.costAdcube.setTextFill(Color.RED);
+		
+		if (money >= Antivirus.getCostProperty().getValue())
+			this.costAntivirus.setTextFill(Color.GREEN);
+		else
+			this.costAntivirus.setTextFill(Color.RED);
+		
+		if (money >= AuthenticationPoint.getCostProperty().getValue())
+			this.costAuthPoint.setTextFill(Color.GREEN);
+		else
+			this.costAuthPoint.setTextFill(Color.RED);
+		
+		if (money >= Firewall.getCostProperty().getValue())
+			this.costFirewall.setTextFill(Color.GREEN);
+		else
+			this.costFirewall.setTextFill(Color.RED);
+		
+		if (money >= SudVPN.getCostProperty().getValue())
+			this.costSudVPN.setTextFill(Color.GREEN);
+		else
+			this.costSudVPN.setTextFill(Color.RED);
+	}
+	
+	private void onMouseOverLivingObject() {
+		adcube.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue)
+            	name.setText(adcube.getId().toUpperCase());
+        });
+		antivirus.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue)
+            	name.setText(antivirus.getId().toUpperCase());
+        });
+		authenticationpoint.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue)
+            	name.setText(authenticationpoint.getId().toUpperCase());
+        });
+		firewall.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue)
+            	name.setText(firewall.getId().toUpperCase());
+        });
+		sudvpn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue)
+            	name.setText(sudvpn.getId().toUpperCase());
+        });
+	}
+	
 }
