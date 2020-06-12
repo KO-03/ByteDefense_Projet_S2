@@ -23,7 +23,6 @@ import byteDefense.model.Bullet;
 import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.GameMaster;
-import byteDefense.model.LivingObject;
 import byteDefense.model.enemies.Enemy;
 import byteDefense.model.towers.AdCube;
 import byteDefense.model.towers.Antivirus;
@@ -330,10 +329,10 @@ public class Controller implements Initializable {
 		return (float)gm.getInfectionProgress() / GameMaster.getLaptopHp();
 	}
 	
-	private void updateStats(LivingObject lo) {
-		this.attackStat.setText(Integer.toString(lo.getAttack()));
-		this.defenseStat.setText(Integer.toString(lo.getDefense()));
-		this.attackRangeStat.setText(Integer.toString(lo.getAttackRange()));
+	private void updateStats(Tower tower) {
+		this.attackStat.setText(Integer.toString(tower.getAttack()));
+		this.defenseStat.setText(Integer.toString(tower.getDefense()));
+		this.attackRangeStat.setText(Integer.toString(tower.getAttackRange()));
 	}
 
 	// Methode qui recupere et affiche le nom des tourelles et des ennemis lorsqu'on les survole avec le curseur de la souris
@@ -498,10 +497,10 @@ public class Controller implements Initializable {
 	}
 	
 	// Methode qui lance une nouvelle vague lorsque le bouton est presser
-		@FXML
-		private void launchWave(ActionEvent event) {
-			// Incrementation du numero de la vague (lancement d'une vague) lorsqu'aucune vague est en cours
-			if(!gm.isWaveRunning())
-				gm.incrementWaveInProgressNumber();
-	    }
+	@FXML
+	private void launchWave(ActionEvent event) {
+		// Incrementation du numero de la vague (lancement d'une vague) lorsqu'aucune vague est en cours
+		if(!gm.isWaveRunning())
+			gm.incrementWaveInProgressNumber();
+    }
 }

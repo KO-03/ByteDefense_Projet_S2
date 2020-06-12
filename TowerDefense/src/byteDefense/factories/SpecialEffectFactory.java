@@ -23,17 +23,17 @@ public class SpecialEffectFactory {
 		SpecialEffect specialEffect;
 		
 		if (livingObject instanceof Rootkit) 
-			specialEffect = new PiercingDefenseEffect(4);
+			specialEffect = new PiercingDefenseEffect(3);
 		else if (livingObject instanceof Bot)
-			specialEffect = new SniperEffect(3);
+			specialEffect = new SniperEffect(4);
 		else if (livingObject instanceof Ransomware)
-			specialEffect = new FrozenEffect(3);
+			specialEffect = new FrozenEffect(2);
 		else if (livingObject instanceof Spyware)
 			specialEffect = new StealingStatsEffect(3);
 		else if (livingObject instanceof AuthenticationPoint)
 			specialEffect = new AuthenticationLinkEffect(2);
 		else if (livingObject instanceof Firewall)
-			specialEffect = new IgniteEffect(2);
+			specialEffect = new IgniteEffect(5);
 		else if (livingObject instanceof SudVPN)
 			specialEffect = new IncreasingAttackEffect(2);
 		else 

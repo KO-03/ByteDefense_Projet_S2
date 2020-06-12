@@ -63,4 +63,13 @@ public abstract class Tower extends LivingObject {
 	}
 	
 	public abstract int getCost();
+	
+	public abstract int getAttackRange();
+
+	@Override
+	public String toString() {
+		return "Tower getHp()=" + getHp();
+	}
+	
+	
 }

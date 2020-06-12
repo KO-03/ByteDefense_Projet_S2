@@ -18,9 +18,8 @@ import byteDefense.utilities.BFS;
 
 public class TrojanHorse extends Enemy {
 
-	private static final int INITIAL_DEFENSE = 10000;
-	private static final int ATTACK_RANGE = 0; // portee d'attaque en nombre de tuile du plateau de jeu
-	private static final int LOOT = 80;
+	private static final int INITIAL_DEFENSE = 800;
+	private static final int LOOT = 60;
 
 	private int attack;
 
@@ -31,10 +30,6 @@ public class TrojanHorse extends Enemy {
 
 	public int getAttack() {
 		return this.attack;
-	}
-
-	public int getAttackRange() {
-		return ATTACK_RANGE;
 	}
 
 	public int getLoot() {

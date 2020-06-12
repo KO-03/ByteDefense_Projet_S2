@@ -12,6 +12,8 @@ import byteDefense.model.Bullet;
 import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
+import byteDefense.model.enemies.OffensiveEnemy;
+import byteDefense.model.towers.Tower;
 import javafx.collections.ObservableList;
 
 public class ShootUtilities {
@@ -24,7 +26,13 @@ public class ShootUtilities {
 	// Fonction qui retourne ou non la cible du tireur en fonction de leur position et portee d'attaque
 	public static LivingObject checkTargetPosition(LivingObject target, LivingObject shooter) {
 		int tileSize = GameArea.TILE_SIZE; // taille d'une tuile du plateau de jeu
-		int attackRange = shooter.getAttackRange(); // portee d'attaque du tireur
+		int attackRange;
+		if (shooter instanceof OffensiveEnemy)
+			attackRange = ((OffensiveEnemy)shooter).getAttackRange(); // portee d'attaque du tireur
+		else if (shooter instanceof Tower)
+			attackRange = ((Tower)shooter).getAttackRange(); // portee d'attaque du tireur
+		else 
+			attackRange = 0;
 		
 		// La cible est a la portee de l'attaque du tireur
 		if ((shooter.getY() - attackRange * tileSize <= target.getY() 

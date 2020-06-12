@@ -39,7 +39,7 @@ public class GameMaster {
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
 		this.waveInProgressNbrProperty = new SimpleIntegerProperty(0);
-		this.byteCoinProperty = new SimpleIntegerProperty(100);
+		this.byteCoinProperty = new SimpleIntegerProperty(10000);
 	}
 	
 	public GameArea getGameArea() {

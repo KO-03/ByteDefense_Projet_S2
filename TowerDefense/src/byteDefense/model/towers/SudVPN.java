@@ -19,11 +19,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class SudVPN extends Tower {
 
-	private static final float INCREASING_ATTACK_RATE = 1.10F; // taux d'aumgmentation d'attaque en pourcentage
-	private static final int INITIAL_ATTACK = 40;
-	private static final int INITIAL_DEFENSE = 25;
+	private static final float INCREASING_ATTACK_RATE = 3.50F; // taux d'aumgmentation d'attaque en pourcentage
+	private static final int INITIAL_ATTACK = 15;
+	private static final int INITIAL_DEFENSE = 30;
 	private static final int ATTACK_RANGE = 2; // portee d'attaque en nombre de tuile du plateau de jeu
-	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(40);
+	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(65);
 
 	private int attack;
 	

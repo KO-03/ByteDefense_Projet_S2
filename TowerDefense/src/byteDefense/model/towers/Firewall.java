@@ -21,9 +21,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Firewall extends Tower {
 
 	private static final int ATTACK = 25;
-	private static final int INITIAL_DEFENSE = 20;
-	private static final int ATTACK_RANGE = 4; // portee d'attaque en nombre de tuile du plateau de jeu
-	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(35);
+	private static final int INITIAL_DEFENSE = 15;
+	private static final int ATTACK_RANGE = 3; // portee d'attaque en nombre de tuile du plateau de jeu
+	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(45);
 
 	public Firewall(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, INITIAL_DEFENSE, gameEnv);

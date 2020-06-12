@@ -11,6 +11,5 @@ public class AuthenticationLinkEffect extends SpecialEffect {
 	
 	public void endEffect(LivingObject livingObject) {
 		((AuthenticationPoint)livingObject).resetAttack();
-		((AuthenticationPoint)livingObject).resetAttackRange();
 	}
 }

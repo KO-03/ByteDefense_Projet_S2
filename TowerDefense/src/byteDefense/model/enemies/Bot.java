@@ -18,11 +18,11 @@ import byteDefense.utilities.BFS;
 
 public class Bot extends OffensiveEnemy {
 
-	private static final float INCREASE_ATTACK_RANGE_RATE = 1.90F; // taux d'augmentation de la vitesse de deplacement en pourcentage
-	private static final int ATTACK = 10;
-	private static final int INITIAL_DEFENSE = 10;
+	private static final float INCREASE_ATTACK_RANGE_RATE = 2F; // taux d'augmentation de la vitesse de deplacement en pourcentage
+	private static final int ATTACK = 15;
+	private static final int INITIAL_DEFENSE = 15;
 	public static final int INITIAL_ATTACK_RANGE = 2; // portee d'attaque en nombre de tuile du plateau de jeu
-	private static final int LOOT = 30;
+	private static final int LOOT = 6;
 	
 	private int attackRange;
 	

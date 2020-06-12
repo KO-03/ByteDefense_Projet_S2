@@ -93,8 +93,6 @@ public abstract class LivingObject extends GameObject {
 	}
 	
 	public abstract int getAttack();
-
-	public abstract int getAttackRange();
 	
 	public abstract void useSpecialEffect(LivingObject livingObject);
 }

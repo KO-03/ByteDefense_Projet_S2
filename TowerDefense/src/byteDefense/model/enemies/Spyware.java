@@ -14,14 +14,15 @@ package byteDefense.model.enemies;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
 import byteDefense.model.effects.SpecialEffect;
+import byteDefense.model.towers.Tower;
 import byteDefense.utilities.BFS;
 
 public class Spyware extends OffensiveEnemy {
 
-	private static final int INITIAL_ATTACK = 10;
-	private static final int INITIAL_DEFENSE = 10;
-	public static final int INITIAL_ATTACK_RANGE = 1; // portee d'attaque en nombre de tuile du plateau de jeu
-	private static final int LOOT = 50;
+	private static final int INITIAL_ATTACK = 15;
+	private static final int INITIAL_DEFENSE = 25;
+	public static final int INITIAL_ATTACK_RANGE = 2; // portee d'attaque en nombre de tuile du plateau de jeu
+	private static final int LOOT = 10;
 
 	public int attack;
 	public int attackRange;
@@ -60,18 +61,18 @@ public class Spyware extends OffensiveEnemy {
 		this.setAttackRange(INITIAL_ATTACK_RANGE);
 	}
 	
-	public void stealStats(LivingObject livingObject) {
-		if (livingObject.getAttack() > this.attack)
-			this.setAttack(livingObject.getAttack());
-		if (livingObject.getAttackRange() > this.attackRange)
-			this.setAttackRange(livingObject.getAttackRange());
+	public void stealStats(Tower tower) {
+		if (tower.getAttack() > this.attack)
+			this.setAttack(tower.getAttack());
+		if (tower.getAttackRange() > this.attackRange)
+			this.setAttackRange(tower.getAttackRange());
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
 		SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated()) {
-			this.stealStats(livingObject);
+			this.stealStats((Tower)livingObject);
 			specialEffect.changeActivated();
 			super.inflictEffect(specialEffect);
 		}

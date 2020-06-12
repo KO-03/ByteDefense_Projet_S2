@@ -20,9 +20,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Antivirus extends Tower {
 
-	private static final int ATTACK = 35;
-	private static final int INITIAL_DEFENSE = 30;
-	private static final int ATTACK_RANGE = 2; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
+	private static final int ATTACK = 15;
+	private static final int INITIAL_DEFENSE = 0;
+	private static final int ATTACK_RANGE = 3; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
 	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(15);
 
 	public Antivirus(int x, int y, GameEnvironment gameEnv) {
@@ -56,7 +56,7 @@ public class Antivirus extends Tower {
 				target = (Enemy) ShootUtilities.checkTargetPosition(enemy, this);
 			i++;
 		}
-		if (target != null)
+		if (target != null && super.isAlive())
 			ShootUtilities.shoot(this, target, gameEnv);
 	}
 }

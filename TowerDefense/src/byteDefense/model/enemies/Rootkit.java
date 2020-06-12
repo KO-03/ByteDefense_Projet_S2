@@ -20,10 +20,10 @@ import byteDefense.utilities.BFS;
 public class Rootkit extends OffensiveEnemy {
 
 	private static final float PIERCING_DEFENSE_RATE = 1.10F; 
-	private static final int INITIAL_ATTACK = 2;
-	private static final int INITIAL_DEFENSE = 20;
-	private static final int ATTACK_RANGE = 4; // portee d'attaque en nombre de tuile du plateau de jeu
-	private static final int LOOT = 10;
+	private static final int INITIAL_ATTACK = 15;
+	private static final int INITIAL_DEFENSE = 5;
+	private static final int ATTACK_RANGE = 2; // portee d'attaque en nombre de tuile du plateau de jeu
+	private static final int LOOT = 4;
 	
 	private int attack;
 

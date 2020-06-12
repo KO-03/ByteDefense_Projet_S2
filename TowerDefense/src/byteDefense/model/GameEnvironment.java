@@ -80,15 +80,16 @@ public class GameEnvironment {
 			// Retirer les points de vie de la cible si elle est toujours vivante
 			if (bullet.targetIsAlive())
 				bullet.attackTarget();
-			
-			this.removeBullet(bullet);
 		}
 	}
 	
 	// Methode qui gere la suppression des tourelles et ennemis dans l'environnement 
-	private void removeLivingObject() {
+	private void removeGameObject() {
 		Enemy enemy;
 		Tower tower;
+		
+		for (int i = this.bullets.size() - 1; i >= 0; i--)
+			this.removeBullet(this.bullets.get(i));
 		
 		for (int i = this.enemies.size() - 1; i >= 0; i--) {
 			enemy = this.enemies.get(i);
@@ -102,8 +103,10 @@ public class GameEnvironment {
 			tower = this.towers.get(i);
 
 			// Si la tourelle est morte, elle est supprimee
-			if(!tower.isAlive())
+			if(!tower.isAlive()) {
 				this.towers.remove(tower);
+				System.out.println(tower);
+			}
 		}
 	}
 	
@@ -130,8 +133,9 @@ public class GameEnvironment {
 	// Methode qui regroupe les actions sur les LivingObjects et les tirs
 	public void gameEnvironmentAction() {
 		this.bulletsAction();
-    	this.removeLivingObject();
+		this.removeGameObject();
 		this.livingObjectAttack();
+		
 	}
 	
 	/* Methode qui gere les actions des ennemis durant un tour (mise a jour des effets ingliges, 
@@ -152,10 +156,8 @@ public class GameEnvironment {
 	
 	// Methode qui gere les actions des tourelles durant un tour (mise a jour des effets ingliges) 
 	public void towersTurn() {
-		for (int i = 0; i < this.towers.size(); i++) {
+		for (int i = 0; i < this.towers.size(); i++)
 			this.towers.get(i).updateInflictedEffects(); // Mise a jour des effets infliges a la tourelle
-			//System.out.println(towers.get(i));
-		}
 	}
 	
 	// Fonction qui verifie si la tuile a des coordonnes xy donnees est occupee par une tourelle ou pas 

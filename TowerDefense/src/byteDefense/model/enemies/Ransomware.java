@@ -19,10 +19,10 @@ import byteDefense.utilities.BFS;
 
 public class Ransomware extends OffensiveEnemy {
 
-	private static final int ATTACK = 1;
-	private static final int INITIAL_DEFENSE = 20;
+	private static final int ATTACK = 10;
+	private static final int INITIAL_DEFENSE = 30;
 	private static final int ATTACK_RANGE = 3; // portee d'attaque en nombre de tuile du plateau de jeu
-	private static final int LOOT = 40;
+	private static final int LOOT = 8;
 
 	public Ransomware(BFS bfs, GameEnvironment gameEnv) {
 		super(INITIAL_DEFENSE, bfs, gameEnv);

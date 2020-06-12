@@ -18,9 +18,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class AdCube extends Tower {
 
-	private static final int ATTACK = 10;
-	private static final int INITIAL_DEFENSE = 20;
-	private static final int ATTACK_RANGE = 3; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
+	private static final int ATTACK = 8;
+	private static final int INITIAL_DEFENSE = 10;
+	private static final int ATTACK_RANGE = 2; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
 	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(5);
 
 	public AdCube(int x, int y, GameEnvironment gameEnv) {

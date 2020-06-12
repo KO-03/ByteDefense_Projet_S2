@@ -19,10 +19,9 @@ import byteDefense.utilities.BFS;
 
 public class Adware extends Enemy {
 
-	private static final int ATTACK = 20;
-	private static final int INITIAL_DEFENSE = 10;
-	private static final int ATTACK_RANGE = 1; // portee d'attaque en nombre de tuile du plateau de jeu
-	private static final int LOOT = 20;
+	private static final int ATTACK = 10;
+	private static final int INITIAL_DEFENSE = 5;
+	private static final int LOOT = 1;
 	
 	public Adware(BFS bfs, GameEnvironment gameEnv) {
 		super(INITIAL_DEFENSE, bfs, gameEnv);
@@ -30,10 +29,6 @@ public class Adware extends Enemy {
 	
 	public int getAttack() {
 		return ATTACK;
-	}
-
-	public int getAttackRange() {
-		return ATTACK_RANGE;
 	}
 
 	public int getLoot() {
