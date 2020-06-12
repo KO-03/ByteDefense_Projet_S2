@@ -18,27 +18,19 @@ import byteDefense.utilities.BFS;
 
 public class TrojanHorse extends Enemy {
 
-	private static int attack;
-	private static final int DEFENSE = 40;
-	private static final int ATTACK_SPEED = 0; // vitesse d'attaque en nombre de tour
+	private static final int INITIAL_DEFENSE = 10000;
 	private static final int ATTACK_RANGE = 0; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 80;
 
+	private int attack;
+
 	public TrojanHorse(BFS bfs, GameEnvironment gameEnv) {
-		super(bfs, gameEnv);
-		attack = GameMaster.getPcHp();
+		super(INITIAL_DEFENSE, bfs, gameEnv);
+		attack = GameMaster.getLaptopHp();
 	}
 
 	public int getAttack() {
-		return attack;
-	}
-
-	public int getDefense() {
-		return DEFENSE;
-	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
+		return this.attack;
 	}
 
 	public int getAttackRange() {
@@ -48,9 +40,8 @@ public class TrojanHorse extends Enemy {
 	public int getLoot() {
 		return LOOT;
 	}
-
+	
 	public void useSpecialEffect(LivingObject livingObject) {
-		
-		
+
 	}
 }

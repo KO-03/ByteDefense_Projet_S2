@@ -1,7 +1,7 @@
 package byteDefense.model.effects;
 
 import byteDefense.model.LivingObject;
-import byteDefense.model.enemies.Rootkit;
+import byteDefense.model.towers.SudVPN;
 
 public class IncreasingAttackEffect extends SpecialEffect {
 	
@@ -10,6 +10,6 @@ public class IncreasingAttackEffect extends SpecialEffect {
 	}
 	
 	public void endEffect(LivingObject livingObject) {
-		((Rootkit)livingObject).resetAttack();
+		((SudVPN)livingObject).resetAttack();
 	}
 }

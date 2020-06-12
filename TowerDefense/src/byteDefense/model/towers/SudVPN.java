@@ -13,33 +13,37 @@ package byteDefense.model.towers;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
+import byteDefense.model.effects.SpecialEffect;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class SudVPN extends Tower {
 
-	private static final int ATTACK = 40;
-	private static final int DEFENSE = 25;
-	private static final int ATTACK_SPEED = 2; // vitesse d'attaque en nombre de tour
+	private static final float INCREASING_ATTACK_RATE = 1.10F; // taux d'aumgmentation d'attaque en pourcentage
+	private static final int INITIAL_ATTACK = 40;
+	private static final int INITIAL_DEFENSE = 25;
 	private static final int ATTACK_RANGE = 2; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(40);
 
+	private int attack;
+	
 	public SudVPN(int x, int y, GameEnvironment gameEnv) {
-		super(x, y, gameEnv);
+		super(x, y, INITIAL_DEFENSE, gameEnv);
+		this.attack = INITIAL_ATTACK;
 	}
 
 	public int getAttack() {
-		return ATTACK;
+		return this.attack;
 	}
 
-	public int getDefense() {
-		return DEFENSE;
+	private void setAttack(int newAttack) {
+		this.attack = newAttack;
 	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
+	
+	public void resetAttack() {
+		this.setAttack(INITIAL_ATTACK);
 	}
-
+	
 	public int getAttackRange() {
 		return ATTACK_RANGE;
 	}
@@ -52,7 +56,17 @@ public class SudVPN extends Tower {
 		return COST_PROPERTY.getValue();
 	}
 
+	public void increaseAttack() {
+		this.setAttack((int)(this.attack * INCREASING_ATTACK_RATE));
+	}
+	
 	public void useSpecialEffect(LivingObject livingObject) {
+		SpecialEffect specialEffect = super.getSpecialEffect();
 		
+		if (!specialEffect.getActivated()) {
+			this.increaseAttack();
+			specialEffect.changeActivated();
+			super.inflictEffect(specialEffect);
+		}
 	}
 }

@@ -14,36 +14,48 @@ package byteDefense.model.towers;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
+import byteDefense.model.effects.SpecialEffect;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class AuthenticationPoint extends Tower {
 
-	private static final float SPEED_REDUCTION_RATE = 0.50F; // taux de reduction de vitesse de deplacement des ennemis en pourcentage
-	private static final int ATTACK = 10;
-	private static final int DEFENSE = 30;
-	private static final int ATTACK_SPEED = 2; // vitesse d'attaque en nombre de tour
-	private static final int ATTACK_RANGE = 3; // portee d'attaque en nombre de tuile du plateau de jeu
+	private static final int INITIAL_ATTACK = 10;
+	private static final int INITIAL_DEFENSE = 30;
+	private static final int INITIAL_ATTACK_RANGE = 3; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(20);
 
+	public int attack;
+	public int attackRange;
+	
 	public AuthenticationPoint(int x, int y, GameEnvironment gameEnv) {
-		super(x, y, gameEnv);
+		super(x, y, INITIAL_DEFENSE, gameEnv);
+		this.attack = INITIAL_ATTACK;
+		this.attackRange = INITIAL_ATTACK_RANGE;
 	}
 
 	public int getAttack() {
-		return ATTACK;
-	}
-
-	public int getDefense() {
-		return DEFENSE;
-	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
+		return attack;
 	}
 
 	public int getAttackRange() {
-		return ATTACK_RANGE;
+		return attackRange;
+	}
+
+	public void setAttack(int attack) {
+		this.attack = attack;
+	}
+
+	public void resetAttack() {
+		this.setAttack(INITIAL_ATTACK);
+	}
+	
+	public void setAttackRange(int attackRange) {
+		this.attackRange = attackRange;
+	}
+
+	public void resetAttackRange() {
+		this.setAttack(INITIAL_ATTACK_RANGE);
 	}
 	
 	public static final IntegerProperty getCostProperty() {
@@ -54,7 +66,18 @@ public class AuthenticationPoint extends Tower {
 		return COST_PROPERTY.getValue();
 	}
 	
+	public void authenticationLink(LivingObject livingObject) {
+		this.setAttack(livingObject.getAttack() + this.attack);
+		this.setAttackRange(livingObject.getAttackRange() + this.attackRange);
+	}
+	
 	public void useSpecialEffect(LivingObject livingObject) {
+		SpecialEffect specialEffect = super.getSpecialEffect();
 		
+		if (!specialEffect.getActivated()) {
+			this.authenticationLink(livingObject);
+			specialEffect.changeActivated();
+			super.inflictEffect(specialEffect);
+		}
 	}
 }

@@ -13,33 +13,24 @@ package byteDefense.model.towers;
 
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
+import byteDefense.model.enemies.Enemy;
+import byteDefense.utilities.ShootUtilities;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Antivirus extends Tower {
 
 	private static final int ATTACK = 35;
-	private static final int DEFENSE = 30;
-	private static final int ATTACK_SPEED = 2; // correspond a la vitesse d'attaque en nombre de tour
+	private static final int INITIAL_DEFENSE = 30;
 	private static final int ATTACK_RANGE = 2; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
 	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(15);
 
-	
-	
 	public Antivirus(int x, int y, GameEnvironment gameEnv) {
-		super(x, y, gameEnv);
+		super(x, y, INITIAL_DEFENSE, gameEnv);
 	}
 
 	public int getAttack() {
 		return ATTACK;
-	}
-
-	public int getDefense() {
-		return DEFENSE;
-	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
 	}
 
 	public int getAttackRange() {
@@ -55,6 +46,17 @@ public class Antivirus extends Tower {
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
+		GameEnvironment gameEnv = super.getGameEnvironment();
+		Enemy target = null, enemy;
+		int i = 0;
 		
+		while (i < gameEnv.getEnemies().size() && target == null) {
+			enemy = gameEnv.getEnemies().get(i);
+			if (enemy != livingObject)
+				target = (Enemy) ShootUtilities.checkTargetPosition(enemy, this);
+			i++;
+		}
+		if (target != null)
+			ShootUtilities.shoot(this, target, gameEnv);
 	}
 }

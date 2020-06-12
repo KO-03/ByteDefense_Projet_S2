@@ -22,13 +22,15 @@ public abstract class Enemy extends LivingObject {
 	private IntegerProperty xProperty;
 	private IntegerProperty yProperty;
 	private int currentTile; // la tuile ou l'ennemi se trouve
+	private boolean ignited;
 	
-	public Enemy(BFS bfsMap, GameEnvironment gameEnv) {
-		super(50, gameEnv);
+	public Enemy(int defense, BFS bfsMap, GameEnvironment gameEnv) {
+		super(50, defense, gameEnv);
 		bfs = bfsMap;
 		this.xProperty = new SimpleIntegerProperty(GameArea.tilePosX(GameArea.randomSpawnpoint()));
 		this.yProperty = new SimpleIntegerProperty(GameArea.tilePosY(GameArea.randomSpawnpoint()));
 		this.currentTile = GameArea.tileIndex(this.getX(), this.getY());
+		this.ignited = false;
 	}
 	
 	public IntegerProperty getXProperty() {
@@ -53,6 +55,17 @@ public abstract class Enemy extends LivingObject {
 
 	public void setY(int newY) {
 		this.yProperty.setValue(newY);
+	}
+	
+	public boolean getIgnited() {
+		return this.ignited;
+	}
+	
+	public void changeIgnited() {
+		if (this.ignited)
+			this.ignited = false;
+		else 
+			this.ignited = true;
 	}
 	
 	// Fonction qui verifie si un ennemi est arrive au bout du chemin du BFS

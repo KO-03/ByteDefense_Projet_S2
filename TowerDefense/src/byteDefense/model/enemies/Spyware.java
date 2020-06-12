@@ -16,62 +16,65 @@ import byteDefense.model.LivingObject;
 import byteDefense.model.effects.SpecialEffect;
 import byteDefense.utilities.BFS;
 
-public class Spyware extends Enemy {
+public class Spyware extends OffensiveEnemy {
 
-	private static final float INCREASE_ATTACK_RANGE_RATE = 1.10F; // taux d'augmentation de la vitesse de deplacement en pourcentage
-	private static final int ATTACK = 30;
-	private static final int DEFENSE = 10;
-	private static final int ATTACK_SPEED = 0; // vitesse d'attaque en nombre de tour
-	public static final int INITIAL_ATTACK_RANGE = 0; // portee d'attaque en nombre de tuile du plateau de jeu
+	private static final int INITIAL_ATTACK = 10;
+	private static final int INITIAL_DEFENSE = 10;
+	public static final int INITIAL_ATTACK_RANGE = 1; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 50;
 
-	private int attackRange;
+	public int attack;
+	public int attackRange;
 	
 	public Spyware(BFS bfsMap, GameEnvironment gameEnv) {
-		super(bfsMap, gameEnv);
+		super(INITIAL_DEFENSE, bfsMap, gameEnv);
+		this.attack = INITIAL_ATTACK;
 		this.attackRange = INITIAL_ATTACK_RANGE;
 	}
 
 	public int getAttack() {
-		return ATTACK;
-	}
-
-	public int getDefense() {
-		return DEFENSE;
-	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
+		return attack;
 	}
 
 	public int getAttackRange() {
 		return attackRange;
 	}
-
-	public void setAttackRange(int newAttackRange) {
-		this.attackRange = newAttackRange;
-	}
-	
-	public void resetAttackRange() {
-		this.setAttackRange(INITIAL_ATTACK_RANGE);
-	}
 	
 	public int getLoot() {
 		return LOOT;
 	}
+
+	private void setAttack(int attack) {
+		this.attack = attack;
+	}
+
+	public void resetAttack() {
+		this.setAttack(INITIAL_ATTACK);
+	}
 	
-	public void increaseAttackRange(LivingObject livingObject) {
-		this.setAttackRange((int)(this.getAttackSpeed() * INCREASE_ATTACK_RANGE_RATE));
+	public void setAttackRange(int attackRange) {
+		this.attackRange = attackRange;
+	}
+
+	public void resetAttackRange() {
+		this.setAttackRange(INITIAL_ATTACK_RANGE);
+	}
+	
+	public void stealStats(LivingObject livingObject) {
+		if (livingObject.getAttack() > this.attack)
+			this.setAttack(livingObject.getAttack());
+		if (livingObject.getAttackRange() > this.attackRange)
+			this.setAttackRange(livingObject.getAttackRange());
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
 		SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated()) {
-			this.increaseAttackRange(livingObject);
-			specialEffect.changeActivated();	
+			this.stealStats(livingObject);
+			specialEffect.changeActivated();
+			super.inflictEffect(specialEffect);
 		}
-		super.inflictEffect(specialEffect);
 	}
 }
 

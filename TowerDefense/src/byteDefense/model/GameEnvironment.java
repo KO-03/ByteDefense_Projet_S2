@@ -115,7 +115,6 @@ public class GameEnvironment {
 		for (int i = this.enemies.size() - 1; i >= 0; i--) {
 			enemy = this.enemies.get(i);
 			
-			enemy.updateInflictedEffects(); // Mise a jour des effets infliges a l'ennemi
 			if (enemy instanceof OffensiveEnemy)
 				((OffensiveEnemy)enemy).attackTower();
 		}
@@ -123,7 +122,6 @@ public class GameEnvironment {
 		for (int i = this.towers.size() - 1; i >= 0; i--) {
 			tower = towers.get(i);
 			
-			tower.updateInflictedEffects(); // Mise a jour des effets infliges a la tourelle
 			if (!tower.getFrozen()) // la tourelle peut attaquer lorsqu'elle n'est pas gelee
 				tower.attackEnemy();
 		}
@@ -136,12 +134,27 @@ public class GameEnvironment {
 		this.livingObjectAttack();
 	}
 	
-	// Methode qui gere le mouvement des ennemis et ce qu'il entraine (progression de l'infection)
-	public void enemiesMove() {
-		for (Enemy enemy : this.enemies) {
+	/* Methode qui gere les actions des ennemis durant un tour (mise a jour des effets ingliges, 
+	 * mouvement des ennemis, mise a jour de la progression de l'infection) 
+	 */
+	public void enemiesTurn() {
+		Enemy enemy;
+		for (int i = 0; i < this.enemies.size(); i++) {
+			enemy = this.enemies.get(i);
 			enemy.moveEnnemy();
+			enemy.updateInflictedEffects(); // Mise a jour des effets infliges a l'ennemi
+			if (enemy.getIgnited())
+				enemy.receiveDamage(3);
 			if (enemy.isArrived())
 				this.setInfectingProgress(this.infectingProgress + enemy.getAttack());
+		}
+	}
+	
+	// Methode qui gere les actions des tourelles durant un tour (mise a jour des effets ingliges) 
+	public void towersTurn() {
+		for (int i = 0; i < this.towers.size(); i++) {
+			this.towers.get(i).updateInflictedEffects(); // Mise a jour des effets infliges a la tourelle
+			//System.out.println(towers.get(i));
 		}
 	}
 	

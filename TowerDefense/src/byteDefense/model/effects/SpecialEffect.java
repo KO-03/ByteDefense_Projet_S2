@@ -33,8 +33,7 @@ public abstract class SpecialEffect {
 		this.turnNbr--;
 	}
 	
-	public void reinitializeEffect(LivingObject livingObject) {
-		this.endEffect(livingObject);
+	public void reinitializeEffect() {
 		this.changeActivated();
 		this.turnNbr = TIME_EFFECT;
 	}

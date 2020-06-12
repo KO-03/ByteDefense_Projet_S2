@@ -19,38 +19,21 @@ import byteDefense.utilities.BFS;
 
 public class Rootkit extends OffensiveEnemy {
 
-	private static final float INCREASING_ATTACK_RATE = 1.10F; // taux d'aumgmentation d'attaque en pourcentage
+	private static final float PIERCING_DEFENSE_RATE = 1.10F; 
 	private static final int INITIAL_ATTACK = 2;
-	private static final int DEFENSE = 20;
-	private static final int ATTACK_SPEED = 3; // vitesse d'attaque en nombre de tour
+	private static final int INITIAL_DEFENSE = 20;
 	private static final int ATTACK_RANGE = 4; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 10;
 	
 	private int attack;
 
 	public Rootkit(BFS bfsMap, GameEnvironment gameEnv) {
-		super(bfsMap, gameEnv);
+		super(INITIAL_DEFENSE, bfsMap, gameEnv);
 		this.attack = INITIAL_ATTACK; 
 	}
 	
 	public int getAttack() {
 		return this.attack;
-	}
-
-	public void setAttack(int newAttack) {
-		this.attack = newAttack;
-	}
-
-	public void resetAttack() {
-		this.setAttack(INITIAL_ATTACK);
-	}
-	
-	public int getDefense() {
-		return DEFENSE;
-	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
 	}
 
 	public int getAttackRange() {
@@ -61,21 +44,29 @@ public class Rootkit extends OffensiveEnemy {
 		return LOOT;
 	}
 	
+	public void setAttack(int newAttack) {
+		this.attack = newAttack;
+	}
+
+	public void resetAttack() {
+		this.setAttack(INITIAL_ATTACK);
+	}
+	
 	public void attack() {
 		super.attackTower();
 	}
 	
-	private void increaseAttack(LivingObject livingObject) {
-		this.setAttack((int)(this.attack + livingObject.getDefense() * INCREASING_ATTACK_RATE));
+	private void piercingDefense(LivingObject livingObject) {
+		this.setAttack((int)(this.attack + livingObject.getDefense() * PIERCING_DEFENSE_RATE));
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {
 		SpecialEffect specialEffect = super.getSpecialEffect();
 		
 		if (!specialEffect.getActivated()) {
-			this.increaseAttack(livingObject);
-			specialEffect.changeActivated();	
+			this.piercingDefense(livingObject);
+			specialEffect.changeActivated();
+			super.inflictEffect(specialEffect);
 		}
-		super.inflictEffect(specialEffect);
 	}
 }

@@ -1,13 +1,21 @@
 package byteDefense.factories;
 
 import byteDefense.model.LivingObject;
+import byteDefense.model.effects.AuthenticationLinkEffect;
 import byteDefense.model.effects.FrozenEffect;
+import byteDefense.model.effects.IgniteEffect;
 import byteDefense.model.effects.IncreasingAttackEffect;
-import byteDefense.model.effects.IncreasingAttackSpeedEffect;
+import byteDefense.model.effects.PiercingDefenseEffect;
+import byteDefense.model.effects.SniperEffect;
 import byteDefense.model.effects.SpecialEffect;
+import byteDefense.model.effects.StealingStatsEffect;
+import byteDefense.model.enemies.Bot;
 import byteDefense.model.enemies.Ransomware;
 import byteDefense.model.enemies.Rootkit;
 import byteDefense.model.enemies.Spyware;
+import byteDefense.model.towers.AuthenticationPoint;
+import byteDefense.model.towers.Firewall;
+import byteDefense.model.towers.SudVPN;
 
 public class SpecialEffectFactory {
 
@@ -15,25 +23,19 @@ public class SpecialEffectFactory {
 		SpecialEffect specialEffect;
 		
 		if (livingObject instanceof Rootkit) 
-			specialEffect = new IncreasingAttackEffect(2);
-		/*else if (livingObject instanceof Adware)
-			specialEffect = new SpecialEffect(2);
+			specialEffect = new PiercingDefenseEffect(4);
 		else if (livingObject instanceof Bot)
-			specialEffect = new SpecialEffect(2);*/
+			specialEffect = new SniperEffect(3);
 		else if (livingObject instanceof Ransomware)
-			specialEffect = new FrozenEffect(2);
+			specialEffect = new FrozenEffect(3);
 		else if (livingObject instanceof Spyware)
-			specialEffect = new IncreasingAttackSpeedEffect(3);
-		/*else if (livingObject instanceof AdCube)
-			specialEffect = new SpecialEffect(2);
-		else if (livingObject instanceof Antivirus)
-			specialEffect = new SpecialEffect(2);
+			specialEffect = new StealingStatsEffect(3);
 		else if (livingObject instanceof AuthenticationPoint)
-			specialEffect = new SpecialEffect(2);
+			specialEffect = new AuthenticationLinkEffect(2);
 		else if (livingObject instanceof Firewall)
-			specialEffect = new SpecialEffect(2);
+			specialEffect = new IgniteEffect(2);
 		else if (livingObject instanceof SudVPN)
-			specialEffect = new SpecialEffect(2);*/
+			specialEffect = new IncreasingAttackEffect(2);
 		else 
 			specialEffect  = null;
 		

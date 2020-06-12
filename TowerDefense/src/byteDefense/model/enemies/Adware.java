@@ -17,29 +17,19 @@ import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
 import byteDefense.utilities.BFS;
 
-public class Adware extends OffensiveEnemy {
+public class Adware extends Enemy {
 
-	private static final float REPRODUCTION_RATE = 50; // taux de reproduction en pourcentage
 	private static final int ATTACK = 20;
-	private static final int DEFENSE = 10;
-	private static final int ATTACK_SPEED = 3; // vitesse d'attaque en nombre de tour
+	private static final int INITIAL_DEFENSE = 10;
 	private static final int ATTACK_RANGE = 1; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 20;
 	
 	public Adware(BFS bfs, GameEnvironment gameEnv) {
-		super(bfs, gameEnv);
+		super(INITIAL_DEFENSE, bfs, gameEnv);
 	}
-
+	
 	public int getAttack() {
 		return ATTACK;
-	}
-
-	public int getDefense() {
-		return DEFENSE;
-	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
 	}
 
 	public int getAttackRange() {
@@ -54,25 +44,8 @@ public class Adware extends OffensiveEnemy {
 		if (!super.isArrived())
 			super.moveEnnemy();
 	}
-	/*
-	// Permet de savoir si une action probabiliste se réalise 
-	public boolean reussitProba(float pourcent) {
-		return (Math.random() <= pourcent / 100);
-	}
 	
-	public void breed(GameEnvironment gameEnv) {
-		gameEnv.addEnemy(new Adware(super.getX(), super.getY(), super.getBfs(), gameEnv));
-	}
-	*/
 	public void useSpecialEffect(LivingObject livingObject) {
-		/*SpecialEffect specialEffect = super.getSpecialEffect();
-		!specialEffect.getActivated() && 
-		System.out.println(Math.random());
-		if (reussitProba(REPRODUCTION_RATE)) {
-			this.breed(super.getGameEnvironment());
-			System.out.println("ok");
-			specialEffect.changeActivated();
-		}
-		this.inflictEffect(specialEffect);*/	
+		
 	}
-}
+}	

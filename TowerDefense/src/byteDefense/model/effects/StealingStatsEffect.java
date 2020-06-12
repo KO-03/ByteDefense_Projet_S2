@@ -3,13 +3,14 @@ package byteDefense.model.effects;
 import byteDefense.model.LivingObject;
 import byteDefense.model.enemies.Spyware;
 
-public class IncreasingAttackSpeedEffect extends SpecialEffect {
+public class StealingStatsEffect extends SpecialEffect {
 	
-	public IncreasingAttackSpeedEffect(int timeEffect) {
+	public StealingStatsEffect(int timeEffect) {
 		super(timeEffect);
 	}
 	
 	public void endEffect(LivingObject livingObject) {
+		((Spyware)livingObject).resetAttack();
 		((Spyware)livingObject).resetAttackRange();
 	}
 }

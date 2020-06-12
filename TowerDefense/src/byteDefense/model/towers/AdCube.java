@@ -19,25 +19,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class AdCube extends Tower {
 
 	private static final int ATTACK = 10;
-	private static final int DEFENSE = 20;
-	private static final int ATTACK_SPEED = 4; // correspond a la vitesse d'attaque en nombre de tour
+	private static final int INITIAL_DEFENSE = 20;
 	private static final int ATTACK_RANGE = 3; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
 	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(5);
 
 	public AdCube(int x, int y, GameEnvironment gameEnv) {
-		super(x, y, gameEnv);
+		super(x, y, INITIAL_DEFENSE, gameEnv);
 	}
 
 	public int getAttack() {
 		return ATTACK;
-	}
-
-	public int getDefense() {
-		return DEFENSE;
-	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
 	}
 
 	public int getAttackRange() {
