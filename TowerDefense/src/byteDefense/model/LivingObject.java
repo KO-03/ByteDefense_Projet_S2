@@ -1,10 +1,14 @@
 /*
  * LivingObject.java
  * Cette classe parent represente un objet "vivant" du jeu (un ennemi ou une tourelle), ses responsabilites sont de :
- * - stocker, recuperer et decrementer ses points de vie 
+ * - stocker, recuperer et incremente ses points de vie 
+ * - stocker et recuperer la defense
  * - stocker et recuperer son environnement de jeu
- * - verifier s'il est mort ou non
- * - recuperer ses caracteristiques (points d'attaque, points de defense, vitesse d'attaque, portee d'attaque)
+ * - stocker, recuperer l'effet propre a l'objet
+ * - stocker, recuperer et mettre a jour la liste des effets infliges
+ * - gerer la perte de points de vie et de defense
+ * - verifier si l'objet est mort ou non
+ * - recuperer ses caracteristiques (x, y et points d'attaque)
  */
 
 package byteDefense.model;
@@ -19,7 +23,7 @@ public abstract class LivingObject extends GameObject {
 	private int hp;
 	private int defense;
 	private GameEnvironment gameEnv;
-	private SpecialEffect specialEffect; // effet/capacite propre 
+	private SpecialEffect specialEffect; // effet propre a l'objet
 	private ArrayList<SpecialEffect> inflictedEffects; // liste des effets infliges
 
 	public LivingObject(int hp, int defense, GameEnvironment gameEnv) {
@@ -64,17 +68,15 @@ public abstract class LivingObject extends GameObject {
 		this.setHp(newHp);
 	}
 	
-	// Methode qui gere la decrementation de la defense et des points de vie
+	// Methode qui gere la decrementation de la defense et des points de vie de l'objet
 	public void receiveDamage(int damage) {
-		if (this.defense > 0) {
+		int rest = this.defense - damage;
 		
-			int rest = this.defense - damage;
-			if (rest < 0) {
-				this.setDefense(0);
-				this.setHp(this.getHp() + rest);
-			} else if (rest > 0)
-				this.setDefense(rest);
-		}
+		if (rest < 0) {
+			this.setDefense(0);
+			this.setHp(this.getHp() + rest);
+		} else if (rest > 0)
+			this.setDefense(rest);
 	}
 	
 	// Fonction qui verifie si l'objet est en vie ou non 
