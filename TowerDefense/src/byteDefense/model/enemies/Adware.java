@@ -1,59 +1,43 @@
 /*
  * Adware.java
  * Cette classe represente un objet Adware, ses responsabilites sont de :
- * - stocker et recuperer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer son attaque de base
+ * - stocker et recuperer sa defense de base
+ * - stocker et recuperer sa portee d'attaque de base
  * - stocker et recuperer le montant de son butin
- * - stocker son taux de reproduction
- * - gerer son tour de naissance dans une vague
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - attaquer une tourelle
  */
 
 package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.LivingObject;
 import byteDefense.utilities.BFS;
 
-public class Adware extends OffensiveEnnemy {
+public class Adware extends Enemy {
 
-	private static final float REPRODUCTION_RATE = 0;
-	private static final int ATTACK = 20;
-	private static final int DEFENSE = 10;
-	private static final int ATTACK_RANGE = 1;
-	private static final int ATTACK_SPEED = 3;
-	private static final int LOOT = 20;
-
-	private int bornTurn;
-
-	public Adware(BFS bfsMap, GameEnvironment gameEnv) {
-		super(bfsMap, gameEnv);
+	private static final int INITIAL_ATTACK = 10;
+	public static final int INITIAL_ATTACK_RANGE = 0;
+	private static final int INITIAL_DEFENSE = 5;
+	private static final int LOOT = 1;
+	
+	public Adware(BFS bfs, GameEnvironment gameEnv) {
+		super(INITIAL_DEFENSE, bfs, gameEnv);
 	}
-
+	
 	public int getAttack() {
-		return ATTACK;
-	}
-
-	public int getDefense() {
-		return DEFENSE;
-	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
+		return INITIAL_ATTACK;
 	}
 
 	public int getAttackRange() {
-		return ATTACK_RANGE;
+		return INITIAL_ATTACK_RANGE;
 	}
-
+	
 	public int getLoot() {
 		return LOOT;
 	}
-
-	public void act() {
-		if (!super.isArrived())
-			super.moveEnnemy();
-		super.attackTower();
+	
+	public void useSpecialEffect(LivingObject livingObject) {
+		
 	}
-}
+}	

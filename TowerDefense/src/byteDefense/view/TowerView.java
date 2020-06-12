@@ -3,7 +3,9 @@
  * Cette classe gere la partie visuelle d'un objet de jeu Tower (une tourelle), ses responsabilites sont de :
  * - charger et stocker les textures des tourelles
  * - faire la correspondance entre les types de tourelles et leurs textures
- * - initialiser  les ImagesView de chaques types de tourelles et les ajouter à la grille où elles sont affichees
+ * - initialiser les positions des ImagesView des tourelles dans leur menu d'achat et les ajouter à la grille 
+ *   où elles sont affichees
+ * - ajouter la tourelle a la vue en fixant ces donnees de vues et ces actions d'evenements
  */
 
 package byteDefense.view;
@@ -11,41 +13,46 @@ package byteDefense.view;
 import java.io.File;
 import java.net.MalformedURLException;
 
-import byteDefense.model.GameObject;
+import byteDefense.controller.Controller;
+import byteDefense.model.LivingObject;
 import byteDefense.model.towers.AdCube;
 import byteDefense.model.towers.Antivirus;
 import byteDefense.model.towers.AuthenticationPoint;
 import byteDefense.model.towers.Firewall;
 import byteDefense.model.towers.SudVPN;
+import byteDefense.model.towers.Tower;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class TowerView extends GameObjectView {
+public class TowerView extends LivingObjectView {
 
+	// Textures des tourelles
 	private static Image adcubeImg; 
 	private static Image antivirusImg;
 	private static Image firewallImg;
 	private static Image authenticationPointImg;
 	private static Image sudvpnImg;
 
+	// Noeuds a ajouter a la vue
 	private ImageView adcube;
 	private ImageView antivirus;
-	private ImageView authentipoint;
+	private ImageView authenticationpoint;
 	private ImageView firewall;
 	private ImageView sudvpn;
 
-	public TowerView(Pane grid, ImageView adcube, ImageView antivirus, ImageView authentificatipoint, ImageView firewall, ImageView sudvpn) {
-		super(grid);
+	public TowerView(Pane gridTowers, ImageView adcube, ImageView antivirus, ImageView authenticationpoint, ImageView firewall, ImageView sudvpn) {
+		super(gridTowers);
 		this.adcube = adcube;
 		this.antivirus = antivirus;
-		this.authentipoint = authentificatipoint;
+		this.authenticationpoint = authenticationpoint;
 		this.firewall = firewall;
 		this.sudvpn = sudvpn;
 
-		this.initInventory(grid);
+		this.initInventory(super.gameObjectGrid);
 	}
 
+	// Methode qui recupere et charge les textures des tourelles
 	public void imageLoader() {
 		try {	
 			adcubeImg = new Image(new File("./resources/towerTextures/adcube.png").toURI().toURL().toString()); 
@@ -57,42 +64,63 @@ public class TowerView extends GameObjectView {
 			e.printStackTrace();
 		}
 	}
-
-	public Image imageGetter(GameObject gameObject) {
+	
+	// Fonction qui retourne la texture correspondante a la tourelle donne en parametre
+	public Image imageGetter(LivingObject livingObject) {
 		Image img;
 
-		if (gameObject instanceof AdCube)
+		if (livingObject instanceof AdCube)
 			img = adcubeImg;
-		else if (gameObject instanceof Antivirus)
+		else if (livingObject instanceof Antivirus)
 			img = antivirusImg;
-		else if (gameObject instanceof Firewall)
+		else if (livingObject instanceof Firewall)
 			img = firewallImg;
-		else if (gameObject instanceof AuthenticationPoint)
+		else if (livingObject instanceof AuthenticationPoint)
 			img = authenticationPointImg;
-		else if (gameObject instanceof SudVPN)
+		else if (livingObject instanceof SudVPN)
 			img = sudvpnImg;
 		else
 			img = null;
 
 		return img;
 	}
+	
+	/* Methode qui initialise les positions des ImagesView des tourelles dans leur menu d'achat 
+	 * et les ajoute à la grille où elles sont affichees
+	 */
+	private void initInventory(Pane gameObjectGrid) {
+		this.adcube.setX(158);
+		this.adcube.setY(800);
+		this.antivirus.setX(236);
+		this.antivirus.setY(800);
+		this.authenticationpoint.setX(314);
+		this.authenticationpoint.setY(800);
+		this.firewall.setX(392);
+		this.firewall.setY(800);
+		this.sudvpn.setX(470);
+		this.sudvpn.setY(800);
 
-	public void initInventory(Pane grid) {
-		this.adcube.setX(129);
-		this.adcube.setY(741);
-		this.antivirus.setX(213);
-		this.antivirus.setY(741);
-		this.authentipoint.setX(298);
-		this.authentipoint.setY(741);
-		this.firewall.setX(383);
-		this.firewall.setY(741);
-		this.sudvpn.setX(466);
-		this.sudvpn.setY(741);
+		gameObjectGrid.getChildren().add(this.adcube);
+		gameObjectGrid.getChildren().add(this.antivirus);
+		gameObjectGrid.getChildren().add(this.authenticationpoint);
+		gameObjectGrid.getChildren().add(this.firewall);
+		gameObjectGrid.getChildren().add(this.sudvpn);
+	}
+	
+	// Methode qui ajoute la tourelle a la vue en fixant ces donnees de vues et ces actions d'evenements
+	public void addTowerView(Tower tower) {
+		Image img = imageGetter(tower);
 
-		grid.getChildren().add(this.adcube);
-		grid.getChildren().add(this.antivirus);
-		grid.getChildren().add(this.authentipoint);
-		grid.getChildren().add(this.firewall);
-		grid.getChildren().add(this.sudvpn);
+		if (img != null) {
+			ImageView imgView = new ImageView();
+			imgView.setImage(img);
+			imgView.setId(Integer.toString(tower.getId()));
+			imgView.setX(tower.getX());
+			imgView.setY(tower.getY());	
+			
+			Controller.moveAndSellTowers(imgView, (Tower) tower);
+			
+			super.gameObjectGrid.getChildren().add(imgView);
+		}
 	}
 }

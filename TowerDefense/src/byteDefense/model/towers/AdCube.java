@@ -1,51 +1,48 @@
 /*
  * AdCube.java
  * Cette classe represente un objet AdCube, ses responsabilites sont de :
- * - stocker et recuperer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer son attaque de base
+ * - stocker et recuperer sa defense de base
+ * - stocker et recuperer sa portee d'attaque de base
  * - stocker et recuperer le montant de son cout
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - attaquer un ennemi
  */
 
 package byteDefense.model.towers;
 
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.LivingObject;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class AdCube extends Tower {
 
-	private static final int ATTACK = 10;
-	private static final int DEFENSE = 20;
-	private static final int ATTACK_SPEED = 4;
-	private static final int ATTACK_RANGE = 3;
-	private static final int COST = 5;
+	private static final int INITIAL_ATTACK = 8;
+	private static final int INITIAL_DEFENSE = 10;
+	private static final int INITIAL_ATTACK_RANGE = 2; // correspond a la portee d'attaque en nombre de tuile du plateau de jeu
+	private static final IntegerProperty COST_PROPERTY = new SimpleIntegerProperty(5);
 
 	public AdCube(int x, int y, GameEnvironment gameEnv) {
-		super(x, y, gameEnv);
+		super(x, y, INITIAL_DEFENSE, gameEnv);
 	}
 
 	public int getAttack() {
-		return ATTACK;
-	}
-
-	public int getDefense() {
-		return DEFENSE;
-	}
-
-	public int getAttackSpeed() {
-		return ATTACK_SPEED;
+		return INITIAL_ATTACK;
 	}
 
 	public int getAttackRange() {
-		return ATTACK_RANGE;
+		return INITIAL_ATTACK_RANGE;
+	}
+	
+	public static final IntegerProperty getCostProperty() {
+		return COST_PROPERTY;
 	}
 
-	public int getCost() {
-		return COST;
+	public final int getCost() {
+		return COST_PROPERTY.getValue();
 	}
-
-	public void act() {
-		super.attackEnnemy();
+	
+	public void useSpecialEffect(LivingObject livingObject) {
+		
 	}
 }

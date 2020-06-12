@@ -14,16 +14,17 @@ import byteDefense.model.GameArea;
 
 public class BFS {
 	
-	int tilesIndex = 0;
+	public static final int STOP_TILE = -1;// valeur -1 pour les domaines non accessibles
+
 	int gameAreaDimension;
 	public GameArea gameArea;
-	public int[] cameFrom;
+	private int[] cameFrom;
 
 	public BFS(GameArea gameArea) {
 		this.gameArea = gameArea;
 		this.gameAreaDimension = (int) Math.pow(GameArea.gameAreaTilesSize, 2);// (largeurDuTerrain^2)
 		this.cameFrom = new int[this.gameAreaDimension];
-		this.BFS_algo(GameArea.arrivalPoint);	
+		this.BFS_algo(GameArea.arrivalPoints.get(0));
 	}
 
 	private int[] foundNeightbours(int index) {
@@ -33,7 +34,6 @@ public class BFS {
 		int right = GameArea.tileIndex(x + 1, y);
 		int down = GameArea.tileIndex(x, y + 1);
 		int left = GameArea.tileIndex(x - 1, y);
-	
 		int[] neightbours = new int[] {
 				this.lookTileValue(up),
 				this.lookTileValue(right), 
@@ -44,11 +44,15 @@ public class BFS {
 	}
 	
 	private int lookTileValue(int value) {
-		if (this.gameArea.isWalkable(this.gameArea.getTilesList().get(value))) 
+		if (value >0 && this.gameArea.isWalkable(this.gameArea.getTilesList().get(value))) 
 			return value;
 		else
-			return -1;
+			return STOP_TILE;
 	}
+	
+	public int getParentTile(int tileIndex) {
+        return this.cameFrom[tileIndex];
+    }
 	
 	private boolean isInCameFrom(int value) {
 		for (int i : this.cameFrom)
@@ -58,18 +62,17 @@ public class BFS {
 	}
 
 	public void BFS_algo(int start) {
-		LinkedList<Integer> queue = new LinkedList<Integer>();
+		LinkedList<Integer> queue = new LinkedList<Integer>(); // FIFO queue
 		
 		queue.add(start);
-		this.cameFrom[start] = -1;//premier sommet du BFS
+		this.cameFrom[start] = STOP_TILE;//premier sommet du BFS
 		
 		while (queue.size() != 0) {
 			int current = queue.poll();
 			int [] neightbour = this.foundNeightbours(current);
-			int next;
-			
+			int next;		
 			for (int i = 0 ; i < neightbour.length; i++) {
-				if (neightbour[i] != -1) {
+				if (neightbour[i] != STOP_TILE) {
 					next = neightbour[i];					
 					if (!this.isInCameFrom(next)) {
 						queue.add(next);

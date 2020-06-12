@@ -1,63 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="byteDefense.model.enemies.WaveEntities" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/model/enemies/WaveEntities.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="713" y="676"/>    
+  <class id="1" language="java" name="byteDefense.view.GameAreaView" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/view/GameAreaView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="502" width="266" x="456" y="95"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="byteDefense.model.enemies.WaveServices" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/model/enemies/WaveServices.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="302" y="277"/>    
+  <class id="2" language="java" name="byteDefense.view.EnemyView" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/view/EnemyView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="214" x="456" y="800"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="byteDefense.model.enemies.Wave" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/model/enemies/Wave.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="708" y="344"/>    
+  <class id="3" language="java" name="byteDefense.view.LivingObjectView" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/view/LivingObjectView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="123" width="217" x="609" y="637"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="byteDefense.factories.EnnemyFactory" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/factories/EnnemyFactory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="316" y="587"/>    
+  <class id="4" language="java" name="byteDefense.view.BulletView" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/view/BulletView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="175" x="866" y="637"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="byteDefense.utilities.WaveReader" project="TowerDefense" 
-    file="/TowerDefense/src/byteDefense/utilities/WaveReader.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1089" y="305"/>    
+  <class id="5" language="java" name="byteDefense.view.GameObjectView" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/view/GameObjectView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="275" x="762" y="95"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="6">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="7" name="waveEnemies">        
-        <position height="0" width="0" x="-143" y="-49"/>      
-      </attribute>      
-      <multiplicity id="8" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-143" y="-49"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <class id="6" language="java" name="byteDefense.view.TowerView" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/view/TowerView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="340" width="456" x="710" y="800"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="7">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="8">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="9">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="10">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

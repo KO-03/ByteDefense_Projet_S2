@@ -10,12 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class Main extends Application{
+public class Main extends Application {
 
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = FXMLLoader.load(getClass().getResource("view/GameView.fxml"));
-			Scene scene = new Scene(root,890,926);
+			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Byte Defense");

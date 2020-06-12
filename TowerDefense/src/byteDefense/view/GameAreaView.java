@@ -29,7 +29,10 @@ public class GameAreaView {
 	public static final int INTERSECTION_PATH = 5;
 	public static final int HORIZONTAL_WALL = 6;
 	public static final int TOWER_ZONE = 7;
+	public static final int LAPTOP_ARRIVAL = 8;
+	public static final int SPAWN_POINT = 9;
 
+	// Textures des tuiles du plateau de jeu
 	private static Image CORNER_SRC_IMG; 
 	private static Image HORIZONTAL_PATH_SRC_IMG;
 	private static Image VERTICAL_PATH_SRC_IMG;
@@ -37,35 +40,41 @@ public class GameAreaView {
 	private static Image INTERSECTION_PATH_SRC_IMG;
 	private static Image HORIZONTAL_WALL_SRC_IMG;
 	private static Image TOWER_ZONE_SRC_IMG;
+	private static Image LAPTOP_ARRIVAL_SRC_IMG;
+	private static Image SPAWN_POINT_SRC_IMG;
 
-	private GameArea map;
-	private TilePane gameBoard;
+	private GameArea gameArea; // plateau de jeu
+	private TilePane gameBoard; // grille de tuiles ou le plateau de jeu est affiches
 
-	public GameAreaView(GameArea map, TilePane gameBoard) {
-		this.map = map;
+	public GameAreaView(GameArea gameArea, TilePane gameBoard) {
+		this.gameArea = gameArea;
 		this.gameBoard = gameBoard;
 		this.imageLoader();
 		this.generateMapView();
 	}
 
+	// Methode qui recupere et charge les textures du plateau de jeu
 	private void imageLoader() {
 		try {
-			CORNER_SRC_IMG = new Image(new File("./resources/tilemapTextures/corner.png").toURI().toURL().toString()); 
-			HORIZONTAL_PATH_SRC_IMG = new Image(new File("./resources/tilemapTextures/horizontal_path.png").toURI().toURL().toString()); 
-			VERTICAL_PATH_SRC_IMG= new Image(new File("./resources/tilemapTextures/vertical_path.png").toURI().toURL().toString()); 
-			VERTICAL_WALL_SRC_IMG = new Image(new File("./resources/tilemapTextures/vertical_wall.png").toURI().toURL().toString()); 
-			INTERSECTION_PATH_SRC_IMG = new Image(new File("./resources/tilemapTextures/intersection_path.png").toURI().toURL().toString()); 
-			HORIZONTAL_WALL_SRC_IMG = new Image(new File("./resources/tilemapTextures/horizontal_wall.png").toURI().toURL().toString()); 
-			TOWER_ZONE_SRC_IMG = new Image(new File("./resources/tilemapTextures/tower_zone.png").toURI().toURL().toString()); 
+			CORNER_SRC_IMG  = new Image(new File("./resources/tilemapTextures/corner.png").toURI().toURL().toString()); 
+			HORIZONTAL_PATH_SRC_IMG  = new Image(new File("./resources/tilemapTextures/horizontal_path.png").toURI().toURL().toString()); 
+			VERTICAL_PATH_SRC_IMG = new Image(new File("./resources/tilemapTextures/vertical_path.png").toURI().toURL().toString()); 
+			VERTICAL_WALL_SRC_IMG  = new Image(new File("./resources/tilemapTextures/vertical_wall.png").toURI().toURL().toString()); 
+			INTERSECTION_PATH_SRC_IMG  = new Image(new File("./resources/tilemapTextures/intersection_path.png").toURI().toURL().toString()); 
+			HORIZONTAL_WALL_SRC_IMG  = new Image(new File("./resources/tilemapTextures/horizontal_wall.png").toURI().toURL().toString()); 
+			TOWER_ZONE_SRC_IMG  = new Image(new File("./resources/tilemapTextures/tower_zone.png").toURI().toURL().toString());
+			LAPTOP_ARRIVAL_SRC_IMG = new Image(new File("./resources/tilemapTextures/laptop.png").toURI().toURL().toString());
+			SPAWN_POINT_SRC_IMG = new Image(new File("./resources/tilemapTextures/spawn.png").toURI().toURL().toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private Image tileImageGet(int mapCase) {
+	// Fonction qui retourne la texture correspondante a tuile donne en parametre
+	private Image tileImageGetter(int mapTile) {
 		Image tileImg = null;
 
-		switch (mapCase) {
+		switch (mapTile) {
 		case CORNER:
 			tileImg = CORNER_SRC_IMG;
 			break;
@@ -87,17 +96,24 @@ public class GameAreaView {
 		case TOWER_ZONE:
 			tileImg = TOWER_ZONE_SRC_IMG;
 			break;
+		case LAPTOP_ARRIVAL:
+			tileImg = LAPTOP_ARRIVAL_SRC_IMG;
+			break;
+		case SPAWN_POINT:
+			tileImg = SPAWN_POINT_SRC_IMG;
+			break;
 		}
 		return tileImg;
 	}
 
+	// Methode qui construit la vue du plateau de jeu tuile par tuile en initialisant leurs donnees
 	private void generateMapView() {
 		Image tileImg;
-		int tilesSize = GameArea.gameAreaTilesSize;
+		int tilesSize = GameArea.gameAreaTilesSize; // taille du plateau de jeu en nombre de tuile
 
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {
-				tileImg = this.tileImageGet(this.map.gameAreaCase(x, y));
+				tileImg = this.tileImageGetter(this.gameArea.gameAreaCase(x, y));
 
 				if(tileImg != null) {
 					ImageView tile = new ImageView();

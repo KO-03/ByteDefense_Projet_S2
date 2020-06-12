@@ -26,7 +26,13 @@ public class GameAreaReader {
 		return tilesList;
 	}
 	
-	// Fonction qui retourne la liste des tilesList contruites par récupération des donnees d'un fichier
+	/* Fonction qui retourne la liste des tilesList contruites par récupération des donnees d'un fichier tiles.txt.
+	 * Ces donnees sont des entiers correspondants chacun à une tuile precise du plateau de jeu sont separees par un ", ".
+	 * Une ligne du fichier correspon au niveau du jeu
+	 * Exemple d'une ligne du fichier : "7, 4, 5, 2, 2, 2, 5, 7"
+	 * La correspondance entre chaque donnee du plateau de jeu et sa composante visuelle est decrite dans 
+	 * la classe de vue GameAreaView.
+	 */
 	public static ArrayList<ArrayList<Integer>> generateLevelsTilesList(String sourceFile) {
 		ArrayList<ArrayList<Integer>> levelsTilesList = new ArrayList<>();
 		ArrayList<Integer> tilesList;
@@ -37,7 +43,7 @@ public class GameAreaReader {
 			List<String> allLines = Files.readAllLines(Paths.get(sourceFile));
 			int fileSize = allLines.size();
 			
-			// recuperation dans le fichier la ligne correspondant au niveau
+			// Traitements des donnees du fichier ligne par ligne et construction des listes de tuiles
 			while (level < fileSize && (levelLine = allLines.get(level)) != null) {
 				tilesList = createTilesList(levelLine, level + 1);
 				
