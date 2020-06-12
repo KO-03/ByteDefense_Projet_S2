@@ -1,6 +1,17 @@
 /*
  * Controller.java
  * Cette classe fait le lien entre le modele et la vue, ses responsabilitees sont :
+ * - charger les textures du bouton de controle
+ * - generer tous les listener des objects du jeu
+ * - creer les listener et bind entre le modele et la vue
+ * - initialiser le bouton de controle
+ * - verifier si la partie est en cours
+ * - changer la couleur du prix de chaque type en fonction de l'argent
+ * - retourner le pourcentage d'infection des ennemies
+ * - mettre a jour les informations d'une tourelle dans la vue
+ * - gerer le deplacement et la vente des tourelles sur le terrain
+ * - mettre a jour le minuteur
+ * - tourner le jeu en boucle
  * - initialiser le gameMaster
  * - initialiser la vue des ennemis et celle des tourelles
  * - initialiser la vue de la GameArea
