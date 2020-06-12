@@ -12,7 +12,6 @@ package byteDefense.model;
 
 import byteDefense.model.enemies.Enemy;
 import byteDefense.model.enemies.OffensiveEnemy;
-import byteDefense.model.enemies.TrojanHorse;
 import byteDefense.model.towers.Tower;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -142,7 +141,7 @@ public class GameEnvironment {
 		for (Enemy enemy : this.enemies) {
 			enemy.moveEnnemy();
 			if (enemy.isArrived())
-				this.setInfectingProgress(this.infectingProgress+enemy.getAttack());
+				this.setInfectingProgress(this.infectingProgress + enemy.getAttack());
 		}
 	}
 	

@@ -7,19 +7,12 @@
 
 package byteDefense.model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
-public class GameObject {
+public abstract class GameObject {
 	
 	protected static int counterId = 0;
 	private int id;
-	private IntegerProperty xProperty;
-	private IntegerProperty yProperty;
 
-	public GameObject(int x, int y) {
-		this.xProperty = new SimpleIntegerProperty(x);
-		this.yProperty = new SimpleIntegerProperty(y);
+	public GameObject() {
 		this.id = counterId;
 		counterId++;
 	}
@@ -28,27 +21,7 @@ public class GameObject {
 		return this.id;
 	}
 	
-	public IntegerProperty getXProperty() {
-		return this.xProperty;
-	}
-
-	public int getX() {
-		return this.xProperty.getValue();
-	}
-
-	public IntegerProperty getYProperty() {
-		return this.yProperty;
-	}
+	public abstract int getX();
 	
-	public int getY() {
-		return this.yProperty.getValue();
-	}
-	
-	public void setX(int newX) {
-		this.xProperty.setValue(newX);
-	}
-
-	public void setY(int newY) {
-		this.yProperty.setValue(newY);
-	}
+	public abstract int getY();
 }

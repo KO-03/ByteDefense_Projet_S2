@@ -13,11 +13,14 @@ public class Bullet extends GameObject {
 	
 	private LivingObject targetObject;
 	private LivingObject shooterObject;
+	private int x;
+	private int y;
 
 	public Bullet(int x, int y, LivingObject targetObject, LivingObject shooterObject) {
-		super(x, y);
 		this.targetObject = targetObject;
 		this.shooterObject = shooterObject;
+		this.x = shooterObject.getX();
+		this.y = shooterObject.getY();
 	}
 	
 	public LivingObject getShooterObject() {
@@ -35,6 +38,14 @@ public class Bullet extends GameObject {
 	// Fonction qui verifie si la cible est en vie ou non
 	public boolean targetIsAlive() {
 		return this.targetObject.isAlive();
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
 	}
 
 	public void attackTarget() {

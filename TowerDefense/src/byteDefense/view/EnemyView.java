@@ -13,11 +13,13 @@ import java.net.MalformedURLException;
 import byteDefense.model.LivingObject;
 import byteDefense.model.enemies.Adware;
 import byteDefense.model.enemies.Bot;
+import byteDefense.model.enemies.Enemy;
 import byteDefense.model.enemies.Ransomware;
 import byteDefense.model.enemies.Rootkit;
 import byteDefense.model.enemies.Spyware;
 import byteDefense.model.enemies.TrojanHorse;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class EnemyView extends LivingObjectView {
@@ -68,5 +70,23 @@ public class EnemyView extends LivingObjectView {
 			img = null;
 
 		return img;
+	}
+	
+	// Methode qui ajoute l'ennemi a la vue en fixant ces donnees de vues et ces actions d'evenements
+	public void addEnemyView(Enemy enemy) {
+		Image img = imageGetter(enemy);
+
+		if (img != null) {
+			ImageView imgView = new ImageView();
+			imgView.setImage(img);
+			imgView.setId(Integer.toString(enemy.getId()));
+			imgView.setTranslateX(enemy.getX());
+			imgView.setTranslateY(enemy.getY());	
+
+			imgView.translateXProperty().bind(enemy.getXProperty());
+			imgView.translateYProperty().bind(enemy.getYProperty());
+			
+			super.gameObjectGrid.getChildren().add(imgView);
+		}
 	}
 }

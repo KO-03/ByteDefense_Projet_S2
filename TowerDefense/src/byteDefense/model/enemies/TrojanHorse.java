@@ -12,6 +12,7 @@
 package byteDefense.model.enemies;
 
 import byteDefense.model.GameEnvironment;
+import byteDefense.model.GameMaster;
 import byteDefense.model.LivingObject;
 import byteDefense.utilities.BFS;
 
@@ -25,7 +26,7 @@ public class TrojanHorse extends Enemy {
 
 	public TrojanHorse(BFS bfs, GameEnvironment gameEnv) {
 		super(bfs, gameEnv);
-		attack = gameEnv.getInfectingProgress();
+		attack = GameMaster.getPcHp();
 	}
 
 	public int getAttack() {

@@ -13,25 +13,52 @@ import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.LivingObject;
 import byteDefense.utilities.BFS;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Enemy extends LivingObject {
 
 	private static BFS bfs;
+	private IntegerProperty xProperty;
+	private IntegerProperty yProperty;
 	private int currentTile; // la tuile ou l'ennemi se trouve
 	
 	public Enemy(BFS bfsMap, GameEnvironment gameEnv) {
-		super(GameArea.tilePosX(GameArea.randomSpawnpoint()), GameArea.tilePosY(GameArea.randomSpawnpoint()), 50, gameEnv);
+		super(50, gameEnv);
 		bfs = bfsMap;
-		this.currentTile = GameArea.tileIndex(super.getX(), super.getY());
+		this.xProperty = new SimpleIntegerProperty(GameArea.tilePosX(GameArea.randomSpawnpoint()));
+		this.yProperty = new SimpleIntegerProperty(GameArea.tilePosY(GameArea.randomSpawnpoint()));
+		this.currentTile = GameArea.tileIndex(this.getX(), this.getY());
 	}
 	
-	public Enemy(int x, int y, BFS bfsMap, GameEnvironment gameEnv) {
-		super(x, y, 50, gameEnv);
-		bfs = bfsMap;
-		this.currentTile = GameArea.tileIndex(x / GameArea.TILE_SIZE, y / GameArea.TILE_SIZE);
+	public IntegerProperty getXProperty() {
+		return this.xProperty;
+	}
+
+	public int getX() {
+		return this.xProperty.getValue();
+	}
+
+	public void setX(int newX) {
+		this.xProperty.setValue(newX);
+	}
+
+	public IntegerProperty getYProperty() {
+		return this.yProperty;
+	}
+
+	public int getY() {
+		return this.yProperty.getValue();
+	}
+
+	public void setY(int newY) {
+		this.yProperty.setValue(newY);
 	}
 	
-	public abstract int getLoot();
+	// Fonction qui verifie si un ennemi est arrive au bout du chemin du BFS
+	public boolean isArrived() {
+		return this.currentTile == BFS.STOP_TILE;
+	}
 	
 	// Methode qui fait se deplacer un ennemi en fonction du BFS
 	public void moveEnnemy() {
@@ -46,8 +73,5 @@ public abstract class Enemy extends LivingObject {
 			this.currentTile = bfs.cameFrom[this.currentTile];
 	}
 	
-	// Fonction qui verifie si un ennemi est arrive au bout du chemin du BFS
-	public boolean isArrived() {
-		return this.currentTile == BFS.STOP_TILE; // -1 correspond au point d'arrivée
-	}
+	public abstract int getLoot();
  }

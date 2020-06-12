@@ -13,11 +13,31 @@ import byteDefense.utilities.ShootUtilities;
 
 public abstract class Tower extends LivingObject {
 	
+	private int x;
+	private int y;
 	public boolean frozen; // indique si la tourelle est gelee ou non
 	
 	public Tower(int x, int y, GameEnvironment gameEnv) {
-		super(x, y, 100, gameEnv);
+		super(100, gameEnv);
+		this.x = x;
+		this.y = y;
 		this.frozen = false;
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
 	}
 	
 	public boolean getFrozen() {

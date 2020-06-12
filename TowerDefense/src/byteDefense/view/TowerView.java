@@ -12,12 +12,14 @@ package byteDefense.view;
 import java.io.File;
 import java.net.MalformedURLException;
 
+import byteDefense.controller.Controller;
 import byteDefense.model.LivingObject;
 import byteDefense.model.towers.AdCube;
 import byteDefense.model.towers.Antivirus;
 import byteDefense.model.towers.AuthenticationPoint;
 import byteDefense.model.towers.Firewall;
 import byteDefense.model.towers.SudVPN;
+import byteDefense.model.towers.Tower;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -102,5 +104,22 @@ public class TowerView extends LivingObjectView {
 		gameObjectGrid.getChildren().add(this.authenticationpoint);
 		gameObjectGrid.getChildren().add(this.firewall);
 		gameObjectGrid.getChildren().add(this.sudvpn);
+	}
+	
+	// Methode qui ajoute la tourelle a la vue en fixant ces donnees de vues et ces actions d'evenements
+	public void addTowerView(Tower tower) {
+		Image img = imageGetter(tower);
+
+		if (img != null) {
+			ImageView imgView = new ImageView();
+			imgView.setImage(img);
+			imgView.setId(Integer.toString(tower.getId()));
+			imgView.setX(tower.getX());
+			imgView.setY(tower.getY());	
+			
+			Controller.moveAndSellTowers(imgView, (Tower) tower);
+			
+			super.gameObjectGrid.getChildren().add(imgView);
+		}
 	}
 }

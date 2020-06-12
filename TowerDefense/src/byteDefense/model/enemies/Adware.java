@@ -29,10 +29,6 @@ public class Adware extends OffensiveEnemy {
 	public Adware(BFS bfs, GameEnvironment gameEnv) {
 		super(bfs, gameEnv);
 	}
-	
-	public Adware(int x, int y, BFS bfs, GameEnvironment gameEnv) {
-		super(x, y, bfs, gameEnv);
-	}
 
 	public int getAttack() {
 		return ATTACK;

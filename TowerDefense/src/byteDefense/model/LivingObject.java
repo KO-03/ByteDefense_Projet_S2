@@ -21,8 +21,7 @@ public abstract class LivingObject extends GameObject {
 	private SpecialEffect specialEffect; // effet/capacite propre 
 	private ArrayList<SpecialEffect> inflictedEffects; // liste des effets infliges
 
-	public LivingObject(int x, int y, int hp, GameEnvironment gameEnv) {
-		super(x, y);
+	public LivingObject(int hp, GameEnvironment gameEnv) {
 		this.hp = hp;
 		this.gameEnv = gameEnv;
 		this.specialEffect = SpecialEffectFactory.getInstance(this);
