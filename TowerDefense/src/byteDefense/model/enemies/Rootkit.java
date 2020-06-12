@@ -19,8 +19,8 @@ import byteDefense.utilities.BFS;
 
 public class Rootkit extends OffensiveEnemy {
 
-	public static final float INCREASE_ATTACK_RATE = 0.90F; // taux d'aumgmentation d'attaque en pourcentage
-	public static final int INTIAL_ATTACK = 2;
+	private static final float INCREASING_ATTACK_RATE = 1.10F; // taux d'aumgmentation d'attaque en pourcentage
+	private static final int INITIAL_ATTACK = 2;
 	private static final int DEFENSE = 20;
 	private static final int ATTACK_SPEED = 3; // vitesse d'attaque en nombre de tour
 	private static final int ATTACK_RANGE = 4; // portee d'attaque en nombre de tuile du plateau de jeu
@@ -30,7 +30,7 @@ public class Rootkit extends OffensiveEnemy {
 
 	public Rootkit(BFS bfsMap, GameEnvironment gameEnv) {
 		super(bfsMap, gameEnv);
-		this.attack = INTIAL_ATTACK; 
+		this.attack = INITIAL_ATTACK; 
 	}
 	
 	public int getAttack() {
@@ -41,6 +41,10 @@ public class Rootkit extends OffensiveEnemy {
 		this.attack = newAttack;
 	}
 
+	public void resetAttack() {
+		this.setAttack(INITIAL_ATTACK);
+	}
+	
 	public int getDefense() {
 		return DEFENSE;
 	}
@@ -57,8 +61,12 @@ public class Rootkit extends OffensiveEnemy {
 		return LOOT;
 	}
 	
+	public void attack() {
+		super.attackTower();
+	}
+	
 	private void increaseAttack(LivingObject livingObject) {
-		this.setAttack((this.attack + (int)(livingObject.getDefense() * INCREASE_ATTACK_RATE)));
+		this.setAttack((int)(this.attack + livingObject.getDefense() * INCREASING_ATTACK_RATE));
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {

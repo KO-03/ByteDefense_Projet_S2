@@ -34,6 +34,7 @@ public class EnemyView extends LivingObjectView {
 		super(gridEnemies);
 	}
 
+	// Methode qui recupere et charge les textures des ennemis
 	public void imageLoader() {
 		try {
 			adwareImg = new Image(new File("./resources/enemiesTextures/adware.png").toURI().toURL().toString()); 
@@ -47,6 +48,7 @@ public class EnemyView extends LivingObjectView {
 		}
 	}
 
+	// Fonction qui retourne la texture correspondante a l'ennemi donne en parametre
 	public Image imageGetter(LivingObject livingObject) {
 		Image img;
 

@@ -18,8 +18,8 @@ public abstract class LivingObject extends GameObject {
 
 	private int hp;
 	private GameEnvironment gameEnv;
-	private SpecialEffect specialEffect;
-	private ArrayList<SpecialEffect> inflictedEffects;
+	private SpecialEffect specialEffect; // effet/capacite propre 
+	private ArrayList<SpecialEffect> inflictedEffects; // liste des effets infliges
 
 	public LivingObject(int x, int y, int hp, GameEnvironment gameEnv) {
 		super(x, y);
@@ -33,7 +33,7 @@ public abstract class LivingObject extends GameObject {
 		return this.hp;
 	}
 
-	public void setHp(int newHp) {
+	private void setHp(int newHp) {
 		this.hp = newHp;
 	}
 
@@ -53,23 +53,19 @@ public abstract class LivingObject extends GameObject {
 		return this.specialEffect;
 	}
 	
-	public ArrayList<SpecialEffect> getInflictedEffects() {
-		return this.inflictedEffects;
-	}
-	
 	public void inflictEffect(SpecialEffect newInflictedEffect) {
 		this.inflictedEffects.add(newInflictedEffect);	
 	}
 	
+	// Methode qui met a jours les effets infliges
 	public void updateInflictedEffects() {
 		SpecialEffect inflictedEffect;
 		
 		for (int i = 0; i < this.inflictedEffects.size() -1; i++) {
 			inflictedEffect = this.inflictedEffects.get(i); 
-			
+			// L'effet est dissipe
 			if (inflictedEffect.getTurnNbr() == 0) {
-				inflictedEffect.endEffect(this);
-				inflictedEffect.reinitializeEffect();
+				inflictedEffect.reinitializeEffect(this);
 				this.inflictedEffects.remove(inflictedEffect);
 			} else
 				inflictedEffect.decrementTurnNbr();

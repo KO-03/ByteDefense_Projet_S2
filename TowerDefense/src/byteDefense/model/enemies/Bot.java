@@ -48,6 +48,10 @@ public class Bot extends Enemy {
 		return LOOT;
 	}
 	
+	public float getHealingRate() {
+		return HEALING_RATE;
+	}
+	
 	public void useSpecialEffect(LivingObject livingObject) {
 		
 	}

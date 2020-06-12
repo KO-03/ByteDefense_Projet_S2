@@ -13,7 +13,7 @@ import byteDefense.utilities.ShootUtilities;
 
 public abstract class Tower extends LivingObject {
 	
-	public boolean frozen;
+	public boolean frozen; // indique si la tourelle est gelee ou non
 	
 	public Tower(int x, int y, GameEnvironment gameEnv) {
 		super(x, y, 100, gameEnv);
@@ -24,6 +24,7 @@ public abstract class Tower extends LivingObject {
 		return this.frozen;
 	}
 	
+	// Methode qui gele ou degele un enemi selon son etat
 	public void changeFrozen() {
 		if (this.frozen)
 			this.frozen = false;
@@ -31,6 +32,7 @@ public abstract class Tower extends LivingObject {
 			this.frozen = true;
 	}
 	
+	// Methode qui fait attaquer un ennemi a la portee de la tourelle
 	public void attackEnemy() {
 		GameEnvironment gameEnv = super.getGameEnvironment();
 		Enemy target = (Enemy)ShootUtilities.findTarget(gameEnv.getEnemies(), this);

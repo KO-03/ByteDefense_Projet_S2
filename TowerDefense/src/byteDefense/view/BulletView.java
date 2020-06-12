@@ -23,8 +23,8 @@ public class BulletView extends GameObjectView {
 	
 	public void addBulletView(Bullet bullet) {
 		int tileCenter = GameArea.TILE_SIZE / 2; // centre d'une tuile du plateau de jeu
-		
 		Circle circ = new Circle();
+		
 		circ.setId(Integer.toString(bullet.getId()));
 		circ.setTranslateX(bullet.getX() + tileCenter);
 		circ.setTranslateY(bullet.getY() + tileCenter);

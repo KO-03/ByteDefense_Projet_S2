@@ -18,6 +18,7 @@ public class GameObjectView {
 		this.gameObjectGrid = gameObjectGrid;
 	}
 	
+	// Methode qui supprime l'objet de jeu de la vue
 	public void removeGameObjectView(GameObject gameObject) {
 		this.gameObjectGrid.getChildren().remove(this.gameObjectGrid.lookup("#" + gameObject.getId()));
 	}

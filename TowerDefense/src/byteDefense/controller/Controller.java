@@ -54,19 +54,20 @@ import javafx.util.Duration;
 
 public class Controller implements Initializable {
 
+	// Textures du bouton play/pause
 	private static Image playImg;
 	private static Image pauseImg;
 	
 	@FXML
 	private TilePane gameBoard; // Plateau de jeu
 	@FXML
-    private Pane gridBullets; // Grille de tirs
+    private Pane bulletsGrid; // Grille de tirs
 	@FXML
-    private Pane gridEnemies; // Grille d'ennemis
+    private Pane enemiesGrid; // Grille d'ennemis
 	@FXML
-	private Pane gridTowers; // Grille de tourelles
+    private Pane towersGrid; // Grille de tourelles
 	
-	// Dans le magasin
+	// Tourelles du magasin
 	@FXML
 	private ImageView adcube; 
 	@FXML
@@ -87,7 +88,7 @@ public class Controller implements Initializable {
     
     // Informations des livingObjects
     @FXML
-    private Label name; // Nom de l'objet du jeu
+    private Label name; // Nom du livingObject
     @FXML
 	private Label attackStat;
     @FXML
@@ -97,7 +98,7 @@ public class Controller implements Initializable {
     @FXML
     private Label attackRangeStat;
     
-    // Labels des coûts dans la boutique
+    // Couts dans la boutique
     @FXML
 	private Label costAdcube;
     @FXML
@@ -111,20 +112,16 @@ public class Controller implements Initializable {
     
     // Boutons de contrôles
     @FXML
-    private Button launchWaveBt;
+    private Button launchWaveBt; // Bouton pour lancer une nouvelle vague
     @FXML
-    private Button gameControls;
-    @FXML
-    private ImageView pauseButton; // Bouton pause
-    @FXML
-    private ImageView playButton; // Bouton jouer
+    private Button gameControls; // Bouton pour gerer le pause/play
     @FXML
     private Label timer; // Minuteur
     @FXML
-    private Label message;
+    private Label message; // Message qui indique l'etat de la partie (vague en cours, en pause, entre-vague, fin de partie)
     
     private GameMaster gm;
-    private boolean playActivated;
+    private boolean playActivated; // indique si le bouton play/pause a ete presse
 	private EnemyView ev;
 	private TowerView tv;
 	private BulletView bv;
@@ -133,38 +130,7 @@ public class Controller implements Initializable {
 	private int seconde;
 	private int minute;
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.loadPlayPauseImage();
-		this.gm = new GameMaster();
-		this.seconde = 0;
-        this.minute = 0;
-		
-		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
-		this.ev = new EnemyView(this.gridEnemies);
-		this.tv = new TowerView(this.gridTowers, this.adcube, this.antivirus, this.authenticationpoint, this.firewall, this.sudvpn);
-		this.bv = new BulletView(this.gridBullets);
-		
-		this.onMouseOverLivingObject();
-		this.generateGameObjectsListener();
-		this.createBindAndListeners();
-		this.initPlayAndPause();
-		this.mouseDraggedOnShop();
-		this.initAnimation();
-		this.gameLoop.play();
-		this.playActivated = true;
-	}
-	
-	private void createBindAndListeners() {
-		this.byteCoin.textProperty().bind(this.gm.getWalletProperty().asString());
-		this.waveNbr.textProperty().bind(this.gm.getWaveInProgressNbrProperty().asString());		
-		this.costAdcube.setText(Integer.toString(AdCube.getCostProperty().getValue()));
-		this.costAntivirus.setText(Integer.toString(Antivirus.getCostProperty().getValue()));
-		this.costAuthPoint.setText(Integer.toString(AuthenticationPoint.getCostProperty().getValue()));
-		this.costFirewall.setText(Integer.toString(Firewall.getCostProperty().getValue()));
-		this.costSudVPN.setText(Integer.toString(SudVPN.getCostProperty().getValue()));
-	}
-	
+	// Methode de chargement des textures du bouton de controle
 	private void loadPlayPauseImage() {
 		try {
 			playImg = new Image(new File("./resources/icons/play-button.png").toURI().toURL().toString());
@@ -173,72 +139,7 @@ public class Controller implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
-	private void initPlayAndPause() {
-    	this.gameControls.setOnAction(new EventHandler<ActionEvent>() {
-    	    @Override 
-    	    public void handle(ActionEvent e) {    	    	
-				if (playActivated) {
-			        gameControls.setGraphic(new ImageView(playImg));
-	    	        gameLoop.pause();
-	    	        disableMouseDraggedOnTowers();
-	    	        playActivated = false;
-	    	        message.setText("PAUSE");
-    	    	} else {
-    	    		gameControls.setGraphic(new ImageView(pauseImg));
-        	        gameLoop.play();
-        	        enableMouseDraggedOnTowers();
-        	        playActivated = true;
-        	        message.setText("PLAY");
-    	    	}    	    		    	      
-    	    }
-    	});
-    }
-	
-	private void initAnimation() {
-		this.gameLoop = new Timeline();
-        this.time = 0;
-        this.gameLoop.setCycleCount(Timeline.INDEFINITE);
 
-		KeyFrame kf = new KeyFrame(Duration.seconds(0.25), (event -> {
-			if (this.time % 4 == 0) {		
-				if (this.gm.isWaveRunning()) {
-					this.message.setText("Vague en cours...");
-					if (this.playActivated)
-						this.gm.aTurn();
-				} else 
-					this.message.setText("Lance une vague");
-				
-				this.updateTimer();
-				
-				if (this.gm.playerLooses()) {
-					this.message.setText("LOOSE !");
-					this.gameLoop.stop();
-					this.disableMouseDraggedOnTowers();
-				}
-			} else {
-				this.gm.getGameEnvironment().gameEnvironmentAction();
-				this.canBuy();
-				if (this.gm.playerWins()) {
-					this.message.setText("WIN !");
-					this.gameLoop.stop();
-					this.disableMouseDraggedOnTowers();
-				}
-			}
-			this.time++;
-		}));
-		this.gameLoop.getKeyFrames().add(kf);
-	}
-
-	private void updateTimer() {
-		this.seconde++;
-		if (this.seconde == 60) {
-			this.seconde = 0;
-			this.minute++;
-		}
-		this.timer.setText(String.format("%02d", this.minute) + ":" + String.format("%02d", this.seconde));
-	}
-	
 	private void generateGameObjectsListener() {
 		this.gm.getGameEnvironment().getTowers().addListener((ListChangeListener <Tower>) c-> {
 			while (c.next()) {
@@ -259,13 +160,14 @@ public class Controller implements Initializable {
 					nbEnemySpawned++;
 				}
 				for (Enemy enemy : c.getRemoved()) {
-					if(enemy.getHp()<=0)
+					// Gain de byteCoin quand un ennemi est tue
+					if(!enemy.isAlive())
 						this.gm.addMoney(enemy.getLoot());
 					this.ev.removeGameObjectView(enemy);					
 					nbEnemyDead++;
 				}
 				int nbEnemy = Integer.parseInt(this.enemiesNbr.getText());
-				this.enemiesNbr.setText(Integer.toString(nbEnemy-nbEnemyDead+nbEnemySpawned));
+				this.enemiesNbr.setText(Integer.toString(nbEnemy - nbEnemyDead + nbEnemySpawned));
 			}
 		});
 		
@@ -278,41 +180,59 @@ public class Controller implements Initializable {
 			}
 		});
 	}
-	
-	private void mouseDraggedOnShop() {
-		this.adcube.setOnMouseDragged(event -> {
-			dragAndDrop(this.adcube, (int) this.adcube.getX());
-		});
-		this.antivirus.setOnMouseDragged(event -> {
-			dragAndDrop(this.antivirus, (int) this.antivirus.getX());
-		});
-		this.authenticationpoint.setOnMouseDragged(event -> {
-			dragAndDrop(this.authenticationpoint, (int) this.authenticationpoint.getX());
-		});
-		this.firewall.setOnMouseDragged(event -> {
-			dragAndDrop(this.firewall, (int) this.firewall.getX());
-		});
-		this.sudvpn.setOnMouseDragged(event -> {
-			dragAndDrop(this.sudvpn, (int) this.sudvpn.getX());
-		});
+		
+	// Methode de creation des liens entre le modele et les vues (byteCoin, numero de la vague en cours, couts des tourelles)
+	private void createBindAndListeners() {
+		this.byteCoin.textProperty().bind(this.gm.getByteCoinProperty().asString());
+		this.waveNbr.textProperty().bind(this.gm.getWaveInProgressNbrProperty().asString());		
+		this.costAdcube.setText(Integer.toString((AdCube.getCostProperty().getValue())));
+		this.costAntivirus.setText(Integer.toString((Antivirus.getCostProperty().getValue())));
+		this.costAuthPoint.setText(Integer.toString((AuthenticationPoint.getCostProperty().getValue())));
+		this.costFirewall.setText(Integer.toString((Firewall.getCostProperty().getValue())));
+		this.costSudVPN.setText(Integer.toString((SudVPN.getCostProperty().getValue())));
 	}
+	
+	// Methode qui initialise les actions du bouton de controle de la partie
+	private void initPlayAndPause() {
+    	this.gameControls.setOnAction(new EventHandler<ActionEvent>() {
+    	    @Override public void handle(ActionEvent e) {    	    	
+				if (playActivated) {
+			        gameControls.setGraphic(new ImageView(playImg));
+	    	        gameLoop.pause();
+	    	        disableMouseDraggedAndDropOnTowers();
+	    	        playActivated = false;
+	    	        message.setText("PAUSE");
+    	    	} else {
+    	    		gameControls.setGraphic(new ImageView(pauseImg));
+        	        gameLoop.play();
+        	        enableMouseDraggedAndDropOnTowers();
+        	        playActivated = true;
+        	        message.setText("PLAY");
+    	    	}    	    		    	      
+    	    }
+    	});
+    }
+	
+	// Methode qui initialise les actions de glisser-deposer sur les tourelles du magasin
+	private void dragAndDropOnTower(ImageView tower, int initialX) { 
+		int tileSize = GameArea.TILE_SIZE; // taille d'une tuile dans le plateau de jeu
 
-	private void dragAndDrop(ImageView tower, int initialX) { 
-		int tileSize = GameArea.TILE_SIZE;
-
+		// La tourelle suit le curseur de la souris lorsque au glisser de la souris
 		tower.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
-				tower.setX((int) event.getX() - tileSize / 2);
+				tower.setX((int) event.getX() - tileSize / 2); 
 				tower.setY((int) event.getY() - tileSize / 2);
 			}
 		});
-
+		
+		// La tourelle est placee au relacher de la souris
 		tower.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Tower newTower;
 				int x = (int) event.getX() / tileSize * tileSize; 
 				int y = (int) event.getY() / tileSize * tileSize;
 
+				// La tuile ou la tourelle a ete relachee n'est pas prise et est placeable
 				if (gm.towerIsPlaceable(x, y) && !gm.tileIsReserved(x, y)) {
 					GameEnvironment ge = gm.getGameEnvironment();
 					
@@ -339,7 +259,27 @@ public class Controller implements Initializable {
 		});
 	}
 	
-	private void disableMouseDraggedOnTowers() {
+	// Methode qui initialise pour chaque type de tourelle les actions de glisser-deposer dans le magasin
+	private void mouseDraggedOnShop() {
+		this.adcube.setOnMouseDragged(event -> {
+			dragAndDropOnTower(this.adcube, (int) this.adcube.getX());
+		});
+		this.antivirus.setOnMouseDragged(event -> {
+			dragAndDropOnTower(this.antivirus, (int) this.antivirus.getX());
+		});
+		this.authenticationpoint.setOnMouseDragged(event -> {
+			dragAndDropOnTower(this.authenticationpoint, (int) this.authenticationpoint.getX());
+		});
+		this.firewall.setOnMouseDragged(event -> {
+			dragAndDropOnTower(this.firewall, (int) this.firewall.getX());
+		});
+		this.sudvpn.setOnMouseDragged(event -> {
+			dragAndDropOnTower(this.sudvpn, (int) this.sudvpn.getX());
+		});
+	}
+	
+	// Methode de desactivation des evenements des tourelles du magasin
+	private void disableMouseDraggedAndDropOnTowers() {
 		this.adcube.setDisable(true);
 		this.antivirus.setDisable(true);
 		this.authenticationpoint.setDisable(true);
@@ -347,7 +287,8 @@ public class Controller implements Initializable {
 		this.sudvpn.setDisable(true);
 	}
 	
-	private void enableMouseDraggedOnTowers() {
+	// Methode de activation des evenements des tourelles du magasin
+	private void enableMouseDraggedAndDropOnTowers() {
 		this.adcube.setDisable(false);
 		this.antivirus.setDisable(false);
 		this.authenticationpoint.setDisable(false);
@@ -355,14 +296,18 @@ public class Controller implements Initializable {
 		this.sudvpn.setDisable(false);
 	}
 	
-	@FXML
-	private void launchWave(ActionEvent event) {
-		if (!this.gm.isWaveRunning())
-			this.gm.incrementWaveNumber();
+	private void updateTimer() {
+		this.seconde++;
+		if (this.seconde == 60) {
+			this.seconde = 0;
+			this.minute++;
+		}
+		this.timer.setText(String.format("%02d", this.minute) + ":" + String.format("%02d", this.seconde));
 	}
 	
+	// Methode qui change les couleurs des prix dans le magasin pour préciser si l'on peut acheter ou non les tourelles
 	private void canBuy() {
-		int money = this.gm.getWalletProperty().getValue();
+		int money = this.gm.getByteCoinProperty().getValue();
 		
 		if (money >= AdCube.getCostProperty().getValue())
 			this.costAdcube.setTextFill(Color.GREEN);
@@ -390,27 +335,94 @@ public class Controller implements Initializable {
 			this.costSudVPN.setTextFill(Color.RED);
 	}
 	
+	// Methode qui fait tourner le jeu en boucle (faire un tour, actions de l'environnement, achat, victoire et defaite, timer)
+	private void initAnimation() {
+		this.gameLoop = new Timeline();
+        this.time = 0;
+        this.gameLoop.setCycleCount(Timeline.INDEFINITE);
+
+		KeyFrame kf = new KeyFrame(Duration.seconds(0.25), (event -> {
+			if (this.time % 4 == 0) {		
+				// Vague en cours
+				if (this.gm.isWaveRunning()) {
+					this.message.setText("Vague en cours...");
+					if (this.playActivated) // Bouton de controle sur play
+						this.gm.aTurn();
+				} else 
+					this.message.setText("Lance une vague");
+				
+				this.updateTimer();
+				
+				if (this.gm.playerLooses()) {
+					message.setText("DEFAITE !");
+					this.gameLoop.stop();
+					this.disableMouseDraggedAndDropOnTowers();
+				}
+			} else {
+				this.gm.actionGameEnvironment();
+				this.canBuy();
+				if (this.gm.playerWins()) {
+					this.message.setText("VICTOIRE !");
+					this.gameLoop.stop();
+					this.disableMouseDraggedAndDropOnTowers();
+				}
+			}
+			this.time++;
+		}));
+		this.gameLoop.getKeyFrames().add(kf);
+	}
+
+	// Methode qui recupere et affiche le nom des tourelles et des ennemis lorsqu'on les survole avec le curseur de la souris
 	private void onMouseOverLivingObject() {
-		adcube.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+		this.adcube.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
             if (newValue)
-            	name.setText(adcube.getId().toUpperCase());
+            	this.name.setText(this.adcube.getId().toUpperCase());
         });
-		antivirus.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+		this.antivirus.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
             if (newValue)
-            	name.setText(antivirus.getId().toUpperCase());
+            	this.name.setText(this.antivirus.getId().toUpperCase());
         });
-		authenticationpoint.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+		this.authenticationpoint.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
             if (newValue)
-            	name.setText(authenticationpoint.getId().toUpperCase());
+            	this.name.setText(this.authenticationpoint.getId().toUpperCase());
         });
-		firewall.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+		this.firewall.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
             if (newValue)
-            	name.setText(firewall.getId().toUpperCase());
+            	this.name.setText(this.firewall.getId().toUpperCase());
         });
-		sudvpn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+		this.sudvpn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
             if (newValue)
-            	name.setText(sudvpn.getId().toUpperCase());
+            	this.name.setText(this.sudvpn.getId().toUpperCase());
         });
 	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		this.loadPlayPauseImage();
+		this.gm = new GameMaster();
+		this.seconde = 0;
+        this.minute = 0;
+		
+		new GameAreaView(this.gm.getGameArea(), this.gameBoard);
+		this.ev = new EnemyView(this.enemiesGrid);
+		this.tv = new TowerView(this.towersGrid, this.adcube, this.antivirus, this.authenticationpoint, this.firewall, this.sudvpn);
+		this.bv = new BulletView(this.bulletsGrid);
+		
+		this.onMouseOverLivingObject();
+		this.generateGameObjectsListener();
+		this.createBindAndListeners();
+		this.initPlayAndPause();
+		this.mouseDraggedOnShop();
+		this.initAnimation();
+		this.gameLoop.play();
+		this.playActivated = true;
+	}
 	
+	// Methode qui lance une nouvelle vague lorsque le bouton est presser
+	@FXML
+	private void launchWave(ActionEvent event) {
+    	// Incrementation du numero de la vague (lancement d'une vague) lorsqu'aucune vague est en cours
+		if(!this.gm.isWaveRunning())
+    		this.gm.incrementWaveInProgressNumber();
+    }
 }

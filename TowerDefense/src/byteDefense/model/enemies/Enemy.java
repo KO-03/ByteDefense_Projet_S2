@@ -17,7 +17,7 @@ import byteDefense.utilities.BFS;
 public abstract class Enemy extends LivingObject {
 
 	private static BFS bfs;
-	private int currentTile;
+	private int currentTile; // la tuile ou l'ennemi se trouve
 	
 	public Enemy(BFS bfsMap, GameEnvironment gameEnv) {
 		super(GameArea.tilePosX(GameArea.spawnPoint), GameArea.tilePosY(GameArea.spawnPoint), 50, gameEnv);
@@ -25,17 +25,28 @@ public abstract class Enemy extends LivingObject {
 		this.currentTile = GameArea.tileIndex(super.getX(), super.getY());
 	}
 	
+	public Enemy(int x, int y, BFS bfsMap, GameEnvironment gameEnv) {
+		super(x, y, 50, gameEnv);
+		bfs = bfsMap;
+		this.currentTile = GameArea.tileIndex(x / GameArea.TILE_SIZE, y / GameArea.TILE_SIZE);
+	}
+	
 	public abstract int getLoot();
 	
+	// Methode qui fait se deplacer un ennemi en fonction du BFS
 	public void moveEnnemy() {
-		// fixage de la position de l'ennemi en fonction du chemin du BFS
-		this.setX(GameArea.tilePosX(this.currentTile) * GameArea.TILE_SIZE);
-		this.setY(GameArea.tilePosY(this.currentTile) * GameArea.TILE_SIZE);
+		int tileSize = GameArea.TILE_SIZE; // taille d'une tuile dans le plateau de jeu
+		
+		// Fixage de la position de l'ennemi en fonction du chemin du BFS
+		this.setX(GameArea.tilePosX(this.currentTile) * tileSize);
+		this.setY(GameArea.tilePosY(this.currentTile) * tileSize);
 
+		// Refixage de la tuile courante
 		if(!this.isArrived()) 
 			this.currentTile = bfs.cameFrom[this.currentTile];
 	}
 	
+	// Fonction qui verifie si un ennemi est arrive au bout du chemin du BFS
 	public boolean isArrived() {
 		return this.currentTile == BFS.STOP_TILE; // -1 correspond au point d'arrivée
 	}

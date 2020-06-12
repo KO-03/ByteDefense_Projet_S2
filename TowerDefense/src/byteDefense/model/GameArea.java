@@ -32,16 +32,16 @@ public class GameArea {
 	
 	public GameArea() {
 		levelsTilesList = GameAreaReader.generateLevelsTilesList("./resources/tiles.txt");
-		this.tilesList = fixLevelTilesList(1);
-		gameAreaTilesSize = gameAreaTilesSize();
-	}
-	
-	private ArrayList<Integer> fixLevelTilesList(int level) {
-		return levelsTilesList.get(level - 1);
+		this.tilesList = this.fixLevelTilesList(1);
+		gameAreaTilesSize = this.gameAreaTilesSize();
 	}
 	
 	public ArrayList<Integer> getTilesList(){
 		return this.tilesList;
+	}
+	
+	private ArrayList<Integer> fixLevelTilesList(int level) {
+		return levelsTilesList.get(level - 1);
 	}
 	
 	private int gameAreaTilesSize() {

@@ -27,7 +27,7 @@ public class GameObject {
 	public int getId() {
 		return this.id;
 	}
-
+	
 	public IntegerProperty getXProperty() {
 		return this.xProperty;
 	}
@@ -36,16 +36,16 @@ public class GameObject {
 		return this.xProperty.getValue();
 	}
 
-	public void setX(int newX) {
-		this.xProperty.setValue(newX);
-	}
-
 	public IntegerProperty getYProperty() {
 		return this.yProperty;
 	}
-
+	
 	public int getY() {
 		return this.yProperty.getValue();
+	}
+	
+	public void setX(int newX) {
+		this.xProperty.setValue(newX);
 	}
 
 	public void setY(int newY) {

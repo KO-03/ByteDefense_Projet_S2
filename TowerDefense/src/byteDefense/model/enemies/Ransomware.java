@@ -25,8 +25,8 @@ public class Ransomware extends OffensiveEnemy {
 	private static final int ATTACK_RANGE = 3; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 40;
 
-	public Ransomware(BFS bfsMap, GameEnvironment gameEnv) {
-		super(bfsMap, gameEnv);
+	public Ransomware(BFS bfs, GameEnvironment gameEnv) {
+		super(bfs, gameEnv);
 	}
 
 	public int getAttack() {
@@ -48,6 +48,10 @@ public class Ransomware extends OffensiveEnemy {
 	public int getLoot() {
 		return LOOT;
 	}
+
+	public void attack() {
+		super.attackTower();
+	}
 	
 	public void frozeTower(Tower tower) {
 		tower.changeFrozen();
@@ -56,7 +60,7 @@ public class Ransomware extends OffensiveEnemy {
 	public void useSpecialEffect(LivingObject livingObject) {
 		SpecialEffect specialEffect = super.getSpecialEffect();
 		
-		if (!specialEffect.getActivated() && !((Tower)livingObject).getFrozen()) {
+		if (!specialEffect.getActivated() && ((Tower)livingObject).getFrozen()) {
 			this.frozeTower(((Tower)livingObject));
 			specialEffect.changeActivated();
 		}

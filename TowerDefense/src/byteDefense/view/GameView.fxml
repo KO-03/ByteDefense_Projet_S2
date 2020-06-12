@@ -412,9 +412,9 @@
                </image>
             </ImageView>
             <TilePane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="672.0" tileAlignment="CENTER_RIGHT" />
-            <Pane fx:id="gridEnemies" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
-            <Pane fx:id="gridTowers" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
-            <Pane fx:id="gridBullets" prefHeight="672.0" prefWidth="672.0" scaleZ="3.0" />
+            <Pane fx:id="enemiesGrid" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
+            <Pane fx:id="towersGrid" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
+            <Pane fx:id="bulletsGrid" prefHeight="672.0" prefWidth="672.0" scaleZ="3.0" />
          </children>
       </Pane>
    </center>

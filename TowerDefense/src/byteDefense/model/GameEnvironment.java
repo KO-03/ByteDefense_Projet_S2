@@ -12,19 +12,20 @@ package byteDefense.model;
 
 import byteDefense.model.enemies.Enemy;
 import byteDefense.model.enemies.OffensiveEnemy;
+import byteDefense.model.enemies.TrojanHorse;
 import byteDefense.model.towers.Tower;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class GameEnvironment {
 	
-	private int infectingProgress;
-	private ObservableList<Enemy> enemies;
-	private ObservableList<Tower> towers;
-	private ObservableList<Bullet> bullets;
+	private int infectingProgress; // progression de l'infection
+	private ObservableList<Enemy> enemies; // liste des ennemis
+	private ObservableList<Tower> towers; // liste des tourelles
+	private ObservableList<Bullet> bullets; // liste des tirs des ennemis et tourelles
 
-	public GameEnvironment() {
-		this.infectingProgress = 0;
+	public GameEnvironment(int laptopHp) {
+		this.infectingProgress = laptopHp;
 		this.enemies = FXCollections.observableArrayList();
 		this.towers = FXCollections.observableArrayList();
 		this.bullets = FXCollections.observableArrayList();
@@ -38,6 +39,31 @@ public class GameEnvironment {
 		return this.enemies;
 	}
 	
+	public ObservableList<Tower> getTowers() {
+		return this.towers;
+	}
+	
+	public ObservableList<Bullet> getBullets() {
+		return this.bullets;
+	}
+	
+	private void setInfectingProgress(int remainingHp) {
+		this.infectingProgress = remainingHp;
+	}
+	
+	// Methode qui met a jour la progression de l'infection
+	private void updateInfectingProgress(Enemy enemy) {
+		int newInfectingProgress;
+		
+		// L'ennemi qui est passe est le Boss final qui infecte l'ordinateur en une fois
+		if (enemy instanceof TrojanHorse)
+			newInfectingProgress = 0;
+		else
+			newInfectingProgress = this.infectingProgress - enemy.getAttack();
+			
+		this.setInfectingProgress(newInfectingProgress);
+	}
+	
 	public void addEnemy(Enemy enemy) {
 		this.enemies.add(enemy);
 	}
@@ -46,66 +72,8 @@ public class GameEnvironment {
 		return this.enemies.size() == 0;
 	}
 	
-	public ObservableList<Tower> getTowers() {
-		return this.towers;
-	}
-	
 	public void addTower(Tower tower) {
 		this.towers.add(tower);
-	}
-	
-	public void removeLivingObject() {
-		Enemy enemy;
-		Tower tower;
-		
-		for (int i = this.enemies.size() - 1; i >= 0; i--) {
-			enemy = this.enemies.get(i);
-
-			// Si l'objet de jeu est mort, ou qu'il est arrive au bout du chemin, il est supprime
-			if(!enemy.isAlive() || enemy.isArrived())
-				this.enemies.remove(enemy);
-		}
-		
-		for (int i = this.towers.size() - 1; i >= 0; i--) {
-			tower = this.towers.get(i);
-
-			// Si l'objet de jeu est mort, il est supprime
-			if(!tower.isAlive())
-				this.towers.remove(tower);
-		}
-	}
-	
-	public void livingObjectAttack() {
-		Enemy enemy;
-		Tower tower;
-		
-		for (int i = this.enemies.size() - 1; i >= 0; i--) {
-			enemy = this.enemies.get(i);
-			
-			enemy.updateInflictedEffects();
-			if (enemy instanceof OffensiveEnemy)
-				((OffensiveEnemy)enemy).attackTower();
-		}
-		
-		for (int i = this.towers.size() - 1; i >= 0; i--) {
-			tower = towers.get(i);
-			
-			tower.updateInflictedEffects();
-			if (!tower.getFrozen())
-				tower.attackEnemy();
-		}
-	}
-	
-	public void enemiesMove() {
-		for (Enemy enemy : this.enemies) {
-			enemy.moveEnnemy();
-			if (enemy.isArrived())
-				this.infectingProgress += enemy.getAttack(); 
-		}
-	}
-	
-	public ObservableList<Bullet> getBullets() {
-		return this.bullets;
 	}
 	
 	public void addBullet(Bullet bullet) {
@@ -116,13 +84,14 @@ public class GameEnvironment {
 		this.bullets.remove(bullet);
 	}
 	
-	public void bulletsAction() {
+	// Methode qui regroupe les actions des tirs (attaque et suppression)
+	private void bulletsAction() {
 		Bullet bullet;
 		
 		for (int i = this.bullets.size() - 1; i >= 0; i--) {
 			bullet = this.bullets.get(i);
 			
-			// Retirer les points de vie a la cible si elle est toujours vivante
+			// Retirer les points de vie de la cible si elle est toujours vivante
 			if (bullet.targetIsAlive())
 				bullet.attackTarget();
 			
@@ -130,16 +99,69 @@ public class GameEnvironment {
 		}
 	}
 	
-	// Methode qui regroupe les actions des tirs et d'attaques des LivingObjects
+	// Methode qui gere la suppression des tourelles et ennemis dans l'environnement 
+	private void removeLivingObject() {
+		Enemy enemy;
+		Tower tower;
+		
+		for (int i = this.enemies.size() - 1; i >= 0; i--) {
+			enemy = this.enemies.get(i);
+
+			// Si l'ennemi est mort, ou qu'il est arrive au bout du chemin, il est supprime
+			if(!enemy.isAlive() || enemy.isArrived())
+				this.enemies.remove(enemy);
+		}
+		
+		for (int i = this.towers.size() - 1; i >= 0; i--) {
+			tower = this.towers.get(i);
+
+			// Si la tourelle est morte, elle est supprimee
+			if(!tower.isAlive())
+				this.towers.remove(tower);
+		}
+	}
+	
+	// Methode qui gere les attaques des tourelles et des ennemis
+	private void livingObjectAttack() {
+		Enemy enemy;
+		Tower tower;
+		
+		for (int i = this.enemies.size() - 1; i >= 0; i--) {
+			enemy = this.enemies.get(i);
+			
+			enemy.updateInflictedEffects(); // Mise a jour des effets infliges a l'ennemi
+			if (enemy instanceof OffensiveEnemy)
+				((OffensiveEnemy)enemy).attackTower();
+		}
+		
+		for (int i = this.towers.size() - 1; i >= 0; i--) {
+			tower = towers.get(i);
+			
+			tower.updateInflictedEffects(); // Mise a jour des effets infliges a la tourelle
+			if (!tower.getFrozen()) // la tourelle peut attaquer lorsqu'elle n'est pas gelee
+				tower.attackEnemy();
+		}
+	}
+	
+	// Methode qui regroupe les actions sur les LivingObjects et les tirs
 	public void gameEnvironmentAction() {
 		this.bulletsAction();
     	this.removeLivingObject();
 		this.livingObjectAttack();
 	}
 	
-	// Fonction qui verifie si la tuile correspond des coordonnes xy donnees est occupee par une tourelle ou pas 
+	// Methode qui gere le mouvement des ennemis et ce qu'il entraine (progression de l'infection)
+	public void enemiesMove() {
+		for (Enemy enemy : this.enemies) {
+			enemy.moveEnnemy();
+			if (enemy.isArrived())
+				this.updateInfectingProgress(enemy);
+		}
+	}
+	
+	// Fonction qui verifie si la tuile a des coordonnes xy donnees est occupee par une tourelle ou pas 
 	public boolean checkTowerPosition(int x, int y) {
-		int tileSize = GameArea.TILE_SIZE;
+		int tileSize = GameArea.TILE_SIZE; // taille d'une tuile dans le plateau de jeu
 		
 		for (Tower tower: this.towers)
 			if (tower.getX() / tileSize * tileSize == x && tower.getY() / tileSize * tileSize == y)

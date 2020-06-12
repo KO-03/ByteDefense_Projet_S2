@@ -24,16 +24,19 @@ public class ShootUtilities {
 	// Fonction qui retourne ou non la cible du tireur en fonction de leur position et portee d'attaque
 	public static LivingObject checkTargetPosition(LivingObject target, LivingObject shooter) {
 		int tileSize = GameArea.TILE_SIZE; // taille d'une tuile du plateau de jeu
-	
-		if ((shooter.getY() - shooter.getAttackRange() * tileSize <= target.getY() 
-			&& target.getY() <= shooter.getY() + shooter.getAttackRange() * tileSize) 
-			&& (shooter.getX() - shooter.getAttackRange() * tileSize <= target.getX() 
-			&& target.getX() <= shooter.getX() + shooter.getAttackRange() * tileSize)) {
+		int attackRange = shooter.getAttackRange(); // portee d'attaque du tireur
+		
+		// La cible est a la portee de l'attaque du tireur
+		if ((shooter.getY() - attackRange * tileSize <= target.getY() 
+			&& target.getY() <= shooter.getY() + attackRange * tileSize) 
+			&& (shooter.getX() - attackRange * tileSize <= target.getX() 
+			&& target.getX() <= shooter.getX() + attackRange * tileSize)) {
 			return target;
 		}
 		return null;
 	}
 	
+	// Fonction qui retourne une cible autour du tireur 
 	public static LivingObject findTarget(ObservableList<? extends LivingObject> livingObjectList, LivingObject shooter) {
 		LivingObject target = null;
 		int i = 0;

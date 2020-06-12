@@ -49,6 +49,7 @@ public class TowerView extends LivingObjectView {
 		this.initInventory(super.gameObjectGrid);
 	}
 
+	// Methode qui recupere et charge les textures des tourelles
 	public void imageLoader() {
 		try {	
 			adcubeImg = new Image(new File("./resources/towerTextures/adcube.png").toURI().toURL().toString()); 
@@ -60,7 +61,8 @@ public class TowerView extends LivingObjectView {
 			e.printStackTrace();
 		}
 	}
-
+	
+	// Fonction qui retourne la texture correspondante a la tourelle donne en parametre
 	public Image imageGetter(LivingObject livingObject) {
 		Image img;
 

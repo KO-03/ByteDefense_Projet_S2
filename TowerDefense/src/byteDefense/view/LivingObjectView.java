@@ -22,6 +22,7 @@ public abstract class LivingObjectView extends GameObjectView {
 
 	public abstract Image imageGetter(LivingObject livingObject);
 
+	// Methode qui ajoute la tourelle ou l'ennemi a la vue en fixant ces donnees de vues et ces actions d'evenements
 	public void addLivingObjectView(LivingObject livingObject) {
 		Image img = imageGetter(livingObject);
 

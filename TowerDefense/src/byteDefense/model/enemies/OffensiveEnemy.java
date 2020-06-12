@@ -17,7 +17,12 @@ public abstract class OffensiveEnemy extends Enemy {
 		super(bfsMap, gameEnv);
 	}
 	
-	public void attackTower() {
+	public OffensiveEnemy(int x, int y, BFS bfsMap, GameEnvironment gameEnv) {
+		super(x, y, bfsMap, gameEnv);
+	}
+	
+	// Methode qui fait attaquer un tourelle a la portee de la ennemi
+	public void attackTower() { 
 		GameEnvironment gameEnv = super.getGameEnvironment();
 		Tower target = (Tower)ShootUtilities.findTarget(gameEnv.getTowers(), this);
 		

@@ -20,10 +20,6 @@ public class Bullet extends GameObject {
 		this.shooterObject = shooterObject;
 	}
 	
-	public boolean targetIsAlive() {
-		return this.targetObject.isAlive();
-	}
-	
 	public LivingObject getShooterObject() {
 		return this.shooterObject;
 	}
@@ -35,9 +31,14 @@ public class Bullet extends GameObject {
 	public int getTargetY() {
 		return this.targetObject.getY();
 	}
+	
+	// Fonction qui verifie si la cible est en vie ou non
+	public boolean targetIsAlive() {
+		return this.targetObject.isAlive();
+	}
 
 	public void attackTarget() {
-		this.shooterObject.useSpecialEffect(targetObject);
+		this.shooterObject.useSpecialEffect(this.targetObject);
 		this.targetObject.receiveDamage(this.shooterObject);
 	}
 }

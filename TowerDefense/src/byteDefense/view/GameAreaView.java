@@ -53,6 +53,7 @@ public class GameAreaView {
 		this.generateMapView();
 	}
 
+	// Methode qui recupere et charge les textures du plateau de jeu
 	private void imageLoader() {
 		try {
 			CORNER_SRC_IMG  = new Image(new File("./resources/tilemapTextures/corner.png").toURI().toURL().toString()); 
@@ -69,10 +70,11 @@ public class GameAreaView {
 		}
 	}
 
-	private Image tileImageGet(int mapCase) {
+	// Fonction qui retourne la texture correspondante a tuile donne en parametre
+	private Image tileImageGetter(int mapTile) {
 		Image tileImg = null;
 
-		switch (mapCase) {
+		switch (mapTile) {
 		case CORNER:
 			tileImg = CORNER_SRC_IMG;
 			break;
@@ -104,13 +106,14 @@ public class GameAreaView {
 		return tileImg;
 	}
 
+	// Methode qui construit la vue du plateau de jeu tuile par tuile en initialisant leurs donnees
 	private void generateMapView() {
 		Image tileImg;
 		int tilesSize = GameArea.gameAreaTilesSize; // taille du plateau de jeu en nombre de tuile
 
 		for (int y = 0; y < tilesSize; y++) {
 			for (int x = 0; x < tilesSize; x++) {
-				tileImg = this.tileImageGet(this.gameArea.gameAreaCase(x, y));
+				tileImg = this.tileImageGetter(this.gameArea.gameAreaCase(x, y));
 
 				if(tileImg != null) {
 					ImageView tile = new ImageView();
