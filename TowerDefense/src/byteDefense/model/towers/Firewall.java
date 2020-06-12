@@ -1,12 +1,13 @@
 /*
  * Firewall.java
  * Cette classe represente un objet Firewall, ses responsabilites sont de :
- * - stocker et recuperer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer son attaque de base
+ * - stocker et recuperer sa defense de base
+ * - stocker et recuperer sa portee d'attaque de base
  * - stocker et recuperer le montant de son cout
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - attaquer un ennemi
+ * - enflammer un ennemi
+ * - utiliser son effet special (enflamment d'un ennemi)
  */
 
 package byteDefense.model.towers;

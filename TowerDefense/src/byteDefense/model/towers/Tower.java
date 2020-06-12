@@ -2,6 +2,8 @@
  * Tower.java
  * Cette classe represente un objet Tower (une tourelle), ses responsabilites sont de :
  * - attaquer un ennemi
+ * - stocker, recuperer et changer l'etat de gele de la tourelle
+ * - stocker, recuperer et fixer les coordonnees xy de la tourelle
  */
 
 package byteDefense.model.towers;
@@ -63,6 +65,4 @@ public abstract class Tower extends LivingObject {
 	}
 	
 	public abstract int getCost();
-	
-	public abstract int getAttackRange();
 }

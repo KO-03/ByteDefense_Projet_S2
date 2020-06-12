@@ -1,3 +1,8 @@
+/*
+ * IncreasingAttackEffect
+ * Cette classe represente l'effet d'augmentation de l'attaque d'un SudVPN
+ */
+
 package byteDefense.model.effects;
 
 import byteDefense.model.LivingObject;

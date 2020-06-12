@@ -1,12 +1,14 @@
 /*
  * SudVPN.java
  * Cette classe represente un objet SudVPN, ses responsabilites sont de :
+ * - stocker son attaque de base
  * - stocker et recuperer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer sa defense de base
+ * - stocker et recuperer sa portee d'attaque de base
  * - stocker et recuperer le montant de son cout
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - attaquer un ennemi
+ * - augmenter ses degats
+ * - utiliser son effet special (augmentation de ses degats)
  */
 
 package byteDefense.model.towers;

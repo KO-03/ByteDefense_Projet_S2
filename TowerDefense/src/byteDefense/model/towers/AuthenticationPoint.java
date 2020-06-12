@@ -1,13 +1,14 @@
 /*
  * AuthenticationPoint.java
  * Cette classe represente un objet AuthenticationPoint, ses responsabilites sont de :
+ * - stocker son attaque de base
  * - stocker et recuperer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer sa defense de base
+ * - stocker et recuperer sa portee d'attaque de base
  * - stocker et recuperer le montant de son cout
- * - stocker le taux reduction de vitesse de ses tirs 
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - attaquer un ennemi
+ * - faire un lien avec une cible en ajoutant ses stats aux siennes
+ * - utiliser son effet special (creer un lien)
  */
 
 package byteDefense.model.towers;

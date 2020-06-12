@@ -3,6 +3,7 @@
  * Cette classe gere la partie visuelle d'un objet de jeu Enemy (un ennemi), ses responsabilites sont de :
  * - charger et stocker les textures des ennemis
  * - faire la correspondance entre les types de d'ennemis et leurs textures
+ * - ajouter un ennemi dans la vue en fixant ces donnees de vues et ces actions d'evenements
  */
 
 package byteDefense.view;

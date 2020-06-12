@@ -1,8 +1,10 @@
 /*
  * Enemy.java
  * Cette classe represente un objet Enemy (un ennemi), ses responsabilites sont de :
- * - stocker et recuperer l'indice de la tile courante de l'ennemi dans le BFS 
+ * - stocker et recuperer la tuile courante de l'ennemi dans le BFS 
  * - stocker le BFS dans lequel l'ennemi se deplace
+ * - stocker, fixer et recuperer les coordonnees xy de l'ennemi
+ * - stocker, recuperer et changer l'etat d'enflamment de l'ennemi
  * - faire se deplacer un ennemi selon le BFS et mettre a jour l'indice de la tile courante
  * - verifier si un ennemi est arrive au bout du chemin
  */

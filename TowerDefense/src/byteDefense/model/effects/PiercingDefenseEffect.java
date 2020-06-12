@@ -1,3 +1,8 @@
+/*
+ * PiercingDefenseEffect.java
+ * Cette classe represente l'effet de perce de defense d'une tourelle par un Rootkit
+ */
+
 package byteDefense.model.effects;
 
 import byteDefense.model.LivingObject;

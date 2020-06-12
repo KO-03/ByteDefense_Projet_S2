@@ -1,14 +1,11 @@
 /*
  * Adware.java
  * Cette classe represente un objet Adware, ses responsabilites sont de :
- * - stocker et recuperer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer son attaque de base
+ * - stocker et recuperer sa defense de base
+ * - stocker et recuperer sa portee d'attaque de base
  * - stocker et recuperer le montant de son butin
- * - stocker son taux de reproduction
- * - gerer son tour de naissance dans une vague
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - attaquer une tourelle
  */
 
 package byteDefense.model.enemies;
@@ -19,7 +16,8 @@ import byteDefense.utilities.BFS;
 
 public class Adware extends Enemy {
 
-	private static final int ATTACK = 10;
+	private static final int INITIAL_ATTACK = 10;
+	public static final int INITIAL_ATTACK_RANGE = 0;
 	private static final int INITIAL_DEFENSE = 5;
 	private static final int LOOT = 1;
 	
@@ -28,16 +26,15 @@ public class Adware extends Enemy {
 	}
 	
 	public int getAttack() {
-		return ATTACK;
+		return INITIAL_ATTACK;
 	}
 
+	public int getAttackRange() {
+		return INITIAL_ATTACK_RANGE;
+	}
+	
 	public int getLoot() {
 		return LOOT;
-	}
-
-	public void move() {
-		if (!super.isArrived())
-			super.moveEnnemy();
 	}
 	
 	public void useSpecialEffect(LivingObject livingObject) {

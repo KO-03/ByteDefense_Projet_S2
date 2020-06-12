@@ -1,12 +1,13 @@
 /*
  * Bot.java
  * Cette classe represente un objet Bot, ses responsabilites sont de :
- * - stocker et recuperer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer son attaque de base
+ * - stocker et recuperer sa defense de base
+ * - stocker sa portee d'attaque de base
+ * - stocker et recuperer sa portee d'attaque 
  * - stocker et recuperer le montant de son butin
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - augmenter sa portee d'attaque
+ * - utiliser son effet special (augmenter sa portee d'attaque)
  */
 
 package byteDefense.model.enemies;
@@ -19,7 +20,7 @@ import byteDefense.utilities.BFS;
 public class Bot extends OffensiveEnemy {
 
 	private static final float INCREASE_ATTACK_RANGE_RATE = 2F; // taux d'augmentation de la vitesse de deplacement en pourcentage
-	private static final int ATTACK = 15;
+	private static final int INITIAL_ATTACK = 15;
 	private static final int INITIAL_DEFENSE = 15;
 	public static final int INITIAL_ATTACK_RANGE = 2; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 6;
@@ -32,7 +33,7 @@ public class Bot extends OffensiveEnemy {
 	}
 
 	public int getAttack() {
-		return ATTACK;
+		return INITIAL_ATTACK;
 	}
 
 	public int getAttackRange() {

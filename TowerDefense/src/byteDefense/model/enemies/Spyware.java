@@ -1,12 +1,15 @@
 /*
  * Spyware.java
  * Cette classe represente un objet Spyware, ses responsabilites sont de :
- * - stocker et recuperer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
+ * - stocker son attaque de base
+ * - stocker sa portee d'attaque de base
+ * - stocker et recuperer sa defense de base
+ * - stocker et recuperer son attaque de base
+ * - stocker et recuperer sa portee d'attaque de base
  * - stocker et recuperer le montant de son butin
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - attaquer une tourelle
+ * - voler les caracteristiques d'une tourelle si elles sont superieurs
+ * - utiliser son effet special (vole de caracteristiques)
  */
 
 package byteDefense.model.enemies;

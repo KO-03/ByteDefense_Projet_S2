@@ -1,12 +1,13 @@
 /*
  * Ransomware.java
  * Cette classe represente un objet Ransomware, ses responsabilites sont de :
- * - stocker et recuperer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
+ * - stocker et recuperer son attaque de base
+ * - stocker et recuperer sa defense de base
+ * - stocker et recuperer sa portee d'attaque de base
  * - stocker et recuperer le montant de son butin
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - - attaquer une tourelle
+ * - geler une tourelle
+ * - utiliser son effet special (geler une tourelle)
  */
 
 package byteDefense.model.enemies;
@@ -19,7 +20,7 @@ import byteDefense.utilities.BFS;
 
 public class Ransomware extends OffensiveEnemy {
 
-	private static final int ATTACK = 10;
+	private static final int INITIAL_ATTACK = 10;
 	private static final int INITIAL_DEFENSE = 30;
 	private static final int ATTACK_RANGE = 3; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 8;
@@ -29,7 +30,7 @@ public class Ransomware extends OffensiveEnemy {
 	}
 
 	public int getAttack() {
-		return ATTACK;
+		return INITIAL_ATTACK;
 	}
 
 	public int getAttackRange() {

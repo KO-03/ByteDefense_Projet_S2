@@ -1,3 +1,8 @@
+/*
+ * FrozenEffect.java
+ * Cette classe represente l'effet de gele d'une tourelle engendre par un Ransomware
+ */
+
 package byteDefense.model.effects;
 
 import byteDefense.model.LivingObject;

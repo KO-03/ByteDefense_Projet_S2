@@ -5,6 +5,7 @@
  * - faire la correspondance entre les types de tourelles et leurs textures
  * - initialiser les positions des ImagesView des tourelles dans leur menu d'achat et les ajouter à la grille 
  *   où elles sont affichees
+ * - ajouter la tourelle a la vue en fixant ces donnees de vues et ces actions d'evenements
  */
 
 package byteDefense.view;

@@ -1,3 +1,8 @@
+/*
+ * SniperEffect.java
+ * Cette classe represent l'effet d'augmentation de la portee d'attaque d'un Bot
+ */
+
 package byteDefense.model.effects;
 
 import byteDefense.model.LivingObject;

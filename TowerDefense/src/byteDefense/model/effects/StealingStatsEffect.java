@@ -1,3 +1,8 @@
+/*
+ * StealingStatsEffect.java
+ * Cette classe represente l'effet de vole de caracteristiques d'un Spyware a une tourelle
+ */
+
 package byteDefense.model.effects;
 
 import byteDefense.model.LivingObject;

@@ -26,6 +26,4 @@ public abstract class OffensiveEnemy extends Enemy {
 		if (target != null)
 			ShootUtilities.shoot(this, target, gameEnv);
 	}
-	
-	public abstract int getAttackRange();
 }

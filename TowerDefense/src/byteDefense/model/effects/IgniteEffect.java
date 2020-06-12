@@ -1,3 +1,8 @@
+/*
+ * IgniteEffect.java
+ * Cette classe represente l'effet d'enflamment d'un ennemi par un Firewall
+ */
+
 package byteDefense.model.effects;
 
 import byteDefense.model.LivingObject;

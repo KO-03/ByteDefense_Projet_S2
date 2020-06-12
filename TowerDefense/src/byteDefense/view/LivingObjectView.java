@@ -1,7 +1,6 @@
 /*
  * LivingObjectView.java
- * Cette classe gere la partie visuelle d'un LivingObject (Enemy ou Tower), sa responsabilite est de :
- * - ajouter un LivingObject a la vue (grille)
+ * Cette classe gere la partie visuelle d'un LivingObject (Enemy ou Tower)
  */
 
 package byteDefense.view;

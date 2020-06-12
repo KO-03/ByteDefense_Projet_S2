@@ -1,13 +1,15 @@
 /*
  * Rootkit.java
  * Cette classe represente un objet Rookit, ses responsabilites sont de :
- * - stocker, recuperer et incrementer son attaque
- * - stocker et recuperer sa defense
- * - stocker et recuperer sa vitesse d'attaque
- * - stocker et recuperer sa portee d'attaque
- * - stocker et recuperer le montant de son butin
+ * - stocker son attaque de base
+ * - stocker et recuperer sa portee d'attaque de base
+ * - stocker et recuperer sa defense de base
+ * - stocker et recuperer son attaque
+ * - stocker et recuperer le montant de son butin 
  * - stocker taux d'augmentation d'attaque par tour
- * - effectuer toutes les actions d'aggissement durant un tour
+ * - attaquer une tourelle
+ * - percer la defense d'un tourelle
+ * - utiliser son effet special (perce de defense)
  */
 
 package byteDefense.model.enemies;
@@ -22,7 +24,7 @@ public class Rootkit extends OffensiveEnemy {
 	private static final float PIERCING_DEFENSE_RATE = 1.10F; 
 	private static final int INITIAL_ATTACK = 15;
 	private static final int INITIAL_DEFENSE = 5;
-	private static final int ATTACK_RANGE = 2; // portee d'attaque en nombre de tuile du plateau de jeu
+	private static final int INITIAL_ATTACK_RANGE = 2; // portee d'attaque en nombre de tuile du plateau de jeu
 	private static final int LOOT = 4;
 	
 	private int attack;
@@ -37,7 +39,7 @@ public class Rootkit extends OffensiveEnemy {
 	}
 
 	public int getAttackRange() {
-		return ATTACK_RANGE;
+		return INITIAL_ATTACK_RANGE;
 	}
 
 	public int getLoot() {

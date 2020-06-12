@@ -1,3 +1,8 @@
+/*
+ * AuthentificationLinkEffect.java
+ * Cette classe represente l'effet de lien d'authentification cree par un AuthenticationPoint avec un ennemi
+ */
+
 package byteDefense.model.effects;
 
 import byteDefense.model.LivingObject;
