@@ -383,15 +383,25 @@
                               </GridPane>
                               <VBox>
                                  <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-bright" text="Point de vie de l'ordinateur">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Text>
+                                    <ProgressBar fx:id="hpPC" prefWidth="200.0" progress="1.0">
+                                       <VBox.margin>
+                                          <Insets bottom="3.0" right="3.0" top="3.0" />
+                                       </VBox.margin>
+                                    </ProgressBar>
+                                    <Label fx:id="message" style="-fx-font-size: 20; -fx-text-fill: gray;" styleClass="bottomLabel" text="Lance une vague" />
                                     <Label fx:id="timer" style="-fx-font-size: 40;" styleClass="bottomLabel" text="00:00">
                                        <font>
                                           <Font size="25.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="message" style="-fx-font-size: 20; -fx-text-fill: gray;" styleClass="bottomLabel" text="Lance une vague" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="50.0" top="25.0" />
+                                    <Insets left="50.0" top="5.0" />
                                  </HBox.margin>
                               </VBox>
                            </children>
@@ -412,9 +422,9 @@
                </image>
             </ImageView>
             <TilePane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="672.0" tileAlignment="CENTER_RIGHT" />
-            <Pane fx:id="enemiesGrid" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
-            <Pane fx:id="towersGrid" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
-            <Pane fx:id="bulletsGrid" prefHeight="672.0" prefWidth="672.0" scaleZ="3.0" />
+            <Pane fx:id="enemiesGrid" prefHeight="672.0" prefWidth="672.0" />
+            <Pane fx:id="towersGrid" prefHeight="672.0" prefWidth="672.0" />
+            <Pane fx:id="bulletsGrid" prefHeight="672.0" prefWidth="672.0" scaleZ="2.0" />
          </children>
       </Pane>
    </center>

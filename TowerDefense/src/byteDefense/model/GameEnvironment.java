@@ -24,8 +24,8 @@ public class GameEnvironment {
 	private ObservableList<Tower> towers; // liste des tourelles
 	private ObservableList<Bullet> bullets; // liste des tirs des ennemis et tourelles
 
-	public GameEnvironment(int laptopHp) {
-		this.infectingProgress = laptopHp;
+	public GameEnvironment() {
+		this.infectingProgress = 0;
 		this.enemies = FXCollections.observableArrayList();
 		this.towers = FXCollections.observableArrayList();
 		this.bullets = FXCollections.observableArrayList();
@@ -49,19 +49,6 @@ public class GameEnvironment {
 	
 	private void setInfectingProgress(int remainingHp) {
 		this.infectingProgress = remainingHp;
-	}
-	
-	// Methode qui met a jour la progression de l'infection
-	private void updateInfectingProgress(Enemy enemy) {
-		int newInfectingProgress;
-		
-		// L'ennemi qui est passe est le Boss final qui infecte l'ordinateur en une fois
-		if (enemy instanceof TrojanHorse)
-			newInfectingProgress = 0;
-		else
-			newInfectingProgress = this.infectingProgress - enemy.getAttack();
-			
-		this.setInfectingProgress(newInfectingProgress);
 	}
 	
 	public void addEnemy(Enemy enemy) {
@@ -155,7 +142,7 @@ public class GameEnvironment {
 		for (Enemy enemy : this.enemies) {
 			enemy.moveEnnemy();
 			if (enemy.isArrived())
-				this.updateInfectingProgress(enemy);
+				this.setInfectingProgress(this.infectingProgress+enemy.getAttack());
 		}
 	}
 	

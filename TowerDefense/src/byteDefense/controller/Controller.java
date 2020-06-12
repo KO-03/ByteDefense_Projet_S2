@@ -23,6 +23,7 @@ import byteDefense.model.Bullet;
 import byteDefense.model.GameArea;
 import byteDefense.model.GameEnvironment;
 import byteDefense.model.GameMaster;
+import byteDefense.model.LivingObject;
 import byteDefense.model.enemies.Enemy;
 import byteDefense.model.towers.AdCube;
 import byteDefense.model.towers.Antivirus;
@@ -44,6 +45,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -119,6 +121,8 @@ public class Controller implements Initializable {
     private Label timer; // Minuteur
     @FXML
     private Label message; // Message qui indique l'etat de la partie (vague en cours, en pause, entre-vague, fin de partie)
+    @FXML
+    private ProgressBar hpPC; //barre de vie de l'ordianteur
     
     private GameMaster gm;
     private boolean playActivated; // indique si le bouton play/pause a ete presse
@@ -346,8 +350,10 @@ public class Controller implements Initializable {
 				// Vague en cours
 				if (this.gm.isWaveRunning()) {
 					this.message.setText("Vague en cours...");
-					if (this.playActivated) // Bouton de controle sur play
+					if (this.playActivated) { // Bouton de controle sur play
 						this.gm.aTurn();
+						this.hpPC.setProgress(this.progressBarValue());
+					}
 				} else 
 					this.message.setText("Lance une vague");
 				
@@ -371,28 +377,54 @@ public class Controller implements Initializable {
 		}));
 		this.gameLoop.getKeyFrames().add(kf);
 	}
+	
+	private float progressBarValue() {
+		float progressBarValue = (1-(float)this.gm.getInfectionProgress()/GameMaster.getPcHp());
+		if(progressBarValue<=0)
+			return 0;
+		else
+			return progressBarValue;
+	}
+	
+	private void updateStats(LivingObject lo) {
+		this.attackStat.setText(Integer.toString(lo.getAttack()));
+	    this.defenseStat.setText(Integer.toString(lo.getDefense()));
+	    this.attackSpeedStat.setText(Integer.toString(lo.getAttackSpeed()));
+	    this.attackRangeStat.setText(Integer.toString(lo.getAttackRange()));		
+	}
 
 	// Methode qui recupere et affiche le nom des tourelles et des ennemis lorsqu'on les survole avec le curseur de la souris
 	private void onMouseOverLivingObject() {
-		this.adcube.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
-            if (newValue)
-            	this.name.setText(this.adcube.getId().toUpperCase());
+		GameEnvironment ge = new GameEnvironment();
+		adcube.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue) {
+            	name.setText(adcube.getId().toUpperCase());
+            	updateStats(new  AdCube(0, 0, ge));
+            }
         });
-		this.antivirus.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
-            if (newValue)
-            	this.name.setText(this.antivirus.getId().toUpperCase());
+		antivirus.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue) {
+            	name.setText(antivirus.getId().toUpperCase());
+            	updateStats(new  Antivirus(0, 0, ge));
+            }
         });
-		this.authenticationpoint.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
-            if (newValue)
-            	this.name.setText(this.authenticationpoint.getId().toUpperCase());
+		authenticationpoint.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue) {
+            	name.setText(authenticationpoint.getId().toUpperCase());
+            	updateStats(new  AuthenticationPoint(0, 0, ge));
+            }
         });
-		this.firewall.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
-            if (newValue)
-            	this.name.setText(this.firewall.getId().toUpperCase());
+		firewall.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue) {
+            	name.setText(firewall.getId().toUpperCase());
+            	updateStats(new  Firewall(0, 0, ge));
+            }
         });
-		this.sudvpn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
-            if (newValue)
-            	this.name.setText(this.sudvpn.getId().toUpperCase());
+		sudvpn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
+            if (newValue) {
+            	name.setText(sudvpn.getId().toUpperCase());
+            	updateStats(new  SudVPN(0, 0, ge));
+            }
         });
 	}
 
@@ -407,7 +439,7 @@ public class Controller implements Initializable {
 		this.ev = new EnemyView(this.enemiesGrid);
 		this.tv = new TowerView(this.towersGrid, this.adcube, this.antivirus, this.authenticationpoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.bulletsGrid);
-		
+		this.hpPC.setStyle("-fx-accent :  #1e838c;");
 		this.onMouseOverLivingObject();
 		this.generateGameObjectsListener();
 		this.createBindAndListeners();

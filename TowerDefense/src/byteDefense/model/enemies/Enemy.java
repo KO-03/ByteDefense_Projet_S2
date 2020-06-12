@@ -20,7 +20,7 @@ public abstract class Enemy extends LivingObject {
 	private int currentTile; // la tuile ou l'ennemi se trouve
 	
 	public Enemy(BFS bfsMap, GameEnvironment gameEnv) {
-		super(GameArea.tilePosX(GameArea.spawnPoint), GameArea.tilePosY(GameArea.spawnPoint), 50, gameEnv);
+		super(GameArea.tilePosX(GameArea.randomSpawnpoint()), GameArea.tilePosY(GameArea.randomSpawnpoint()), 50, gameEnv);
 		bfs = bfsMap;
 		this.currentTile = GameArea.tileIndex(super.getX(), super.getY());
 	}

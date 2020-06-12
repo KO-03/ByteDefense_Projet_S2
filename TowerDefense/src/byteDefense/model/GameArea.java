@@ -17,6 +17,7 @@
 package byteDefense.model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import byteDefense.utilities.GameAreaReader;
 
@@ -25,8 +26,8 @@ public class GameArea {
 	private static ArrayList<ArrayList<Integer>> levelsTilesList;
 	public static final int TILE_SIZE = 48;
 	public static int gameAreaTilesSize;
-	public static int arrivalPoint = 28;
-	public static int spawnPoint = 139;
+	public static ArrayList<Integer> arrivalPoints = new ArrayList<>();
+	public static ArrayList<Integer> spawnPoints = new ArrayList<>();
 	
 	private ArrayList<Integer> tilesList;
 	
@@ -34,6 +35,20 @@ public class GameArea {
 		levelsTilesList = GameAreaReader.generateLevelsTilesList("./resources/tiles.txt");
 		this.tilesList = this.fixLevelTilesList(1);
 		gameAreaTilesSize = this.gameAreaTilesSize();
+		this.referenceSpecialPoints();
+	}
+	
+	public void referenceSpecialPoints() {
+		for(int i = 0; i < this.tilesList.size(); i++ ) {
+			if(tilesList.get(i) == 9)
+				spawnPoints.add(i);			
+			else if(tilesList.get(i) == 8)
+				arrivalPoints.add(i);
+		}
+	}
+	
+	public static int randomSpawnpoint() {
+		return spawnPoints.get(new Random().nextInt(spawnPoints.size()));
 	}
 	
 	public ArrayList<Integer> getTilesList(){

@@ -35,7 +35,7 @@ public class GameMaster {
 	public GameMaster() {
 		this.gameArea = new GameArea();
 		this.bfs = new BFS(this.gameArea);
-		this.gameEnv = new GameEnvironment(LAPTOP_HP);
+		this.gameEnv = new GameEnvironment();
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
 		this.waveInProgressNbrProperty = new SimpleIntegerProperty(0);
@@ -69,6 +69,14 @@ public class GameMaster {
 	
 	private final int getByteCoin() {
 		return this.byteCoinProperty.getValue();
+	}
+	
+	public int getInfectionProgress() {
+		return this.gameEnv.getInfectingProgress();
+	}
+	
+	public static int getPcHp() {
+		return LAPTOP_HP;
 	}
 	
 	// Fonction qui verifie si une tourelle est plaçable sur une tuile du plateau de jeu
@@ -171,9 +179,9 @@ public class GameMaster {
 	 * c'est-a-dire si la progression de l'infection est nulle
 	 */
 	private boolean infectionSucceed() {
-		return this.gameEnv.getInfectingProgress() <= 0;
+		return this.gameEnv.getInfectingProgress() >= LAPTOP_HP;
 	}
-	
+		
 	/* Fonction qui verifie si le joueur a gagne ou pas la partie, c'est-a-dire si : 
 	 * - les ennemis de toutes les vagues ont ete ajoutes,
 	 * - tous les ennemis ont ete tues,

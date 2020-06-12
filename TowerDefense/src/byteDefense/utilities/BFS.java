@@ -24,7 +24,7 @@ public class BFS {
 		this.gameArea = gameArea;
 		this.gameAreaDimension = (int) Math.pow(GameArea.gameAreaTilesSize, 2);// (largeurDuTerrain^2)
 		this.cameFrom = new int[this.gameAreaDimension];
-		this.BFS_algo(GameArea.arrivalPoint);	
+		this.BFS_algo(GameArea.arrivalPoints.get(0));
 	}
 
 	private int[] foundNeightbours(int index) {
@@ -34,7 +34,6 @@ public class BFS {
 		int right = GameArea.tileIndex(x + 1, y);
 		int down = GameArea.tileIndex(x, y + 1);
 		int left = GameArea.tileIndex(x - 1, y);
-	
 		int[] neightbours = new int[] {
 				this.lookTileValue(up),
 				this.lookTileValue(right), 
@@ -45,7 +44,7 @@ public class BFS {
 	}
 	
 	private int lookTileValue(int value) {
-		if (this.gameArea.isWalkable(this.gameArea.getTilesList().get(value))) 
+		if (value >0 && this.gameArea.isWalkable(this.gameArea.getTilesList().get(value))) 
 			return value;
 		else
 			return STOP_TILE;
