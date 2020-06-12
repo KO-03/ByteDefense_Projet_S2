@@ -26,8 +26,8 @@ public class BulletView extends GameObjectView {
 		Circle circ = new Circle();
 		
 		circ.setId(Integer.toString(bullet.getId()));
-		circ.setTranslateX(bullet.getX() + tileCenter);
-		circ.setTranslateY(bullet.getY() + tileCenter);
+		circ.setTranslateX(bullet.getShooterX() + tileCenter);
+		circ.setTranslateY(bullet.getShooterY() + tileCenter);
 		circ.setRadius(5);
 		if (bullet.getShooterObject() instanceof Enemy)
 			circ.setFill(Color.FIREBRICK);

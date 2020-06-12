@@ -23,7 +23,7 @@ public class WaveServices {
 		this.gameEnv = gameEnvironment;
 	}
 	
-	private Enemy createEnemy(Wave wave) {
+	private Enemy createEnemy(Wave wave) throws Exception {
 		WaveEnemy waveEnnemy = wave.getWaveEnemyRandomly();
 		int enemyType = wave.getEnemyType(waveEnnemy);
 
@@ -32,7 +32,7 @@ public class WaveServices {
 		return EnemyFactory.getInstance(enemyType, this.bfsMap, this.gameEnv);
 	}
 
-	public void addNewEnemy(Wave wave) {
+	public void addNewEnemy(Wave wave) throws Exception {
 		this.gameEnv.addEnemy(createEnemy(wave));
 	}
 }

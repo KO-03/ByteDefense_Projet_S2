@@ -83,7 +83,7 @@ public abstract class Enemy extends LivingObject {
 
 		// Refixage de la tuile courante
 		if(!this.isArrived()) 
-			this.currentTile = bfs.cameFrom[this.currentTile];
+			this.currentTile = bfs.getParentTile(this.currentTile);
 	}
 	
 	public abstract int getLoot();

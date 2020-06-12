@@ -18,7 +18,7 @@ import byteDefense.utilities.BFS;
 
 public class EnemyFactory {
 
-	public static Enemy getInstance(int enemyType, BFS bfsMap, GameEnvironment gameEnv) {
+	public static Enemy getInstance(int enemyType, BFS bfsMap, GameEnvironment gameEnv) throws Exception {
 		Enemy enemy;
 		
 		switch (enemyType) {
@@ -41,7 +41,7 @@ public class EnemyFactory {
 			enemy = new TrojanHorse(bfsMap, gameEnv);
 			break;
 		default:
-			enemy = null;
+			throw new Exception("Aucun ennemi trouve correpondant au type donne");
 		}
 		return enemy;
 	}

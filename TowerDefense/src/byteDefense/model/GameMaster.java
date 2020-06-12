@@ -1,12 +1,25 @@
 /*
  * GameMaster.java
  * Cette classe represente le GameMaster (maitre de jeu), ses responsabilites sont de:
- * - stocker, initialiser et recuperer les donnees necessaires au fonctionnement du jeu 
- *   (classe des services des Wave, la liste des waves, BFS, le plateau du jeu, l'environnement du jeu...)
- * - supprimer la Wave fini (celle au-dessus de la liste de vague) 
- * - fixer l'argent du jeu 
- * - gerer le gain et le debit d'argent, ainsi que leurs exceptions
- * - rassembler les differentes actions qui ont lieu lors d'un tour (ajout d'ennemis a la vague, actions dans l'environnement, gain d'argent...) 
+ * - stocker, initialiser et recuperer les donnees necessaires au fonctionnement du jeu (classe des services
+ *   des vagues, la liste des waves, BFS, le plateau du jeu, l'environnement du jeu, le numero de la vague en 
+ *   cours, l'argent en byteCoin du joueur)
+ * - recuperer, incrementer supprimer la vague dont tous les ennemis ont ete ajoutes (celle au-dessus de la liste des vagues) 
+ * - verifier si une tourelle est placeable sur une tuile du plateau de jeu
+ * - verifier si une tuile est occupee ou non par une tourelle
+ * - verifier si tous les ennemis de toutes vagues ont ete ajoutees
+ * - realiser les actions de l'environnement
+ * - gerer le gain et le debit de byteCoin
+ * - recuperer le numero d'une vague
+ * - verifie si une vague est en cours, c'est-a-dire si le numero de la vague est egale a celui de la vague a ajouter 
+ *   (la premier de la liste) 
+ * - realiser les actions qui ont lieu pendant un tour de la vague (ajout d'un ennemi dans l'environnement, suppression 
+ *   de la vague ajoute, deplacement des ennemis, gain d'argent chaque tour)
+ * - verifier si les ennemis ont reussit a infecte l'ordinateur,
+	 * c'est-a-dire si la progression de l'infection est nulle
+ * - verifier si le joueur a gagne ou pas la partie (les ennemis de toutes les vagues ont ete ajoutes, tous les ennemis 
+ *   ont ete tues, les ennemis n'ont pas reussit a infecte l'ordinateur)
+ * - verifier si le joueur a perdu ou pas la partie, c'est-a-dire si les ennemis ont reussit a infecte l'ordinateur
  */
 
 package byteDefense.model;
@@ -15,6 +28,7 @@ import java.util.ArrayList;
 
 import byteDefense.model.enemies.Wave;
 import byteDefense.model.enemies.WaveServices;
+import byteDefense.model.towers.Tower;
 import byteDefense.utilities.BFS;
 import byteDefense.utilities.WaveReader;
 import javafx.beans.property.IntegerProperty;
@@ -33,13 +47,13 @@ public class GameMaster {
 	private IntegerProperty byteCoinProperty; // byteCoin du joueur
 
 	public GameMaster() {
-		this.gameArea = new GameArea();
+		this.gameArea = new GameArea(1);
 		this.bfs = new BFS(this.gameArea);
 		this.gameEnv = new GameEnvironment();
 		this.waves = WaveReader.generateWaves("./resources/waves_informations.txt");
 		this.waveServices = new WaveServices(this.bfs, this.gameEnv); 
 		this.waveInProgressNbrProperty = new SimpleIntegerProperty(0);
-		this.byteCoinProperty = new SimpleIntegerProperty(10000);
+		this.byteCoinProperty = new SimpleIntegerProperty(15);
 	}
 	
 	public GameArea getGameArea() {
@@ -48,6 +62,10 @@ public class GameMaster {
 
 	public GameEnvironment getGameEnvironment() {
 		return this.gameEnv;
+	}
+	
+	public void removeEnvironmentTower(Tower tower) {
+		this.gameEnv.removeTower(tower);
 	}
 	
 	// Fonction qui retourne la premiere vague de la liste des vagues a ajouter
@@ -67,7 +85,7 @@ public class GameMaster {
 		return this.byteCoinProperty;
 	}
 	
-	private final int getByteCoin() {
+	public final int getByteCoin() {
 		return this.byteCoinProperty.getValue();
 	}
 	
@@ -152,15 +170,19 @@ public class GameMaster {
 	/* Fonction qui verifie si une vague est en cours, c'est-a-dire si le numero de la vague
 	 * est egale a celui de la vague a ajouter (la premier de la liste) 
 	 */
-	public boolean isWaveRunning() {		
-		return this.getWaveInProgressNbr() == this.numberOfWave(this.getTopWave());
+	public boolean isWaveRunning() {
+		try {
+            return this.getWaveInProgressNbr() == this.numberOfWave(this.getTopWave());
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
 	}
 	
 	/* Methode qui realise les actions qui ont lieu pendant un tour de la vague
 	 * (ajout d'un ennemi dans l'environnement, suppression de la vague ajoute,
 	 * deplacement des ennemis, gain d'argent chaque tour)  
 	 */
-	public void aTurn() {
+	public void aTurn() throws Exception {
 		// Toutes les vagues n'ont pas ete ajoutes a l'environnement et une vague est en cours
 		if (!this.allWavesAdded() && this.isWaveRunning()) { 
 			Wave wave = this.getTopWave();
@@ -171,8 +193,7 @@ public class GameMaster {
 			if (this.gameEnv.enemiesIsEmpty()) 
 				this.removeTopWave();
 		}
-		this.gameEnv.enemiesTurn();
-		this.gameEnv.towersTurn();
+		this.gameEnv.turnActions();
 		this.addMoney(1);
 	}
 	

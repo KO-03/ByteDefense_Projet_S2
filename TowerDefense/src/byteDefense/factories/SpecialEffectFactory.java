@@ -1,3 +1,9 @@
+/*
+ * EnemyFactory.java
+ * Cette classe gere la fabrication d'instance d'SpecialEffect (un effet), sa responsabilite est de :
+ * - Creer un effet en fonction d'un livingObject (tourelle ou ennemi) donne
+ */
+
 package byteDefense.factories;
 
 import byteDefense.model.LivingObject;

@@ -144,6 +144,9 @@ public class Controller implements Initializable {
 		}
 	}
 
+	/* Methode qui genere tous les listener pour mettre a jour la vue en fonction des 
+	 * donnees de l'environnement du jeu
+	 */
 	private void generateGameObjectsListener() {
 		gm.getGameEnvironment().getTowers().addListener((ListChangeListener <Tower>) c-> {
 			while (c.next()) {
@@ -164,8 +167,7 @@ public class Controller implements Initializable {
 					nbEnemySpawned++;
 				}
 				for (Enemy enemy : c.getRemoved()) {
-					// Gain de byteCoin quand un ennemi est tue
-					if(!enemy.isAlive())
+					if (!enemy.isAlive()) // Gain de byteCoin quand un ennemi est tue
 						gm.addMoney(enemy.getLoot());
 					this.ev.removeGameObjectView(enemy);					
 					nbEnemyDead++;
@@ -185,7 +187,9 @@ public class Controller implements Initializable {
 		});
 	}
 		
-	// Methode de creation des liens entre le modele et les vues (byteCoin, numero de la vague en cours, couts des tourelles)
+	/* Methode de creation des liens entre le modele et les vues (byteCoin, 
+	 * numero de la vague en cours, couts des tourelles dans le magasin)
+	 */
 	private void createBindAndListeners() {
 		this.byteCoin.textProperty().bind(gm.getByteCoinProperty().asString());
 		this.waveNbr.textProperty().bind(gm.getWaveInProgressNbrProperty().asString());		
@@ -196,12 +200,12 @@ public class Controller implements Initializable {
 		this.costSudVPN.setText(Integer.toString(SudVPN.getCostProperty().getValue()));
 	}
 	
-	// Methode qui initialise les actions du bouton de controle de la partie
+	// Methode qui initialise les actions du bouton de controle (play/pause) de la partie
 	private void initPlayAndPause() {
 		this.gameControls.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (playActivated) {
+				if (playActivated) { // le bouton play a ete presse
 					gameControls.setGraphic(new ImageView(playImg));
 					gameLoop.pause();
 					playActivated = false;
@@ -216,20 +220,20 @@ public class Controller implements Initializable {
 		});
     }
 	
-	// Methode qui verifie si le bouton est sur play et si le joueur a gagne ou perdu (pour activer ou pas les actions sur les towers)
+	/* Methode qui verifie si le bouton est sur play et si le joueur a gagne ou perdu 
+	 * (pour activer ou pas les actions sur les towers)
+	 */
 	private static boolean isRunning() {
-		if (playActivated) {
-			if (gm.playerLooses() || gm.playerWins())
-				return false;
+		if (playActivated && !gm.playerLooses() && !gm.playerWins())
 			return true;
-		}
+			
 		return false;
 	}
 	
-	// Methode qui initialise les actions de glisser-deposer sur les tourelles du magasin
-	private void dragAndDropOnTower(ImageView tower, int initialX) { 
+	// Methode qui initialise les actions de glisser-deposer sur une tourelle du magasin
+	private void dragAndDropOnTowerShop(ImageView tower, int initialX) { 
 		int tileSize = GameArea.TILE_SIZE; // taille d'une tuile dans le plateau de jeu
-
+		
 		// La tourelle suit le curseur de la souris lorsque au glisser de la souris
 		tower.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
@@ -240,7 +244,7 @@ public class Controller implements Initializable {
 			}
 		});
 		
-		// La tourelle est placee au relacher de la souris
+		// La tourelle est placee au relacher de la souris (avec debit de byteCoin)
 		tower.setOnMouseReleased(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
 				if (isRunning()) {
@@ -250,24 +254,24 @@ public class Controller implements Initializable {
 	
 					// La tuile ou la tourelle a ete relachee n'est pas prise et est placeable
 					if (gm.towerIsPlaceable(x, y) && !gm.tileIsReserved(x, y)) {
-						GameEnvironment ge = gm.getGameEnvironment();
+						GameEnvironment gameEnv = gm.getGameEnvironment();
 						
 						if (tower == adcube)
-							newTower = new AdCube(x, y, ge);
+							newTower = new AdCube(x, y, gameEnv);
 						else if (tower == antivirus)
-							newTower = new Antivirus(x, y, ge);
+							newTower = new Antivirus(x, y, gameEnv);
 						else if (tower == authenticationpoint)
-							newTower = new AuthenticationPoint(x, y, ge);
+							newTower = new AuthenticationPoint(x, y, gameEnv);
 						else if (tower == firewall)
-							newTower = new Firewall(x, y, ge);
+							newTower = new Firewall(x, y, gameEnv);
 						else if (tower == sudvpn)
-							newTower = new SudVPN(x, y, ge);
+							newTower = new SudVPN(x, y, gameEnv);
 						else
 							newTower = null;
 						
 						// Si le joueur possede assez de byteCoin pour acheter la tourelle
 						if (gm.debitMoney(newTower.getCost()))
-							ge.addTower(newTower);
+							gameEnv.addTower(newTower);
 					}
 					tower.setX(initialX);
 					tower.setY(800); // 800 est l'ordonnee des imageView des tourelles dans leur menu d'achat
@@ -277,27 +281,27 @@ public class Controller implements Initializable {
 	}
 	
 	// Methode qui initialise pour chaque type de tourelle les actions de glisser-deposer dans le magasin
-	private void mouseDraggedOnShop() {
+	private void mouseDraggedAndDropOnTowersShop() {
 		this.adcube.setOnMouseDragged(event -> {
-			dragAndDropOnTower(this.adcube, (int)this.adcube.getX());
+			this.dragAndDropOnTowerShop(this.adcube, (int)this.adcube.getX());
 		});
 		this.antivirus.setOnMouseDragged(event -> {
-			dragAndDropOnTower(this.antivirus, (int)this.antivirus.getX());
+			this.dragAndDropOnTowerShop(this.antivirus, (int)this.antivirus.getX());
 		});
 		this.authenticationpoint.setOnMouseDragged(event -> {
-			dragAndDropOnTower(this.authenticationpoint, (int)this.authenticationpoint.getX());
+			this.dragAndDropOnTowerShop(this.authenticationpoint, (int)this.authenticationpoint.getX());
 		});
 		this.firewall.setOnMouseDragged(event -> {
-			dragAndDropOnTower(this.firewall, (int)this.firewall.getX());
+			this.dragAndDropOnTowerShop(this.firewall, (int)this.firewall.getX());
 		});
 		this.sudvpn.setOnMouseDragged(event -> {
-			dragAndDropOnTower(this.sudvpn, (int)this.sudvpn.getX());
+			this.dragAndDropOnTowerShop(this.sudvpn, (int)this.sudvpn.getX());
 		});
 	}
 	
 	// Methode qui change les couleurs des prix dans le magasin pour préciser si l'on peut acheter ou non les tourelles
 	private void canBuy() {
-		int money = gm.getByteCoinProperty().getValue();
+		int money = gm.getByteCoin();
 		
 		if (money >= AdCube.getCostProperty().getValue())
 			this.costAdcube.setTextFill(Color.GREEN);
@@ -325,106 +329,118 @@ public class Controller implements Initializable {
 			this.costSudVPN.setTextFill(Color.RED);
 	}
 	
-	private float progressBarValue() {
+	/* Fonction qui retourne le pourcentage de progression de l'infection en fonction des
+	 * points de vie de base de l'ordinateur
+	 */
+	private float infectionProgressBarValue() {
 		return (float)gm.getInfectionProgress() / GameMaster.getLaptopHp();
 	}
 	
+	// Methode qui met a jour dans la vue les informations d'une tourelle du modele
 	private void updateStats(Tower tower) {
 		this.attackStat.setText(Integer.toString(tower.getAttack()));
 		this.defenseStat.setText(Integer.toString(tower.getDefense()));
 		this.attackRangeStat.setText(Integer.toString(tower.getAttackRange()));
 	}
 
-	// Methode qui recupere et affiche le nom des tourelles et des ennemis lorsqu'on les survole avec le curseur de la souris
+	/* Methode qui recupere et affiche le informations des tourelles du magasin lorsque 
+	 * le curseur de la souris les survole 
+	 */
 	private void onMouseOverShopTowers() {
-		GameEnvironment ge = new GameEnvironment();
+		GameEnvironment gameEnv = new GameEnvironment();
+		
 		adcube.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
 			if (newValue) {
 				name.setText(adcube.getId().toUpperCase());
-				updateStats(new AdCube(0, 0, ge));
+				this.updateStats(new AdCube(0, 0, gameEnv));
 			}
 		});
 		antivirus.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
 			if (newValue) {
 				name.setText(antivirus.getId().toUpperCase());
-				updateStats(new Antivirus(0, 0, ge));
+				this.updateStats(new Antivirus(0, 0, gameEnv));
 			}
 		});
 		authenticationpoint.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
 			if (newValue) {
 				name.setText(authenticationpoint.getId().toUpperCase());
-				updateStats(new AuthenticationPoint(0, 0, ge));
+				this.updateStats(new AuthenticationPoint(0, 0, gameEnv));
 			}
 		});
 		firewall.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
 			if (newValue) {
 				name.setText(firewall.getId().toUpperCase());
-				updateStats(new Firewall(0, 0, ge));
+				this.updateStats(new Firewall(0, 0, gameEnv));
 			}
 		});
 		sudvpn.hoverProperty().addListener((ChangeListener<Boolean>) (observable, oldValue, newValue) -> {
 			if (newValue) {
 				name.setText(sudvpn.getId().toUpperCase());
-				updateStats(new SudVPN(0, 0, ge));
+				this.updateStats(new SudVPN(0, 0, gameEnv));
 			}
 		});
 	}
 	
-	public static void moveAndSellTowers(ImageView imgView, Tower tower) {
+	// Methode qui gere le deplacement et la vente de tourelles deja placees sur le terrain
+	public static void moveAndSellTowers(ImageView imgViewTower, Tower tower) {
 		int tileSize = GameArea.TILE_SIZE;
 		
-		imgView.setOnMouseDragged(new EventHandler <MouseEvent>() {
+		// La tourelle suit le curseur de la souris lorsque au glisser de la souris
+		imgViewTower.setOnMouseDragged(new EventHandler <MouseEvent>() {
 			public void handle(MouseEvent event) {
+				// Aucune vague n'est en cours, le jeu n'est pas en pause et la partie n'est pas terminee
 				if (isRunning() && !gm.isWaveRunning()) {
-					imgView.setX((int)event.getX() - tileSize / 2);
-					imgView.setY((int)event.getY() - tileSize / 2);
+					imgViewTower.setX((int)event.getX() - tileSize / 2);
+					imgViewTower.setY((int)event.getY() - tileSize / 2);
 				}
 			}
 		});
 		
-		imgView.setOnMouseReleased(new EventHandler <MouseEvent>() {
-			int initialX = (int)imgView.getX();
-			int initialY = (int)imgView.getY();
+		// La tourelle est placee au relacher de la souris (avec debit de byteCoin)
+		imgViewTower.setOnMouseReleased(new EventHandler <MouseEvent>() {
+			int initialX = (int)imgViewTower.getX();
+			int initialY = (int)imgViewTower.getY();
 			
 			public void handle(MouseEvent event) {
+				// Aucune vague n'est en cours, le jeu n'est pas en pause et la partie n'est pas terminee
 				if (isRunning() && !gm.isWaveRunning()) {
 					int x = (int)event.getX() / tileSize * tileSize;
 					int y = (int)event.getY() / tileSize * tileSize;
 					
+					// La tuile ou la tourelle a ete relachee n'est pas prise et est placeable et le debit de byteCoin peut se faire
 					if (gm.towerIsPlaceable(x, y) && !gm.tileIsReserved(x, y) && gm.debitMoney((int)Math.round(tower.getCost() * 0.5))) {
-						tower.setX(x);
+						// La tourelle est deplacee a l'endroit ou la souris a ete relachee
+						tower.setX(x); 
 						tower.setY(y);
-						imgView.setX(x);
-						imgView.setY(y);
+						imgViewTower.setX(x); 
+						imgViewTower.setY(y);
 						initialX = x;
 						initialY = y;
 					} else {
-						imgView.setX(initialX);
-						imgView.setY(initialY);
+						// La tourelle est reaffichee a sa position initiale
+						imgViewTower.setX(initialX);
+						imgViewTower.setY(initialY);
 					}
 				}
 			}
 		});
 		
-		imgView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		// La tourelle disparait lorsque l'on fait un double clique dessus (avec gain de byteCoin)
+		imgViewTower.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent mouseEvent) {
+				// Aucune vague n'est en cours, le jeu n'est pas en pause et la partie n'est pas terminee
 				if (isRunning() && !gm.isWaveRunning()) {
-					if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
-						if (mouseEvent.getClickCount() == 2) {
-							gm.getGameEnvironment().getTowers().remove(tower);
-							gm.addMoney((int)Math.round(tower.getCost() * 0.7));
-						}
+					// Un double clique est fait sur la tourelle
+					if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+						gm.removeEnvironmentTower(tower);
+						gm.addMoney((int)Math.round(tower.getCost() * 0.7));
 					}
 				}
 			}
 		});
 	}
 	
-	private void disableAllButton() {
-		this.gameControls.setDisable(true);
-		this.launchWaveBt.setDisable(true);
-	}
-	
+	// Methode qui met a jour le minuteur
 	private void updateTimer() {
 		this.seconde++;
 		if (this.seconde == 60) {
@@ -446,8 +462,12 @@ public class Controller implements Initializable {
 				if (gm.isWaveRunning()) {
 					this.message.setText("Vague en cours...");
 					if (playActivated) { // Bouton de controle sur play
-						gm.aTurn();
-						this.laptopHpBar.setProgress(this.progressBarValue());
+						try {
+							gm.aTurn();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						this.laptopHpBar.setProgress(this.infectionProgressBarValue());
 					}
 				} else
 					this.message.setText("Lance une vague");
@@ -457,15 +477,15 @@ public class Controller implements Initializable {
 				if (gm.playerLooses()) {
 					message.setText("DEFAITE !");
 					this.gameLoop.stop();
-					this.disableAllButton();
+					this.gameControls.setDisable(true);
 				}
 			} else {
-				gm.actionGameEnvironment();
 				this.canBuy();
+				gm.actionGameEnvironment();
 				if (gm.playerWins()) {
 					this.message.setText("VICTOIRE !");
 					this.gameLoop.stop();
-					this.disableAllButton();
+					this.gameControls.setDisable(true);
 				}
 			}
 			this.time++;
@@ -489,7 +509,7 @@ public class Controller implements Initializable {
 		this.generateGameObjectsListener();
 		this.createBindAndListeners();
 		this.initPlayAndPause();
-		this.mouseDraggedOnShop();
+		this.mouseDraggedAndDropOnTowersShop();
 		this.initAnimation();
 		this.gameLoop.play();
 		playActivated = true;

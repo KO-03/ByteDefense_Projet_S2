@@ -37,7 +37,7 @@ public abstract class LivingObject extends GameObject {
 	private void setHp(int newHp) {
 		this.hp = newHp;
 	}
-
+	
 	public int getDefense() {
 		return this.defense;
 	}
@@ -46,23 +46,11 @@ public abstract class LivingObject extends GameObject {
 		this.defense = newDefense;
 	}
 	
-	public void incrementHp(int newHp) {
-		this.setHp(newHp);
-	}
+	public abstract int getX();
 	
-	public void receiveDamage(int damage) {
-		int rest = this.getDefense() - damage;
-		
-		if (rest < 0) {
-			this.setDefense(0);
-			this.setHp(this.getHp() + rest);
-		} else if (rest > 0)
-			this.setDefense(rest);
-	}
+	public abstract int getY();
 	
-	public boolean isAlive() {
-		return this.hp > 0;
-	}
+	public abstract int getAttack();
 	
 	public GameEnvironment getGameEnvironment() {
 		return this.gameEnv;
@@ -72,11 +60,36 @@ public abstract class LivingObject extends GameObject {
 		return this.specialEffect;
 	}
 	
+	public void incrementHp(int newHp) {
+		this.setHp(newHp);
+	}
+	
+	// Methode qui gere la decrementation de la defense et des points de vie
+	public void receiveDamage(int damage) {
+		if (this.defense > 0) {
+		
+			int rest = this.defense - damage;
+			if (rest < 0) {
+				this.setDefense(0);
+				this.setHp(this.getHp() + rest);
+			} else if (rest > 0)
+				this.setDefense(rest);
+		}
+	}
+	
+	// Fonction qui verifie si l'objet est en vie ou non 
+	public boolean isAlive() {
+		return this.hp > 0;
+	}
+	
+	public abstract void useSpecialEffect(LivingObject livingObject);
+	
+	// Methode qui inflige un nouveau effet au livingObject (l'ajoute a la liste des effets infliges)
 	public void inflictEffect(SpecialEffect newInflictedEffect) {
 		this.inflictedEffects.add(newInflictedEffect);	
 	}
 	
-	// Methode qui met a jours les effets infliges
+	// Methode qui met a jour les effets infliges
 	public void updateInflictedEffects() {
 		SpecialEffect inflictedEffect;
 		
@@ -91,8 +104,4 @@ public abstract class LivingObject extends GameObject {
 				inflictedEffect.decrementTurnNbr();
 		}
 	}
-	
-	public abstract int getAttack();
-	
-	public abstract void useSpecialEffect(LivingObject livingObject);
 }

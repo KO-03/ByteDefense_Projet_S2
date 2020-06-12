@@ -18,7 +18,7 @@ public class BFS {
 
 	int gameAreaDimension;
 	public GameArea gameArea;
-	public int[] cameFrom;
+	private int[] cameFrom;
 
 	public BFS(GameArea gameArea) {
 		this.gameArea = gameArea;
@@ -49,6 +49,10 @@ public class BFS {
 		else
 			return STOP_TILE;
 	}
+	
+	public int getParentTile(int tileIndex) {
+        return this.cameFrom[tileIndex];
+    }
 	
 	private boolean isInCameFrom(int value) {
 		for (int i : this.cameFrom)
