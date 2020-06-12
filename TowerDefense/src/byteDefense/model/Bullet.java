@@ -13,14 +13,10 @@ public class Bullet extends GameObject {
 	
 	private LivingObject targetObject;
 	private LivingObject shooterObject;
-	private int x;
-	private int y;
 
-	public Bullet(int x, int y, LivingObject targetObject, LivingObject shooterObject) {
+	public Bullet(LivingObject targetObject, LivingObject shooterObject) {
 		this.targetObject = targetObject;
 		this.shooterObject = shooterObject;
-		this.x = shooterObject.getX();
-		this.y = shooterObject.getY();
 	}
 	
 	public LivingObject getShooterObject() {
@@ -41,15 +37,15 @@ public class Bullet extends GameObject {
 	}
 	
 	public int getX() {
-		return this.x;
+		return this.shooterObject.getX();
 	}
 	
 	public int getY() {
-		return this.y;
+		return this.shooterObject.getY();
 	}
 
 	public void attackTarget() {
 		this.shooterObject.useSpecialEffect(this.targetObject);
-		this.targetObject.receiveDamage(this.shooterObject);
+		this.targetObject.receiveDamage(this.shooterObject.getAttack());
 	}
 }

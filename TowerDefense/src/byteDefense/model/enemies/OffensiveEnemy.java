@@ -13,8 +13,8 @@ import byteDefense.utilities.ShootUtilities;
 
 public abstract class OffensiveEnemy extends Enemy {
 
-	public OffensiveEnemy(BFS bfsMap, GameEnvironment gameEnv) {
-		super(bfsMap, gameEnv);
+	public OffensiveEnemy(int defense, BFS bfsMap, GameEnvironment gameEnv) {
+		super(defense, bfsMap, gameEnv);
 	}
 	
 	// Methode qui fait attaquer un tourelle a la portee de la ennemi
@@ -22,7 +22,7 @@ public abstract class OffensiveEnemy extends Enemy {
 		GameEnvironment gameEnv = super.getGameEnvironment();
 		Tower target = (Tower)ShootUtilities.findTarget(gameEnv.getTowers(), this);
 		
-		// Si une cible a ete trouvee aux alentours de l'ennemi
+		// une cible a ete trouvee aux alentours de l'ennemi
 		if (target != null)
 			ShootUtilities.shoot(this, target, gameEnv);
 	}

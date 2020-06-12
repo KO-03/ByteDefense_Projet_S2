@@ -18,7 +18,7 @@ public class ShootUtilities {
 	
 	// Methode qui fait tirer un tireur sur une cible, c'est-a-dire qui ajoute un tir a son environnement de jeu
 	public static void shoot(LivingObject shooter, LivingObject target, GameEnvironment gameEnv) {
-		gameEnv.addBullet(new Bullet(shooter.getX(), shooter.getY(), target, shooter));
+		gameEnv.addBullet(new Bullet(target, shooter));
 	}
 	
 	// Fonction qui retourne ou non la cible du tireur en fonction de leur position et portee d'attaque

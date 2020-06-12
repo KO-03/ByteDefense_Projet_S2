@@ -17,8 +17,8 @@ public abstract class Tower extends LivingObject {
 	private int y;
 	public boolean frozen; // indique si la tourelle est gelee ou non
 	
-	public Tower(int x, int y, GameEnvironment gameEnv) {
-		super(100, gameEnv);
+	public Tower(int x, int y, int defense, GameEnvironment gameEnv) {
+		super(100, defense, gameEnv);
 		this.x = x;
 		this.y = y;
 		this.frozen = false;

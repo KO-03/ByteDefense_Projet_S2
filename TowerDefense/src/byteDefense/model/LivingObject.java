@@ -17,12 +17,14 @@ import byteDefense.model.effects.SpecialEffect;
 public abstract class LivingObject extends GameObject {
 
 	private int hp;
+	private int defense;
 	private GameEnvironment gameEnv;
 	private SpecialEffect specialEffect; // effet/capacite propre 
 	private ArrayList<SpecialEffect> inflictedEffects; // liste des effets infliges
 
-	public LivingObject(int hp, GameEnvironment gameEnv) {
+	public LivingObject(int hp, int defense, GameEnvironment gameEnv) {
 		this.hp = hp;
+		this.defense = defense;
 		this.gameEnv = gameEnv;
 		this.specialEffect = SpecialEffectFactory.getInstance(this);
 		this.inflictedEffects = new ArrayList<>(); 
@@ -36,8 +38,26 @@ public abstract class LivingObject extends GameObject {
 		this.hp = newHp;
 	}
 
-	public void receiveDamage(LivingObject shooterObject) {
-		this.setHp(this.getHp() + this.getDefense() - shooterObject.getAttack());
+	public int getDefense() {
+		return this.defense;
+	}
+	
+	public void setDefense(int newDefense) {
+		this.defense = newDefense;
+	}
+	
+	public void incrementHp(int newHp) {
+		this.setHp(newHp);
+	}
+	
+	public void receiveDamage(int damage) {
+		int rest = this.getDefense() - damage;
+		
+		if (rest < 0) {
+			this.setDefense(0);
+			this.setHp(this.getHp() + rest);
+		} else if (rest > 0)
+			this.setDefense(rest);
 	}
 	
 	public boolean isAlive() {
@@ -64,7 +84,8 @@ public abstract class LivingObject extends GameObject {
 			inflictedEffect = this.inflictedEffects.get(i); 
 			// L'effet est dissipe
 			if (inflictedEffect.getTurnNbr() == 0) {
-				inflictedEffect.reinitializeEffect(this);
+				inflictedEffect.endEffect(this);
+				inflictedEffect.reinitializeEffect();
 				this.inflictedEffects.remove(inflictedEffect);
 			} else
 				inflictedEffect.decrementTurnNbr();
@@ -73,11 +94,7 @@ public abstract class LivingObject extends GameObject {
 	
 	public abstract int getAttack();
 
-	public abstract int getDefense();
-
 	public abstract int getAttackRange();
-	
-	public abstract int getAttackSpeed();
 	
 	public abstract void useSpecialEffect(LivingObject livingObject);
 }
