@@ -75,7 +75,7 @@ public class GameMaster {
 		return this.gameEnv.getInfectingProgress();
 	}
 	
-	public static int getPcHp() {
+	public static int getLaptopHp() {
 		return LAPTOP_HP;
 	}
 	
@@ -171,7 +171,8 @@ public class GameMaster {
 			if (this.gameEnv.enemiesIsEmpty()) 
 				this.removeTopWave();
 		}
-		this.gameEnv.enemiesMove();
+		this.gameEnv.enemiesTurn();
+		this.gameEnv.towersTurn();
 		this.addMoney(1);
 	}
 	

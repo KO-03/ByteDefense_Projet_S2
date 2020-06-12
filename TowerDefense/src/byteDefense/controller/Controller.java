@@ -97,8 +97,6 @@ public class Controller implements Initializable {
 	@FXML
 	private Label defenseStat;
 	@FXML
-	private Label attackSpeedStat;
-	@FXML
 	private Label attackRangeStat;
 	
 	// Couts dans la boutique
@@ -125,7 +123,7 @@ public class Controller implements Initializable {
 	@FXML
 	private Label message; // Message qui indique l'etat de la partie (vague en cours, en pause, entre-vague, fin de partie)
 	@FXML
-	private ProgressBar hpPC; //barre de vie de l'ordianteur
+	private ProgressBar laptopHpBar; //barre de vie de l'ordianteur
 	
 	private static GameMaster gm;
 	private static boolean playActivated; // indique si le bouton play/pause a ete presse
@@ -136,14 +134,6 @@ public class Controller implements Initializable {
 	private int time;
 	private int seconde;
 	private int minute;
-	
-	// Methode qui lance une nouvelle vague lorsque le bouton est presser
-	@FXML
-	private void launchWave(ActionEvent event) {
-		// Incrementation du numero de la vague (lancement d'une vague) lorsqu'aucune vague est en cours
-		if(!gm.isWaveRunning())
-			gm.incrementWaveInProgressNumber();
-    }
 
 	// Methode de chargement des textures du bouton de controle
 	private void loadPlayPauseImage() {
@@ -337,13 +327,12 @@ public class Controller implements Initializable {
 	}
 	
 	private float progressBarValue() {
-		return (float)gm.getInfectionProgress() / GameMaster.getPcHp();
+		return (float)gm.getInfectionProgress() / GameMaster.getLaptopHp();
 	}
 	
 	private void updateStats(LivingObject lo) {
 		this.attackStat.setText(Integer.toString(lo.getAttack()));
 		this.defenseStat.setText(Integer.toString(lo.getDefense()));
-		this.attackSpeedStat.setText(Integer.toString(lo.getAttackSpeed()));
 		this.attackRangeStat.setText(Integer.toString(lo.getAttackRange()));
 	}
 
@@ -459,7 +448,7 @@ public class Controller implements Initializable {
 					this.message.setText("Vague en cours...");
 					if (playActivated) { // Bouton de controle sur play
 						gm.aTurn();
-						this.hpPC.setProgress(this.progressBarValue());
+						this.laptopHpBar.setProgress(this.progressBarValue());
 					}
 				} else
 					this.message.setText("Lance une vague");
@@ -496,7 +485,7 @@ public class Controller implements Initializable {
 		this.ev = new EnemyView(this.enemiesGrid);
 		this.tv = new TowerView(this.towersGrid, this.adcube, this.antivirus, this.authenticationpoint, this.firewall, this.sudvpn);
 		this.bv = new BulletView(this.bulletsGrid);
-		this.hpPC.setStyle("-fx-accent :  #e01111;");
+		
 		this.onMouseOverShopTowers();
 		this.generateGameObjectsListener();
 		this.createBindAndListeners();
@@ -507,4 +496,12 @@ public class Controller implements Initializable {
 		playActivated = true;
 		this.quitBt.setOnMouseClicked(event -> System.exit(0));
 	}
+	
+	// Methode qui lance une nouvelle vague lorsque le bouton est presser
+		@FXML
+		private void launchWave(ActionEvent event) {
+			// Incrementation du numero de la vague (lancement d'une vague) lorsqu'aucune vague est en cours
+			if(!gm.isWaveRunning())
+				gm.incrementWaveInProgressNumber();
+	    }
 }
