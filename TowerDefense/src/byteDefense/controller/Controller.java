@@ -99,9 +99,9 @@ public class Controller implements Initializable {
 	@FXML
 	private Label byteCoin; // Argent du jeu
 	
-	// Informations des livingObjects
+	// Informations des tourelles du magasin
 	@FXML
-	private Label name; // Nom du livingObject
+	private Label name; // Nom de la tourelle
 	@FXML
 	private Label attackStat;
 	@FXML
