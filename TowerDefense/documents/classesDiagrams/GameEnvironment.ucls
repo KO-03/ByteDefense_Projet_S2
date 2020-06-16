@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="byteDefense.model.GameEnvironment" project="ByteDefense" 
     file="/ByteDefense/src/byteDefense/model/GameEnvironment.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="520" width="249" x="144" y="-33"/>    
+    <position height="-1" width="-1" x="654" y="246"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="byteDefense.model.Bullet" project="ByteDefense" 
     file="/ByteDefense/src/byteDefense/model/Bullet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="250" width="211" x="766" y="50"/>    
+    <position height="-1" width="-1" x="985" y="699"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="byteDefense.model.enemies.Enemy" project="ByteDefense" 
     file="/ByteDefense/src/byteDefense/model/enemies/Enemy.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="916" y="568"/>    
+    <position height="-1" width="-1" x="652" y="748"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,35 +30,65 @@
   </class>  
   <class id="4" language="java" name="byteDefense.model.towers.Tower" project="ByteDefense" 
     file="/ByteDefense/src/byteDefense/model/towers/Tower.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="285" width="227" x="332" y="518"/>    
+    <position height="-1" width="-1" x="311" y="708"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="5">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="6" name="enemies"/>      
-      <multiplicity id="7" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <note id="5">    
+    <position height="26" width="49" x="374" y="508"/>    
+    <text><![CDATA[Liste
+    ]]>
+    </text>  
+  </note>  
+  <note id="6">    
+    <position height="25" width="44" x="586" y="504"/>    
+    <text><![CDATA[Liste
+    ]]>
+    </text>  
+  </note>  
+  <note id="7">    
+    <position height="29" width="46" x="898" y="501"/>    
+    <text><![CDATA[Liste
+    ]]>
+    </text>  
+  </note>  
   <association id="8">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="9" name="towers"/>      
-      <multiplicity id="10" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="1" navigable="false" variant="ASSOCIATION">      
+      <attribute id="9" name="towers">        
+        <position height="0" width="0" x="-134" y="48"/>      
+      </attribute>      
+      <multiplicity id="10" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="444" y="548"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true" variant="ASSOCIATION"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="11">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="12" name="bullets"/>      
-      <multiplicity id="13" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="1" navigable="false" variant="ASSOCIATION">      
+      <attribute id="12" name="enemies">        
+        <position height="20" width="57" x="580" y="532"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-264" y="180"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="14">    
+    <end type="SOURCE" refId="1" navigable="false" variant="ASSOCIATION">      
+      <attribute id="15" name="bullets">        
+        <position height="20" width="46" x="898" y="542"/>      
+      </attribute>      
+      <multiplicity id="16" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="840" y="555"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true" variant="ASSOCIATION"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

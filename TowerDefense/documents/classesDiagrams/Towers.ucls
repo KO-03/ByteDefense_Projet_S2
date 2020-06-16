@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="byteDefense.view.GameAreaView" project="ByteDefense" 
-    file="/ByteDefense/src/byteDefense/view/GameAreaView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="502" width="266" x="456" y="95"/>    
+  <class id="1" language="java" name="byteDefense.model.towers.Tower" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/model/towers/Tower.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="285" width="227" x="1052" y="-163"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="byteDefense.view.EnemyView" project="ByteDefense" 
-    file="/ByteDefense/src/byteDefense/view/EnemyView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="250" width="214" x="456" y="800"/>    
+  <class id="2" language="java" name="byteDefense.model.towers.AdCube" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/model/towers/AdCube.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="234" x="449" y="162"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="byteDefense.view.LivingObjectView" project="ByteDefense" 
-    file="/ByteDefense/src/byteDefense/view/LivingObjectView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="123" width="217" x="609" y="637"/>    
+  <class id="3" language="java" name="byteDefense.model.towers.AuthenticationPoint" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/model/towers/AuthenticationPoint.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="322" width="289" x="723" y="162"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="byteDefense.view.BulletView" project="ByteDefense" 
-    file="/ByteDefense/src/byteDefense/view/BulletView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="175" x="866" y="637"/>    
+  <class id="4" language="java" name="byteDefense.model.towers.Firewall" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/model/towers/Firewall.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1178" y="296"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="byteDefense.view.GameObjectView" project="ByteDefense" 
-    file="/ByteDefense/src/byteDefense/view/GameObjectView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="124" width="275" x="762" y="95"/>    
+  <class id="5" language="java" name="byteDefense.model.towers.Antivirus" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/model/towers/Antivirus.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="234" x="1326" y="162"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="byteDefense.view.TowerView" project="ByteDefense" 
-    file="/ByteDefense/src/byteDefense/view/TowerView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="340" width="456" x="710" y="800"/>    
+  <class id="6" language="java" name="byteDefense.model.towers.SudVPN" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/model/towers/SudVPN.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="340" width="234" x="1600" y="162"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -56,20 +56,24 @@
     </display>  
   </class>  
   <generalization id="7">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="3"/>  
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
   </generalization>  
   <generalization id="8">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
   </generalization>  
   <generalization id="9">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
   </generalization>  
   <generalization id="10">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="3"/>  
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

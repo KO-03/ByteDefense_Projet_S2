@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="byteDefense.model.enemies.WaveEnemy" project="ByteDefense" 
     file="/ByteDefense/src/byteDefense/model/enemies/WaveEnemy.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="196" width="217" x="407" y="546"/>    
+    <position height="-1" width="-1" x="473" y="624"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="byteDefense.model.enemies.Wave" project="ByteDefense" 
     file="/ByteDefense/src/byteDefense/model/enemies/Wave.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="340" width="322" x="407" y="166"/>    
+    <position height="-1" width="-1" x="471" y="314"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,19 +21,56 @@
   </class>  
   <class id="3" language="java" name="byteDefense.model.enemies.WaveServices" project="ByteDefense" 
     file="/ByteDefense/src/byteDefense/model/enemies/WaveServices.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="160" width="251" x="769" y="166"/>    
+    <position height="-1" width="-1" x="883" y="142"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="4">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="5" name="waveEnemies"/>      
-      <multiplicity id="6" minimum="0" maximum="2147483647"/>    
+  <class id="4" language="java" name="byteDefense.model.GameMaster" project="ByteDefense" 
+    file="/ByteDefense/src/byteDefense/model/GameMaster.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="866" y="631"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="5">    
+    <end type="SOURCE" refId="4" navigable="false" variant="ASSOCIATION">      
+      <attribute id="6" name="waveServices">        
+        <position height="0" width="0" x="35" y="-88"/>      
+      </attribute>      
+      <multiplicity id="7" minimum="0" maximum="1">        
+        <position height="18" width="27" x="897" y="234"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="8">    
+    <end type="SOURCE" refId="2" navigable="false" variant="ASSOCIATION">      
+      <attribute id="9" name="waveEnemies">        
+        <position height="20" width="87" x="372" y="494"/>      
+      </attribute>      
+      <multiplicity id="10" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="489" y="498"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="11">    
+    <end type="SOURCE" refId="4" navigable="false" variant="ASSOCIATION">      
+      <attribute id="12" name="waves">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="644" y="490"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true" variant="ASSOCIATION"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
