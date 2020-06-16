@@ -1,4 +1,4 @@
-![BYTE DEFENSE](https://drive.google.com/file/d/1jS97SsNiH5rwESB1eOTEQmxsFY9dw75u/view?usp=sharing)
+BYTE DEFENSE
 ======
 Projet tuteuré Tower Defense - Mennad Chalabi, Kowsikan Sivakaran, Simon Zou
 -----
