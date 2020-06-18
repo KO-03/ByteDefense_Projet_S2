@@ -5,7 +5,7 @@ Projet tuteuré Tower Defense - Mennad Chalabi, Kowsikan Sivakaran, Simon Zou
 ###		IUT DE MONTREUIL - UNIV PARIS 8
 
 Here you can [**Read The Docs**](https://github.com/KO-03/ByteDefense_Projet_S2/tree/master/TowerDefense/documents)
-or [here](https://drive.google.com/file/d/1RPnpaLIgaNZOcCxaTPuGaNSxw3nS3XCH/view?usp=sharing) 
+or [here](https://drive.google.com/file/d/1RPnpaLIgaNZOcCxaTPuGaNSxw3nS3XCH/view?usp=sharing).
 
 ### Screenplay
 
