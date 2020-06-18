@@ -4,7 +4,8 @@ Projet tuteuré Tower Defense - Mennad Chalabi, Kowsikan Sivakaran, Simon Zou
 -----
 ###		IUT DE MONTREUIL - UNIV PARIS 8
 
-Here you can [**Read The Docs**](https://drive.google.com/file/d/1RPnpaLIgaNZOcCxaTPuGaNSxw3nS3XCH/view?usp=sharing)
+Here you can [**Read The Docs**](https://github.com/KO-03/ByteDefense_Projet_S2/tree/master/TowerDefense/documents)
+or [here](https://drive.google.com/file/d/1RPnpaLIgaNZOcCxaTPuGaNSxw3nS3XCH/view?usp=sharing) 
 
 ### Screenplay
 
@@ -26,4 +27,4 @@ Utilisez astucieusement les capacités de vos **protecteurs** (les tourelles) po
 * Tourelles
 *  Special Effects
 
-> Dernière MAJ : 16/06/2020
+> Dernière MAJ : 18/06/2020
